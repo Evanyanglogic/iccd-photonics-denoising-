@@ -67,3 +67,14 @@ Original `E:/PNGAN-main` contains an sCMOS-oriented PNGAN prototype:
 5. Run first experiment:
    Poisson-Gaussian vs sCMOS prior vs ICCD prior vs ICCD-aware PNGAN.
 
+## Skill Setup
+
+Installed/created on 2026-07-15:
+
+- `pytorch-patterns`: installed from `affaan-m/ECC`, path
+  `skills/pytorch-patterns`. Use for PyTorch model, data pipeline, training loop,
+  reproducibility, memory, and speed audits.
+- `iccd-denoising-optimizer`: custom Codex skill created under
+  `C:/Users/Yjia/.codex/skills/iccd-denoising-optimizer`. Use for ICCD-specific
+  data diagnostics, experiment planning, metric checks, and Photonics Journal
+  evidence discipline.
