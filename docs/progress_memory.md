@@ -1,0 +1,69 @@
+# Progress Memory
+
+Date: 2026-07-15
+
+## Current Direction
+
+Target journal: 光子学报.
+
+Chosen route: ICCD-aware physical-prior noise modeling plus PNGAN-style
+generative refinement for low-light denoising data augmentation.
+
+The paper should be framed as an optical imaging / device-noise / calibration
+paper, not as a generic deep denoising network paper.
+
+## User Constraints
+
+- Real device data can already be collected.
+- Both ICCD and sCMOS data are available.
+- Calibration data include dark/flat and device-condition sequences.
+- The target is 光子学报.
+
+## Current Repository Status
+
+Original `E:/PNGAN-main` contains an sCMOS-oriented PNGAN prototype:
+
+- `scmos_noise_model.py`: physical prior with signal-dependent, read, and row
+  noise.
+- `networks/smnet_grayscale.py`: residual U-Net style generator.
+- `networks/discriminator_grayscale.py`: patch and multiscale discriminators.
+- `train_pngan.py`: PNGAN training loop with adversarial, domain, perceptual,
+  and identity losses.
+- `loss_functions_grayscale.py`: denoising losses including edge, SSIM, and
+  intensity-adaptive loss.
+
+## Most Valuable Transfer Points
+
+1. Residual generator: keep the `output = input + residual` idea for ICCD noise
+   refinement.
+2. Dr content-domain constraint: keep `L1(Dr(fake), Dr(real))`, but train or
+   adapt Dr for ICCD conditions.
+3. Patch discriminator: use as the first stable noise-domain discriminator.
+4. Multiscale discriminator: reserve for ICCD spatial correlation and phosphor
+   diffusion once the base version is stable.
+5. Physical-prior input: replace `sCMOSNoiseModel` with `ICCDNoiseModel` rather
+   than rewriting the whole PNGAN framework.
+
+## Key Changes Needed for ICCD
+
+- Add ICCD imaging-chain prior:
+  photon statistics, photocathode response, MCP gain fluctuation, dark counts,
+  phosphor diffusion, and readout noise.
+- Add condition-aware metadata:
+  gain, gate width, exposure, illumination level, device type.
+- Add noise-statistical validation:
+  mean-variance, histogram, PSD, spatial autocorrelation, dark-field
+  distribution.
+- Recalibrate intensity-adaptive loss:
+  ICCD weak-light emphasis should likely prioritize dark/low-photon regions
+  rather than bright regions.
+
+## Immediate Engineering Plan
+
+1. Port minimal PNGAN loop into this sub-repository.
+2. Replace sCMOS prior with `src/iccd_noise/physical_model.py`.
+3. Build an ICCD dataloader with metadata and condition split.
+4. Add noise-statistical loss/metrics.
+5. Run first experiment:
+   Poisson-Gaussian vs sCMOS prior vs ICCD prior vs ICCD-aware PNGAN.
+
