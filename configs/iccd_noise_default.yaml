@@ -1,0 +1,14 @@
+# First-pass ICCD physical-prior noise parameters.
+# Replace these with values fitted from dark/flat calibration sequences.
+
+photon_scale: 120.0
+photocathode_qe: 0.18
+mcp_gain_mean: 1.0
+mcp_gain_var: 0.18
+dark_count_rate: 0.002
+phosphor_sigma: 0.8
+read_noise_sigma: 0.01
+offset: 0.0
+clip: true
+seed: 20260714
+
