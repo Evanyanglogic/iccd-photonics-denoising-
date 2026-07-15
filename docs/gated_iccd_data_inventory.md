@@ -122,3 +122,67 @@ For the next download, prioritize one of these:
 The most useful next condition is another folder from `F:\20260319\...` whose
 `PictureInfo.txt` has different `exposure_width_ms` or gate width but matching
 frame count and scene.
+
+## Full Downloaded Batch
+
+Local path:
+
+```text
+D:\iccd\data\20260319
+```
+
+Inventory command:
+
+```powershell
+python scripts\inventory_gated_iccd_batch.py `
+  --root D:\iccd\data\20260319 `
+  --output-dir reports\gated_iccd_20260319_full_inventory
+```
+
+Folder completeness:
+
+| folder | TIFFs | PictureInfo length | status |
+|---|---:|---:|---|
+| 1 | 200 | 35692 | complete |
+| 2 | 200 | 35692 | complete |
+| 3 | 4 | 708 | partial |
+| 4 | 200 | 35692 | complete |
+| 5 | 200 | 35692 | complete |
+| 6 | 5 | 885 | partial |
+| 7 | 200 | 35692 | complete |
+| 8 | 200 | 35692 | complete |
+| 9 | 200 | 35692 | complete |
+| 10 | 200 | 35692 | complete |
+| 11 | 200 | 35692 | complete |
+| 12 | 0 | 0 | empty/incomplete |
+| 13 | 200 | 35692 | complete |
+| 1_20260715_143749 | 0 | - | empty helper folder |
+
+Batch inventory summary:
+
+| folder | TIFFs | metadata rows | exposure width ms | Sync A width us | Sync B width us | gain | p50 | p99 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 992 | 2288 |
+| 2 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 960 | 1184 |
+| 3 | 4 | 4 | 900.000000 | 4.000000 | 4.000000 | 60 | 1056 | 4352 |
+| 4 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 1056 | 4336 |
+| 5 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 1456 | 15248 |
+| 6 | 5 | 5 | 900.000000 | 4.000000 | 4.000000 | 60 | 1440 | 15136 |
+| 7 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 1168 | 7696 |
+| 8 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 1120 | 6608 |
+| 9 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 1008 | 3056 |
+| 10 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 992 | 2224 |
+| 11 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 976 | 1680 |
+| 13 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 | 944 | 1056 |
+
+Current interpretation:
+
+- The batch currently appears to contain one exposure/gate/gain setting:
+  exposure width 900 ms, Sync A/B width 4 us, gain 60.
+- Folder-to-folder brightness changes are substantial, but they are not
+  explained by exposure/gate/gain metadata in `PictureInfo.txt`.
+- These folders are suitable for single-condition temporal noise and
+  fixed-pattern analysis across several brightness levels.
+- They do not yet form supervised clean/noisy pairs by exposure. A paired
+  denoising dataset still needs another exposure/gate/gain condition or a
+  clearly identified reference acquisition.

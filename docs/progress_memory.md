@@ -126,6 +126,10 @@ Smoke test status:
   frames.
 - Gated ICCD batch inventory for `F:/20260319` currently detects one folder:
   `1`, with 200 TIFF frames and 200 metadata rows.
+- Full gated ICCD download at `D:/iccd/data/20260319` inventoried: complete
+  200-frame folders are `1,2,4,5,7,8,9,10,11,13`; partial folders are `3` and
+  `6`; `12` is empty/incomplete. All complete folders share exposure width
+  900 ms, Sync A/B width 4 us, and gain 60.
 
 ## Skill Setup
 
