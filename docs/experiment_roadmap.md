@@ -309,7 +309,7 @@ python scripts\compare_noise_priors.py `
 
 ### E2.3 sCMOS Comparison
 
-- Status: data-dependent.
+- Status: target sCMOS data identified; risk audit complete.
 - Purpose: show why ICCD cannot be reduced to a normal sCMOS noise model.
 - Inputs:
   - Matched or comparable sCMOS repeated data.
@@ -324,6 +324,27 @@ python scripts\compare_noise_priors.py `
     where the current data cannot support that comparison.
 - Paper use:
   - Device comparison figure if data are comparable.
+
+### E2.4 sCMOS Content Source for ICCD-Like Synthetic Noise
+
+- Status: feasible with strict labeling.
+- Source:
+  - `F:/目标传感器噪声参数估计/data`
+  - Inventory: `docs/target_scmos_data_inventory.md`
+- Purpose:
+  - Use longer-exposure sCMOS frames as content/reference images.
+  - Add ICCD-like noise calibrated from real ICCD repeated-frame statistics.
+- Required preprocessing:
+  - Apply dark/offset correction.
+  - Mask saturated/hot pixels using derived bad-pixel masks.
+  - Generate pair manifests by tail index, not by full filename.
+- Claim boundary:
+  - These are synthetic ICCD-like noisy samples generated from sCMOS content.
+  - They are not real ICCD paired measurements.
+- Gate:
+  - At least one sCMOS candidate pair set, such as `15ms -> 500ms`, must pass
+    brightness, alignment, and mask-aware metric checks before being used as
+    reference content.
 
 ## Experiment Set C: Training Pipeline and Baselines
 

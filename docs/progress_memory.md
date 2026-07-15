@@ -158,6 +158,13 @@ Smoke test status:
   mean-variance analysis. First run on the ten complete gated ICCD folders used
   32 frames, 512x512 center crops, 16 bins, and showed temporal Fano increasing
   from about 1.70 to 14.46 with brightness.
+- Added `scripts/audit_scmos_target_data.py` and audited
+  `F:/目标传感器噪声参数估计/data` as sCMOS data. The audit generated crop-level
+  dark offset, dark std, and bad-pixel mask artifacts under
+  `reports/target_scmos_risk_audit`; documented the source in
+  `docs/target_scmos_data_inventory.md`. This dataset can be used as sCMOS
+  baseline/content source for ICCD-like synthetic noise, but not as real ICCD
+  paired data.
 
 ## Skill Setup
 
