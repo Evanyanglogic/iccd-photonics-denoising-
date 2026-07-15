@@ -346,6 +346,44 @@ python scripts\compare_noise_priors.py `
     brightness, alignment, and mask-aware metric checks before being used as
     reference content.
 
+### E2.5 sCMOS Tail-Index Pair Manifest
+
+- Status: initial `15ms -> 500ms` manifest complete.
+- Purpose:
+  - Bridge the sCMOS multi-exposure folders into the shared `pairs.csv` /
+    `splits.yaml` interface.
+  - Make the data usable by B0 PSNR/SSIM evaluation and later ICCD-like
+    synthetic-noise generation scripts.
+- Current command:
+
+```powershell
+python scripts\convert_scmos_tail_pairs.py `
+  --root "F:\目标传感器噪声参数估计\data" `
+  --noisy-exposure 15ms `
+  --clean-exposure 500ms `
+  --output-dir reports\target_scmos_15ms_500ms_manifest `
+  --dark-offset-path reports\target_scmos_risk_audit\dark_offset_center_crop.npy `
+  --bad-pixel-mask-path reports\target_scmos_risk_audit\bad_pixel_mask_center_crop.npy
+```
+
+- Outputs:
+  - `reports/target_scmos_15ms_500ms_manifest/pairs.csv`
+  - `reports/target_scmos_15ms_500ms_manifest/splits.yaml`
+  - `reports/target_scmos_15ms_500ms_manifest/manifest_report.md`
+- First result:
+  - 100 common tail-index pairs.
+  - Split sizes: train 85, val 8, test 7.
+  - Dataloader check passed on a 256x256 center crop.
+  - B0 PSNR/SSIM: 13.5869 dB / 0.191758.
+- Risk:
+  - Residual mean is about 0.18 in normalized units, so brightness/offset
+    mismatch is substantial.
+  - This manifest is a valid data bridge but not yet evidence that `15ms` and
+    `500ms` are clean/noisy pairs suitable for supervised denoising.
+- Next gate:
+  - Add offset-corrected and mask-aware pair evaluation before using this set
+    as reference content.
+
 ## Experiment Set C: Training Pipeline and Baselines
 
 ### E3.1 Paired Dataset Audit
@@ -517,13 +555,15 @@ Minimum paper figures:
 
 The next sprint should implement and run the first three Stage 2 experiments:
 
-1. Add `scripts/evaluate_fixed_pattern_correction.py`.
-2. Add a crop/frame-count robustness mode or wrapper around
+1. Add offset-corrected and mask-aware pair evaluation for
+   `reports/target_scmos_15ms_500ms_manifest/pairs.csv`.
+2. Add `scripts/evaluate_fixed_pattern_correction.py`.
+3. Add a crop/frame-count robustness mode or wrapper around
    `summarize_single_condition_noise.py`.
-3. Rerun `fit_mean_variance_curve.py` with larger crops or more frames if the
+4. Rerun `fit_mean_variance_curve.py` with larger crops or more frames if the
    fixed-pattern correction result suggests the first 512x512 crop is not
    representative.
-4. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
+5. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
 
 Do not start major network changes until E1.3 and E1.4 have been run and their
 outputs show which noise component is the dominant bottleneck.

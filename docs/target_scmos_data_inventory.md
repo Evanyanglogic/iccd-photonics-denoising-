@@ -119,10 +119,61 @@ Use these data in three stages:
 
 ## Next Steps
 
-1. Add a tail-index pair-manifest converter for this dataset.
-2. Add dark-offset and bad-pixel mask support to pair evaluation scripts.
-3. Visually/statistically verify at least one candidate pair set, starting with
-   `15ms -> 500ms`.
-4. Use real ICCD mean-variance and fixed-pattern statistics to synthesize
+1. Add dark-offset and bad-pixel mask support to pair evaluation scripts.
+2. Visually/statistically inspect `15ms -> 500ms` for brightness mismatch,
+   alignment, and residual structure.
+3. Use real ICCD mean-variance and fixed-pattern statistics to synthesize
    ICCD-like noisy images from selected sCMOS content frames.
 
+## Tail-Index Pair Manifest: 15ms -> 500ms
+
+Generated with:
+
+```powershell
+python scripts\convert_scmos_tail_pairs.py `
+  --root "F:\目标传感器噪声参数估计\data" `
+  --noisy-exposure 15ms `
+  --clean-exposure 500ms `
+  --output-dir reports\target_scmos_15ms_500ms_manifest `
+  --dark-offset-path reports\target_scmos_risk_audit\dark_offset_center_crop.npy `
+  --bad-pixel-mask-path reports\target_scmos_risk_audit\bad_pixel_mask_center_crop.npy
+```
+
+Outputs:
+
+- `reports\target_scmos_15ms_500ms_manifest\pairs.csv`
+- `reports\target_scmos_15ms_500ms_manifest\splits.yaml`
+- `reports\target_scmos_15ms_500ms_manifest\manifest_report.md`
+
+Pairing result:
+
+- Common tail-index pairs: 100.
+- Tail-index range: `000..099`.
+- Splits: train 85, val 8, test 7.
+- Metadata records `source_device=sCMOS` and claim boundary:
+  `sCMOS proxy/content source, not real ICCD paired data`.
+
+No-model baseline command:
+
+```powershell
+python scripts\evaluate_pair_baseline.py `
+  --pairs-csv reports\target_scmos_15ms_500ms_manifest\pairs.csv `
+  --output-dir reports\target_scmos_15ms_500ms_b0 `
+  --range-max 65535 `
+  --bins 8
+```
+
+B0 result:
+
+- Pair count: 100.
+- PSNR mean/std: 13.5869 / 0.1699 dB.
+- SSIM mean/std: 0.191758 / 0.001216.
+- Residual mean/std mean: 0.179934 / 0.106725.
+
+Interpretation:
+
+- The manifest is valid for dataloader and metric scripts.
+- The large residual mean indicates brightness/offset mismatch, so this pair set
+  is not yet a clean supervised training target.
+- Before training or ICCD-like synthesis, run mask-aware and offset-corrected
+  pair checks.

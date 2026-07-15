@@ -165,6 +165,13 @@ Smoke test status:
   `docs/target_scmos_data_inventory.md`. This dataset can be used as sCMOS
   baseline/content source for ICCD-like synthetic noise, but not as real ICCD
   paired data.
+- Added `scripts/convert_scmos_tail_pairs.py` for E2.5 and generated a
+  `15ms -> 500ms` sCMOS tail-index manifest under
+  `reports/target_scmos_15ms_500ms_manifest`: 100 pairs, train/val/test =
+  85/8/7. Dataloader check passed. B0 no-model baseline on the manifest gives
+  PSNR 13.5869 dB and SSIM 0.191758, but residual mean is about 0.18, so
+  brightness/offset mismatch must be handled before using it as supervised
+  training reference.
 
 ## Skill Setup
 
