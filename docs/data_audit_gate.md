@@ -39,6 +39,8 @@ python scripts\audit_iccd_dataset.py `
   claims are made.
 - Train/validation/test split is based on scene and condition fields when
   metadata is available.
+- `scripts/check_manifest_dataloader.py` can read the generated pair/split
+  manifests and returns CHW float data in [0, 1].
 
 ## Blocking Findings
 

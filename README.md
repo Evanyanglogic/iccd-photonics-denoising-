@@ -37,6 +37,7 @@ experiments/      Runnable experiment entry points and logs later
 paper/            Manuscript outline and figure/table planning
 scripts/          Dataset audit and experiment utility scripts
 src/iccd_eval/    Float-domain metrics and residual analysis helpers
+src/iccd_data/    Manifest-backed ICCD paired dataset utilities
 src/iccd_noise/   ICCD noise model and analysis code
 ```
 
@@ -76,5 +77,16 @@ src/iccd_noise/   ICCD noise model and analysis code
      --output-dir reports\noise_prior_fidelity
    ```
 
-6. Connect the ICCD prior to the existing PNGAN training loop only after the
+6. Check the manifest-backed dataloader before training:
+
+   ```powershell
+   python scripts\check_manifest_dataloader.py `
+     --pairs-csv data_manifest\pairs.csv `
+     --splits-yaml data_manifest\splits.yaml `
+     --split train
+   ```
+
+   See `docs/manifest_dataloader.md`.
+
+7. Connect the ICCD prior to the existing PNGAN training loop only after the
    data and metric gates are stable.

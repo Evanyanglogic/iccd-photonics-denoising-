@@ -87,6 +87,9 @@ Added on 2026-07-15:
   evaluator using the pair manifest.
 - `scripts/compare_noise_priors.py`: E2 synthetic-noise fidelity comparison for
   Poisson-Gaussian, sCMOS-like, and ICCD-chain priors.
+- `scripts/check_manifest_dataloader.py`: split-aware dataloader smoke test.
+- `src/iccd_data/`: manifest-backed pair records and PyTorch-compatible paired
+  TIFF dataset.
 - `src/iccd_noise/baselines.py`: generic Poisson-Gaussian and simplified
   sCMOS-like noise priors.
 - `src/iccd_eval/metrics.py`: float-domain PSNR/SSIM, residual statistics, and
@@ -100,6 +103,8 @@ Smoke test status:
   a tiny synthetic 16-bit TIFF pair.
 - B0 baseline evaluator and noise-prior comparison script ran successfully on
   the same smoke-test pair.
+- Manifest dataloader check passed and PyTorch DataLoader produced BCHW
+  batches on the smoke-test pair.
 
 ## Skill Setup
 
