@@ -175,12 +175,12 @@ python scripts\fit_mean_variance_curve.py `
 
 ### E1.4 Fixed-Pattern Correction Baseline
 
-- Status: needs implementation.
+- Status: initial implementation and first run complete.
 - Purpose: estimate how much repeated-frame fixed structure can be removed
   before learning-based denoising.
 - Inputs:
   - Repeated frames from each complete folder.
-- Planned method:
+- Method:
   - Estimate per-pixel temporal mean map.
   - Decompose each frame into global brightness, fixed-pattern component, and
     temporal residual.
@@ -195,7 +195,8 @@ python scripts\evaluate_fixed_pattern_correction.py `
   --output-dir reports\gated_iccd_20260319_fixed_pattern `
   --train-frames 100 `
   --test-frames 100 `
-  --crop-size 1024
+  --crop-size 512 `
+  --save-maps
 ```
 
 - Primary metrics:
@@ -203,6 +204,14 @@ python scripts\evaluate_fixed_pattern_correction.py `
   - Temporal residual standard deviation before/after correction.
   - Residual mean bias.
   - Visual map of fixed-pattern component.
+- First-run result:
+  - All ten complete folders produced held-out rows.
+  - Median spatial fixed-pattern reduction: about 95.1%.
+  - Folder-level spatial reduction range: about 57.5% to 96.4%.
+  - Temporal standard-deviation change was effectively 0% because the baseline
+    subtracts a frame-invariant zero-mean map.
+  - Folder `13` has the weakest reduction because its fixed-pattern component
+    is already small relative to temporal noise.
 - Working success threshold:
   - Provisional target: reduce spatial fixed-pattern standard deviation by at
     least 50% on held-out frames.
@@ -555,15 +564,16 @@ Minimum paper figures:
 
 The next sprint should implement and run the first three Stage 2 experiments:
 
-1. Add offset-corrected and mask-aware pair evaluation for
-   `reports/target_scmos_15ms_500ms_manifest/pairs.csv`.
-2. Add `scripts/evaluate_fixed_pattern_correction.py`.
-3. Add a crop/frame-count robustness mode or wrapper around
+1. Add a crop/frame-count robustness mode or wrapper around
    `summarize_single_condition_noise.py`.
-4. Rerun `fit_mean_variance_curve.py` with larger crops or more frames if the
+2. Add PSD/autocorrelation analysis for residuals after fixed-pattern removal.
+3. Run the dark/flat data gate once matching calibration folders are identified.
+4. Add offset-corrected and mask-aware pair evaluation for
+   `reports/target_scmos_15ms_500ms_manifest/pairs.csv`.
+5. Rerun `fit_mean_variance_curve.py` with larger crops or more frames if the
    fixed-pattern correction result suggests the first 512x512 crop is not
    representative.
-5. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
+6. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
 
 Do not start major network changes until E1.3 and E1.4 have been run and their
 outputs show which noise component is the dominant bottleneck.

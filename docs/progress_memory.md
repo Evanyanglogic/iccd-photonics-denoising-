@@ -172,6 +172,13 @@ Smoke test status:
   PSNR 13.5869 dB and SSIM 0.191758, but residual mean is about 0.18, so
   brightness/offset mismatch must be handled before using it as supervised
   training reference.
+- Added `scripts/evaluate_fixed_pattern_correction.py` for E1.4 and ran it on
+  the ten complete gated ICCD folders under `D:/iccd/data/20260319`. The run
+  used 100 calibration frames, 100 held-out test frames, and 512x512 center
+  crops. Median held-out spatial fixed-pattern reduction is about 95.1%, with
+  temporal standard deviation effectively unchanged. This supports a
+  fixed-pattern correction baseline, but not a true flat-field claim without
+  matching flat-field frames.
 
 ## Skill Setup
 

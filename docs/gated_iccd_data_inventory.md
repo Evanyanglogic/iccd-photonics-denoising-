@@ -269,3 +269,48 @@ Preliminary interpretation:
 - Linear slopes are exploratory raw-domain variance-vs-mean fits, not Poisson
   unit-slope claims. Folder `13` has weak linear fit quality and should be
   inspected in the bin CSV/plot before being used for paper claims.
+
+## Fixed-Pattern Correction Baseline
+
+Computed with:
+
+```powershell
+python scripts\evaluate_fixed_pattern_correction.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_fixed_pattern `
+  --train-frames 100 `
+  --test-frames 100 `
+  --crop-size 512 `
+  --save-maps
+```
+
+The fixed-pattern map is estimated from the first 100 frames in each folder and
+evaluated on the held-out next 100 frames. The map is additive and zero-mean, so
+it preserves global frame brightness while subtracting repeated spatial
+structure.
+
+| folder | mean signal | fixed map std | spatial std before | spatial std after | reduction | temporal std before | temporal std after |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 1157.9 | 239.056 | 238.97 | 51.1507 | 78.595% | 67.3758 | 67.3758 |
+| 2 | 963.794 | 34.974 | 35.1576 | 8.34231 | 76.272% | 43.6609 | 43.6609 |
+| 4 | 1780.23 | 920.623 | 915.374 | 47.1845 | 94.845% | 110.8 | 110.8 |
+| 5 | 4678.27 | 4015.52 | 3993.7 | 183.597 | 95.403% | 224.734 | 224.734 |
+| 7 | 2508.71 | 1705.17 | 1702.81 | 72.6114 | 95.736% | 146.755 | 146.755 |
+| 8 | 2240.18 | 1418.77 | 1415.67 | 50.4512 | 96.436% | 134.3 | 134.3 |
+| 9 | 1399.68 | 508.428 | 509.641 | 20.0485 | 96.066% | 87.444 | 87.444 |
+| 10 | 1201.67 | 296.185 | 295.918 | 13.4673 | 95.449% | 71.3095 | 71.3095 |
+| 11 | 1078.96 | 163.184 | 163.668 | 8.98447 | 94.511% | 58.1733 | 58.1733 |
+| 13 | 937.207 | 13.241 | 13.2443 | 5.63519 | 57.452% | 38.5776 | 38.5776 |
+
+Preliminary interpretation:
+
+- The empirical fixed-pattern baseline removes most repeated spatial structure
+  on held-out frames, with median spatial reduction about 95.1%.
+- Temporal standard deviation is effectively unchanged, which is expected for a
+  frame-invariant additive map and is a useful guardrail against artificial
+  temporal smoothing.
+- This supports including fixed-pattern correction as a calibration baseline or
+  preprocessing control in the paper.
+- This does not replace true dark/flat calibration. True flat-field claims still
+  require matching flat-field data.
