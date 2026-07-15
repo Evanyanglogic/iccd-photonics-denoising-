@@ -82,3 +82,47 @@ matching dark/flat correction set for `D:\iccd\data\20260319`.
 The best immediate use is to audit the first low-saturation segment
 `57-187` as a dark/background candidate and compare its temporal distribution
 against `F:\ICCD_pir\dark`.
+
+## Background Candidate Audit: Indices 57-187
+
+Computed with:
+
+```powershell
+python scripts\audit_iccd_pir_background.py `
+  --root F:\ICCD_pir\2025.07.09\CDM-A4000-UM90_DH09131AAK00007 `
+  --start-index 57 `
+  --end-index 187 `
+  --output-dir reports\iccd_pir_20250709_background_57_187 `
+  --crop-size 512 `
+  --save-maps
+```
+
+This run uses 512x512 center crops from the low-saturation segment.
+
+| metric | value |
+|---|---:|
+| frames | 131 |
+| mean_signal | 112.069 |
+| frame_mean_std | 1.99475 |
+| frame_mean_min | 107.781 |
+| frame_mean_max | 117.206 |
+| temporal_std_mean | 17.5962 |
+| temporal_std_p50 | 17.8577 |
+| temporal_std_p99 | 24.8166 |
+| spatial_mean_std | 25.7620 |
+| fixed_to_temporal_std_ratio | 1.46407 |
+| saturated_fraction_mean | 0.00234452 |
+| saturated_fraction_max | 0.00259781 |
+| hot_pixel_fraction_p999 | 0.00181198 |
+| unstable_pixel_fraction_p999 | 0.00100327 |
+
+Interpretation:
+
+- Frame means are fairly stable, so this segment is credible as an auxiliary
+  8-bit background/dark candidate.
+- Saturation is low but nonzero, and the p99.9 mean-map threshold reaches 255,
+  so hot/saturated pixels must be masked if this data family is used.
+- The fixed/temporal ratio is about 1.46, showing structured background
+  nonuniformity even in the low-saturation segment.
+- This result strengthens auxiliary background evidence, but it still does not
+  provide matching dark correction for the 5120x5120 uint16 `20260319` batch.

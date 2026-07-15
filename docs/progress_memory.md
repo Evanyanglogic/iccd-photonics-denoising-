@@ -205,6 +205,13 @@ Smoke test status:
   regimes. It is useful as auxiliary ICCD dark/background or brightness-regime
   evidence, but not as matching dark/flat correction for the 5120x5120 uint16
   `D:/iccd/data/20260319` gated ICCD batch.
+- Added `scripts/audit_iccd_pir_background.py` and audited the low-saturation
+  `ICCD_pir` segment 57-187. The 512x512 crop summary over 131 frames gives
+  mean signal 112.07 DN, frame mean std 1.99 DN, temporal std mean 17.60 DN,
+  spatial mean std 25.76 DN, fixed/temporal ratio 1.46, mean saturation
+  fraction 0.00234, and p99.9 hot-pixel fraction 0.00181. This is useful
+  auxiliary 8-bit background evidence but not matching correction for the main
+  16-bit gated ICCD batch.
 - Added `docs/literature_matrix.md` to position the planned paper against
   low-light RAW denoising, physics-based noise synthesis, real-camera noise
   datasets, self-supervised denoising, and ICCD/MCP characterization literature.
