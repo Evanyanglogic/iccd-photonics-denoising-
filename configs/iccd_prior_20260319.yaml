@@ -1,0 +1,59 @@
+# Evidence-backed ICCD prior generated from local E1 reports.
+# Runnable sections are compatible with scripts/compare_noise_priors.py.
+# Empirical components record evidence not yet represented by the simple runnable model.
+range_max: 65535
+bins: 8
+seed: 20260715
+poisson_gaussian:
+  peak_photons: 3764.2105
+  read_noise_sigma: 0.00058468276
+  clip: true
+scmos_like:
+  signal_gain: 0.00026565996
+  read_noise_sigma: 0.00058468276
+  row_noise_sigma: 0.0
+  column_noise_sigma: 0.0
+  offset: 0.0
+  clip: true
+iccd:
+  photon_scale: 3764.2105
+  photocathode_qe: 1.0
+  mcp_gain_mean: 1.0
+  mcp_gain_var: 0.0001
+  dark_count_rate: 0.0
+  phosphor_sigma: 0.0
+  read_noise_sigma: 0.00058468276
+  offset: 0.0
+  clip: true
+iccd_empirical_components:
+  source_main_batch: "D:/iccd/data/20260319"
+  calibration_status: repeated-frame empirical prior; no matching dark/flat
+  mean_signal_dn_min: 936.10876
+  mean_signal_dn_max: 4716.9346
+  temporal_fano_min: 1.6958123
+  temporal_fano_median: 6.0504704
+  temporal_fano_max: 14.456356
+  valid_linear_slope_var_per_dn_median_r2_ge_0p95: 17.410025
+  valid_linear_slope_count: 9
+  effective_peak_photons_from_raw_slope: 3764.2105
+  fixed_pattern_sigma_norm_median: 0.0061388089
+  fixed_pattern_reduction_median: 0.95124084
+  lag1_row_corr_median: 0.031910672
+  lag1_col_corr_median: 0.030097863
+  corr_length_0p1_px_median: 1.0
+  auxiliary_8bit_background:
+    available: true
+    source: "F:/ICCD_pir/2025.07.09/CDM-A4000-UM90_DH09131AAK00007"
+    dtype: uint8
+    frame_count: 131
+    mean_signal_dn: 112.0693
+    temporal_std_mean_dn: 17.596157
+    spatial_mean_std_dn: 25.761991
+    saturated_fraction_mean: 0.0023445246
+    hot_pixel_fraction_p999: 0.0018119812
+    matching_main_batch: false
+  claim_boundary:
+    - Parameters are derived from repeated-frame empirical reports.
+    - Do not present as strict dark/flat physical calibration.
+    - The current runnable ICCD model uses an effective photon scale to match raw-domain variance slope.
+    - Fixed-pattern statistics are recorded but not yet injected by src.iccd_noise.ICCDNoiseModel.

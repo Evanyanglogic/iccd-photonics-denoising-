@@ -217,6 +217,14 @@ Smoke test status:
   datasets, self-supervised denoising, and ICCD/MCP characterization literature.
   Current differentiation: real gated-ICCD repeated-frame statistics -> device
   prior -> synthetic paired data -> real-device statistical validation.
+- Added `scripts/build_iccd_prior_config.py` for E2.1 and generated
+  `configs/iccd_prior_20260319.yaml` plus
+  `reports/e2_1_iccd_prior/prior_parameter_report.md`. The first config is
+  derived from E1 reports: effective raw-domain linear slope about 17.41
+  variance DN per DN, effective photon scale about 3764, temporal Fano range
+  about 1.70 to 14.46 with median about 6.05, median normalized fixed-pattern
+  sigma about 0.00614, and weak residual lag-1 spatial correlation. It is an
+  empirical repeated-frame prior, not strict dark/flat calibration.
 
 ## Skill Setup
 

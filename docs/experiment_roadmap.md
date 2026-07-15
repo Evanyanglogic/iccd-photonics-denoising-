@@ -315,17 +315,38 @@ python scripts\analyze_iccd_spatial_correlation.py `
 
 ### E2.1 ICCD Prior Parameterization
 
-- Status: partial code exists; needs calibration from E1.3/E1.5.
+- Status: initial implementation and config generated.
 - Purpose: turn real ICCD statistics into prior parameters.
 - Inputs:
   - Mean-variance fits.
   - Fixed-pattern maps or fixed-pattern statistics.
   - Spatial correlation estimates if available.
+- Current command:
+
+```powershell
+python scripts\build_iccd_prior_config.py `
+  --output-config configs\iccd_prior_20260319.yaml `
+  --output-report reports\e2_1_iccd_prior\prior_parameter_report.md
+```
+
+- Current output:
+  - `configs/iccd_prior_20260319.yaml`
+  - `reports/e2_1_iccd_prior/prior_parameter_report.md`
 - Model components:
   - Signal-dependent over-dispersion.
   - Additive read/dark term.
   - Fixed-pattern component.
   - Optional spatial diffusion/correlation component.
+- First generated parameter summary:
+  - Main source batch: `D:/iccd/data/20260319`.
+  - Calibration status: repeated-frame empirical prior; no matching dark/flat.
+  - Effective raw-domain linear slope: about 17.41 variance DN per DN.
+  - Effective photon scale for the runnable simplified model: about 3764.
+  - Temporal Fano range: about 1.70 to 14.46, median about 6.05.
+  - Median normalized fixed-pattern sigma: about 0.00614.
+  - Median fixed-pattern reduction from E1.4: about 95.1%.
+  - Residual lag-1 correlation is weak, so `phosphor_sigma` is currently set to
+    0 in the runnable simplified prior.
 - Success criteria:
   - Parameters are derived from reports, not hand-tuned only by visuals.
   - The prior reproduces brightness-bin variance better than generic
