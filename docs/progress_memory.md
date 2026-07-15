@@ -81,6 +81,8 @@ Added on 2026-07-15:
 - `configs/dataset_iccd.yaml`: dataset audit configuration template.
 - `scripts/audit_iccd_dataset.py`: TIFF pair, range, calibration, manifest, and
   split audit utility.
+- `scripts/evaluate_pair_baseline.py`: no-model B0 noisy-input baseline
+  evaluator using the pair manifest.
 - `src/iccd_eval/metrics.py`: float-domain PSNR/SSIM, residual statistics, and
   brightness-bin PSNR.
 

@@ -58,7 +58,15 @@ src/iccd_noise/   ICCD noise model and analysis code
    `data_manifest/metadata_template.csv`.
 3. Use `src/iccd_eval/metrics.py` for float-domain PSNR/SSIM and residual
    statistics; do not quantize normalized scientific images to uint8.
-4. Compare sCMOS prior, Poisson-Gaussian prior, and ICCD prior on noise
+4. Measure the no-model B0 baseline from the generated pair manifest:
+
+   ```powershell
+   python scripts\evaluate_pair_baseline.py `
+     --pairs-csv data_manifest\pairs.csv `
+     --output-dir reports\b0_noisy_baseline
+   ```
+
+5. Compare sCMOS prior, Poisson-Gaussian prior, and ICCD prior on noise
    statistics after the audit gate passes.
-5. Connect the ICCD prior to the existing PNGAN training loop only after the
+6. Connect the ICCD prior to the existing PNGAN training loop only after the
    data and metric gates are stable.
