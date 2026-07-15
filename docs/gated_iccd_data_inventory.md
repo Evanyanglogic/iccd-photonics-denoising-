@@ -15,6 +15,20 @@ Current contents:
 - Filename pattern: `<frame>-Camera1[20600555].tif`
 - Frame index range: 1 to 200, no missing indices detected.
 
+Batch inventory command:
+
+```powershell
+python scripts\inventory_gated_iccd_batch.py `
+  --root F:\20260319 `
+  --output-dir reports\gated_iccd_20260319_inventory
+```
+
+Current batch inventory:
+
+| folder | TIFFs | metadata rows | exposure width ms | Sync A width us | Sync B width us | gain |
+|---|---:|---:|---:|---:|---:|---:|
+| 1 | 200 | 200 | 900.000000 | 4.000000 | 4.000000 | 60 |
+
 ## Acquisition Metadata
 
 Parsed from `PictureInfo.txt`:

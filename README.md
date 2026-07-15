@@ -61,6 +61,14 @@ src/iccd_noise/   ICCD noise model and analysis code
      --output-dir reports\single_exposure_20260319_1
    ```
 
+   To inventory every downloaded gated ICCD exposure folder under one date:
+
+   ```powershell
+   python scripts\inventory_gated_iccd_batch.py `
+     --root F:\20260319 `
+     --output-dir reports\gated_iccd_20260319_inventory
+   ```
+
 2. Confirm strict clean/noisy pairing, 16-bit range handling, metadata coverage,
    dark/flat calibration coverage, and held-out scene/condition splits. See
    `docs/data_audit_gate.md`; start metadata from

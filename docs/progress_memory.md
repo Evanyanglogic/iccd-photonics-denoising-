@@ -87,6 +87,8 @@ Added on 2026-07-15:
   split audit utility.
 - `scripts/audit_single_exposure_iccd.py`: single-exposure gated ICCD sequence
   audit for unpaired repeated frames.
+- `scripts/inventory_gated_iccd_batch.py`: batch-level gated ICCD folder
+  inventory for multiple downloaded exposure/gate folders.
 - `scripts/convert_exposure_lists.py`: legacy PMRID exposure-list to
   `pairs.csv`/`splits.yaml` converter using exposure duration to orient
   clean/noisy columns.
@@ -122,6 +124,8 @@ Smoke test status:
 - Gated ICCD subset `F:/20260319/1` audited: 200 TIFF frames, 5120x5120 uint16,
   exposure width 900 ms, Sync A/B width 4 us, gain 60, no saturation in sampled
   frames.
+- Gated ICCD batch inventory for `F:/20260319` currently detects one folder:
+  `1`, with 200 TIFF frames and 200 metadata rows.
 
 ## Skill Setup
 
