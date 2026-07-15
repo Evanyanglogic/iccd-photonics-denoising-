@@ -60,12 +60,36 @@ Original `E:/PNGAN-main` contains an sCMOS-oriented PNGAN prototype:
 
 ## Immediate Engineering Plan
 
-1. Port minimal PNGAN loop into this sub-repository.
-2. Replace sCMOS prior with `src/iccd_noise/physical_model.py`.
-3. Build an ICCD dataloader with metadata and condition split.
-4. Add noise-statistical loss/metrics.
-5. Run first experiment:
-   Poisson-Gaussian vs sCMOS prior vs ICCD prior vs ICCD-aware PNGAN.
+Updated after the `$pytorch-patterns` training-code audit:
+
+1. Data and metric gates come before model changes.
+2. Run `scripts/audit_iccd_dataset.py` to verify strict pairing, TIFF numeric
+   range, metadata coverage, dark/flat availability, and split readiness.
+3. Use `src/iccd_eval/metrics.py` for float-domain PSNR/SSIM and residual
+   statistics.
+4. Build an ICCD dataloader with metadata and condition split after the audit
+   manifest is stable.
+5. Run the first controlled comparison only after the audit passes:
+   noisy input vs Poisson-Gaussian vs sCMOS prior vs ICCD prior.
+6. Connect the ICCD prior to PNGAN after baseline data, metrics, and splits are
+   reproducible.
+
+## Current Implementation Progress
+
+Added on 2026-07-15:
+
+- `configs/dataset_iccd.yaml`: dataset audit configuration template.
+- `scripts/audit_iccd_dataset.py`: TIFF pair, range, calibration, manifest, and
+  split audit utility.
+- `src/iccd_eval/metrics.py`: float-domain PSNR/SSIM, residual statistics, and
+  brightness-bin PSNR.
+
+Smoke test status:
+
+- AST syntax check passed.
+- Metric smoke test passed.
+- Audit script generated a sample report, pair manifest, and split manifest on
+  a tiny synthetic 16-bit TIFF pair.
 
 ## Skill Setup
 

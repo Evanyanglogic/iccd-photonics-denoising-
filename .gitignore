@@ -16,6 +16,7 @@ datasets/
 checkpoints/
 logs/
 results/
+reports/
 outputs/
 *.pth
 *.pt
@@ -29,4 +30,3 @@ outputs/
 Thumbs.db
 .vscode/
 .idea/
-

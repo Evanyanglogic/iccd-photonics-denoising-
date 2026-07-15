@@ -35,14 +35,30 @@ data_manifest/    Dataset organization and capture protocol notes
 docs/             Research route, contribution lock, experiment matrix
 experiments/      Runnable experiment entry points and logs later
 paper/            Manuscript outline and figure/table planning
+scripts/          Dataset audit and experiment utility scripts
+src/iccd_eval/    Float-domain metrics and residual analysis helpers
 src/iccd_noise/   ICCD noise model and analysis code
 ```
 
 ## Immediate Milestones
 
-1. Build an ICCD calibration dataset manifest.
-2. Implement a first ICCD physical noise simulator.
-3. Compare sCMOS prior, Poisson-Gaussian prior, and ICCD prior on noise statistics.
-4. Connect the ICCD prior to the existing PNGAN training loop.
-5. Run downstream denoising validation on real ICCD test data.
+1. Run the dataset audit gate before training:
 
+   ```powershell
+   python scripts\audit_iccd_dataset.py `
+     --config configs\dataset_iccd.yaml `
+     --output-dir reports `
+     --pairs-out data_manifest\pairs.csv `
+     --splits-out data_manifest\splits.yaml
+   ```
+
+2. Confirm strict clean/noisy pairing, 16-bit range handling, metadata coverage,
+   dark/flat calibration coverage, and held-out scene/condition splits. See
+   `docs/data_audit_gate.md`; start metadata from
+   `data_manifest/metadata_template.csv`.
+3. Use `src/iccd_eval/metrics.py` for float-domain PSNR/SSIM and residual
+   statistics; do not quantize normalized scientific images to uint8.
+4. Compare sCMOS prior, Poisson-Gaussian prior, and ICCD prior on noise
+   statistics after the audit gate passes.
+5. Connect the ICCD prior to the existing PNGAN training loop only after the
+   data and metric gates are stable.

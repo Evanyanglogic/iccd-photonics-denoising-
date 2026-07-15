@@ -1,0 +1,43 @@
+# ICCD/sCMOS dataset audit template.
+# Fill paths before running scripts/audit_iccd_dataset.py.
+
+dataset_name: iccd_low_light_placeholder
+device: ICCD
+
+# Paired data. clean_dir is long-exposure/reference; noisy_dir is short-exposure.
+clean_dir: ""
+noisy_dir: ""
+
+# Optional calibration sequences.
+dark_dir: ""
+flat_dir: ""
+
+# Optional CSV with one row per file. Useful columns:
+# filename, stem, scene_id, frame_id, device, gain, gate_width, exposure_ms,
+# illumination_level, bit_depth, temperature
+metadata_csv: ""
+
+# If empty, pairing uses Path.stem. If provided, use a Python regex. A named
+# group called "key" is preferred; otherwise the full match is used.
+pair_key_regex: ""
+
+bit_depth: 16
+expected_range_max: 65535
+max_sample_pairs: 32
+max_calibration_files: 64
+
+# These fields define the paper-level split boundary when metadata is present.
+scene_key_fields:
+  - scene_id
+condition_key_fields:
+  - device
+  - gain
+  - gate_width
+  - exposure_ms
+  - illumination_level
+
+split:
+  train_fraction: 0.7
+  val_fraction: 0.15
+  test_fraction: 0.15
+  seed: 20260715
