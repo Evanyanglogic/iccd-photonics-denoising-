@@ -148,6 +148,11 @@ Smoke test status:
   slope in raw DN; temporal variance should be separated from fixed-pattern
   nonuniformity; provisional thresholds should later be backed by uncertainty
   intervals.
+- Tool installation plan saved in `docs/tooling_install_plan.md`: install
+  FiftyOne and MLflow first for visual dataset review and experiment tracking,
+  add Kornia/PIQ/TorchMetrics/LPIPS with training code, defer DVC until a data
+  remote is chosen, and defer broad extra skills or community OpenCV MCP until a
+  specific gap appears.
 
 ## Skill Setup
 
