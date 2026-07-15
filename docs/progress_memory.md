@@ -139,6 +139,10 @@ Smoke test status:
   for web/venue/device sources, GitHub MCP for remote repository context,
   `academic-research-suite` for literature/experiment planning, and
   `paper-spine` only after contribution and evidence gates are mature.
+- Detailed experiment roadmap drafted in `docs/experiment_roadmap.md`. It
+  breaks the work into device noise characterization, noise-model fidelity,
+  training baselines, ablations, and paper evidence, with explicit gates and
+  success criteria.
 
 ## Skill Setup
 
