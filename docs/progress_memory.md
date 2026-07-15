@@ -179,6 +179,13 @@ Smoke test status:
   temporal standard deviation effectively unchanged. This supports a
   fixed-pattern correction baseline, but not a true flat-field claim without
   matching flat-field frames.
+- Added `scripts/evaluate_noise_robustness.py` for E1.2 and ran crop/frame-count
+  robustness on the same ten gated ICCD folders. Comparing 512x512/32-frame
+  statistics with 1024x1024/128-frame statistics gives median absolute relative
+  changes of about 5.8% in mean signal, 9.8% in temporal standard deviation,
+  6.4% in temporal Fano, 2.9% in spatial fixed-pattern standard deviation, and
+  16.2% in fixed/temporal ratio. The main trend is stable, but larger crops
+  reveal meaningful spatial nonuniformity.
 
 ## Skill Setup
 

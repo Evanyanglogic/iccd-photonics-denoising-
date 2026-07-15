@@ -227,6 +227,40 @@ Preliminary interpretation:
   folders, making flat-field/fixed-pattern correction important before final
   denoising claims.
 
+## Crop and Frame-Count Robustness
+
+Computed with:
+
+```powershell
+python scripts\evaluate_noise_robustness.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_noise_robustness `
+  --crop-sizes 256 512 1024 `
+  --frame-counts 16 32 64 128
+```
+
+The report compares the existing 512x512 center-crop, 32-frame baseline with a
+larger 1024x1024 center-crop, 128-frame setting.
+
+| metric | median abs relative change | max abs relative change |
+|---|---:|---:|
+| mean_signal | 5.760% | 18.716% |
+| temporal_std_mean | 9.839% | 15.930% |
+| temporal_fano_approx | 6.426% | 10.403% |
+| spatial_fixed_std | 2.852% | 29.731% |
+| fixed_to_temporal_std_ratio | 16.247% | 28.580% |
+
+Preliminary interpretation:
+
+- The signal-dependent temporal-noise trend remains under larger crop and frame
+  settings.
+- Expanding from 512 to 1024 center crops changes mean signal noticeably in some
+  folders, so full-field spatial nonuniformity should be treated as a real
+  device/illumination factor rather than hidden.
+- The 512x512 center crop is acceptable for fast screening, but paper figures
+  should either use larger crops or explicitly report crop sensitivity.
+
 ## Mean-Variance Summary
 
 Computed with:

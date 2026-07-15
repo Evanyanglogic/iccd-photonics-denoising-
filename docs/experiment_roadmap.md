@@ -103,20 +103,41 @@ python scripts\summarize_single_condition_noise.py `
 
 ### E1.2 Crop and Frame-Count Robustness
 
-- Status: needs script option or wrapper.
+- Status: initial implementation and first run complete.
 - Purpose: check whether E1.1 is an artifact of the 512x512 center crop or first
   32 frames.
 - Inputs:
   - Same ten complete folders.
-- Planned runs:
+- Runs:
   - Crop sizes: 256, 512, 1024.
   - Frame counts: 16, 32, 64, 128.
-  - Optional crop positions: center and four quadrants.
+  - Current implementation uses center crops; quadrant/edge crops remain
+    optional if full-field spatial variation becomes a main paper claim.
+- Current command:
+
+```powershell
+python scripts\evaluate_noise_robustness.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_noise_robustness `
+  --crop-sizes 256 512 1024 `
+  --frame-counts 16 32 64 128
+```
+
 - Primary metrics:
   - Mean signal.
   - Temporal standard deviation.
   - Fano approximation.
   - Fixed-to-temporal ratio.
+- First-run result:
+  - 120 rows were produced: ten folders x three crop sizes x four frame counts.
+  - Comparing the existing 512x512/32-frame baseline with 1024x1024/128-frame
+    statistics gives median absolute relative changes of about 5.8% for mean
+    signal, 9.8% for temporal standard deviation, 6.4% for Fano approximation,
+    2.9% for spatial fixed-pattern standard deviation, and 16.2% for the
+    fixed/temporal ratio.
+  - The largest mean-signal change is about 18.7%, so spatial nonuniformity is
+    visible when expanding from center crop to larger field.
 - Success criteria:
   - Main trends remain after changing crop size or frame count.
   - If trends change by region, report this as spatial nonuniformity rather than
