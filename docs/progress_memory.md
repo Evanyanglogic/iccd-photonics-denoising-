@@ -130,6 +130,9 @@ Smoke test status:
   200-frame folders are `1,2,4,5,7,8,9,10,11,13`; partial folders are `3` and
   `6`; `12` is empty/incomplete. All complete folders share exposure width
   900 ms, Sync A/B width 4 us, and gain 60.
+- Single-condition noise summary over 10 complete folders shows mean signal
+  range about 936 to 4717 DN, temporal std mean about 37.7 to 217.9 DN, and
+  Fano approximation about 1.64 to 14.0 on 512x512 center crops.
 
 ## Skill Setup
 

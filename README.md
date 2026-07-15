@@ -69,6 +69,15 @@ src/iccd_noise/   ICCD noise model and analysis code
      --output-dir reports\gated_iccd_20260319_inventory
    ```
 
+   To summarize temporal and fixed-pattern noise across complete folders:
+
+   ```powershell
+   python scripts\summarize_single_condition_noise.py `
+     --root D:\iccd\data\20260319 `
+     --folders 1 2 4 5 7 8 9 10 11 13 `
+     --output-dir reports\gated_iccd_20260319_noise_summary
+   ```
+
 2. Confirm strict clean/noisy pairing, 16-bit range handling, metadata coverage,
    dark/flat calibration coverage, and held-out scene/condition splits. See
    `docs/data_audit_gate.md`; start metadata from

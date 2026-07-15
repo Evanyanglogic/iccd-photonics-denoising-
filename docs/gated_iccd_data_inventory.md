@@ -186,3 +186,43 @@ Current interpretation:
 - They do not yet form supervised clean/noisy pairs by exposure. A paired
   denoising dataset still needs another exposure/gate/gain condition or a
   clearly identified reference acquisition.
+
+## Single-Condition Noise Summary
+
+Computed with:
+
+```powershell
+python scripts\summarize_single_condition_noise.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_noise_summary `
+  --max-frames 32 `
+  --crop-size 512
+```
+
+These values use 512x512 center crops from the first 32 frames of each complete
+folder.
+
+| folder | mean signal | frame mean std | spatial fixed std | temporal std mean | Fano approx | fixed/temporal |
+|---|---:|---:|---:|---:|---:|---:|
+| 13 | 936.109 | 2.2052 | 14.4721 | 37.7137 | 1.64282 | 0.383735 |
+| 2 | 966.032 | 2.77462 | 35.5336 | 42.5688 | 2.01727 | 0.834734 |
+| 11 | 1083.35 | 2.85444 | 163.789 | 56.784 | 3.40482 | 2.88441 |
+| 1 | 1157.76 | 2.30129 | 239.786 | 64.8298 | 4.30272 | 3.6987 |
+| 10 | 1202.05 | 2.87118 | 296.421 | 69.7951 | 4.98268 | 4.24702 |
+| 9 | 1395.74 | 3.06875 | 507.677 | 85.5111 | 6.74011 | 5.93697 |
+| 4 | 1787.63 | 2.66886 | 923.57 | 108.358 | 8.88335 | 8.52332 |
+| 8 | 2243.32 | 3.46062 | 1420.08 | 131.337 | 10.4732 | 10.8125 |
+| 7 | 2510.35 | 2.80575 | 1706.33 | 143.278 | 11.2167 | 11.9092 |
+| 5 | 4716.93 | 6.79848 | 4030.13 | 217.86 | 14.0046 | 18.4987 |
+
+Preliminary interpretation:
+
+- Temporal noise increases with signal level, which supports a signal-dependent
+  noise component.
+- Approximate Fano factor is greater than 1 and grows with brightness, which is
+  consistent with multiplicative/intensifier behavior rather than simple
+  Poisson noise alone.
+- Spatial fixed-pattern variation grows faster than temporal noise in brighter
+  folders, making flat-field/fixed-pattern correction important before final
+  denoising claims.
