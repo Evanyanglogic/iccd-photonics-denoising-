@@ -133,6 +133,12 @@ Smoke test status:
 - Single-condition noise summary over 10 complete folders shows mean signal
   range about 936 to 4717 DN, temporal std mean about 37.7 to 217.9 DN, and
   Fano approximation about 1.64 to 14.0 on 512x512 center crops.
+- Workflow routing documented in `docs/iccd_research_workflow.md`: use
+  `iccd-denoising-optimizer` for data/noise/metric gates, `pytorch-patterns`
+  for PyTorch pipeline audits, arXiv MCP for paper discovery, Brave Search MCP
+  for web/venue/device sources, GitHub MCP for remote repository context,
+  `academic-research-suite` for literature/experiment planning, and
+  `paper-spine` only after contribution and evidence gates are mature.
 
 ## Skill Setup
 
