@@ -348,3 +348,45 @@ Preliminary interpretation:
   preprocessing control in the paper.
 - This does not replace true dark/flat calibration. True flat-field claims still
   require matching flat-field data.
+
+## Spatial Correlation and PSD
+
+Computed with:
+
+```powershell
+python scripts\analyze_iccd_spatial_correlation.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_spatial_correlation `
+  --max-frames 64 `
+  --crop-size 512 `
+  --max-radius 128
+```
+
+Residuals are computed after subtracting each folder's per-pixel temporal mean
+and each frame's residual mean.
+
+| folder | residual std | row lag-1 | col lag-1 | autocorr r1 | corr <= 0.1 px | PSD low | PSD high |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 71.7565 | 0.061646 | 0.055747 | 0.050575 | 1 | 22.465% | 42.280% |
+| 2 | 44.4288 | 0.056779 | 0.043676 | 0.036802 | 1 | 29.644% | 51.374% |
+| 4 | 127.065 | 0.021684 | 0.019731 | 0.017920 | 1 | 22.098% | 56.112% |
+| 5 | 260.638 | 0.033384 | 0.033118 | 0.032153 | 1 | 50.138% | 29.978% |
+| 7 | 169.349 | 0.027550 | 0.027078 | 0.025152 | 1 | 40.377% | 39.745% |
+| 8 | 154.567 | 0.021959 | 0.020361 | 0.018800 | 1 | 26.431% | 52.520% |
+| 9 | 97.7598 | 0.024290 | 0.021026 | 0.018961 | 1 | 21.754% | 57.212% |
+| 10 | 77.9769 | 0.030437 | 0.026058 | 0.022176 | 1 | 19.052% | 59.960% |
+| 11 | 61.1428 | 0.051413 | 0.044150 | 0.036446 | 1 | 21.664% | 57.445% |
+| 13 | 39.4584 | 0.057355 | 0.038881 | 0.033858 | 1 | 33.822% | 48.253% |
+
+Preliminary interpretation:
+
+- Current residual noise after fixed-pattern removal has weak short-range
+  positive correlation, with median lag-1 row/column correlation about
+  0.032/0.030.
+- Radial autocorrelation falls below 0.1 by 1 px for all ten folders, so the
+  current center-crop data do not show a strong long-range spatial blur
+  signature in the temporal residual.
+- For the paper, the stronger spatial claim is fixed-pattern/nonuniform mean
+  structure, not long-range correlated residual noise, unless later full-field
+  or calibration data show otherwise.

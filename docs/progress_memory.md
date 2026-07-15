@@ -186,6 +186,13 @@ Smoke test status:
   6.4% in temporal Fano, 2.9% in spatial fixed-pattern standard deviation, and
   16.2% in fixed/temporal ratio. The main trend is stable, but larger crops
   reveal meaningful spatial nonuniformity.
+- Added `scripts/analyze_iccd_spatial_correlation.py` for E1.5 and ran it on 64
+  frames from each complete gated ICCD folder. After subtracting each folder's
+  per-pixel temporal mean and each frame's residual mean, median row/column
+  lag-1 correlations are about 0.032/0.030 and radial autocorrelation falls
+  below 0.1 by 1 px. Current evidence supports strong fixed-pattern/spatial
+  mean nonuniformity, but only weak short-range correlation in temporal
+  residual noise.
 
 ## Skill Setup
 

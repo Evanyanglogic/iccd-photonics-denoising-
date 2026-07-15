@@ -248,15 +248,33 @@ python scripts\evaluate_fixed_pattern_correction.py `
 
 ### E1.5 Spatial Correlation and PSD
 
-- Status: needs implementation.
+- Status: initial implementation and first run complete.
 - Purpose: test whether residual noise has spatial structure from phosphor
   diffusion, optics, readout, or processing.
 - Inputs:
   - Residuals after subtracting per-pixel temporal mean.
-- Planned outputs:
+- Current command:
+
+```powershell
+python scripts\analyze_iccd_spatial_correlation.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_spatial_correlation `
+  --max-frames 64 `
+  --crop-size 512 `
+  --max-radius 128
+```
+
+- Outputs:
   - Radially averaged PSD.
   - Autocorrelation map.
   - Row/column correlation summary.
+- First-run result:
+  - Median row lag-1 correlation: about 0.032.
+  - Median column lag-1 correlation: about 0.030.
+  - Median radius where radial autocorrelation falls below 0.1: 1 px.
+  - Current center-crop residuals show weak short-range correlation rather than
+    a strong long-range spatial blur signature.
 - Success criteria:
   - Report whether residuals are spatially white or correlated.
   - If spatial correlation is present, use it to justify a phosphor/spatial blur
