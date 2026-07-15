@@ -39,6 +39,19 @@ Already supported:
 - Approximate Fano factor spans about 1.64 to 14.0.
 - Fixed-pattern variation grows strongly with brightness.
 
+External evidence check:
+
+- Camera characterization standards use photon-transfer/mean-variance analysis
+  rather than a raw-DN unit-slope Poisson assumption.
+- Low-light noise literature supports separating signal-dependent,
+  signal-independent, fixed-pattern, and spatially correlated noise terms.
+- Image-intensified and amplified detectors can have excess-noise behavior, so
+  an over-dispersed ICCD prior is plausible, but it must be calibrated from the
+  actual device data rather than asserted.
+- Current thresholds in this roadmap are working engineering thresholds, not
+  publishable statistical significance tests. They should be replaced or
+  supported by bootstrap confidence intervals after the scripts exist.
+
 Not yet supported:
 
 - Supervised ICCD clean/noisy training claims from the gated data alone.
@@ -122,8 +135,11 @@ python scripts\summarize_single_condition_noise.py `
   - Per-folder brightness-bin table.
   - Combined mean-variance CSV.
   - Mean-variance plot.
-  - Simple fitted parameters for comparison with Poisson and over-dispersed
-    models.
+  - Temporal-only variance estimated from repeated frames or frame differences.
+  - Spatial nonuniformity/total variance reported separately.
+  - Linear-regime fit for system gain or effective slope.
+  - Over-dispersion fit compared with Poisson-Gaussian behavior after gain
+    scaling, not by assuming unit slope in raw DN.
 - Candidate command:
 
 ```powershell
@@ -137,8 +153,9 @@ python scripts\fit_mean_variance_curve.py `
 ```
 
 - Success criteria:
-  - Variance is not adequately explained by unit-slope Poisson behavior in raw
-    DN.
+  - The usable linear regime is identified before fitting. If the curve bends
+    at high signal, report the nonlinearity rather than force one fit.
+  - Temporal variance is separated from fixed-pattern/spatial nonuniformity.
   - A calibrated over-dispersed or signal-dependent model reduces bin-wise
     variance error relative to a simple Poisson-Gaussian baseline.
   - If a simple model fits poorly, the failure mode is reported, not discarded.
@@ -177,10 +194,13 @@ python scripts\evaluate_fixed_pattern_correction.py `
   - Residual mean bias.
   - Visual map of fixed-pattern component.
 - Working success threshold:
-  - Reduce spatial fixed-pattern standard deviation by at least 50% on held-out
-    frames.
-  - Do not increase temporal residual standard deviation by more than 10%.
+  - Provisional target: reduce spatial fixed-pattern standard deviation by at
+    least 50% on held-out frames.
+  - Provisional guardrail: do not increase temporal residual standard deviation
+    by more than 10%.
   - Residual mean remains close to zero after correction.
+  - Final reporting should include confidence intervals or bootstrap intervals
+    rather than relying only on these provisional thresholds.
 - Paper use:
   - Calibration baseline.
   - Evidence that fixed-pattern correction is necessary before final denoising
@@ -268,10 +288,12 @@ python scripts\compare_noise_priors.py `
   - Brightness-bin residual error.
   - PSD/autocorrelation distance after E1.5 exists.
 - Working success threshold:
-  - ICCD prior reduces variance or brightness-bin residual error by at least 20%
-    versus Poisson-Gaussian in most valid bins.
+  - Provisional target: ICCD prior reduces variance or brightness-bin residual
+    error by at least 20% versus Poisson-Gaussian in most valid bins.
   - It must not improve one statistic while severely degrading mean or histogram
     fidelity.
+  - Final paper claim should report uncertainty intervals and per-condition
+    failure cases.
 - Paper use:
   - Main comparison table for noise fidelity.
 
@@ -465,11 +487,14 @@ Minimum paper figures:
 The next sprint should implement and run the first three Stage 2 experiments:
 
 1. Add `scripts/fit_mean_variance_curve.py`.
-2. Add `scripts/evaluate_fixed_pattern_correction.py`.
-3. Add a crop/frame-count robustness mode or wrapper around
+2. In that script, separate temporal variance from spatial nonuniformity using
+   repeated frames or frame differences, and fit only the identified linear
+   regime.
+3. Add `scripts/evaluate_fixed_pattern_correction.py`.
+4. Add a crop/frame-count robustness mode or wrapper around
    `summarize_single_condition_noise.py`.
-4. Run all three on `D:/iccd/data/20260319`.
-5. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
+5. Run all three on `D:/iccd/data/20260319`.
+6. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
 
 Do not start major network changes until E1.3 and E1.4 have been run and their
 outputs show which noise component is the dominant bottleneck.
@@ -484,4 +509,3 @@ Priority order:
 4. Matched sCMOS repeated data if the paper will include device comparison.
 5. Any acquisition notes explaining why folders `1` to `13` differ in
    brightness despite identical recorded exposure/gate/gain metadata.
-

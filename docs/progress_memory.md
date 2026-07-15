@@ -143,6 +143,11 @@ Smoke test status:
   breaks the work into device noise characterization, noise-model fidelity,
   training baselines, ablations, and paper evidence, with explicit gates and
   success criteria.
+- External evidence check revised the roadmap: mean-variance fitting should
+  estimate the linear regime and effective gain instead of assuming unit Poisson
+  slope in raw DN; temporal variance should be separated from fixed-pattern
+  nonuniformity; provisional thresholds should later be backed by uncertainty
+  intervals.
 
 ## Skill Setup
 
