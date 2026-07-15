@@ -78,6 +78,20 @@ src/iccd_noise/   ICCD noise model and analysis code
      --output-dir reports\gated_iccd_20260319_noise_summary
    ```
 
+   To fit brightness-bin mean-variance statistics from repeated frames:
+
+   ```powershell
+   python scripts\fit_mean_variance_curve.py `
+     --root D:\iccd\data\20260319 `
+     --folders 1 2 4 5 7 8 9 10 11 13 `
+     --output-dir reports\gated_iccd_20260319_mean_variance `
+     --max-frames 32 `
+     --crop-size 512 `
+     --bins 16 `
+     --min-count 256 `
+     --min-linear-bins 6
+   ```
+
 2. Confirm strict clean/noisy pairing, 16-bit range handling, metadata coverage,
    dark/flat calibration coverage, and held-out scene/condition splits. See
    `docs/data_audit_gate.md`; start metadata from

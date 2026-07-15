@@ -153,6 +153,11 @@ Smoke test status:
   add Kornia/PIQ/TorchMetrics/LPIPS with training code, defer DVC until a data
   remote is chosen, and defer broad extra skills or community OpenCV MCP until a
   specific gap appears.
+- Added `requirements-analysis.txt` for offline analysis dependencies and
+  `scripts/fit_mean_variance_curve.py` for repeated-frame brightness-bin
+  mean-variance analysis. First run on the ten complete gated ICCD folders used
+  32 frames, 512x512 center crops, 16 bins, and showed temporal Fano increasing
+  from about 1.70 to 14.46 with brightness.
 
 ## Skill Setup
 

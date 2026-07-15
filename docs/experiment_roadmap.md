@@ -127,7 +127,7 @@ python scripts\summarize_single_condition_noise.py `
 
 ### E1.3 Brightness-Bin Mean-Variance Curve
 
-- Status: next recommended implementation.
+- Status: initial implementation and first run complete.
 - Purpose: fit real ICCD mean-variance behavior from repeated frames.
 - Inputs:
   - Repeated frames from complete folders.
@@ -147,10 +147,20 @@ python scripts\fit_mean_variance_curve.py `
   --root D:\iccd\data\20260319 `
   --folders 1 2 4 5 7 8 9 10 11 13 `
   --output-dir reports\gated_iccd_20260319_mean_variance `
-  --max-frames 64 `
-  --crop-size 1024 `
-  --bins 32
+  --max-frames 32 `
+  --crop-size 512 `
+  --bins 16 `
+  --min-count 256 `
+  --min-linear-bins 6
 ```
+
+- First-run result:
+  - Mean signal range: about 936 to 4717 DN.
+  - Temporal variance range: about 1587 to 68190 DN^2.
+  - Temporal Fano range: about 1.70 to 14.46.
+  - Spatial mean standard deviation range: about 14.47 to 4030 DN.
+  - Folder `13` has weak exploratory linear fit quality; inspect its bin curve
+    before using it as a fitted-calibration claim.
 
 - Success criteria:
   - The usable linear regime is identified before fitting. If the curve bends
@@ -486,15 +496,13 @@ Minimum paper figures:
 
 The next sprint should implement and run the first three Stage 2 experiments:
 
-1. Add `scripts/fit_mean_variance_curve.py`.
-2. In that script, separate temporal variance from spatial nonuniformity using
-   repeated frames or frame differences, and fit only the identified linear
-   regime.
-3. Add `scripts/evaluate_fixed_pattern_correction.py`.
-4. Add a crop/frame-count robustness mode or wrapper around
+1. Add `scripts/evaluate_fixed_pattern_correction.py`.
+2. Add a crop/frame-count robustness mode or wrapper around
    `summarize_single_condition_noise.py`.
-5. Run all three on `D:/iccd/data/20260319`.
-6. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
+3. Rerun `fit_mean_variance_curve.py` with larger crops or more frames if the
+   fixed-pattern correction result suggests the first 512x512 crop is not
+   representative.
+4. Promote only stable summaries into `docs/gated_iccd_data_inventory.md`.
 
 Do not start major network changes until E1.3 and E1.4 have been run and their
 outputs show which noise component is the dominant bottleneck.

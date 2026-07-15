@@ -226,3 +226,46 @@ Preliminary interpretation:
 - Spatial fixed-pattern variation grows faster than temporal noise in brighter
   folders, making flat-field/fixed-pattern correction important before final
   denoising claims.
+
+## Mean-Variance Summary
+
+Computed with:
+
+```powershell
+python scripts\fit_mean_variance_curve.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_mean_variance `
+  --max-frames 32 `
+  --crop-size 512 `
+  --bins 16 `
+  --min-count 256 `
+  --min-linear-bins 6
+```
+
+These values use 512x512 center crops from the first 32 frames of each complete
+folder. `temporal var` is computed per pixel across repeated frames and then
+averaged; `spatial mean std` is computed from the per-pixel temporal mean map.
+
+| folder | mean signal | temporal var | temporal Fano | spatial mean std | linear slope | linear R2 |
+|---|---:|---:|---:|---:|---:|---:|
+| 13 | 936.109 | 1587.46 | 1.69581 | 14.4721 | 28.335 | 0.705446 |
+| 2 | 966.032 | 2011.61 | 2.08234 | 35.5337 | 13.7716 | 0.983275 |
+| 11 | 1083.35 | 3807.6 | 3.51465 | 163.789 | 14.4234 | 0.99937 |
+| 1 | 1157.76 | 5142.22 | 4.44151 | 239.786 | 14.8685 | 0.999915 |
+| 10 | 1202.05 | 6182.64 | 5.14341 | 296.422 | 14.5068 | 0.999803 |
+| 9 | 1395.74 | 9710.88 | 6.95753 | 507.678 | 18.4298 | 0.997448 |
+| 4 | 1787.63 | 16392.4 | 9.16991 | 923.571 | 17.703 | 0.99891 |
+| 8 | 2243.32 | 24252.6 | 10.811 | 1420.09 | 17.4517 | 0.999465 |
+| 7 | 2510.35 | 29066.1 | 11.5785 | 1706.33 | 17.41 | 0.999364 |
+| 5 | 4716.93 | 68189.7 | 14.4564 | 4030.14 | 18.4375 | 0.999928 |
+
+Preliminary interpretation:
+
+- Temporal variance and temporal Fano increase strongly with mean signal,
+  reinforcing the signal-dependent noise conclusion.
+- Spatial mean variation also increases strongly with brightness, so the next
+  experiment should estimate a fixed-pattern correction baseline.
+- Linear slopes are exploratory raw-domain variance-vs-mean fits, not Poisson
+  unit-slope claims. Folder `13` has weak linear fit quality and should be
+  inspected in the bin CSV/plot before being used for paper claims.
