@@ -67,6 +67,14 @@ src/iccd_noise/   ICCD noise model and analysis code
    ```
 
 5. Compare sCMOS prior, Poisson-Gaussian prior, and ICCD prior on noise
-   statistics after the audit gate passes.
+   statistics after the audit gate passes:
+
+   ```powershell
+   python scripts\compare_noise_priors.py `
+     --pairs-csv data_manifest\pairs.csv `
+     --config configs\noise_prior_baselines.yaml `
+     --output-dir reports\noise_prior_fidelity
+   ```
+
 6. Connect the ICCD prior to the existing PNGAN training loop only after the
    data and metric gates are stable.

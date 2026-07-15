@@ -29,6 +29,15 @@ Compare these sources:
 - ICCD physical-prior model.
 - ICCD-aware PNGAN generated noise.
 
+Current runnable entry point before PNGAN:
+
+```powershell
+python scripts\compare_noise_priors.py `
+  --pairs-csv data_manifest\pairs.csv `
+  --config configs\noise_prior_baselines.yaml `
+  --output-dir reports\noise_prior_fidelity
+```
+
 Metrics:
 
 - Mean error.
@@ -80,4 +89,3 @@ Expected table:
 | No MCP | TBD | TBD | TBD |
 | No phosphor | TBD | TBD | TBD |
 | No adversarial alignment | TBD | TBD | TBD |
-

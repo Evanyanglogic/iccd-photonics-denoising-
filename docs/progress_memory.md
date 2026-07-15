@@ -79,10 +79,16 @@ Updated after the `$pytorch-patterns` training-code audit:
 Added on 2026-07-15:
 
 - `configs/dataset_iccd.yaml`: dataset audit configuration template.
+- `configs/noise_prior_baselines.yaml`: first-pass synthetic prior comparison
+  parameters.
 - `scripts/audit_iccd_dataset.py`: TIFF pair, range, calibration, manifest, and
   split audit utility.
 - `scripts/evaluate_pair_baseline.py`: no-model B0 noisy-input baseline
   evaluator using the pair manifest.
+- `scripts/compare_noise_priors.py`: E2 synthetic-noise fidelity comparison for
+  Poisson-Gaussian, sCMOS-like, and ICCD-chain priors.
+- `src/iccd_noise/baselines.py`: generic Poisson-Gaussian and simplified
+  sCMOS-like noise priors.
 - `src/iccd_eval/metrics.py`: float-domain PSNR/SSIM, residual statistics, and
   brightness-bin PSNR.
 
@@ -92,6 +98,8 @@ Smoke test status:
 - Metric smoke test passed.
 - Audit script generated a sample report, pair manifest, and split manifest on
   a tiny synthetic 16-bit TIFF pair.
+- B0 baseline evaluator and noise-prior comparison script ran successfully on
+  the same smoke-test pair.
 
 ## Skill Setup
 

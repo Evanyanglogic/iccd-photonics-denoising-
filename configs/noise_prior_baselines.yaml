@@ -1,0 +1,31 @@
+# Synthetic-noise prior comparison defaults.
+# These are first-pass values. Replace them with fitted values from dark/flat
+# calibration sequences before making paper-facing claims.
+
+range_max: 65535
+bins: 8
+seed: 20260715
+
+poisson_gaussian:
+  peak_photons: 120.0
+  read_noise_sigma: 0.01
+  clip: true
+
+scmos_like:
+  signal_gain: 0.20
+  read_noise_sigma: 0.015
+  row_noise_sigma: 0.004
+  column_noise_sigma: 0.0
+  offset: 0.0
+  clip: true
+
+iccd:
+  photon_scale: 120.0
+  photocathode_qe: 0.18
+  mcp_gain_mean: 1.0
+  mcp_gain_var: 0.18
+  dark_count_rate: 0.002
+  phosphor_sigma: 0.8
+  read_noise_sigma: 0.01
+  offset: 0.0
+  clip: true
