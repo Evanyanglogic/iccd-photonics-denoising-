@@ -53,6 +53,14 @@ src/iccd_noise/   ICCD noise model and analysis code
      --splits-out data_manifest\splits.yaml
    ```
 
+   For a single downloaded exposure sequence without clean/noisy pairs:
+
+   ```powershell
+   python scripts\audit_single_exposure_iccd.py `
+     --input-dir F:\20260319\1 `
+     --output-dir reports\single_exposure_20260319_1
+   ```
+
 2. Confirm strict clean/noisy pairing, 16-bit range handling, metadata coverage,
    dark/flat calibration coverage, and held-out scene/condition splits. See
    `docs/data_audit_gate.md`; start metadata from

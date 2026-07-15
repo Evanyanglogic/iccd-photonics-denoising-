@@ -85,6 +85,8 @@ Added on 2026-07-15:
   checked manual pair paths.
 - `scripts/audit_iccd_dataset.py`: TIFF pair, range, calibration, manifest, and
   split audit utility.
+- `scripts/audit_single_exposure_iccd.py`: single-exposure gated ICCD sequence
+  audit for unpaired repeated frames.
 - `scripts/convert_exposure_lists.py`: legacy PMRID exposure-list to
   `pairs.csv`/`splits.yaml` converter using exposure duration to orient
   clean/noisy columns.
@@ -101,6 +103,8 @@ Added on 2026-07-15:
   brightness-bin PSNR.
 - `docs/pmrid7_data_inventory.md`: current PMRID7 path inventory and first B0
   observations.
+- `docs/gated_iccd_data_inventory.md`: downloaded gated ICCD subset inventory
+  and first single-exposure audit.
 
 Smoke test status:
 
@@ -115,6 +119,9 @@ Smoke test status:
 - PMRID7 `train_lists1` converted to 480 train and 120 val pairs.
 - PMRID7 `train_lists2` converted to 320 train and 80 val pairs.
 - Both converted PMRID7 manifests passed train/val dataloader checks.
+- Gated ICCD subset `F:/20260319/1` audited: 200 TIFF frames, 5120x5120 uint16,
+  exposure width 900 ms, Sync A/B width 4 us, gain 60, no saturation in sampled
+  frames.
 
 ## Skill Setup
 
