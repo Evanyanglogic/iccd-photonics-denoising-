@@ -1,0 +1,22 @@
+# PMRID7 legacy exposure-list conversion notes.
+# The conversion script is CLI-based; this file records the known local paths.
+
+path_root: E:\PMRID\PMRID7
+
+exposure_mapping_fixed:
+  train_list: E:\PMRID\PMRID7\data\train_lists1\train_list_exposure_mapping_FIXED.txt
+  val_list: E:\PMRID\PMRID7\data\train_lists1\val_list_exposure_mapping_FIXED.txt
+  target: mixed short exposures -> 250ms reference
+
+lowlight_enhancement:
+  train_list: E:\PMRID\PMRID7\data\train_lists2\train_list_lowlight_enhancement.txt
+  val_list: E:\PMRID\PMRID7\data\train_lists2\val_list_lowlight_enhancement.txt
+  target: 1ms weak-light input -> longer-exposure reference
+
+manual_pairs_checked:
+  pmrid_1s_50ms:
+    clean_dir: E:\PMRID\PMRID7\data\1s
+    noisy_dir: E:\PMRID\PMRID7\data\50ms
+  pmrid_500ms_15ms:
+    clean_dir: E:\PMRID\PMRID7\data\500ms
+    noisy_dir: E:\PMRID\PMRID7\data\15ms

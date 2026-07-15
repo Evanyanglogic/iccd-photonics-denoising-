@@ -88,5 +88,18 @@ src/iccd_noise/   ICCD noise model and analysis code
 
    See `docs/manifest_dataloader.md`.
 
-7. Connect the ICCD prior to the existing PNGAN training loop only after the
+7. Convert legacy PMRID7 exposure lists when reusing the old train/val splits:
+
+   ```powershell
+   python scripts\convert_exposure_lists.py `
+     --train-list E:\PMRID\PMRID7\data\train_lists1\train_list_exposure_mapping_FIXED.txt `
+     --val-list E:\PMRID\PMRID7\data\train_lists1\val_list_exposure_mapping_FIXED.txt `
+     --path-root E:\PMRID\PMRID7 `
+     --pairs-out reports\pmrid_list_exposure_mapping\pairs.csv `
+     --splits-out reports\pmrid_list_exposure_mapping\splits.yaml
+   ```
+
+   See `docs/pmrid7_data_inventory.md`.
+
+8. Connect the ICCD prior to the existing PNGAN training loop only after the
    data and metric gates are stable.

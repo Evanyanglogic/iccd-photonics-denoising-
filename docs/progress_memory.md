@@ -81,8 +81,13 @@ Added on 2026-07-15:
 - `configs/dataset_iccd.yaml`: dataset audit configuration template.
 - `configs/noise_prior_baselines.yaml`: first-pass synthetic prior comparison
   parameters.
+- `configs/pmrid7_exposure_lists.yaml`: known local PMRID7 list paths and
+  checked manual pair paths.
 - `scripts/audit_iccd_dataset.py`: TIFF pair, range, calibration, manifest, and
   split audit utility.
+- `scripts/convert_exposure_lists.py`: legacy PMRID exposure-list to
+  `pairs.csv`/`splits.yaml` converter using exposure duration to orient
+  clean/noisy columns.
 - `scripts/evaluate_pair_baseline.py`: no-model B0 noisy-input baseline
   evaluator using the pair manifest.
 - `scripts/compare_noise_priors.py`: E2 synthetic-noise fidelity comparison for
@@ -94,6 +99,8 @@ Added on 2026-07-15:
   sCMOS-like noise priors.
 - `src/iccd_eval/metrics.py`: float-domain PSNR/SSIM, residual statistics, and
   brightness-bin PSNR.
+- `docs/pmrid7_data_inventory.md`: current PMRID7 path inventory and first B0
+  observations.
 
 Smoke test status:
 
@@ -105,6 +112,9 @@ Smoke test status:
   the same smoke-test pair.
 - Manifest dataloader check passed and PyTorch DataLoader produced BCHW
   batches on the smoke-test pair.
+- PMRID7 `train_lists1` converted to 480 train and 120 val pairs.
+- PMRID7 `train_lists2` converted to 320 train and 80 val pairs.
+- Both converted PMRID7 manifests passed train/val dataloader checks.
 
 ## Skill Setup
 

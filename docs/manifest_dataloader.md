@@ -5,6 +5,9 @@ Use the manifest dataloader after the data audit gate has generated:
 - `data_manifest/pairs.csv`
 - `data_manifest/splits.yaml`
 
+Legacy exposure-pair text lists can be converted with
+`scripts/convert_exposure_lists.py`.
+
 The dataloader prevents training scripts from silently using the same directory
 for train and validation.
 
