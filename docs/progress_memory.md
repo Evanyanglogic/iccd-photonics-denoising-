@@ -198,6 +198,18 @@ Smoke test status:
   and an empty helper folder. No local ICCD folder is identified as dark, flat,
   background, bias, or no-light calibration data. Dark/flat calibration claims
   remain blocked until matching calibration folders are provided.
+- Audited `F:/ICCD_pir/2025.07.09/CDM-A4000-UM90_DH09131AAK00007` as an
+  auxiliary ICCD calibration-candidate sequence. It contains 305 continuous
+  2048x2048 uint8 TIFFs, indices 57 to 361, without local metadata files.
+  Brightness segmentation suggests low-background, mid, and heavily saturated
+  regimes. It is useful as auxiliary ICCD dark/background or brightness-regime
+  evidence, but not as matching dark/flat correction for the 5120x5120 uint16
+  `D:/iccd/data/20260319` gated ICCD batch.
+- Added `docs/literature_matrix.md` to position the planned paper against
+  low-light RAW denoising, physics-based noise synthesis, real-camera noise
+  datasets, self-supervised denoising, and ICCD/MCP characterization literature.
+  Current differentiation: real gated-ICCD repeated-frame statistics -> device
+  prior -> synthetic paired data -> real-device statistical validation.
 
 ## Skill Setup
 
