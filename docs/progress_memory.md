@@ -193,6 +193,11 @@ Smoke test status:
   below 0.1 by 1 px. Current evidence supports strong fixed-pattern/spatial
   mean nonuniformity, but only weak short-range correlation in temporal
   residual noise.
+- Completed the E1.6 local dark/flat gate check by scanning `D:/iccd/data`.
+  Only the `20260319` ICCD batch is present locally, with folders `1` to `13`
+  and an empty helper folder. No local ICCD folder is identified as dark, flat,
+  background, bias, or no-light calibration data. Dark/flat calibration claims
+  remain blocked until matching calibration folders are provided.
 
 ## Skill Setup
 

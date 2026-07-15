@@ -285,9 +285,19 @@ python scripts\analyze_iccd_spatial_correlation.py `
 
 ### E1.6 Dark and Flat Data Gate
 
-- Status: blocked until data are identified or acquired.
+- Status: local scan complete; blocked until matching calibration data are
+  identified or acquired.
 - Purpose: separate true dark/read components from scene or illumination
   structure.
+- Current local check:
+  - Scanned `D:/iccd/data` recursively.
+  - Found only the `20260319` batch with folders `1` to `13` and an empty helper
+    folder.
+  - No local folder name indicates ICCD dark, flat, background, bias, or
+    no-light calibration data.
+  - The complete folders share the target gain/gate/exposure metadata, but they
+    contain scene/illumination signal and should not be relabeled as dark or
+    flat frames without acquisition notes.
 - Data needed:
   - Dark frames at gain 60, exposure width 900 ms, Sync A/B width 4 us.
   - Flat-field frames at several illumination levels under the same device

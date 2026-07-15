@@ -390,3 +390,33 @@ Preliminary interpretation:
 - For the paper, the stronger spatial claim is fixed-pattern/nonuniform mean
   structure, not long-range correlated residual noise, unless later full-field
   or calibration data show otherwise.
+
+## Dark and Flat Data Gate
+
+Local check performed on `D:\iccd\data`:
+
+```powershell
+Get-ChildItem -Path D:\iccd\data -Directory -Recurse -ErrorAction SilentlyContinue
+```
+
+Current result:
+
+- Only the `20260319` ICCD batch is present locally.
+- Subfolders are `1` to `13` plus an empty helper folder
+  `1_20260715_143749`.
+- No local folder name indicates dark, flat, background, bias, or no-light ICCD
+  calibration data.
+- The complete folders share gain 60, exposure width 900 ms, and Sync A/B width
+  4 us, but their image statistics contain scene/illumination signal. They
+  should not be used as dark or flat calibration frames without acquisition
+  notes proving that role.
+
+Gate status:
+
+- Dark/flat calibration evidence is not available in the current local ICCD
+  data.
+- Current E1 evidence can support repeated-frame temporal noise,
+  mean-variance, fixed-pattern correction, and residual spatial-correlation
+  claims.
+- True dark-current, dark-count, read-noise, or flat-field calibration claims
+  remain blocked until matching calibration folders are provided.
