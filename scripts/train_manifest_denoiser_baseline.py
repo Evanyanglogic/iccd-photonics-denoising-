@@ -43,6 +43,7 @@ class TrainConfig:
     weight_decay: float
     channels: int
     depth: int
+    model_type: str
     seed: int
     num_workers: int
     grad_clip: float
@@ -108,7 +109,8 @@ def main() -> int:
         pin_memory=device.type == "cuda",
     )
 
-    model = ResidualDenoiser(
+    model = build_model(
+        model_type=config.model_type,
         channels=config.channels,
         depth=config.depth,
         input_channels=config.input_channels,
@@ -192,6 +194,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--weight-decay", type=float, default=0.0)
     parser.add_argument("--channels", type=int, default=32)
     parser.add_argument("--depth", type=int, default=4)
+    parser.add_argument(
+        "--model-type",
+        choices=["residual_small", "dncnn", "light_unet"],
+        default="residual_small",
+        help="Denoising architecture used by this manifest baseline.",
+    )
     parser.add_argument("--seed", type=int, default=20260716)
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--grad-clip", type=float, default=1.0)
@@ -238,6 +246,7 @@ def build_config(args: argparse.Namespace) -> TrainConfig:
         weight_decay=args.weight_decay,
         channels=args.channels,
         depth=args.depth,
+        model_type=args.model_type,
         seed=args.seed,
         num_workers=args.num_workers,
         grad_clip=args.grad_clip,
@@ -310,6 +319,100 @@ class ResidualDenoiser(torch.nn.Module):
             torch.nn.init.kaiming_normal_(module.weight, nonlinearity="relu")
             if module.bias is not None:
                 torch.nn.init.zeros_(module.bias)
+
+
+class DnCNNResidual(torch.nn.Module):
+    """DnCNN-style residual denoiser for grayscale ICCD baseline training."""
+
+    def __init__(self, channels: int = 64, depth: int = 17, input_channels: int = 1) -> None:
+        super().__init__()
+        if depth < 3:
+            raise ValueError("DnCNN depth must be >= 3")
+        if input_channels < 1:
+            raise ValueError("input_channels must be >= 1")
+        self.input_channels = input_channels
+        layers: list[torch.nn.Module] = [
+            torch.nn.Conv2d(input_channels, channels, kernel_size=3, padding=1),
+            torch.nn.ReLU(),
+        ]
+        for _ in range(depth - 2):
+            layers.extend(
+                [
+                    torch.nn.Conv2d(channels, channels, kernel_size=3, padding=1),
+                    torch.nn.ReLU(),
+                ]
+            )
+        layers.append(torch.nn.Conv2d(channels, 1, kernel_size=3, padding=1))
+        self.net = torch.nn.Sequential(*layers)
+        self.apply(ResidualDenoiser._init_weights)
+        last = self.net[-1]
+        if isinstance(last, torch.nn.Conv2d):
+            torch.nn.init.zeros_(last.weight)
+            if last.bias is not None:
+                torch.nn.init.zeros_(last.bias)
+
+    def forward(self, model_input: torch.Tensor) -> torch.Tensor:
+        noisy = model_input[:, :1]
+        predicted_noise = 0.1 * torch.tanh(self.net(model_input))
+        return noisy - predicted_noise
+
+
+class ConvBlock(torch.nn.Module):
+    def __init__(self, in_channels: int, out_channels: int) -> None:
+        super().__init__()
+        self.net = torch.nn.Sequential(
+            torch.nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1),
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1),
+            torch.nn.ReLU(),
+        )
+        self.apply(ResidualDenoiser._init_weights)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.net(x)
+
+
+class LightUNetDenoiser(torch.nn.Module):
+    """Small U-Net residual denoiser for formal baseline comparison."""
+
+    def __init__(self, channels: int = 32, depth: int = 4, input_channels: int = 1) -> None:
+        super().__init__()
+        if input_channels < 1:
+            raise ValueError("input_channels must be >= 1")
+        self.input_channels = input_channels
+        base = channels
+        self.enc1 = ConvBlock(input_channels, base)
+        self.enc2 = ConvBlock(base, base * 2)
+        self.bottleneck = ConvBlock(base * 2, base * 4)
+        self.dec2 = ConvBlock(base * 4 + base * 2, base * 2)
+        self.dec1 = ConvBlock(base * 2 + base, base)
+        self.out = torch.nn.Conv2d(base, 1, kernel_size=3, padding=1)
+        ResidualDenoiser._init_weights(self.out)
+        torch.nn.init.zeros_(self.out.weight)
+        if self.out.bias is not None:
+            torch.nn.init.zeros_(self.out.bias)
+
+    def forward(self, model_input: torch.Tensor) -> torch.Tensor:
+        noisy = model_input[:, :1]
+        e1 = self.enc1(model_input)
+        e2 = self.enc2(torch.nn.functional.avg_pool2d(e1, kernel_size=2))
+        bottleneck = self.bottleneck(torch.nn.functional.avg_pool2d(e2, kernel_size=2))
+        up2 = torch.nn.functional.interpolate(bottleneck, size=e2.shape[-2:], mode="bilinear", align_corners=False)
+        d2 = self.dec2(torch.cat([up2, e2], dim=1))
+        up1 = torch.nn.functional.interpolate(d2, size=e1.shape[-2:], mode="bilinear", align_corners=False)
+        d1 = self.dec1(torch.cat([up1, e1], dim=1))
+        residual = 0.1 * torch.tanh(self.out(d1))
+        return noisy + residual
+
+
+def build_model(model_type: str, channels: int, depth: int, input_channels: int) -> torch.nn.Module:
+    if model_type == "residual_small":
+        return ResidualDenoiser(channels=channels, depth=depth, input_channels=input_channels)
+    if model_type == "dncnn":
+        return DnCNNResidual(channels=channels, depth=depth, input_channels=input_channels)
+    if model_type == "light_unet":
+        return LightUNetDenoiser(channels=channels, depth=depth, input_channels=input_channels)
+    raise ValueError(f"Unsupported model_type: {model_type}")
 
 
 def make_grad_scaler(enabled: bool) -> Any:
@@ -569,6 +672,7 @@ def write_report(
         f"- Seed: {config.seed}",
         f"- Device: {config.device}",
         f"- Model parameters: {count_parameters(model)}",
+        f"- Model type: `{config.model_type}`",
         f"- Input channels: {config.input_channels}",
         f"- Condition column: `{config.condition_column or 'none'}`",
         f"- Condition value scale: {config.condition_value_scale:g}",

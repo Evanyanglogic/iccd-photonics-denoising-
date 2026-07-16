@@ -20,7 +20,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from src.iccd_eval.metrics import image_quality
-from train_manifest_denoiser_baseline import ResidualDenoiser, count_parameters, save_triplet_tiff
+from train_manifest_denoiser_baseline import build_model, count_parameters, save_triplet_tiff
 
 
 def main() -> int:
@@ -34,13 +34,19 @@ def main() -> int:
     channels = int(args.channels or ckpt_config.get("channels", 16))
     depth = int(args.depth or ckpt_config.get("depth", 3))
     input_channels = int(args.input_channels or ckpt_config.get("input_channels", 1))
+    model_type = args.model_type or str(ckpt_config.get("model_type", "residual_small"))
     device = torch.device(args.device or ("cuda" if torch.cuda.is_available() else "cpu"))
     condition_map = load_condition_map(Path(args.condition_score_csv), args) if args.condition_score_csv else {}
     args._condition_map = condition_map
     args._checkpoint_condition_column = str(ckpt_config.get("condition_column", ""))
     args._checkpoint_condition_scale = float(ckpt_config.get("condition_value_scale", 1.0) or 1.0)
 
-    model = ResidualDenoiser(channels=channels, depth=depth, input_channels=input_channels).to(device)
+    model = build_model(
+        model_type=model_type,
+        channels=channels,
+        depth=depth,
+        input_channels=input_channels,
+    ).to(device)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
 
@@ -73,6 +79,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", default="")
     parser.add_argument("--channels", type=int, default=0)
     parser.add_argument("--depth", type=int, default=0)
+    parser.add_argument("--model-type", choices=["", "residual_small", "dncnn", "light_unet"], default="")
     parser.add_argument("--input-channels", type=int, default=0)
     parser.add_argument("--condition-column", default="")
     parser.add_argument("--condition-score-csv", default="")

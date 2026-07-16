@@ -21,7 +21,7 @@ if str(SCRIPT_DIR) not in sys.path:
 
 from evaluate_manifest_denoiser_checkpoint import load_checkpoint, load_tiff_tensor
 from src.iccd_eval.metrics import image_quality
-from train_manifest_denoiser_baseline import ResidualDenoiser, count_parameters
+from train_manifest_denoiser_baseline import build_model, count_parameters
 
 
 def main() -> int:
@@ -91,7 +91,9 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 def load_model(path: Path, device: torch.device) -> torch.nn.Module:
     checkpoint = load_checkpoint(path, str(device))
     config = checkpoint.get("config", {})
-    model = ResidualDenoiser(
+    model_type = str(config.get("model_type", "residual_small"))
+    model = build_model(
+        model_type=model_type,
         channels=int(config.get("channels", 16)),
         depth=int(config.get("depth", 3)),
         input_channels=int(config.get("input_channels", 1)),

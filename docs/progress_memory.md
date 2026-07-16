@@ -449,6 +449,15 @@ Added after reviewing `E:/Google_Download/deep-research-report.md` on
   condition strategies still show 24 `grad/noisy < 0.95` warnings, so the
   smoothing-risk claim boundary remains. Next stage is E4 formal baselines:
   DnCNN and Light U-Net on p99 and physical synthetic training data.
+- Started E4 formal baseline readiness. Updated
+  `scripts/train_manifest_denoiser_baseline.py` with `--model-type`
+  `residual_small`, `dncnn`, and `light_unet`; updated checkpoint evaluation
+  and condition-blend loading to restore `model_type` from checkpoint config
+  while keeping old small-CNN checkpoints compatible. Smoke tests ran on CPU:
+  DnCNN smoke has 7,265 parameters and Light U-Net smoke has 29,681 parameters.
+  Both one-batch synthetic smoke trainings and two-pair real-surrogate
+  checkpoint evaluations completed. The real-surrogate smoke gains are negative
+  because these are not trained baselines; they only verify the E4 code path.
 
 ## Skill Setup
 

@@ -1,0 +1,19 @@
+{
+  "noisy_psnr_mean": 58.529341351344726,
+  "noisy_psnr_std": 0.07310851587562794,
+  "noisy_ssim_mean": 0.9984211741122199,
+  "noisy_ssim_std": 2.4044445166682138e-05,
+  "pair_count": 2.0,
+  "psnr_gain_mean": -0.06653637630922304,
+  "psnr_gain_std": 0.013727087358276435,
+  "psnr_mean": 58.46280497503551,
+  "psnr_std": 0.05938142851735151,
+  "residual_mean_mean": -0.0001497671182733029,
+  "residual_mean_std": 1.714465906843543e-05,
+  "residual_std_mean": 0.0011840558145195246,
+  "residual_std_std": 1.0394840501248837e-05,
+  "ssim_gain_mean": -3.399900772771414e-05,
+  "ssim_gain_std": 6.278497612699496e-06,
+  "ssim_mean": 0.9983871751044922,
+  "ssim_std": 1.776594755398264e-05
+}
