@@ -696,6 +696,13 @@ python scripts\evaluate_pair_baseline.py `
     `reports/e3_5_condition_gate`. A simple q40 condition gate removes the four
     negative-gain folders from `always_model` and reaches 0.3669 dB mean folder
     gain, versus 0.3431 dB for always applying the physical checkpoint.
+  - E3.5-B low/high condition subset validation is complete in
+    `docs/e3_5_condition_subsets.md` and `reports/e3_5_condition_subsets`.
+    Splitting by Fano q40 shows the physical checkpoint is negative on
+    low-condition folders (-0.0595 dB) but strong on high-condition folders
+    (+0.6114 dB). A hybrid strategy using p99 on low-condition folders and
+    physical on high-condition folders reaches 0.3788 dB mean folder gain with
+    10/10 positive folders.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.

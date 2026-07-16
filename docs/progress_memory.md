@@ -336,6 +336,17 @@ Smoke test status:
   negative-gain folders, compared with 0.3431 dB and four negative folders for
   always applying the physical checkpoint. Treat this as diagnostic evidence
   because only ten folders are available.
+- Added `scripts/evaluate_condition_subsets.py` and ran E3.5-B low/high subset
+  validation using Fano q40. Outputs are under
+  `reports/e3_5_condition_subsets`, with the summary in
+  `docs/e3_5_condition_subsets.md`. Low-condition folders are 1, 2, 11, and 13;
+  high-condition folders are 4, 5, 7, 8, 9, and 10. Physical checkpoint gain is
+  -0.0595 dB on low-condition folders and +0.6114 dB on high-condition folders.
+  p99 is weak but positive in both subsets. A condition hybrid using p99 for low
+  conditions and physical for high conditions reaches 0.3788 dB mean folder gain
+  with 10/10 positive folders. This is the current best minimal condition-aware
+  validation result, but it still needs visual/residual inspection and more
+  conditions before being treated as a final deployable rule.
 
 ## Skill Setup
 
