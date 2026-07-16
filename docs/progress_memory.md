@@ -247,6 +247,19 @@ Smoke test status:
   supervised clean/noisy pair. The data can still be used as sCMOS
   content/reference source for ICCD-like synthetic noise generation with strict
   labeling.
+- Added `scripts/generate_iccd_like_synthetic_pairs.py` for E2.6 and generated
+  two 100-pair synthetic ICCD-like datasets from the sCMOS content manifest:
+  `reports/target_scmos_iccd_like_synthetic_512` and
+  `reports/target_scmos_iccd_like_synthetic_512_p99_0p25`. Both preserve the
+  source split manifest and pass the existing dataloader smoke check. The
+  strict physical-scale version has B0 PSNR/SSIM about 62.49 dB / 0.99927 and
+  residual std about 0.000718, so it is probably too easy for training. The
+  p99-normalized version has B0 PSNR/SSIM about 56.63 dB / 0.99930 and residual
+  std about 0.001463, closer to the real gated ICCD repeated-frame surrogate B0
+  residual std of about 0.001822. Current decision: use the p99-normalized set
+  as the first synthetic training-source candidate, with the explicit claim
+  boundary that it is content-normalized synthetic ICCD-like data, not real
+  paired ICCD data.
 
 ## Skill Setup
 

@@ -541,6 +541,49 @@ python scripts\evaluate_masked_offset_pairs.py `
     content crops and injects the E1-derived ICCD prior from
     `configs/iccd_prior_20260319.yaml`.
 
+### E2.6 ICCD-Like Synthetic Pair Generation
+
+- Status: initial implementation and two generated variants complete.
+- Purpose:
+  - Convert validated sCMOS content/reference frames into manifest-backed
+    synthetic ICCD-like clean/noisy pairs.
+  - Preserve the same `pairs.csv` / `splits.yaml` interface used by current
+    dataloader and metric scripts.
+- Current script:
+
+```powershell
+python scripts\generate_iccd_like_synthetic_pairs.py `
+  --pairs-csv reports\target_scmos_15ms_500ms_manifest\pairs.csv `
+  --source-splits reports\target_scmos_15ms_500ms_manifest\splits.yaml `
+  --config configs\iccd_prior_20260319.yaml `
+  --output-dir reports\target_scmos_iccd_like_synthetic_512_p99_0p25 `
+  --range-max 65535 `
+  --crop-size 512 `
+  --content-p99-target 0.25
+```
+
+- Outputs:
+  - `reports/target_scmos_iccd_like_synthetic_512/pairs.csv`
+  - `reports/target_scmos_iccd_like_synthetic_512_p99_0p25/pairs.csv`
+  - `docs/e2_synthetic_pair_generation.md`
+- First result:
+  - The strict offset-corrected physical-scale variant is valid but likely too
+    easy: B0 PSNR/SSIM is about 62.49 dB / 0.99927 and residual std is about
+    0.000718.
+  - The p99-normalized variant is closer to the real gated ICCD surrogate noise
+    level: B0 PSNR/SSIM is about 56.63 dB / 0.99930 and residual std is about
+    0.001463.
+  - The real gated ICCD repeated-frame surrogate B0 residual std is about
+    0.001822, with PSNR/SSIM about 56.41 dB / 0.99573.
+- Claim boundary:
+  - These are synthetic ICCD-like noisy samples from sCMOS content, not real
+    ICCD paired data.
+  - The p99-normalized version must be reported as content intensity
+    normalization, not exposure calibration.
+- Next gate:
+  - Audit PyTorch training scripts against this manifest before launching a
+    supervised baseline.
+
 ## Experiment Set C: Training Pipeline and Baselines
 
 ### E3.1 Paired Dataset Audit
