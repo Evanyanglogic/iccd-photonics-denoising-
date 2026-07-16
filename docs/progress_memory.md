@@ -357,6 +357,16 @@ Smoke test status:
   described as noise suppression with smoothing risk, not detail restoration.
   Folder 10 shows q40 Fano is not a final decision rule because p99 slightly
   outperforms physical on the selected boundary sample.
+- Added `scripts/evaluate_condition_score.py` and ran E3.5-D multi-metric
+  condition score. Outputs are under `reports/e3_5_condition_score`, with the
+  summary in `docs/e3_5_condition_score.md`. The score averages z-scored
+  `mean_signal`, `temporal_std_mean`, `fano_temporal`, `fixed_map_std`, and
+  `fixed_to_temporal_std_ratio`. Best diagnostic rule is
+  `score_q50_hybrid_p99_physical`: p99 for folders 13, 2, 11, 1, and 10;
+  physical for folders 9, 4, 8, 7, and 5. It reaches 0.3807 dB mean folder gain
+  with 10/10 positive folders, slightly above Fano q40 hybrid at 0.3788 dB, and
+  fixes the folder 10 boundary decision identified in E3.5-C. Still diagnostic
+  only because thresholds are derived from the same ten folders.
 
 ## Skill Setup
 

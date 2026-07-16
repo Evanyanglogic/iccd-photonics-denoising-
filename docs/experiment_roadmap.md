@@ -708,6 +708,13 @@ python scripts\evaluate_pair_baseline.py `
     Folder 2 confirms physical overcorrection in low-condition data; folder 5
     confirms strong residual suppression but with smoothing risk; folder 10
     shows the q40 Fano threshold is diagnostic rather than deployment-ready.
+  - E3.5-D multi-metric condition score is complete in
+    `docs/e3_5_condition_score.md` and `reports/e3_5_condition_score`. The best
+    diagnostic rule is `score_q50_hybrid_p99_physical`, which uses p99 on
+    folders 13, 2, 11, 1, and 10, and physical on folders 9, 4, 8, 7, and 5.
+    It reaches 0.3807 dB mean folder gain with 10/10 positive folders, slightly
+    above the Fano q40 hybrid's 0.3788 dB while fixing the folder 10 boundary
+    decision.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.
