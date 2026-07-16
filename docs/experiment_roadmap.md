@@ -728,13 +728,18 @@ python scripts\evaluate_pair_baseline.py `
     to beat the conservative p99 baseline on real gated ICCD surrogate pairs:
     E3.6-A reached -0.0321 dB mean PSNR gain and the zero-mean E3.6-B variant
     improved to -0.0066 dB, still below p99's +0.0392 dB.
-  - The result is useful diagnostically: matching residual std alone is
-    insufficient, and synthetic residual mean/clipping bias affects transfer.
-  - E3.6-C should add explicit condition information, preferably a
-    condition-score input channel, so the model is condition-aware during
-    inference instead of relying on post-hoc checkpoint switching.
-  - Keep q50 checkpoint switching as a diagnostic upper-bound/simple baseline,
-    not the final deployable method.
+  - E3.6-C tested an explicit condition-score input channel. Raw score input
+    worsened transfer to -0.0487 dB, while score/3 improved to -0.0102 dB but
+    still did not beat p99. The condition channel can over-drive high-condition
+    brightness correction in this small CNN.
+  - E3.6-D tested inference-time condition blending between p99 and physical
+    checkpoints. q40-q60 linear blend reached +0.3808 dB and q50 hard blend
+    reached +0.3807 dB, both with 10/10 positive folders. The gain difference
+    is negligible, so hard or near-hard condition selection remains the
+    strongest current evidence.
+  - Current decision: stop minor variants of residual-std-only synthetic
+    training. Treat q50/q40-q60 condition selection as the current method
+    baseline, with explicit claim boundaries and smoothing-risk checks.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.

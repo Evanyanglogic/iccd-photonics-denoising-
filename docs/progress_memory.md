@@ -393,6 +393,18 @@ Smoke test status:
   conclusion: residual-std-only scaling is insufficient for an unconditioned
   small CNN; next should be E3.6-C with explicit condition-score input or
   condition-band training.
+- Ran E3.6-C and E3.6-D. Updated `scripts/train_manifest_denoiser_baseline.py`
+  and `scripts/evaluate_manifest_denoiser_checkpoint.py` for optional two-channel
+  condition-score input. Raw condition-score input trained on the zero-mean
+  condition-scaled synthetic set transferred poorly to real surrogate pairs
+  (-0.0487 dB). Scaling the score channel by 3 reduced the bias but remained
+  negative (-0.0102 dB). Added `scripts/evaluate_condition_blend.py` and ran
+  `reports/e3_6_condition_blend_p99_physical`: q40-q60 linear blend reached
+  +0.3808 dB and q50 hard blend reached +0.3807 dB, both with 10/10 positive
+  folders and 75/80 positive pairs. Current decision: do not keep tuning minor
+  residual-std synthetic small-CNN variants. The strongest evidence is explicit
+  condition selection/blending between conservative p99 and stronger physical
+  denoising, with smoothing-risk checks.
 
 ## Skill Setup
 

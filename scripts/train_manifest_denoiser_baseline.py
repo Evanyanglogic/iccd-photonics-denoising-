@@ -47,6 +47,9 @@ class TrainConfig:
     num_workers: int
     grad_clip: float
     amp: bool
+    input_channels: int
+    condition_column: str
+    condition_value_scale: float
     max_train_batches: int
     max_val_batches: int
     device: str
@@ -105,7 +108,11 @@ def main() -> int:
         pin_memory=device.type == "cuda",
     )
 
-    model = ResidualDenoiser(channels=config.channels, depth=config.depth).to(device)
+    model = ResidualDenoiser(
+        channels=config.channels,
+        depth=config.depth,
+        input_channels=config.input_channels,
+    ).to(device)
     criterion = nn.L1Loss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
     scaler = make_grad_scaler(enabled=config.amp and device.type == "cuda")
@@ -149,7 +156,7 @@ def main() -> int:
         save_checkpoint(output_dir / "checkpoints" / "last.pth", model, optimizer, epoch, config, best_psnr)
         if is_best:
             save_checkpoint(output_dir / "checkpoints" / "best.pth", model, optimizer, epoch, config, best_psnr)
-            save_ranked_samples(model, val_loader, device, output_dir / "samples", max_items=3)
+            save_ranked_samples(model, val_loader, device, output_dir / "samples", config, max_items=3)
 
         print(
             f"Epoch {epoch}/{config.epochs}: train_l1={train_loss:.6g}, "
@@ -189,6 +196,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--grad-clip", type=float, default=1.0)
     parser.add_argument("--amp", action="store_true")
+    parser.add_argument("--input-channels", type=int, default=1)
+    parser.add_argument(
+        "--condition-column",
+        default="",
+        help="Optional metadata column used as a constant condition channel, for example assigned_condition_score.",
+    )
+    parser.add_argument(
+        "--condition-value-scale",
+        type=float,
+        default=1.0,
+        help="Divide condition values by this scale before adding the condition channel.",
+    )
     parser.add_argument("--max-train-batches", type=int, default=0)
     parser.add_argument("--max-val-batches", type=int, default=0)
     parser.add_argument("--device", default="")
@@ -223,6 +242,9 @@ def build_config(args: argparse.Namespace) -> TrainConfig:
         num_workers=args.num_workers,
         grad_clip=args.grad_clip,
         amp=args.amp,
+        input_channels=args.input_channels,
+        condition_column=args.condition_column,
+        condition_value_scale=args.condition_value_scale,
         max_train_batches=args.max_train_batches,
         max_val_batches=args.max_val_batches,
         device=device,
@@ -244,16 +266,21 @@ def set_seed(seed: int) -> None:
 class ResidualDenoiser(torch.nn.Module):
     """Small residual CNN baseline for grayscale denoising.
 
-    Input/output shape: (B, 1, H, W). The residual is bounded so the initial
+    Input shape: (B, input_channels, H, W). Output shape: (B, 1, H, W).
+    The first input channel must be the noisy image. Additional channels can
+    carry constant condition values. The residual is bounded so the initial
     baseline stays near the noisy input instead of producing arbitrary images.
     """
 
-    def __init__(self, channels: int = 32, depth: int = 4) -> None:
+    def __init__(self, channels: int = 32, depth: int = 4, input_channels: int = 1) -> None:
         super().__init__()
         if depth < 2:
             raise ValueError("depth must be >= 2")
+        if input_channels < 1:
+            raise ValueError("input_channels must be >= 1")
+        self.input_channels = input_channels
         layers: list[torch.nn.Module] = [
-            torch.nn.Conv2d(1, channels, kernel_size=3, padding=1),
+            torch.nn.Conv2d(input_channels, channels, kernel_size=3, padding=1),
             torch.nn.ReLU(),
         ]
         for _ in range(depth - 2):
@@ -272,8 +299,9 @@ class ResidualDenoiser(torch.nn.Module):
             if last.bias is not None:
                 torch.nn.init.zeros_(last.bias)
 
-    def forward(self, noisy: torch.Tensor) -> torch.Tensor:
-        residual = 0.1 * torch.tanh(self.net(noisy))
+    def forward(self, model_input: torch.Tensor) -> torch.Tensor:
+        noisy = model_input[:, :1]
+        residual = 0.1 * torch.tanh(self.net(model_input))
         return noisy + residual
 
     @staticmethod
@@ -323,9 +351,10 @@ def train_one_epoch(
     for batch_idx, batch in enumerate(loader, start=1):
         noisy = batch["noisy"].to(device, non_blocking=True)
         clean = batch["clean"].to(device, non_blocking=True)
+        model_input = make_model_input(noisy, batch, config).to(device, non_blocking=True)
         optimizer.zero_grad(set_to_none=True)
         with autocast_context(device, scaler is not None):
-            pred = model(noisy)
+            pred = model(model_input)
             loss = criterion(pred, clean)
         if scaler is not None:
             scaler.scale(loss).backward()
@@ -356,7 +385,8 @@ def validate(
     for batch_idx, batch in enumerate(loader, start=1):
         noisy = batch["noisy"].to(device, non_blocking=True)
         clean = batch["clean"].to(device, non_blocking=True)
-        pred = model(noisy)
+        model_input = make_model_input(noisy, batch, config).to(device, non_blocking=True)
+        pred = model(model_input)
         loss = criterion(pred, clean)
         pred_metric = pred.clamp(0.0, 1.0)
         quality = image_quality(pred_metric, clean, data_range=1.0)
@@ -391,6 +421,33 @@ def summarize_validation(rows: list[dict[str, Any]]) -> dict[str, float]:
     }
 
 
+def make_model_input(noisy: torch.Tensor, batch: dict[str, Any], config: TrainConfig) -> torch.Tensor:
+    if config.input_channels == 1:
+        return noisy
+    if config.input_channels != 2:
+        raise ValueError(f"Only input_channels 1 or 2 are supported, got {config.input_channels}")
+    values = condition_values(batch, config.condition_column, config.condition_value_scale, noisy.device)
+    condition = values[:, None, None, None].expand(-1, 1, noisy.shape[-2], noisy.shape[-1])
+    return torch.cat([noisy, condition], dim=1)
+
+
+def condition_values(batch: dict[str, Any], column: str, scale: float, device: Any) -> torch.Tensor:
+    if not column:
+        raise ValueError("--condition-column is required when --input-channels > 1")
+    metadata = batch.get("metadata", {})
+    if column not in metadata:
+        raise KeyError(f"Condition column {column!r} not found in batch metadata")
+    raw_values = metadata[column]
+    if isinstance(raw_values, torch.Tensor):
+        values = raw_values.detach().float().to(device)
+    elif isinstance(raw_values, (list, tuple)):
+        values = torch.tensor([float(item) for item in raw_values], dtype=torch.float32, device=device)
+    else:
+        values = torch.tensor([float(raw_values)], dtype=torch.float32, device=device)
+    divisor = float(scale) if scale else 1.0
+    return values / divisor
+
+
 def mean(rows: list[dict[str, Any]], key: str) -> float:
     if not rows:
         return float("nan")
@@ -406,7 +463,14 @@ def std(rows: list[dict[str, Any]], key: str) -> float:
 
 
 @torch.no_grad()
-def save_ranked_samples(model: torch.nn.Module, loader: Any, device: Any, output_dir: Path, max_items: int) -> None:
+def save_ranked_samples(
+    model: torch.nn.Module,
+    loader: Any,
+    device: Any,
+    output_dir: Path,
+    config: TrainConfig,
+    max_items: int,
+) -> None:
     model.eval()
     output_dir.mkdir(parents=True, exist_ok=True)
     for old_file in output_dir.glob("*.tif"):
@@ -416,7 +480,8 @@ def save_ranked_samples(model: torch.nn.Module, loader: Any, device: Any, output
     for batch in loader:
         noisy = batch["noisy"].to(device)
         clean = batch["clean"].to(device)
-        pred = model(noisy).clamp(0.0, 1.0)
+        model_input = make_model_input(noisy, batch, config).to(device)
+        pred = model(model_input).clamp(0.0, 1.0)
         quality = image_quality(pred, clean, data_range=1.0)
         pair_key = batch["pair_key"][0]
         samples.append({"pair_key": pair_key, "psnr": quality["psnr"]})
@@ -504,6 +569,9 @@ def write_report(
         f"- Seed: {config.seed}",
         f"- Device: {config.device}",
         f"- Model parameters: {count_parameters(model)}",
+        f"- Input channels: {config.input_channels}",
+        f"- Condition column: `{config.condition_column or 'none'}`",
+        f"- Condition value scale: {config.condition_value_scale:g}",
         "",
         "## Final Result",
         "",

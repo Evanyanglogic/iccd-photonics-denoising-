@@ -33,9 +33,14 @@ def main() -> int:
     ckpt_config = checkpoint.get("config", {})
     channels = int(args.channels or ckpt_config.get("channels", 16))
     depth = int(args.depth or ckpt_config.get("depth", 3))
+    input_channels = int(args.input_channels or ckpt_config.get("input_channels", 1))
     device = torch.device(args.device or ("cuda" if torch.cuda.is_available() else "cpu"))
+    condition_map = load_condition_map(Path(args.condition_score_csv), args) if args.condition_score_csv else {}
+    args._condition_map = condition_map
+    args._checkpoint_condition_column = str(ckpt_config.get("condition_column", ""))
+    args._checkpoint_condition_scale = float(ckpt_config.get("condition_value_scale", 1.0) or 1.0)
 
-    model = ResidualDenoiser(channels=channels, depth=depth).to(device)
+    model = ResidualDenoiser(channels=channels, depth=depth, input_channels=input_channels).to(device)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
 
@@ -68,6 +73,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", default="")
     parser.add_argument("--channels", type=int, default=0)
     parser.add_argument("--depth", type=int, default=0)
+    parser.add_argument("--input-channels", type=int, default=0)
+    parser.add_argument("--condition-column", default="")
+    parser.add_argument("--condition-score-csv", default="")
+    parser.add_argument("--condition-folder-column", default="folder")
+    parser.add_argument("--condition-score-column", default="condition_score")
+    parser.add_argument("--condition-value-scale", type=float, default=0.0)
     parser.add_argument("--max-pairs", type=int, default=0)
     parser.add_argument("--sample-count", type=int, default=3)
     return parser.parse_args()
@@ -86,6 +97,15 @@ def read_pairs(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def load_condition_map(path: Path, args: argparse.Namespace) -> dict[str, float]:
+    with path.open("r", newline="", encoding="utf-8-sig") as handle:
+        rows = list(csv.DictReader(handle))
+    mapping: dict[str, float] = {}
+    for row in rows:
+        mapping[str(int(float(row[args.condition_folder_column])))] = float(row[args.condition_score_column])
+    return mapping
+
+
 @torch.no_grad()
 def evaluate_rows(
     model: torch.nn.Module,
@@ -97,7 +117,8 @@ def evaluate_rows(
     for row in rows:
         clean = load_tiff_tensor(row["clean_path"], args.range_max).to(device)
         noisy = load_tiff_tensor(row["noisy_path"], args.range_max).to(device)
-        pred = model(noisy).clamp(0.0, 1.0)
+        model_input = make_model_input(noisy, row, args, model, device)
+        pred = model(model_input).clamp(0.0, 1.0)
         quality = image_quality(pred, clean, data_range=1.0)
         noisy_quality = image_quality(noisy, clean, data_range=1.0)
         metric_rows.append(
@@ -115,6 +136,48 @@ def evaluate_rows(
             }
         )
     return metric_rows
+
+
+def make_model_input(
+    noisy: torch.Tensor,
+    row: dict[str, str],
+    args: argparse.Namespace,
+    model: torch.nn.Module,
+    device: torch.device,
+) -> torch.Tensor:
+    input_channels = int(getattr(model, "input_channels", 1))
+    if input_channels == 1:
+        return noisy
+    if input_channels != 2:
+        raise ValueError(f"Only input_channels 1 or 2 are supported, got {input_channels}")
+    condition = resolve_condition_value(row, args)
+    condition_tensor = torch.full(
+        (noisy.shape[0], 1, noisy.shape[-2], noisy.shape[-1]),
+        fill_value=condition,
+        dtype=noisy.dtype,
+        device=device,
+    )
+    return torch.cat([noisy, condition_tensor], dim=1)
+
+
+def resolve_condition_value(row: dict[str, str], args: argparse.Namespace) -> float:
+    checkpoint_scale = getattr(args, "_checkpoint_condition_scale", 1.0)
+    scale = args.condition_value_scale if args.condition_value_scale else checkpoint_scale
+    scale = scale if scale else 1.0
+    column = args.condition_column or getattr(args, "_checkpoint_condition_column", "")
+    if column and column in row:
+        return float(row[column]) / scale
+    condition_map = getattr(args, "_condition_map", {})
+    folder_column = args.condition_folder_column
+    if condition_map and folder_column in row:
+        folder = str(int(float(row[folder_column])))
+        if folder not in condition_map:
+            raise KeyError(f"Folder {folder} missing from condition map")
+        return float(condition_map[folder]) / scale
+    raise KeyError(
+        "Condition input requested but no condition value was found. "
+        "Provide --condition-column or --condition-score-csv."
+    )
 
 
 def load_tiff_tensor(path_value: str, range_max: float) -> torch.Tensor:
@@ -166,7 +229,8 @@ def save_ranked_samples(
         row = by_key[metric["pair_key"]]
         clean = load_tiff_tensor(row["clean_path"], args.range_max).to(device)
         noisy = load_tiff_tensor(row["noisy_path"], args.range_max).to(device)
-        pred = model(noisy).clamp(0.0, 1.0)
+        model_input = make_model_input(noisy, row, args, model, device)
+        pred = model(model_input).clamp(0.0, 1.0)
         save_triplet_tiff(output_dir / f"{label}_{metric['pair_key']}.tif", clean.cpu(), noisy.cpu(), pred.cpu())
 
 
