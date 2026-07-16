@@ -260,6 +260,14 @@ Smoke test status:
   as the first synthetic training-source candidate, with the explicit claim
   boundary that it is content-normalized synthetic ICCD-like data, not real
   paired ICCD data.
+- Completed an E3 PyTorch training-code audit of the parent `E:/PNGAN-main`
+  scripts using `pytorch-patterns`. The legacy scripts are not safe as direct
+  paper-experiment entry points because they use directory-sorted pairing,
+  hardcoded data paths, incomplete seed control, an sCMOS-only online noise
+  model, and SSIM that quantizes low-light data to uint8. The model/loss code
+  can still be reused. Current decision: build a manifest-driven supervised
+  denoiser baseline first, using `src/iccd_data.ICCDPairDataset` and
+  `src/iccd_eval.metrics`, before modifying SMNet/MIRNet/PNGAN architecture.
 
 ## Skill Setup
 

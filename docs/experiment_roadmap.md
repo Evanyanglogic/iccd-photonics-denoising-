@@ -632,7 +632,7 @@ python scripts\evaluate_pair_baseline.py `
 
 ### E3.3 First Supervised Denoiser Baseline
 
-- Status: planned after PyTorch audit.
+- Status: PyTorch audit complete; manifest-driven trainer planned next.
 - Purpose: create a stable reference model before proposing ICCD-specific
   improvements.
 - Candidate models:
@@ -644,6 +644,18 @@ python scripts\evaluate_pair_baseline.py `
   - Same normalization.
   - Same random seed list, ideally 3 seeds.
   - Same metric script.
+- Current audit result:
+  - Legacy parent-repository scripts are useful references but should not be
+    used directly for paper experiments.
+  - Main blockers are directory-sorted pairing, hardcoded paths, incomplete
+    seed control, sCMOS-only online noise synthesis, and SSIM quantization to
+    uint8.
+  - Details are recorded in `docs/e3_pytorch_training_audit.md`.
+- Next implementation:
+  - Add `scripts/train_manifest_denoiser_baseline.py`.
+  - Use `src/iccd_data.ICCDPairDataset` and `src/iccd_eval.metrics`.
+  - Start with the p99-normalized synthetic ICCD-like manifest from E2.6 and a
+    smoke training mode before any full run.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.
