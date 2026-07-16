@@ -323,6 +323,19 @@ Smoke test status:
   mean r=0.9726, fixed/temporal ratio r=0.9693, fixed-map std r=0.9504, Fano
   r=0.9495, and mean signal r=0.9478. This supports a condition-aware denoising
   or noise-scaling experiment before any larger generic architecture.
+- Upgraded `docs/literature_matrix.md` into a layered reference strategy. High
+  standard anchors are now CVPR/TPAMI low-light raw noise modeling, Noise2Noise
+  / Noise2Void, Noise Flow, SIDD/SID, and EMVA/photon-transfer style detector
+  characterization. Direct ICCD denoising papers are kept as predecessor/gap
+  definitions, not as the writing standard.
+- Added `scripts/evaluate_condition_gate.py` and ran E3.5-A condition gate.
+  Outputs are under `reports/e3_5_condition_gate`, with the summary in
+  `docs/e3_5_condition_gate.md`. The best non-oracle q40 condition gate selects
+  physical checkpoint outputs for 48 high-condition pairs and noisy inputs for
+  32 low-condition pairs. It reaches 0.3669 dB mean folder PSNR gain with zero
+  negative-gain folders, compared with 0.3431 dB and four negative folders for
+  always applying the physical checkpoint. Treat this as diagnostic evidence
+  because only ten folders are available.
 
 ## Skill Setup
 

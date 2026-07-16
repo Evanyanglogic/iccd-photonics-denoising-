@@ -692,6 +692,10 @@ python scripts\evaluate_pair_baseline.py `
     folder gain is highly correlated with E1 temporal std, fixed/temporal ratio,
     fixed-map std, Fano, and mean signal. This supports condition-aware
     denoising/noise scaling as the next step, not generic detail restoration.
+  - E3.5-A condition gate is complete in `docs/e3_5_condition_gate.md` and
+    `reports/e3_5_condition_gate`. A simple q40 condition gate removes the four
+    negative-gain folders from `always_model` and reaches 0.3669 dB mean folder
+    gain, versus 0.3431 dB for always applying the physical checkpoint.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.
