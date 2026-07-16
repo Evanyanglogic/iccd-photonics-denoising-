@@ -177,3 +177,42 @@ Interpretation:
   is not yet a clean supervised training target.
 - Before training or ICCD-like synthesis, run mask-aware and offset-corrected
   pair checks.
+
+## Masked Offset-Corrected Evaluation: 15ms -> 500ms
+
+Generated with:
+
+```powershell
+python scripts\evaluate_masked_offset_pairs.py `
+  --pairs-csv reports\target_scmos_15ms_500ms_manifest\pairs.csv `
+  --output-dir reports\target_scmos_15ms_500ms_masked_offset_eval `
+  --range-max 65535 `
+  --crop-size 1024
+```
+
+Outputs:
+
+- `reports\target_scmos_15ms_500ms_masked_offset_eval\masked_offset_pair_metrics.csv`
+- `reports\target_scmos_15ms_500ms_masked_offset_eval\masked_offset_pair_report.md`
+
+Result:
+
+- Pair count: 100.
+- Valid fraction mean after bad-pixel and saturation masking: 0.998517.
+- Full PSNR/SSIM after dark-offset correction: 24.9660 dB / 0.071947.
+- Masked PSNR mean/std: 24.9716 / 0.3192 dB.
+- Masked MAE mean: 0.0351018.
+- Clean mean / noisy mean after correction: 0.00427077 / 0.0336392.
+- Mean ratio `noisy / clean`: 8.26377.
+- Masked residual mean/std: 0.0293684 / 0.0481715.
+
+Interpretation:
+
+- The center-crop bad-pixel mask keeps almost all pixels valid, so the primary
+  failure mode is not bad-pixel density.
+- Even after dark-offset correction, the `15ms` images are much brighter than
+  the `500ms` images on average. This indicates exposure/illumination or scene
+  mismatch, not a clean noisy-to-reference relationship.
+- This pair manifest should not be used as supervised clean/noisy training data.
+  It can still provide content/reference frames for ICCD-like synthetic noise
+  generation if the paper labels them as sCMOS content sources.

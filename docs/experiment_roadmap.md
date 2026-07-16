@@ -452,7 +452,8 @@ python scripts\compare_noise_priors.py `
 
 ### E2.4 sCMOS Content Source for ICCD-Like Synthetic Noise
 
-- Status: feasible with strict labeling.
+- Status: feasible as content/reference source with strict labeling; not valid
+  as a clean/noisy supervised pair from the first `15ms -> 500ms` check.
 - Source:
   - `F:/目标传感器噪声参数估计/data`
   - Inventory: `docs/target_scmos_data_inventory.md`
@@ -470,10 +471,19 @@ python scripts\compare_noise_priors.py `
   - At least one sCMOS candidate pair set, such as `15ms -> 500ms`, must pass
     brightness, alignment, and mask-aware metric checks before being used as
     reference content.
+- Current gate result:
+  - `15ms -> 500ms` passed tail-index integrity and bad-pixel mask coverage, but
+    failed the clean/noisy supervised-pair assumption.
+  - After crop-level dark-offset correction and bad-pixel masking, valid-pixel
+    fraction is about 0.9985, but the mean ratio `noisy / clean` remains about
+    8.26 and full SSIM remains about 0.07195.
+  - Use these frames as sCMOS content/reference sources for synthetic ICCD-like
+    noise only, not as real supervised denoising targets.
 
 ### E2.5 sCMOS Tail-Index Pair Manifest
 
-- Status: initial `15ms -> 500ms` manifest complete.
+- Status: initial `15ms -> 500ms` manifest and masked/offset evaluation
+  complete.
 - Purpose:
   - Bridge the sCMOS multi-exposure folders into the shared `pairs.csv` /
     `splits.yaml` interface.
@@ -500,14 +510,36 @@ python scripts\convert_scmos_tail_pairs.py `
   - Split sizes: train 85, val 8, test 7.
   - Dataloader check passed on a 256x256 center crop.
   - B0 PSNR/SSIM: 13.5869 dB / 0.191758.
+- Masked/offset result:
+  - Command:
+
+```powershell
+python scripts\evaluate_masked_offset_pairs.py `
+  --pairs-csv reports\target_scmos_15ms_500ms_manifest\pairs.csv `
+  --output-dir reports\target_scmos_15ms_500ms_masked_offset_eval `
+  --range-max 65535 `
+  --crop-size 1024
+```
+
+  - Valid fraction mean: 0.998517.
+  - Full PSNR/SSIM after dark-offset correction: 24.9660 dB / 0.071947.
+  - Masked PSNR mean/std: 24.9716 / 0.3192 dB.
+  - Clean mean / noisy mean after correction: 0.00427077 / 0.0336392.
+  - Mean ratio `noisy / clean`: 8.26377.
 - Risk:
   - Residual mean is about 0.18 in normalized units, so brightness/offset
     mismatch is substantial.
   - This manifest is a valid data bridge but not yet evidence that `15ms` and
     `500ms` are clean/noisy pairs suitable for supervised denoising.
+- Updated interpretation:
+  - Dark-offset correction improves the raw no-model PSNR, but the residual
+    brightness mismatch remains too large for supervised clean/noisy training.
+  - The manifest remains useful for selecting sCMOS content/reference crops for
+    ICCD-like synthetic noise generation.
 - Next gate:
-  - Add offset-corrected and mask-aware pair evaluation before using this set
-    as reference content.
+  - Build a synthetic-pair generator that uses selected long-exposure sCMOS
+    content crops and injects the E1-derived ICCD prior from
+    `configs/iccd_prior_20260319.yaml`.
 
 ## Experiment Set C: Training Pipeline and Baselines
 

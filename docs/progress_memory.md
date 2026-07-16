@@ -236,6 +236,17 @@ Smoke test status:
   ICCD prior, ICCD is much closer to held-out residuals in PSNR/SSIM, residual
   std error, and histogram L1. Safe claim: E1 device calibration matters; do not
   yet claim full ICCD physics beats every re-fitted generic prior.
+- Added `scripts/evaluate_masked_offset_pairs.py` and ran the masked,
+  dark-offset-corrected E2.5 check on the sCMOS `15ms -> 500ms` manifest. The
+  run used 100 tail-index pairs, 1024x1024 center crops, the derived crop-level
+  dark offset, and the bad-pixel mask from `reports/target_scmos_risk_audit`.
+  Valid-pixel fraction is about 0.9985, full PSNR/SSIM after correction is
+  about 24.9660 dB / 0.071947, masked PSNR is about 24.9716 dB, and the mean
+  ratio `noisy / clean` remains about 8.26. Conclusion: bad pixels are not the
+  primary blocker; the exposure/brightness relationship is not a valid
+  supervised clean/noisy pair. The data can still be used as sCMOS
+  content/reference source for ICCD-like synthetic noise generation with strict
+  labeling.
 
 ## Skill Setup
 
