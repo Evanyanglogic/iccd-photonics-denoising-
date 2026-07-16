@@ -703,6 +703,11 @@ python scripts\evaluate_pair_baseline.py `
     (+0.6114 dB). A hybrid strategy using p99 on low-condition folders and
     physical on high-condition folders reaches 0.3788 dB mean folder gain with
     10/10 positive folders.
+  - E3.5-C visual and residual inspection is complete in
+    `docs/e3_5_condition_visuals.md` and `reports/e3_5_condition_visuals`.
+    Folder 2 confirms physical overcorrection in low-condition data; folder 5
+    confirms strong residual suppression but with smoothing risk; folder 10
+    shows the q40 Fano threshold is diagnostic rather than deployment-ready.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.

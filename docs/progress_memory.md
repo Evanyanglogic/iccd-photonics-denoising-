@@ -347,6 +347,16 @@ Smoke test status:
   with 10/10 positive folders. This is the current best minimal condition-aware
   validation result, but it still needs visual/residual inspection and more
   conditions before being treated as a final deployable rule.
+- Added `scripts/inspect_condition_visuals.py` and ran E3.5-C visual/residual
+  inspection for folders 2, 5, 1, and 10. Outputs are under
+  `reports/e3_5_condition_visuals`, with the summary in
+  `docs/e3_5_condition_visuals.md`. Folder 2 confirms physical overcorrection
+  in a low-condition case (p99 +0.1215 dB, physical -0.2832 dB). Folder 5
+  confirms strong physical residual suppression (+1.7393 dB, residual std
+  0.004253 -> 0.003471), but gradient/noisy drops to 0.7945, so this must be
+  described as noise suppression with smoothing risk, not detail restoration.
+  Folder 10 shows q40 Fano is not a final decision rule because p99 slightly
+  outperforms physical on the selected boundary sample.
 
 ## Skill Setup
 
