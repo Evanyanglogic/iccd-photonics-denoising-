@@ -686,6 +686,12 @@ python scripts\evaluate_pair_baseline.py `
     but with high variance and 28/80 negative-gain pairs.
   - Folder-level gains are strongly condition-dependent, so the next gate is
     condition-stratified analysis rather than a larger network.
+  - Condition-stratified follow-up is complete in
+    `docs/e3_condition_gain_analysis.md` and
+    `reports/e3_condition_gain_analysis`. The physical-scale checkpoint's
+    folder gain is highly correlated with E1 temporal std, fixed/temporal ratio,
+    fixed-map std, Fano, and mean signal. This supports condition-aware
+    denoising/noise scaling as the next step, not generic detail restoration.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.

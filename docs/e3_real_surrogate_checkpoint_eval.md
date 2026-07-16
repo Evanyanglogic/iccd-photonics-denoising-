@@ -118,3 +118,25 @@ folder statistics:
 
 Then evaluate whether a condition-aware input or training split reduces the
 folder-dependent failures.
+
+## Follow-Up: Condition-Stratified Gain Analysis
+
+Completed follow-up:
+
+- `docs/e3_condition_gain_analysis.md`
+- `reports\e3_condition_gain_analysis\condition_gain_report.md`
+
+Key result:
+
+- p99 checkpoint: stable but tiny gain, 0.0392 dB mean folder PSNR gain.
+- strict physical-scale checkpoint: stronger average gain, 0.3431 dB, but only
+  6/10 folders improve.
+- For the physical-scale checkpoint, mean folder gain is highly correlated with
+  E1 condition statistics: temporal std mean `r = 0.9726`, fixed/temporal std
+  ratio `r = 0.9693`, fixed-map std `r = 0.9504`, and Fano `r = 0.9495`.
+
+Updated decision:
+
+Do not treat the current model as a general detail restoration model. The next
+experiment should test a minimal condition-aware strategy before any larger
+generic denoising architecture.

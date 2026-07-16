@@ -313,6 +313,16 @@ Smoke test status:
   works with approved network access. Added `scripts/brave_search_direct.py` as
   the fallback and fixed its Windows console UTF-8 handling after a search result
   caused a GBK `UnicodeEncodeError`.
+- Added `scripts/analyze_condition_gain.py` and ran E3 condition-stratified
+  analysis on the p99 and strict physical-scale checkpoints. Outputs are under
+  `reports/e3_condition_gain_analysis`, with the summary in
+  `docs/e3_condition_gain_analysis.md`. The p99 checkpoint is stable but tiny
+  (0.0392 dB mean folder gain, 10/10 positive folders). The physical-scale
+  checkpoint has larger mean gain (0.3431 dB) but only 6/10 positive folders and
+  its gain is strongly correlated with E1 condition statistics: temporal std
+  mean r=0.9726, fixed/temporal ratio r=0.9693, fixed-map std r=0.9504, Fano
+  r=0.9495, and mean signal r=0.9478. This supports a condition-aware denoising
+  or noise-scaling experiment before any larger generic architecture.
 
 ## Skill Setup
 
