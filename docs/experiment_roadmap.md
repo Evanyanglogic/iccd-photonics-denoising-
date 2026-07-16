@@ -674,6 +674,10 @@ python scripts\evaluate_pair_baseline.py `
     input 53.8926 dB / 0.999294, a PSNR gain of about 0.3040 dB.
   - This barely passes the provisional synthetic-validation threshold, but it
     remains a synthetic sanity baseline rather than a real ICCD denoising claim.
+  - The strict physical-scale synthetic set reached final 60.1930 dB / 0.999284
+    versus noisy-input 59.5277 dB / 0.999232, with best observed validation
+    PSNR 60.3309 dB at epoch 93. This is an easier synthetic ablation, not
+    evidence that physical-scale content is closer to real ICCD.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.

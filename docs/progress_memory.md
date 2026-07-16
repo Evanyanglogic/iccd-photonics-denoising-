@@ -285,6 +285,12 @@ Smoke test status:
   0.999948, a gain of about 0.3040 dB over noisy input. This barely passes the
   provisional synthetic-validation threshold and should be treated as the
   minimum supervised sanity baseline, not a real ICCD performance claim.
+- Ran the same 100-epoch small-CNN baseline on the strict physical-scale
+  synthetic set. Final validation PSNR/SSIM was 60.1930 dB / 0.999284 versus
+  noisy-input 59.5277 dB / 0.999232, and best observed validation PSNR was
+  60.3309 dB at epoch 93. This confirms the strict physical-scale set is an
+  easier synthetic ablation; it does not replace the p99-normalized set as the
+  better real-ICCD-residual-magnitude proxy.
 
 ## Skill Setup
 
