@@ -367,6 +367,18 @@ Smoke test status:
   with 10/10 positive folders, slightly above Fano q40 hybrid at 0.3788 dB, and
   fixes the folder 10 boundary decision identified in E3.5-C. Still diagnostic
   only because thresholds are derived from the same ten folders.
+- Extended `scripts/inspect_condition_visuals.py` with configurable sample
+  selection and hybrid physical-folder assignment, then ran E3.5-E all-folder
+  score q50 visual/residual inspection. Outputs are under
+  `reports/e3_5_score_q50_visuals`, with the summary in
+  `docs/e3_5_score_q50_visuals.md`. The run uses median physical-gain samples
+  for all ten folders and the score q50 rule: p99 for folders 13, 2, 11, 1, and
+  10; physical for folders 9, 4, 8, 7, and 5. Folder 10 is now correctly kept on
+  the p99 side. High-score folders show stronger residual suppression, but
+  folder 5 drops grad/noisy to about 0.795, so the claim must remain
+  condition-aware noise suppression with smoothing risk, not detail restoration.
+  Next step is E3.6 condition-scaled ICCD-like synthetic noise training, using
+  q50 checkpoint switching only as a diagnostic/simple baseline.
 
 ## Skill Setup
 

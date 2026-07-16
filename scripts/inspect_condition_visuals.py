@@ -37,7 +37,7 @@ def main() -> int:
     pair_rows = read_csv(Path(args.pairs_csv))
     physical_metrics = read_csv(Path(args.physical_metrics_csv))
     p99_metrics = read_csv(Path(args.p99_metrics_csv))
-    selected = select_pairs(args.folders, pair_rows, physical_metrics, p99_metrics)
+    selected = select_pairs(args.folders, pair_rows, physical_metrics, p99_metrics, args.selection_policy)
 
     rows: list[dict[str, Any]] = []
     with torch.no_grad():
@@ -64,6 +64,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--physical-metrics-csv", required=True)
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--folders", nargs="*", type=int, default=[2, 5, 1, 10])
+    parser.add_argument(
+        "--selection-policy",
+        choices=["diagnostic", "median_physical_gain"],
+        default="diagnostic",
+        help="diagnostic preserves the original hand-picked E3.5-C low/high cases; median_physical_gain picks the median physical-gain pair for each folder.",
+    )
+    parser.add_argument(
+        "--hybrid-physical-folders",
+        nargs="*",
+        type=int,
+        default=[4, 5, 7, 8, 9, 10],
+        help="Folders assigned to the physical checkpoint in the hybrid strategy.",
+    )
     parser.add_argument("--range-max", type=float, default=65535.0)
     parser.add_argument("--device", default="")
     parser.add_argument("--panel-percentile-low", type=float, default=1.0)
@@ -92,6 +105,7 @@ def select_pairs(
     pair_rows: list[dict[str, str]],
     physical_metrics: list[dict[str, str]],
     p99_metrics: list[dict[str, str]],
+    selection_policy: str,
 ) -> list[dict[str, str]]:
     pairs_by_key = {row["pair_key"]: row for row in pair_rows}
     p99_by_key = {row["pair_key"]: row for row in p99_metrics}
@@ -103,7 +117,11 @@ def select_pairs(
     selected: list[dict[str, str]] = []
     for folder in folders:
         rows = by_folder[folder]
-        if folder == 2:
+        if selection_policy == "median_physical_gain":
+            ranked = sorted(rows, key=lambda item: float(item["psnr_gain"]))
+            metric = ranked[len(ranked) // 2]
+            reason = "median_physical_gain"
+        elif folder == 2:
             metric = min(rows, key=lambda item: float(item["psnr_gain"]))
             reason = "worst_physical_low_condition"
         elif folder == 5:
@@ -134,7 +152,8 @@ def inspect_pair(
     p99_t = p99_model(noisy_t).clamp(0.0, 1.0)
     physical_t = physical_model(noisy_t).clamp(0.0, 1.0)
     folder = int(row["folder"])
-    hybrid_t = physical_t if folder in {4, 5, 7, 8, 9, 10} else p99_t
+    physical_folders = set(args.hybrid_physical_folders)
+    hybrid_t = physical_t if folder in physical_folders else p99_t
     tensors = {
         "noisy": noisy_t,
         "p99": p99_t,
@@ -254,13 +273,15 @@ def write_report(
     physical_params: int,
 ) -> None:
     lines = [
-        "# E3.5-C Visual and Residual Inspection",
+        "# E3.5 Visual and Residual Inspection",
         "",
         "This report inspects selected low/high/boundary ICCD folders to check whether condition-aware gains reflect real residual reduction rather than brightness drift or obvious oversmoothing.",
         "",
         f"- Pair manifest: `{args.pairs_csv}`",
         f"- p99 checkpoint: `{args.p99_checkpoint}` ({p99_params} parameters)",
         f"- physical checkpoint: `{args.physical_checkpoint}` ({physical_params} parameters)",
+        f"- Selection policy: `{args.selection_policy}`",
+        f"- Hybrid physical folders: `{', '.join(str(item) for item in args.hybrid_physical_folders)}`",
         f"- Metrics CSV: `{metrics_csv}`",
         f"- Panels: `{panels_dir}`",
         "",
@@ -276,7 +297,7 @@ def write_report(
         folder = int(pair_rows[0]["folder"])
         p99 = find_strategy(pair_rows, "p99")
         physical = find_strategy(pair_rows, "physical")
-        hybrid_strategy = "physical" if folder in {4, 5, 7, 8, 9, 10} else "p99"
+        hybrid_strategy = "physical" if folder in set(args.hybrid_physical_folders) else "p99"
         lines.append(
             "| {folder} | {pair} | {reason} | {p99_gain:.4f} | {physical_gain:.4f} | {hybrid} | `{image_panel}` | `{residual_panel}` |".format(
                 folder=folder,

@@ -715,6 +715,19 @@ python scripts\evaluate_pair_baseline.py `
     It reaches 0.3807 dB mean folder gain with 10/10 positive folders, slightly
     above the Fano q40 hybrid's 0.3788 dB while fixing the folder 10 boundary
     decision.
+  - E3.5-E score q50 visual/residual inspection is complete in
+    `docs/e3_5_score_q50_visuals.md` and `reports/e3_5_score_q50_visuals`.
+    Median physical-gain samples were inspected for all ten folders. The q50
+    hybrid correctly keeps folder 10 on the p99 side, while high-score folders
+    5, 7, and 8 show real residual suppression with measurable smoothing risk.
+    This supports a condition-aware denoising claim, not a low-light detail
+    restoration claim.
+- Next implementation:
+  - E3.6 should generate condition-scaled ICCD-like synthetic noise so the
+    training data itself varies by condition score, instead of switching between
+    two checkpoints after inference.
+  - Keep q50 checkpoint switching as a diagnostic upper-bound/simple baseline,
+    not the final deployable method.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.
