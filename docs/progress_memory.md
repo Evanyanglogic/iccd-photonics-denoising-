@@ -438,6 +438,17 @@ Added after reviewing `E:/Google_Download/deep-research-report.md` on
   carry smoothing risk in high-condition folders, especially folder 5 with
   grad/noisy about 0.7952. Next stage is E3.8 LOFO with thresholds and blend
   intervals selected only from training folders.
+- Completed E3.8 LOFO condition-protocol validation. Added
+  `scripts/evaluate_lofo_condition_protocol.py` and generated
+  `reports/e3_8_lofo_condition_protocol`. For each held-out folder, hard
+  thresholds and linear blend intervals are selected only from the other nine
+  folders. Results: LOFO best linear reaches +0.380355 dB mean folder PSNR gain
+  with 10/10 positive folders and 75/80 positive pairs; LOFO best hard reaches
+  +0.375555 dB with 10/10 positive folders and 72/80 positive pairs. This
+  reduces the threshold-leakage concern from E3.5/E3.6. However, both LOFO
+  condition strategies still show 24 `grad/noisy < 0.95` warnings, so the
+  smoothing-risk claim boundary remains. Next stage is E4 formal baselines:
+  DnCNN and Light U-Net on p99 and physical synthetic training data.
 
 ## Skill Setup
 
