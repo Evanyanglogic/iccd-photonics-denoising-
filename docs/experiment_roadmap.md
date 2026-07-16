@@ -356,8 +356,7 @@ python scripts\build_iccd_prior_config.py `
 
 ### E2.2 Synthetic Noise Fidelity Baseline
 
-- Status: runnable for paired manifests, but gated ICCD pairing is not available
-  yet.
+- Status: initial surrogate repeated-frame comparison complete.
 - Existing entry point:
 
 ```powershell
@@ -368,14 +367,61 @@ python scripts\compare_noise_priors.py `
 ```
 
 - For gated ICCD:
-  - Use only after clean/reference pairing is defined, or define a repeated-frame
-    surrogate carefully.
+  - True clean/reference pairing is still unavailable.
+  - Current E2.2 uses repeated-frame surrogate pairs: first 100 frames per
+    folder are averaged as a clean surrogate, and held-out frames 101, 111, 121,
+    131, 141, 151, 161, 171 are treated as real noisy residual samples.
+- Current surrogate pair command:
+
+```powershell
+python scripts\build_repeated_frame_surrogate_pairs.py `
+  --root D:\iccd\data\20260319 `
+  --folders 1 2 4 5 7 8 9 10 11 13 `
+  --output-dir reports\gated_iccd_20260319_surrogate_pairs `
+  --train-frames 100 `
+  --max-heldout-frames 8 `
+  --heldout-stride 10 `
+  --crop-size 512
+```
+
+- Current prior comparison commands:
+
+```powershell
+python scripts\compare_noise_priors.py `
+  --pairs-csv reports\gated_iccd_20260319_surrogate_pairs\pairs.csv `
+  --config configs\iccd_prior_20260319.yaml `
+  --output-dir reports\gated_iccd_20260319_surrogate_noise_priors `
+  --range-max 65535 `
+  --bins 8
+
+python scripts\compare_noise_priors.py `
+  --pairs-csv reports\gated_iccd_20260319_surrogate_pairs\pairs.csv `
+  --config configs\iccd_prior_comparison_20260319.yaml `
+  --output-dir reports\gated_iccd_20260319_surrogate_noise_priors_comparison `
+  --range-max 65535 `
+  --bins 8
+```
+
 - Primary metrics:
   - Mean error.
   - Variance error.
   - Histogram distance.
   - Brightness-bin residual error.
   - PSD/autocorrelation distance after E1.5 exists.
+- First-run result:
+  - Surrogate pairs: 80 from ten complete folders.
+  - When all priors are E1-calibrated to the same variance scale, the current
+    runnable models are nearly equivalent; this does not support a strong claim
+    that the simplified ICCD model beats a re-fitted Poisson-Gaussian model.
+  - When generic Poisson-Gaussian and sCMOS-like priors keep first-pass defaults
+    and only ICCD is E1-calibrated, ICCD prior is much closer to held-out
+    repeated-frame residuals: PSNR/SSIM about 50.17/0.9875 versus
+    35.65/0.7706 for generic Poisson-Gaussian and 25.47/0.2647 for sCMOS-like.
+  - Residual std error is about 0.000915 for ICCD versus 0.01493 and 0.05073
+    for default Poisson-Gaussian and sCMOS-like priors.
+  - Histogram L1 is about 0.0413 for ICCD versus 1.251 and 1.786.
+  - PSD L1 is similar across priors and should not be treated as the strongest
+    evidence.
 - Working success threshold:
   - Provisional target: ICCD prior reduces variance or brightness-bin residual
     error by at least 20% versus Poisson-Gaussian in most valid bins.

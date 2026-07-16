@@ -1,0 +1,39 @@
+# Comparison config for E2.2.
+# Generic baselines keep first-pass defaults; ICCD prior uses E1-derived values.
+
+range_max: 65535
+bins: 8
+seed: 20260715
+
+poisson_gaussian:
+  peak_photons: 120.0
+  read_noise_sigma: 0.01
+  clip: true
+
+scmos_like:
+  signal_gain: 0.20
+  read_noise_sigma: 0.015
+  row_noise_sigma: 0.004
+  column_noise_sigma: 0.0
+  offset: 0.0
+  clip: true
+
+iccd:
+  photon_scale: 3764.2105
+  photocathode_qe: 1.0
+  mcp_gain_mean: 1.0
+  mcp_gain_var: 0.0001
+  dark_count_rate: 0.0
+  phosphor_sigma: 0.0
+  read_noise_sigma: 0.00058468276
+  offset: 0.0
+  clip: true
+
+iccd_empirical_components:
+  source_config: configs/iccd_prior_20260319.yaml
+  comparison_mode: generic_baselines_vs_e1_calibrated_iccd
+  claim_boundary:
+    - Use this config for E2.2 baseline comparison.
+    - Generic Poisson-Gaussian and sCMOS-like parameters are not fitted to E1.
+    - ICCD parameters are fitted from repeated-frame empirical reports.
+    - This tests whether E1 calibration improves temporal residual fidelity.

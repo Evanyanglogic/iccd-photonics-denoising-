@@ -225,6 +225,17 @@ Smoke test status:
   about 1.70 to 14.46 with median about 6.05, median normalized fixed-pattern
   sigma about 0.00614, and weak residual lag-1 spatial correlation. It is an
   empirical repeated-frame prior, not strict dark/flat calibration.
+- Added `scripts/build_repeated_frame_surrogate_pairs.py` and generated
+  `reports/gated_iccd_20260319_surrogate_pairs`: 80 surrogate pairs from ten
+  complete folders. Each clean surrogate is the mean of the first 100 repeated
+  frames, and held-out frames 101, 111, 121, 131, 141, 151, 161, 171 are used as
+  noisy residual samples. Added `configs/iccd_prior_comparison_20260319.yaml`
+  and `docs/e2_noise_prior_fidelity.md`. E2.2 result: if all priors are
+  E1-calibrated, the runnable models are nearly equivalent; if generic
+  Poisson-Gaussian and sCMOS-like defaults are compared against the E1-calibrated
+  ICCD prior, ICCD is much closer to held-out residuals in PSNR/SSIM, residual
+  std error, and histogram L1. Safe claim: E1 device calibration matters; do not
+  yet claim full ICCD physics beats every re-fitted generic prior.
 
 ## Skill Setup
 
