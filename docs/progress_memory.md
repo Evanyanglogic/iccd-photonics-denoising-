@@ -291,6 +291,14 @@ Smoke test status:
   60.3309 dB at epoch 93. This confirms the strict physical-scale set is an
   easier synthetic ablation; it does not replace the p99-normalized set as the
   better real-ICCD-residual-magnitude proxy.
+- Added `scripts/evaluate_manifest_denoiser_checkpoint.py` and evaluated both
+  synthetic-trained small-CNN checkpoints on 80 real gated ICCD surrogate pairs.
+  The p99-trained checkpoint gives mean PSNR/SSIM 56.4479 dB / 0.995780 versus
+  noisy-input 56.4087 dB / 0.995732, a stable but tiny 0.0392 dB mean gain. The
+  strict physical-scale checkpoint gives 56.7517 dB / 0.996620, a 0.3431 dB mean
+  gain, but with high variance and 28/80 negative-gain pairs. Folder-level
+  results are strongly condition-dependent, so the next gate should be
+  condition-stratified analysis before any larger MIRNet/SMNet/PNGAN run.
 
 ## Skill Setup
 

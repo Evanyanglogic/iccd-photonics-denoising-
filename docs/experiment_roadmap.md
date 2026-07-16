@@ -678,6 +678,14 @@ python scripts\evaluate_pair_baseline.py `
     versus noisy-input 59.5277 dB / 0.999232, with best observed validation
     PSNR 60.3309 dB at epoch 93. This is an easier synthetic ablation, not
     evidence that physical-scale content is closer to real ICCD.
+- Real surrogate transfer result:
+  - Report: `docs/e3_real_surrogate_checkpoint_eval.md`.
+  - The p99-trained small CNN transfers stably but weakly to real surrogate
+    pairs: mean PSNR gain about 0.0392 dB.
+  - The strict physical-scale model has stronger mean transfer, about 0.3431 dB,
+    but with high variance and 28/80 negative-gain pairs.
+  - Folder-level gains are strongly condition-dependent, so the next gate is
+    condition-stratified analysis rather than a larger network.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.
