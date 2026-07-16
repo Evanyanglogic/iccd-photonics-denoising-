@@ -1,0 +1,9 @@
+{
+  "blend_metrics_csv": "reports/e3_6_condition_blend_p99_physical/condition_blend_metrics.csv",
+  "experiment_id": "E3.7",
+  "git_commit": "38bf80396d64259ede1f46d6637a7984663e9652",
+  "high_risk_gradient_ratio": 0.85,
+  "protocol_status": "fixed_before_lofo",
+  "visual_metrics_csv": "reports/e3_5_score_q50_visuals/condition_visual_metrics.csv",
+  "warning_gradient_ratio": 0.95
+}

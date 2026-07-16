@@ -427,6 +427,17 @@ Added after reviewing `E:/Google_Download/deep-research-report.md` on
 - The q40-q60 linear blend and q50 hard blend are nearly tied in current
   evidence, so the paper should not overclaim a continuous-blend contribution
   unless LOFO or cross-architecture baselines show a real advantage.
+- Completed E3.7 evaluation-protocol and smoothing-risk audit. Added
+  `scripts/summarize_e3_7_protocol.py` and generated
+  `reports/e3_7_evaluation_protocol`. The protocol freezes required reporting
+  fields for E3.8 and E4: pair PSNR/SSIM, folder-level gain, positive
+  pair/folder rates, residual mean/std, representative samples, gradient ratio,
+  and strategy source decisions. Current results keep the same boundary:
+  q40-q60 linear blend and q50 hard blend are effectively tied
+  (0.380769 dB vs 0.380695 dB mean folder gain), while physical/hybrid outputs
+  carry smoothing risk in high-condition folders, especially folder 5 with
+  grad/noisy about 0.7952. Next stage is E3.8 LOFO with thresholds and blend
+  intervals selected only from training folders.
 
 ## Skill Setup
 
