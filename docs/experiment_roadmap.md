@@ -632,7 +632,7 @@ python scripts\evaluate_pair_baseline.py `
 
 ### E3.3 First Supervised Denoiser Baseline
 
-- Status: PyTorch audit complete; manifest-driven trainer planned next.
+- Status: manifest-driven smoke trainer implemented and tested.
 - Purpose: create a stable reference model before proposing ICCD-specific
   improvements.
 - Candidate models:
@@ -652,10 +652,20 @@ python scripts\evaluate_pair_baseline.py `
     uint8.
   - Details are recorded in `docs/e3_pytorch_training_audit.md`.
 - Next implementation:
-  - Add `scripts/train_manifest_denoiser_baseline.py`.
+  - Run a full small-CNN synthetic baseline after committing the smoke trainer.
   - Use `src/iccd_data.ICCDPairDataset` and `src/iccd_eval.metrics`.
-  - Start with the p99-normalized synthetic ICCD-like manifest from E2.6 and a
-    smoke training mode before any full run.
+  - Start with the p99-normalized synthetic ICCD-like manifest from E2.6 before
+    any MIRNet/SMNet/PNGAN architecture change.
+- Smoke result:
+  - Script: `scripts/train_manifest_denoiser_baseline.py`.
+  - Report: `docs/e3_manifest_baseline_smoke.md`.
+  - Smoke command used CPU, one epoch, two train batches, and two validation
+    batches.
+  - Validation PSNR/SSIM after smoke training: about 55.7709 dB / 0.999513.
+  - Noisy-input PSNR/SSIM on the same validation subset: about 55.7045 dB /
+    0.999232.
+  - This confirms the manifest training loop and artifact writing, but it is
+    not a paper performance claim.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.

@@ -268,6 +268,16 @@ Smoke test status:
   can still be reused. Current decision: build a manifest-driven supervised
   denoiser baseline first, using `src/iccd_data.ICCDPairDataset` and
   `src/iccd_eval.metrics`, before modifying SMNet/MIRNet/PNGAN architecture.
+- Added `scripts/train_manifest_denoiser_baseline.py`, a manifest-driven
+  supervised denoising baseline with explicit seed control, config capture,
+  git commit recording, metrics CSV, validation rows, best/last checkpoints,
+  and best/median/worst sample TIFFs. A CPU smoke run on the p99-normalized
+  synthetic ICCD-like manifest used one epoch, two train batches, and two
+  validation batches. It produced train L1 0.000410107, validation L1
+  0.000455504, validation PSNR/SSIM 55.7709 dB / 0.999513, and noisy-input
+  PSNR/SSIM 55.7045 dB / 0.999232 on the same validation subset. This confirms
+  the E3 training loop and artifact writing, but is not a paper performance
+  claim.
 
 ## Skill Setup
 
