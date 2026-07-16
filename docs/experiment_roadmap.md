@@ -723,9 +723,16 @@ python scripts\evaluate_pair_baseline.py `
     This supports a condition-aware denoising claim, not a low-light detail
     restoration claim.
 - Next implementation:
-  - E3.6 should generate condition-scaled ICCD-like synthetic noise so the
-    training data itself varies by condition score, instead of switching between
-    two checkpoints after inference.
+  - E3.6-A/B condition-scaled synthetic training has been run and recorded in
+    `docs/e3_6_condition_scaled_training.md`. Residual-std-only scaling failed
+    to beat the conservative p99 baseline on real gated ICCD surrogate pairs:
+    E3.6-A reached -0.0321 dB mean PSNR gain and the zero-mean E3.6-B variant
+    improved to -0.0066 dB, still below p99's +0.0392 dB.
+  - The result is useful diagnostically: matching residual std alone is
+    insufficient, and synthetic residual mean/clipping bias affects transfer.
+  - E3.6-C should add explicit condition information, preferably a
+    condition-score input channel, so the model is condition-aware during
+    inference instead of relying on post-hoc checkpoint switching.
   - Keep q50 checkpoint switching as a diagnostic upper-bound/simple baseline,
     not the final deployable method.
 - Working success threshold:

@@ -379,6 +379,20 @@ Smoke test status:
   condition-aware noise suppression with smoothing risk, not detail restoration.
   Next step is E3.6 condition-scaled ICCD-like synthetic noise training, using
   q50 checkpoint switching only as a diagnostic/simple baseline.
+- Started E3.6 and ran two 100-epoch small-CNN trainings. Updated
+  `scripts/generate_iccd_like_synthetic_pairs.py` to support condition-score CSV
+  input, residual-std scaling, zero-valued valid pixels for regenerated
+  synthetic clean TIFFs, and optional residual mean removal before scaling.
+  E3.6-A generated `reports/target_scmos_iccd_like_synthetic_512_condition_scaled_q50`
+  and trained `reports/e3_6_condition_scaled_q50_smallcnn_100ep`; real surrogate
+  transfer was negative at -0.0321 dB mean PSNR gain. E3.6-B generated
+  `reports/target_scmos_iccd_like_synthetic_512_condition_scaled_q50_zero_mean`
+  and trained `reports/e3_6_condition_scaled_q50_zero_mean_smallcnn_100ep`;
+  transfer improved to -0.0066 dB but still underperformed the p99 baseline
+  (+0.0392 dB). Summary is in `docs/e3_6_condition_scaled_training.md`. Current
+  conclusion: residual-std-only scaling is insufficient for an unconditioned
+  small CNN; next should be E3.6-C with explicit condition-score input or
+  condition-band training.
 
 ## Skill Setup
 

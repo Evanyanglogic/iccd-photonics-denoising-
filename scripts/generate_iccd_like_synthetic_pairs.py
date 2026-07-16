@@ -36,10 +36,12 @@ def main() -> int:
     config = load_config(Path(args.config))
     iccd_config_values = dict(config.get("iccd", {}))
     base_seed = int(args.seed if args.seed is not None else config.get("seed", 20260715))
+    condition_rows = load_condition_rows(Path(args.condition_score_csv)) if args.condition_score_csv else []
 
     output_rows: list[dict[str, Any]] = []
     metric_rows: list[dict[str, Any]] = []
     for index, row in enumerate(rows):
+        condition = assign_condition(index, condition_rows)
         clean_source_path = Path(row[args.clean_column])
         dark_offset = load_optional_npy(Path(row.get("dark_offset_path", "")))
         bad_mask = load_optional_npy(Path(row.get("bad_pixel_mask_path", "")))
@@ -47,7 +49,7 @@ def main() -> int:
         clean_raw = center_crop(load_tiff(clean_source_path), args.crop_size).astype(np.float32)
         dark_crop = align_optional_map(dark_offset, clean_raw.shape)
         mask_crop = align_optional_map(bad_mask, clean_raw.shape)
-        valid = valid_mask(clean_raw, mask_crop, args.range_max)
+        valid = valid_mask(clean_raw, mask_crop, args.range_max, allow_zero=args.allow_zero_valid)
         valid_fraction = float(np.mean(valid))
         if valid_fraction < args.min_valid_fraction:
             raise ValueError(
@@ -61,6 +63,17 @@ def main() -> int:
         pair_key = f"iccd_like_{row['pair_key']}"
         prior = ICCDNoiseModel(ICCDNoiseConfig(**{**iccd_config_values, "seed": base_seed + index}))
         noisy = prior.add_noise(clean)
+        noisy, noise_scale, base_residual_std, target_residual_std = maybe_scale_residual(
+            clean=clean,
+            noisy=noisy,
+            valid=valid,
+            condition=condition,
+            target_column=args.condition_target_column,
+            mode=args.condition_scale_mode,
+            min_scale=args.min_noise_scale,
+            max_scale=args.max_noise_scale,
+            zero_mean=args.zero_mean_residual_before_scale,
+        )
 
         clean_path = clean_dir / f"{pair_key}.tif"
         noisy_path = noisy_dir / f"{pair_key}.tif"
@@ -81,10 +94,30 @@ def main() -> int:
                 "range_max": args.range_max,
                 "valid_fraction": valid_fraction,
                 "content_scale": content_scale,
+                "assigned_condition_folder": condition.get("folder", "") if condition else "",
+                "assigned_condition_score": condition.get("condition_score", "") if condition else "",
+                "assigned_condition_target_residual_std": target_residual_std,
+                "base_residual_std": base_residual_std,
+                "noise_scale": noise_scale,
+                "zero_mean_residual_before_scale": args.zero_mean_residual_before_scale,
                 "claim_boundary": "synthetic ICCD-like noisy data from sCMOS content, not real ICCD paired data",
             }
         )
-        metric_rows.append(summarize_pair(pair_key, clean, noisy, valid, valid_fraction, content_scale))
+        metric_rows.append(
+            summarize_pair(
+                pair_key=pair_key,
+                clean=clean,
+                noisy=noisy,
+                valid=valid,
+                valid_fraction=valid_fraction,
+                content_scale=content_scale,
+                condition=condition,
+                base_residual_std=base_residual_std,
+                target_residual_std=target_residual_std,
+                noise_scale=noise_scale,
+                zero_mean_residual_before_scale=args.zero_mean_residual_before_scale,
+            )
+        )
 
     pairs_out = output_dir / "pairs.csv"
     splits_out = output_dir / "splits.yaml"
@@ -120,10 +153,34 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--min-valid-fraction", type=float, default=0.95)
     parser.add_argument(
+        "--allow-zero-valid",
+        action="store_true",
+        help="Treat zero-valued pixels as valid. Use when regenerating from already normalized synthetic clean TIFFs with real black background.",
+    )
+    parser.add_argument(
         "--content-p99-target",
         type=float,
         default=0.0,
         help="Optional target p99 after correction. Keep 0 to preserve physical scale.",
+    )
+    parser.add_argument(
+        "--condition-score-csv",
+        default="",
+        help="Optional E3.5 condition score CSV. If set, rows are assigned to condition folders and residuals are scaled to the requested condition statistic.",
+    )
+    parser.add_argument("--condition-target-column", default="mean_residual_std")
+    parser.add_argument(
+        "--condition-scale-mode",
+        choices=["none", "residual_std"],
+        default="none",
+        help="residual_std scales the generated residual to the assigned condition target column.",
+    )
+    parser.add_argument("--min-noise-scale", type=float, default=0.25)
+    parser.add_argument("--max-noise-scale", type=float, default=3.0)
+    parser.add_argument(
+        "--zero-mean-residual-before-scale",
+        action="store_true",
+        help="Subtract the generated residual mean on valid pixels before condition residual-std scaling.",
     )
     return parser.parse_args()
 
@@ -131,6 +188,20 @@ def parse_args() -> argparse.Namespace:
 def read_pairs(path: Path) -> list[dict[str, str]]:
     with path.open("r", newline="", encoding="utf-8-sig") as handle:
         return list(csv.DictReader(handle))
+
+
+def load_condition_rows(path: Path) -> list[dict[str, str]]:
+    with path.open("r", newline="", encoding="utf-8-sig") as handle:
+        rows = list(csv.DictReader(handle))
+    if not rows:
+        raise ValueError(f"No condition rows found in {path}")
+    return sorted(rows, key=lambda row: float(row["condition_score"]))
+
+
+def assign_condition(index: int, rows: list[dict[str, str]]) -> dict[str, str]:
+    if not rows:
+        return {}
+    return rows[index % len(rows)]
 
 
 def load_config(path: Path) -> dict[str, Any]:
@@ -202,7 +273,7 @@ def save_tiff_uint16(path: Path, image: np.ndarray, range_max: float) -> None:
 
 
 def load_optional_npy(path: Path) -> np.ndarray | None:
-    if not str(path) or not path.exists():
+    if not str(path) or str(path) == "." or not path.exists() or path.is_dir():
         return None
     return np.load(path)
 
@@ -225,11 +296,12 @@ def align_optional_map(arr: np.ndarray | None, shape: tuple[int, int]) -> np.nda
     return center_crop(np.asarray(arr), min(shape))
 
 
-def valid_mask(raw: np.ndarray, bad_mask: np.ndarray | None, range_max: float) -> np.ndarray:
+def valid_mask(raw: np.ndarray, bad_mask: np.ndarray | None, range_max: float, allow_zero: bool = False) -> np.ndarray:
     mask = np.ones(raw.shape, dtype=bool)
     if bad_mask is not None:
         mask &= ~np.asarray(bad_mask, dtype=bool)
-    mask &= raw > 0
+    if not allow_zero:
+        mask &= raw > 0
     mask &= raw < range_max
     return mask
 
@@ -262,6 +334,37 @@ def maybe_scale_content(clean: np.ndarray, valid: np.ndarray, target_p99: float)
     return np.clip(clean * scale, 0.0, 1.0).astype(np.float32), scale
 
 
+def maybe_scale_residual(
+    clean: np.ndarray,
+    noisy: np.ndarray,
+    valid: np.ndarray,
+    condition: dict[str, str],
+    target_column: str,
+    mode: str,
+    min_scale: float,
+    max_scale: float,
+    zero_mean: bool,
+) -> tuple[np.ndarray, float, float, float]:
+    residual = noisy - clean
+    if zero_mean:
+        residual = residual - float(np.mean(residual[valid]))
+    base_residual_std = float(np.std(residual[valid], ddof=1))
+    if mode == "none" or not condition:
+        return noisy, 1.0, base_residual_std, float("nan")
+    if target_column not in condition:
+        raise KeyError(f"Condition target column not found: {target_column}")
+    target_residual_std = float(condition[target_column])
+    if mode != "residual_std":
+        raise ValueError(f"Unsupported condition scale mode: {mode}")
+    if base_residual_std <= 1e-12:
+        scale = 1.0
+    else:
+        scale = target_residual_std / base_residual_std
+    scale = float(np.clip(scale, min_scale, max_scale))
+    scaled = np.clip(clean + residual * scale, 0.0, 1.0).astype(np.float32)
+    return scaled, scale, base_residual_std, target_residual_std
+
+
 def summarize_pair(
     pair_key: str,
     clean: np.ndarray,
@@ -269,12 +372,23 @@ def summarize_pair(
     valid: np.ndarray,
     valid_fraction: float,
     content_scale: float,
+    condition: dict[str, str],
+    base_residual_std: float,
+    target_residual_std: float,
+    noise_scale: float,
+    zero_mean_residual_before_scale: bool,
 ) -> dict[str, Any]:
     residual = noisy - clean
     return {
         "pair_key": pair_key,
         "valid_fraction": valid_fraction,
         "content_scale": content_scale,
+        "assigned_condition_folder": condition.get("folder", "") if condition else "",
+        "assigned_condition_score": condition.get("condition_score", "") if condition else "",
+        "assigned_condition_target_residual_std": target_residual_std,
+        "base_residual_std": base_residual_std,
+        "noise_scale": noise_scale,
+        "zero_mean_residual_before_scale": zero_mean_residual_before_scale,
         "clean_mean": float(np.mean(clean[valid])),
         "clean_std": float(np.std(clean[valid], ddof=1)),
         "noisy_mean": float(np.mean(noisy[valid])),
@@ -362,6 +476,11 @@ def write_report(
         f"- Clean source column: `{args.clean_column}`",
         f"- Crop size: {args.crop_size}",
         f"- Content p99 target: {args.content_p99_target:g}",
+        f"- Condition score CSV: `{args.condition_score_csv or 'not provided'}`",
+        f"- Condition scale mode: `{args.condition_scale_mode}`",
+        f"- Condition target column: `{args.condition_target_column}`",
+        f"- Noise scale clamp: [{args.min_noise_scale:g}, {args.max_noise_scale:g}]",
+        f"- Zero-mean residual before scale: {args.zero_mean_residual_before_scale}",
         "",
         "## Outputs",
         "",
@@ -378,6 +497,8 @@ def write_report(
         f"- Clean mean/std: {summary['clean_mean_mean']:.6g} / {summary['clean_std_mean']:.6g}",
         f"- Noisy mean/std: {summary['noisy_mean_mean']:.6g} / {summary['noisy_std_mean']:.6g}",
         f"- Residual mean/std: {summary['residual_mean_mean']:.6g} / {summary['residual_std_mean']:.6g}",
+        f"- Base residual std mean: {summary.get('base_residual_std_mean', float('nan')):.6g}",
+        f"- Noise scale mean: {summary.get('noise_scale_mean', float('nan')):.6g}",
         f"- Clean p99 / noisy p99: {summary['clean_p99_mean']:.6g} / {summary['noisy_p99_mean']:.6g}",
         "",
         "## ICCD Prior Snapshot",
@@ -405,6 +526,8 @@ def summarize_metrics(metrics: list[dict[str, Any]]) -> dict[str, float]:
         "noisy_std",
         "residual_mean",
         "residual_std",
+        "base_residual_std",
+        "noise_scale",
         "clean_p99",
         "noisy_p99",
     ]
