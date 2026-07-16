@@ -632,7 +632,7 @@ python scripts\evaluate_pair_baseline.py `
 
 ### E3.3 First Supervised Denoiser Baseline
 
-- Status: manifest-driven smoke trainer implemented and tested.
+- Status: first small-CNN synthetic baseline complete.
 - Purpose: create a stable reference model before proposing ICCD-specific
   improvements.
 - Candidate models:
@@ -666,6 +666,14 @@ python scripts\evaluate_pair_baseline.py `
     0.999232.
   - This confirms the manifest training loop and artifact writing, but it is
     not a paper performance claim.
+- First full synthetic result:
+  - Report: `docs/e3_manifest_baseline_results.md`.
+  - The 20-epoch small-CNN run improved PSNR by about 0.2117 dB over noisy
+    input on the same synthetic validation split.
+  - The 100-epoch small-CNN run reached 54.1966 dB / 0.999948 versus noisy
+    input 53.8926 dB / 0.999294, a PSNR gain of about 0.3040 dB.
+  - This barely passes the provisional synthetic-validation threshold, but it
+    remains a synthetic sanity baseline rather than a real ICCD denoising claim.
 - Working success threshold:
   - Improve no-model baseline by at least 0.3 dB PSNR or 0.005 SSIM on held-out
     real data, while visual panels do not show obvious oversmoothing.

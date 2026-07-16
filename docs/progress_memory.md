@@ -278,6 +278,13 @@ Smoke test status:
   PSNR/SSIM 55.7045 dB / 0.999232 on the same validation subset. This confirms
   the E3 training loop and artifact writing, but is not a paper performance
   claim.
+- Ran first full E3 small-CNN synthetic baselines after committing the trainer.
+  The 20-epoch CPU run on all 85 train and 8 validation pairs reached
+  validation PSNR/SSIM 54.1043 dB / 0.999952 versus noisy-input 53.8926 dB /
+  0.999294, a gain of about 0.2117 dB. The 100-epoch run reached 54.1966 dB /
+  0.999948, a gain of about 0.3040 dB over noisy input. This barely passes the
+  provisional synthetic-validation threshold and should be treated as the
+  minimum supervised sanity baseline, not a real ICCD performance claim.
 
 ## Skill Setup
 
