@@ -458,6 +458,19 @@ Added after reviewing `E:/Google_Download/deep-research-report.md` on
   Both one-batch synthetic smoke trainings and two-pair real-surrogate
   checkpoint evaluations completed. The real-surrogate smoke gains are negative
   because these are not trained baselines; they only verify the E4 code path.
+- Completed the E4 surrogate-reference reliability audit before formal backbone
+  training. Added a preregistered odd/even split-reference experiment using two
+  disjoint 50-frame temporal means and the existing frozen p99/physical
+  checkpoints plus E3.8 LOFO selections. The automatic result is `GO` for the
+  narrow evaluation-stability hypothesis: LOFO-linear exceeds the best fixed
+  model by +0.038255 dB on reference A and +0.035602 dB on reference B; paired
+  folder bootstrap intervals are [0.007836, 0.078854] and
+  [0.003657, 0.080092]. Folder-sign agreement is 0.90. This does not establish
+  clean-ground-truth restoration or a deployable gate: linear is better than
+  physical in five folders, equal in four, and slightly worse in one. The next
+  unique experiment is a scale-matched synthetic-noise distribution audit to
+  separate residual strength from distribution/structure before training a
+  stronger backbone.
 
 ## Skill Setup
 

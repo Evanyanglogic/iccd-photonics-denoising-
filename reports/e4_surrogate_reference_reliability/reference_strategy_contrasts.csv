@@ -1,0 +1,5 @@
+reference,primary_strategy,comparator,mean_paired_folder_difference_db,paired_difference_ci95_low,paired_difference_ci95_high,positive_difference_folder_count,equal_difference_folder_count,negative_difference_folder_count,minimum_folder_difference_db,maximum_folder_difference_db
+reference_a_odd,lofo_best_linear,always_p99,0.3372710493993786,0.07285469649210297,0.6452984437352505,6,4,0,0.0,1.3320236139610815
+reference_a_odd,lofo_best_linear,always_physical,0.038255072417990824,0.007835670330477109,0.07885426761699663,5,4,1,-0.0034922923665998695,0.18237229972683622
+reference_b_even,lofo_best_linear,always_p99,0.3384880238932072,0.07685703602813969,0.666733098108,6,4,0,0.0,1.3400729716184818
+reference_b_even,lofo_best_linear,always_physical,0.03560209729808319,0.003656508426546257,0.08009222805494794,5,4,1,-0.005287042850484092,0.20837219127160012

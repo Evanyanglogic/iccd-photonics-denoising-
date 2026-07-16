@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "folder_sign_agreement": true,
+    "reference_a_odd_advantage": true,
+    "reference_a_odd_gradient": true,
+    "reference_a_odd_positive_folders": true,
+    "reference_a_odd_worst_folder": true,
+    "reference_b_even_advantage": true,
+    "reference_b_even_gradient": true,
+    "reference_b_even_positive_folders": true,
+    "reference_b_even_worst_folder": true
+  },
+  "failed_checks": [],
+  "primary_advantage_over_best_fixed_db": {
+    "reference_a_odd": 0.03825507241799081,
+    "reference_b_even": 0.035602097298083224
+  },
+  "primary_folder_sign_agreement_fraction": 0.9,
+  "status": "GO"
+}

@@ -1,0 +1,67 @@
+{
+  "config": {
+    "bootstrap": {
+      "iterations": 5000,
+      "seed": 20260716
+    },
+    "controls": {
+      "checkpoint_selection": "best synthetic-validation PSNR only",
+      "data_range": 1.0,
+      "epochs": 100,
+      "loss": "L1",
+      "metric_domain": "linear float32 [0,1]",
+      "optimizer": "AdamW (weight_decay=0)",
+      "patch_size": 128,
+      "seed": 20260716,
+      "synthetic_p99_manifest": "reports/target_scmos_iccd_like_synthetic_512_p99_0p25/pairs.csv",
+      "synthetic_physical_manifest": "reports/target_scmos_iccd_like_synthetic_512/pairs.csv"
+    },
+    "core_hypothesis": "When the temporal-mean surrogate is rebuilt from two disjoint, interleaved frame sets, the preregistered LOFO linear condition strategy outperforms both fixed p99 and fixed physical strategies on each reference replicate.",
+    "data": {
+      "crop_size": 512,
+      "folders": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13
+      ],
+      "pair_manifest": "reports/gated_iccd_20260319_surrogate_pairs/pairs.csv",
+      "range_max": 65535.0,
+      "raw_root": "D:/iccd/data/20260319",
+      "reference_a_parity": "odd",
+      "reference_b_parity": "even",
+      "reference_frame_end": 100,
+      "reference_frame_start": 1
+    },
+    "experiment_id": "e4_surrogate_reference_reliability",
+    "fixed_models": {
+      "condition_score_csv": "reports/e3_5_condition_score/condition_score_folders.csv",
+      "lofo_selection_csv": "reports/e3_8_lofo_condition_protocol/lofo_fold_selection.csv",
+      "p99_checkpoint": "reports/e3_manifest_baseline_smallcnn_100ep/checkpoints/best.pth",
+      "physical_checkpoint": "reports/e3_manifest_baseline_physical_scale_100ep/checkpoints/best.pth",
+      "primary_strategy": "lofo_best_linear"
+    },
+    "go_no_go": {
+      "maximum_gradient_ratio_drop_vs_physical": 0.01,
+      "minimum_advantage_over_best_fixed_db_each_reference": 0.0,
+      "minimum_folder_sign_agreement_fraction": 0.8,
+      "minimum_positive_folders_each_reference": 9,
+      "minimum_worst_folder_gain_db": -0.05
+    },
+    "null_hypothesis": "The LOFO linear advantage over the best fixed strategy is absent on either disjoint reference replicate, or its folder-level conclusion changes with the surrogate reference.",
+    "output_dir": "reports/e4_surrogate_reference_reliability",
+    "preregistered_before_run": true,
+    "primary_independent_variable": "surrogate_reference_replicate"
+  },
+  "device": "cuda",
+  "git_commit": "3ae1d3dfbb305a0030f5af1d69f0344417948728",
+  "max_pairs": 0,
+  "pair_count": 80,
+  "torch_version": "2.6.0+cu124"
+}
