@@ -406,6 +406,28 @@ Smoke test status:
   condition selection/blending between conservative p99 and stronger physical
   denoising, with smoothing-risk checks.
 
+Added after reviewing `E:/Google_Download/deep-research-report.md` on
+2026-07-16:
+
+- The external report agrees with the current direction: frame the work as
+  gated-ICCD noise characterization, condition scoring, and condition-aware
+  controlled denoising validation, not ultra-low-light detail restoration.
+- The next stage should not continue small-CNN residual-std variants. It should
+  first run LOFO folder-level validation so q40/q50/q60 thresholds and blend
+  intervals are estimated only from training folders, then tested on held-out
+  folders.
+- Formal network baselines are now required before model-ablation language is
+  justified. Minimum baselines: DnCNN on p99 synthetic, DnCNN on physical
+  synthetic, Light U-Net on p99 synthetic, and Light U-Net on physical
+  synthetic, followed by post-hoc hard-gate and linear-blend comparisons.
+- The report's MLflow, FiftyOne, and DVC requirements are useful but should not
+  block the next experiments. Keep using the current reproducible artifact style
+  under `reports/` first; add MLflow/FiftyOne once the formal baseline scripts
+  are stable. Defer DVC until a real data remote is chosen.
+- The q40-q60 linear blend and q50 hard blend are nearly tied in current
+  evidence, so the paper should not overclaim a continuous-blend contribution
+  unless LOFO or cross-architecture baselines show a real advantage.
+
 ## Skill Setup
 
 Installed/created on 2026-07-15:
