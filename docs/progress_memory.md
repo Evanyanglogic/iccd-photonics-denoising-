@@ -299,6 +299,20 @@ Smoke test status:
   gain, but with high variance and 28/80 negative-gain pairs. Folder-level
   results are strongly condition-dependent, so the next gate should be
   condition-stratified analysis before any larger MIRNet/SMNet/PNGAN run.
+- Updated the research route after the user's challenge about denoising versus
+  detail restoration. Current boundary: do not frame the paper as ultra-low-light
+  detail restoration or "first ICCD denoising." Literature search found direct
+  ICCD clustered-noise denoising work (Yang et al., Sensors 2017), plus stronger
+  adjacent low-light raw noise synthesis and dark-frame noise modeling work
+  (Wei et al. CVPR 2020, Feng et al. PNNP/dark-frame modeling, Cao et al. general
+  low-light raw noise synthesis). Safe framing is now gated ICCD repeated-frame
+  noise characterization, condition-aware/device-aware synthetic noise, and
+  fidelity-controlled denoising validation.
+- Diagnosed the Brave Search MCP issue: the configured Node MCP server still
+  returns `fetch failed`, while direct Python access to the Brave Search API
+  works with approved network access. Added `scripts/brave_search_direct.py` as
+  the fallback and fixed its Windows console UTF-8 handling after a search result
+  caused a GBK `UnicodeEncodeError`.
 
 ## Skill Setup
 

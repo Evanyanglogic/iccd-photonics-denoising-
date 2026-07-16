@@ -14,6 +14,7 @@ from typing import Any
 
 
 def main() -> int:
+    configure_console()
     args = parse_args()
     key = load_api_key()
     params = {
@@ -40,6 +41,13 @@ def main() -> int:
     else:
         print(format_results(payload))
     return 0
+
+
+def configure_console() -> None:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 
 def parse_args() -> argparse.Namespace:
