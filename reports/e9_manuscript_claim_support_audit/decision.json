@@ -1,0 +1,18 @@
+{
+  "decision": "GO-WRITE",
+  "scientific_question": "Under the current gated-ICCD repeated-frame acquisition and surrogate-based evaluation protocol, how are observed noise statistics and controlled synthetic-noise strength/structure mismatch associated with real-domain denoising transfer and oversmoothing boundaries?",
+  "core_claims": [
+    "operational between-folder noise-statistic differences",
+    "unreliable transfer of the tested unified synthetic priors",
+    "narrow noncausal folder-level strength-mismatch association"
+  ],
+  "decisive_missing_experiment": null,
+  "remaining_work": [
+    "assemble frozen figures and tables",
+    "write claim-constrained manuscript sections",
+    "preserve all uncertainty and negative results"
+  ],
+  "e8_sign_correction": "The primary strength association is -0.6061, not +0.6061.",
+  "bootstrap_upper_bound": "exactly 0.0 in the frozen percentile bootstrap output",
+  "claim_boundary": "No causality, predictor, physical-source identification, clean recovery, backbone independence, or cross-camera generalization."
+}

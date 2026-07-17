@@ -564,3 +564,25 @@ Installed/created on 2026-07-15:
 - Unique next step: freeze route 2's evidence chain and perform a manuscript
   claim-support audit; do not train a stronger backbone or construct a mismatch
   predictor from these ten folders.
+
+## E9 manuscript claim-support audit (2026-07-17)
+
+- Completed a no-training, no-new-synthesis claim audit and traced candidate
+  claims to scripts, configs, reports, commits, figures, tables, and verified
+  primary literature.
+- Corrected the E8 shorthand sign: residual-strength mismatch has mean
+  variant-specific Spearman rho `-0.6061`, not `+0.6061`.
+- Verified that the frozen percentile folder bootstrap upper endpoint is exactly
+  `0.0`: among 9,834 finite resamples, 8,769 were negative, 1,065 were zero,
+  none were positive, and 166 were rank-degenerate. Exact permutation remains
+  the primary inference; bootstrap is reported as small-n uncertainty.
+- Froze three manuscript contributions: operational repeated-frame
+  characterization, controlled 2x2 mismatch/negative-transfer and smoothing
+  audit, and a narrow noncausal strength-mismatch association.
+- Classified the current radial-PSD result as a metric-specific unsupported
+  association, not evidence that spatial structure is unimportant. Retained
+  H-L as the weak E8 variant and retained all E5 negative-transfer results.
+- Decision: `GO-WRITE`. No decisive experiment is required before drafting;
+  remaining work is frozen figure/table assembly and claim-constrained writing.
+- Generated `docs/e9_manuscript_claim_support_audit.md` and machine-readable
+  claim/figure maps under `reports/e9_manuscript_claim_support_audit/`.

@@ -180,3 +180,24 @@ already exists. Novelty must therefore come from the linked evidence chain acros
 repeated-frame characterization, controlled 2x2 mismatch causality, seed/reference
 uncertainty, and applicability boundaries, not from claiming a new backbone or an
 already validated condition-aware generator.
+
+## E9 Nearest-Neighbor and Claim Audit Addendum (2026-07-17)
+
+The word `causality` in the preceding E7 positioning sentence is superseded by
+`controlled factor analysis and observational mismatch-to-transfer association`.
+E8 does not identify a causal mechanism.
+
+| Complete citation / official source | Why it is a nearest neighbor | What it prevents us from claiming | Remaining distinction |
+|---|---|---|---|
+| Y. Wang et al., "Characteristic Evaluation of an Intensifier Detector for SMILE UVI," *Sensors* 26, 483 (2026), [doi:10.3390/s26020483](https://doi.org/10.3390/s26020483) | Recent full intensifier/ICCD detector calibration covering radiant gain, background, excess noise factor, nonlinearity, uniformity, MTF, and SNR under controlled illumination and dark acquisition | The present scene repeats are not a complete physical detector calibration and cannot identify ENF, DSNU, PRNU, or component-level noise sources | Our study links operational repeated-frame statistics to controlled denoising-transfer failure boundaries rather than claiming full calibration |
+| Y. Luo et al., "A Novel Framework for Real ICMOS Image Denoising: LD-NGN Noise Modeling and a MAST-Net Denoising Network," *Remote Sensing* 17, 1219 (2025), [doi:10.3390/rs17071219](https://doi.org/10.3390/rs17071219) | Closest intensified-sensor learned noise generator and downstream denoising study, with multi-scene paired/frame-integrated data | No claim that intensified-sensor noise generation or downstream generator validation is new; ICMOS evidence cannot be relabeled ICCD evidence | Our device is ICCD and our contribution is a failure-aware 2x2 mismatch and uncertainty audit, not a successful generator |
+| S. Han et al., "Denoising and Motion Artifact Removal Using Deformable Kernel Prediction Neural Network for Color-Intensified CMOS," *Sensors* 21, 3891 (2021), [doi:10.3390/s21113891](https://doi.org/10.3390/s21113891) | Explicitly reports degradation when Poisson-Gaussian training noise and real intensified-CMOS noise/image characteristics differ | Synthetic-real mismatch in intensified cameras is not a new observation | E5 controls strength and structure and E8 tests folder-level association under repeated seed/reference evaluation |
+| Y. Zhang et al., "Rethinking Noise Synthesis and Modeling in Raw Denoising," *ICCV* (2021), [official page](https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_Rethinking_Noise_Synthesis_and_Modeling_in_Raw_Denoising_ICCV_2021_paper.html) | Uses real-noise sampling, pattern alignment, high-bit reconstruction, and downstream denoising to validate synthetic noise | Marginal histogram or standard-deviation matching is not sufficient evidence of simulator realism | Our result is a gated-ICCD, small-sample applicability audit with explicit negative transfer and uncertainty boundaries |
+| Z. Fu, L. Guo, and B. Wen, "sRGB Real Noise Synthesizing With Neighboring Correlation-Aware Noise Model," *CVPR* (2023), [official page](https://openaccess.thecvf.com/content/CVPR2023/html/Fu_sRGB_Real_Noise_Synthesizing_With_Neighboring_Correlation-Aware_Noise_Model_CVPR_2023_paper.html) | Demonstrates signal dependency and neighboring correlation as relevant real-noise dimensions and validates them downstream | E8's radial-PSD null cannot be interpreted as spatial structure being irrelevant | Our current radial-PSD metric is retained as an unsupported preregistered direction, not a universal negative finding |
+
+Verified-search conclusion for E9: no direct gated-ICCD paper was identified that
+combines (i) repeated-frame operational characterization, (ii) a prespecified
+2x2 synthetic strength/structure probe, and (iii) a folder-blocked
+mismatch-to-transfer association with seed, surrogate-reference, gradient, LOO,
+permutation, bootstrap, and negative-control auditing. This is a bounded search
+finding, not a priority or "first" claim.
