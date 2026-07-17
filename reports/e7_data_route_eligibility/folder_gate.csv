@@ -1,0 +1,11 @@
+folder,integrity,scene_stability,noise_characterization,surrogate_reference,condition_analysis,denoising_validation,repeated_frame_supervision,overall,reason
+1,PASS,PASS,PASS,PASS,WARN,PASS,FAIL,WARN,frame residuals are correlated; row/column residuals are correlated
+2,PASS,PASS,PASS,WARN,WARN,WARN,PASS,WARN,dual-reference folder result is sensitive
+4,PASS,PASS,PASS,PASS,WARN,PASS,FAIL,WARN,row/column residuals are correlated
+5,PASS,WARN,PASS,WARN,WARN,WARN,FAIL,WARN,local drift exceeds E6 gate; frame residuals are correlated; row/column residuals are correlated
+7,PASS,WARN,PASS,WARN,WARN,WARN,FAIL,WARN,local drift exceeds E6 gate; row/column residuals are correlated
+8,PASS,PASS,PASS,PASS,WARN,PASS,FAIL,WARN,row/column residuals are correlated
+9,PASS,PASS,PASS,PASS,WARN,PASS,FAIL,WARN,row/column residuals are correlated
+10,PASS,PASS,PASS,PASS,WARN,PASS,FAIL,WARN,row/column residuals are correlated
+11,PASS,PASS,PASS,PASS,WARN,PASS,PASS,WARN,usable for operational characterization and relative surrogate comparison
+13,PASS,PASS,WARN,WARN,WARN,WARN,FAIL,WARN,split-half stable component is not stable; dual-reference folder result is sensitive

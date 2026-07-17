@@ -514,3 +514,18 @@ Installed/created on 2026-07-15:
   `C:/Users/Yjia/.codex/skills/iccd-denoising-optimizer`. Use for ICCD-specific
   data diagnostics, experiment planning, metric checks, and Photonics Journal
   evidence discipline.
+
+# E7 Data-to-Route Eligibility and Literature Audit (2026-07-17)
+
+- Added `scripts/audit_data_route_eligibility.py` and audited all 2,000 complete-batch TIFF center crops.
+- Integrity: 10/10 PASS; all have 200 continuous `uint16` 5120x5120 frames and 200 metadata rows, with no sampled zeros/saturation/duplicates/corruption.
+- Device metadata do not vary across complete folders: 900 ms exposure width, Sync A/B 4 us, gain 60.
+- Characterization: 9/10 PASS, folder 13 WARN because split-half stable-map correlation is 0.916.
+- Repeated-frame supervision remains 2/10 PASS; no real-domain training was started.
+- Condition audit: max feature correlation 0.99996, PC1 96.9%, max VIF 54,165; LOFO ridge RMSE 0.300 dB versus null 0.558 dB, but maximum E5 seed SD is 0.668 dB. The score is an image-statistical state descriptor confounded with folder/scene, not a verified acquisition-condition variable.
+- Added 25/50/100-frame surrogate audit. Overall strategy ranking is stable, but maximum folder-level gain range is 0.715 dB (folder 5), so references support only cautious relative comparison.
+- Brave MCP returned `fetch failed`; arXiv MCP returned `Transport closed`. Literature verification used official publisher/CVF/PMLR/NeurIPS/DOI pages instead.
+- Updated `docs/literature_matrix.md` with a 19-paper verified matrix and corrected Noise Flow arXiv ID to `1908.08453`.
+- Unique route decision: route 2, `gated ICCD characterization + conditional noise mismatch analysis + surrogate-based denoising applicability/failure-boundary validation`.
+- Full condition-aware generator, deployable gate, clean recovery, and naive repeated-frame supervision are not supported.
+- Next unique experiment is preregistered in `configs/e8_mismatch_transfer_linkage.yaml`; no new model training is allowed before its Go/No-Go result.

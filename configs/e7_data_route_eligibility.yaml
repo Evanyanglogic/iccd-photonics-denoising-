@@ -1,0 +1,30 @@
+experiment_id: e7_data_route_eligibility_audit
+raw_root: D:/iccd/data/20260319
+folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
+expected_frames: 200
+expected_shape: [5120, 5120]
+expected_dtype: uint16
+sample_crop_size: 128
+range_max: 65535.0
+
+inputs:
+  inventory_csv: reports/gated_iccd_20260319_full_inventory/gated_iccd_batch_inventory.csv
+  robustness_csv: reports/gated_iccd_20260319_noise_robustness/noise_robustness_summary.csv
+  repeated_frame_summary_csv: reports/e6_repeated_frame_audit/folder_stability_summary.csv
+  repeated_frame_decision_json: reports/e6_repeated_frame_audit/audit_decision.json
+  condition_csv: reports/e3_5_condition_score/condition_score_folders.csv
+  reference_folder_csv: reports/e4_surrogate_reference_reliability/reference_folder_summary.csv
+  reference_agreement_csv: reports/e4_surrogate_reference_reliability/reference_agreement.csv
+  factorial_uncertainty_json: reports/e5_noise_factorial/factor_analysis/uncertainty_budget.json
+  factorial_decision_json: reports/e5_noise_factorial/factor_analysis/factorial_decision.json
+
+gates:
+  max_zero_fraction: 0.001
+  max_saturated_fraction: 0.001
+  max_local_drift_over_temporal_std: 0.35
+  min_fixed_map_half_correlation: 0.95
+  max_reference_folder_gain_delta_db: 0.01
+  max_condition_lofo_rmse_db: 0.20
+  min_condition_lofo_improvement_over_null: 0.10
+
+output_dir: reports/e7_data_route_eligibility

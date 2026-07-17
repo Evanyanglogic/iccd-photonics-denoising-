@@ -1,0 +1,29 @@
+{
+  "data_integrity_pass_count": 10,
+  "noise_characterization_pass_count": 9,
+  "surrogate_reference_pass_count": 6,
+  "repeated_frame_supervision_pass_count": 2,
+  "module_ratings": {
+    "gated_iccd_noise_characterization": "SUPPORTED",
+    "condition_aware_noise_modeling": "NOT_SUPPORTED",
+    "controlled_denoising_validation": "LIMITED_SUPPORT"
+  },
+  "recommended_route": 2,
+  "recommended_route_name": "gated ICCD characterization + conditional noise mismatch analysis + denoising applicability validation",
+  "condition_diagnostics": {
+    "folder_count": 10,
+    "maximum_absolute_feature_correlation": 0.9999576867065605,
+    "pc1_explained_fraction": 0.9690740175825043,
+    "maximum_vif": 54164.69162730311,
+    "lofo_ridge_rmse_db": 0.2999079867820844,
+    "null_rmse_db": 0.5581203218327884,
+    "lofo_relative_rmse_improvement": 0.46264635948530075,
+    "prediction_observation_correlation": 0.9129711367227213,
+    "target_gain_range_db": 1.5452487203692051,
+    "seed_uncertainty_db": 0.6679961129401641,
+    "device_metadata_varies_across_folders": false,
+    "interpretation": "image-statistical state confounded with folder/scene identity"
+  },
+  "seed_uncertainty_db": 0.6679961129401641,
+  "claim_boundary": "surrogate-based controlled applicability and failure-boundary analysis; no clean-image recovery claim"
+}

@@ -1,29 +1,67 @@
 # Literature Matrix: Gated ICCD Noise Characterization and Synthetic-Data Denoising
 
 Date started: 2026-07-15
-Last updated: 2026-07-16
+Last updated: 2026-07-17 (E7 source verification and route audit)
 
 Working paper title:
 
 ```text
-基于重复帧统计的门控 ICCD 弱光噪声表征与条件感知合成数据驱动去噪方法
+门控 ICCD 噪声表征、条件噪声失配与去噪适用性分析
 ```
 
 ## Claim Boundary
 
-This matrix is for positioning, not final reference formatting. Each source still
-needs final DOI/publisher metadata verification before manuscript submission.
+The E7 core matrix below has been checked against official publisher, proceedings,
+or DOI pages. Older legacy entries later in this file remain positioning notes and
+must not be copied into the manuscript without the same source check.
 
-The manuscript should not be framed as a generic deep denoising network, a
-super-resolution/detail-restoration method, or the first ICCD denoising paper.
-Direct ICCD denoising work already exists. The safer route is:
+The manuscript must not be framed as a generic deep denoising network, a
+super-resolution/detail-restoration method, a validated condition-aware noise
+generator, or the first ICCD denoising paper. E5 showed negative real transfer
+for all four controlled synthetic cells, and E6 admitted only 2/10 folders for
+repeated-frame supervision. The E7-selected route is:
 
 ```text
-real gated-ICCD repeated-frame statistics
--> condition-aware device noise prior
--> synthetic paired data for denoising
--> controlled real-device statistical validation
+operational gated-ICCD repeated-frame characterization
+-> conditional synthetic-real mismatch analysis
+-> surrogate-based denoising applicability and failure-boundary validation
 ```
+
+## E7 Verified Core Literature Matrix
+
+Evidence grades follow the project protocol: A = direct gated ICCD; B = ICCD
+or image-intensifier camera; C = adjacent sensor analogy; D = general denoising
+methodology. E denotes internal project evidence and is recorded in the E7 route
+report rather than treated as external literature.
+
+| Complete citation / official source | Object and data | Method / key finding | Relation to this project | Grade | Directly citable? |
+|---|---|---|---|---|---|
+| B. R. Sandel and A. L. Broadfoot, “Statistical performance of the intensified charged coupled device,” *Applied Optics* 25, 4135–4140 (1986), [doi:10.1364/AO.25.004135](https://doi.org/10.1364/AO.25.004135) | ICCD; analytical detector statistics | Models photon Poisson statistics, exponential MCP pulse-height distribution, gain regime, and CCD digitization | Direct support that an ICCD is not adequately described by a single AWGN scale | A | Yes |
+| T. C. Williams and C. R. Shaddix, “Simultaneous correction of flat field and nonlinearity response of intensified charge-coupled devices,” *Review of Scientific Instruments* 78, 123702 (2007), [doi:10.1063/1.2821616](https://doi.org/10.1063/1.2821616) | ICCD flat-field calibration over dynamic range | Pixelwise response characterization corrects nonuniform gain and nonlinearity | Shows why current scene repeats without flat fields cannot uniquely identify PRNU/FPN | A | Yes |
+| W. Jin et al., “Three-step nonuniformity correction for a highly dynamic intensified charge-coupled device star sensor,” *Optics Communications* 285, 1753–1758 (2012), [doi:10.1016/j.optcom.2011.12.043](https://doi.org/10.1016/j.optcom.2011.12.043) | ICCD star sensor; controlled calibration images | Gain- and integration-dependent photoelectric response and nonlinear correction | Supports condition dependence, but also requires controlled radiance/calibration absent here | A | Yes |
+| R. J. Peláez et al., “Integration of an Intensified Charge-Coupled Device (ICCD) Camera for Accurate Spectroscopic Measurements,” *Applied Spectroscopy* 66, 970–978 (2012), [doi:10.1366/12-06612](https://doi.org/10.1366/12-06612) | ICCD spectroscopy; dark/shot/spatial response | Reports dark and shot noise, spatial inhomogeneity, and smooth spatial dark-current dependence | Directly supports separating temporal and spatial terms and warns against calling all stable structure scene-free FPN | A | Yes |
+| J. J. Selb, D. K. Joseph, and D. A. Boas, “Time-gated optical system for depth-resolved functional brain imaging,” *Journal of Biomedical Optics* 11, 044008 (2006), [doi:10.1117/1.2337320](https://doi.org/10.1117/1.2337320) | Time-gated ICCD; repeated phantom measurements | SNR depends on MCP gain; enumerates intensifier shot noise, MCP gain noise, phosphor shot noise, CCD dark/read noise | Direct physical motivation for multi-stage and gain-dependent noise | A | Yes |
+| S. Liu et al., “Low noise and high resolution microchannel plate,” *Proc. SPIE* 6621, 662105 (2008), [doi:10.1117/12.790585](https://doi.org/10.1117/12.790585) | MCP/image intensifier | Relates MCP design to equivalent background input, FPN, and scintillation noise | Supports device-origin pattern/noise terminology, not a full ICCD image model | B | Yes, with scope caveat |
+| M. Yang, F. Wang, Y. Wang, and N. Zheng, “A Denoising Method for Randomly Clustered Noise in ICCD Sensing Images Based on Hypergraph Cut and Down Sampling,” *Sensors* 17, 2778 (2017), [doi:10.3390/s17122778](https://doi.org/10.3390/s17122778) | Single ICCD images with clustered noise | Hypergraph/downsampling plus conventional restoration | Required direct predecessor; prevents “first ICCD denoising” claims | B | Yes |
+| A. Foi et al., “Practical Poissonian-Gaussian noise modeling and fitting for single-image raw-data,” *IEEE TIP* 17, 1737–1754 (2008), [doi:10.1109/TIP.2008.2001399](https://doi.org/10.1109/TIP.2008.2001399) | Ordinary raw image sensors | Signal-dependent Poisson-Gaussian model with clipping | Valid baseline, but ICCD multiplication/spatial terms exceed its assumptions | C | Yes, as analogy/baseline |
+| T. Plötz and S. Roth, “Benchmarking Denoising Algorithms with Real Photographs,” *CVPR* (2017), [doi:10.1109/CVPR.2017.294](https://doi.org/10.1109/CVPR.2017.294) | Four consumer cameras; carefully aligned low-ISO references | Synthetic rankings can fail on real photographs; reference requires alignment, scaling, and low-frequency bias correction | Strong support for E5 negative transfer and reference-bias audit | C/D | Yes |
+| A. Abdelhamed, S. Lin, and M. S. Brown, “A High-Quality Denoising Dataset for Smartphone Cameras,” *CVPR* (2018), [doi:10.1109/CVPR.2018.00182](https://doi.org/10.1109/CVPR.2018.00182) | Five smartphones, 10 scenes, about 30k noisy captures | Systematic reference estimation; real-device training outperforms low-ISO proxy strategies | Shows the evidence level expected for repeated-frame references and diverse real data | C/D | Yes |
+| T. Brooks et al., “Unprocessing Images for Learned Raw Denoising,” *CVPR* (2019), [official page](https://openaccess.thecvf.com/content_CVPR_2019/html/Brooks_Unprocessing_Images_for_Learned_Raw_Denoising_CVPR_2019_paper.html) | Consumer RAW/sRGB | Noise realism also depends on the processing pipeline, not only noise variance | Supports treating sCMOS content and ICCD output-domain mismatch explicitly | D | Yes |
+| K. Wei et al., “A Physics-Based Noise Formation Model for Extreme Low-Light Raw Denoising,” *CVPR* (2020), [official page](https://openaccess.thecvf.com/content_CVPR_2020/html/Wei_A_Physics-Based_Noise_Formation_Model_for_Extreme_Low-Light_Raw_Denoising_CVPR_2020_paper.html) | Calibrated CMOS RAW cameras | Models shot/read/banding/quantization effects and validates through real denoising transfer | Supports richer calibration, but cannot be transferred to ICCD without device data | C/D | Yes |
+| Y. Zhang et al., “Rethinking Noise Synthesis and Modeling in Raw Denoising,” *ICCV* (2021), [official page](https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_Rethinking_Noise_Synthesis_and_Modeling_in_Raw_Denoising_ICCV_2021_paper.html) | SIDD/ELD real residuals | Real-noise sampling, pattern alignment, and high-bit reconstruction preserve spatial correlation; downstream denoising is decisive | Directly challenges the sufficiency of histogram/std/PSD similarity alone | D | Yes |
+| A. Abdelhamed, M. A. Brubaker, and M. S. Brown, “Noise Flow: Noise Modeling With Conditional Normalizing Flows,” *ICCV* (2019), [official page](https://openaccess.thecvf.com/content_ICCV_2019/html/Abdelhamed_Noise_Flow_Noise_Modeling_With_Conditional_Normalizing_Flows_ICCV_2019_paper.html) | Multiple cameras/gains from SIDD | Conditional likelihood model outperforms coarse parametric noise models | Shows what a validated condition model requires: actual condition labels and real noise data | D | Yes |
+| J. Lehtinen et al., “Noise2Noise: Learning Image Restoration without Clean Data,” *ICML/PMLR* 80, 2965–2974 (2018), [official page](https://proceedings.mlr.press/v80/lehtinen18a) | Independent corruptions of a shared latent target | Noisy targets work when the loss expectation has the correct target statistic | E6 correlated/stable components violate the direct-use assumptions in most folders | D | Yes |
+| J. Batson and L. Royer, “Noise2Self: Blind Denoising by Self-Supervision,” *ICML/PMLR* 97, 524–533 (2019), [official page](https://proceedings.mlr.press/v97/batson19a.html) | Natural and microscopy data | J-invariant risk estimate requires independence across measurement dimensions | Row/column and pixel correlation make naive blind spots unsafe here | D | Yes |
+| W. Lee, S. Son, and K. M. Lee, “AP-BSN: Self-Supervised Denoising for Real-World Images via Asymmetric PD and Blind-Spot Network,” *CVPR* (2022), [official PDF](https://openaccess.thecvf.com/content/CVPR2022/papers/Lee_AP-BSN_Self-Supervised_Denoising_for_Real-World_Images_via_Asymmetric_PD_and_CVPR_2022_paper.pdf) | Real sRGB noise | Pixel-downsampling is used specifically to weaken spatial correlation before blind-spot learning | A possible future method only after ICCD correlation length and scene aliasing are validated | D | Yes, not yet executable evidence |
+| H. Jang et al., “Self-supervised Image Denoising with Downsampled Invariance Loss and Conditional Blind-Spot Network,” *ICCV* (2023), [official PDF](https://openaccess.thecvf.com/content/ICCV2023/papers/Jang_Self-supervised_Image_Denoising_with_Downsampled_Invariance_Loss_and_Conditional_Blind-Spot_ICCV_2023_paper.pdf) | Spatially correlated real sRGB noise | Explicitly notes standard blind spots fail with pixel correlation; random subsampling decorrelates noise | Supports E6 No-Go for naive N2N/N2S and suggests a separately testable future protocol | D | Yes |
+| Y. Luo, T. Zhang, R. Li, B. Zhang, N. Jia, and L. Fu, “A Novel Framework for Real ICMOS Image Denoising: LD-NGN Noise Modeling and a MAST-Net Denoising Network,” *Remote Sensing* 17, 1219 (2025), [doi:10.3390/rs17071219](https://doi.org/10.3390/rs17071219) | ICMOS, not ICCD; real platform and multi-scene pairs | Models sparse clustered intensified-sensor noise and validates a generator via denoising | Closest intensified-CMOS comparison; must be labeled adjacent and prevents broad novelty claims about intensified-sensor noise generation | C | Yes, with device distinction |
+
+### Verified Counter-Evidence
+
+- Direct ICCD calibration studies require controlled dark/flat or radiance-response data; repeated scene frames alone cannot identify DSNU, PRNU, scene texture, and intensifier nonuniformity separately.
+- DND, SIDD, Brooks, Wei, Zhang, and Noise Flow all show that matching a marginal noise scale is insufficient. Pipeline, conditional distribution, spatial structure, high-bit behavior, and downstream real transfer matter.
+- Noise2Self, AP-BSN, and Jang et al. explicitly make independence/correlation handling part of the method. E6 therefore rules out naive repeated-frame or blind-spot training across all 10 folders.
+- The 2024 MIDD study reports strong blur when a fixed architecture is trained on a mismatched real dataset, reinforcing that higher PSNR or stronger backbones do not resolve target-domain mismatch by themselves.
 
 ## Reference Strategy
 
@@ -45,7 +83,7 @@ standard. Use three layers:
 | Wei et al., "A Physics-based Noise Formation Model for Extreme Low-light Raw Denoising" ([arXiv:2003.12751](https://arxiv.org/abs/2003.12751), CVPR 2020) | Top CV conference | Physics-based synthetic raw noise calibrated from camera characteristics | CMOS/raw-camera pipeline, not ICCD intensifier chain | Primary method anchor for physically motivated synthetic noise |
 | Cao et al., "Physics-Guided ISO-Dependent Sensor Noise Modeling for Extreme Low-Light Photography" ([CVPR 2023 PDF](https://openaccess.thecvf.com/content/CVPR2023/papers/Cao_Physics-Guided_ISO-Dependent_Sensor_Noise_Modeling_for_Extreme_Low-Light_Photography_CVPR_2023_paper.pdf)) | Top CV conference | ISO/condition-dependent low-light sensor noise modeling | Still camera-RAW oriented, not gated ICCD | Strong support for our "condition-aware" framing |
 | Feng et al., "Learning Physics-Informed Noise Models from Dark Frames for Low-Light Raw Image Denoising" ([arXiv:2310.09126](https://arxiv.org/abs/2310.09126), IEEE TPAMI 2026 per project/IEEE listing) | Top journal / high-level method | Learns physics-informed noise proxy from dark frames, reducing paired-data dependency | Requires dark frames; targets raw camera sensors, not ICCD | High-level anchor for dark-frame/detector-statistics-driven noise modeling |
-| Abdelhamed et al., "Noise Flow" ([arXiv:1908.00129](https://arxiv.org/abs/1908.00129), ICCV 2019) | Top CV conference | Learns real camera noise distribution with conditional normalizing flows | Needs suitable real sensor noise data; not ICCD-specific | Alternative learned noise model to contrast with interpretable ICCD prior |
+| Abdelhamed et al., "Noise Flow" ([arXiv:1908.08453](https://arxiv.org/abs/1908.08453), ICCV 2019) | Top CV conference | Learns real camera noise distribution with conditional normalizing flows | Needs suitable real sensor noise data; not ICCD-specific | Alternative learned noise model to contrast with interpretable ICCD prior |
 | Lehtinen et al., "Noise2Noise" ([arXiv:1803.04189](https://arxiv.org/abs/1803.04189), ICML 2018) | Top ML conference | Shows denoising from independently noisy observations without clean targets | Independence assumptions can fail under fixed-pattern or structured noise | Use to motivate repeated-frame validation, with caveats |
 | Krull et al., "Noise2Void" ([arXiv:1811.10980](https://arxiv.org/abs/1811.10980), CVPR 2019) | Top CV conference | Blind-spot denoising from noisy data only | Structured fixed-pattern noise can violate blind-spot assumptions | Optional no-clean-target comparison route |
 | Abdelhamed et al., SIDD / Smartphone Image Denoising Dataset ([project](https://www.eecs.yorku.ca/~kamel/sidd/)) | Real-noise benchmark | Real noisy/clean smartphone-image denoising benchmark | Smartphone Bayer/ISP domain, not ICCD | Contrast class showing why real-device data matters |
@@ -90,8 +128,8 @@ synthetic-noise construction and controlled denoising validation.
 |---|---|---|---|
 | Gated ICCD noise is not well represented by a simple raw Poisson-Gaussian assumption | E1.3 shows temporal Fano about 1.70 to 14.46 across brightness folders | Explicit Poisson-Gaussian vs ICCD-prior fidelity comparison with uncertainty intervals | Fano alone is descriptive, not sufficient as a model-comparison proof |
 | Fixed-pattern structure is a dominant component in current gated ICCD data | E1.4 shows median held-out spatial fixed-pattern reduction about 95.1% | Visual maps, crop/frame robustness, and ideally matching dark/flat frames | Without dark/flat, it is empirical fixed-pattern correction, not formal flat-field calibration |
-| Denoising gain is condition-dependent | E3.5 analysis shows physical checkpoint gain correlates with temporal std, fixed/temporal ratio, fixed-map std, Fano, and mean signal | Non-oracle condition gate and condition-aware synthetic scaling | Do not claim uniformly valid real ICCD denoising |
-| ICCD-aware synthetic data can improve denoising | Preliminary E2/E3 route exists; p99 and physical-scale synthetic checks are runnable | E3.5/E3.6 condition-aware controlled experiments | This remains the core experimental claim; current evidence is not enough for strong wording |
+| Denoising gain appears folder-state dependent | E3.5 correlation and E3.8 LOFO strategy are positive | Independent acquisition conditions and gains larger than seed/reference uncertainty | E7 shows the score is highly collinear and confounded with folder/scene identity; exploratory only |
+| Current ICCD-like synthetic priors transfer reliably | E5 directly tests strength and structure | None under the current data protocol | Rejected: all four E5 cells have negative real-domain transfer; retain as mismatch/failure-boundary evidence |
 | Auxiliary `ICCD_pir` data provide calibration candidates | `F:\ICCD_pir\dark`, `F:\ICCD_pir\mid`, and `2025.07.09` path are found | Need metadata or acquisition notes; audit separately | Cannot use 8-bit 2048x2048 data as matching dark/flat for 16-bit 5120x5120 batch |
 
 ## Recommended Citation Roles
@@ -129,15 +167,16 @@ Brave fallback queries added on 2026-07-16:
 
 Preliminary conclusion:
 
-No exact duplicate of the planned route was identified in the current scan:
+No exact duplicate of the **reduced E7 route** was identified in the verified scan:
 
 ```text
-real gated ICCD repeated-frame statistics
--> condition-aware ICCD noise prior
--> synthetic paired data for denoising
--> validation on real gated ICCD statistics
+operational gated ICCD repeated-frame statistics
+-> condition and synthetic-real mismatch analysis
+-> surrogate-based denoising applicability and failure boundaries
 ```
 
-However, every component has high-level precedent in adjacent literature. The
-paper should inherit its standard from Layer A and B sources, while using Layer C
-only to define the direct ICCD-denoising gap.
+Every component has strong precedent, and direct ICCD calibration/denoising work
+already exists. Novelty must therefore come from the linked evidence chain across
+repeated-frame characterization, controlled 2x2 mismatch causality, seed/reference
+uncertainty, and applicability boundaries, not from claiming a new backbone or an
+already validated condition-aware generator.

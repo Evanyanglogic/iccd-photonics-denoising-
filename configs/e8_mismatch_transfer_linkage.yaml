@@ -1,0 +1,31 @@
+experiment_id: e8_mismatch_transfer_linkage
+preregistered_before_analysis: true
+primary_independent_variable: lofo_standardized_synthetic_real_mismatch_score
+unit_of_generalization: held_out_real_folder
+folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
+variants: [P-L, P-H, H-L, H-H]
+seeds: [20260716, 20260717, 20260718]
+references: [reference_a_odd, reference_b_even]
+mismatch_components:
+  - residual_strength
+  - brightness_conditional_variance
+  - tail_and_kurtosis
+  - normalized_psd_and_autocorrelation
+  - row_column_energy
+  - signal_residual_correlation
+  - clipping_ratio
+controls:
+  standardization: training_folders_only
+  model: fixed_ridge_alpha_1
+  bootstrap_unit: folder
+  bootstrap_iterations: 10000
+  permutation_unit: folder
+  no_test_folder_threshold_or_weight_selection: true
+go_no_go:
+  maximum_spearman_rho_each_reference: -0.60
+  require_folder_bootstrap_ci_excludes_zero: true
+  minimum_lofo_rmse_reduction_over_null: 0.25
+  require_three_seed_direction_agreement: true
+  require_effect_exceeds_reference_variation: true
+  maximum_brightness_only_explained_fraction: 0.50
+output_dir: reports/e8_mismatch_transfer_linkage

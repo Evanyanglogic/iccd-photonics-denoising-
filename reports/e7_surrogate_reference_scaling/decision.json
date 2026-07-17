@@ -1,0 +1,17 @@
+{
+  "fixed_model_folder_sign_stability_mean": 0.9714285714285713,
+  "primary_folder_sign_stability_mean": 0.9571428571428571,
+  "maximum_primary_reference_range_db": 0.7152893123381121,
+  "best_strategy_by_reference": {
+    "ref25_q1": "lofo_best_linear",
+    "ref25_q2": "lofo_best_linear",
+    "ref25_q3": "lofo_best_linear",
+    "ref25_q4": "lofo_best_linear",
+    "ref50_h1": "lofo_best_linear",
+    "ref50_h2": "lofo_best_linear",
+    "ref100_all": "lofo_best_linear"
+  },
+  "ranking_top_is_stable": true,
+  "status": "LIMITED_USE_FOR_RELATIVE_COMPARISON",
+  "absolute_ground_truth_status": "NOT_SUPPORTED"
+}
