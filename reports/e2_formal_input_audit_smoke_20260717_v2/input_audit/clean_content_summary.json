@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "file_count": 100,
+  "source_device": "sCMOS",
+  "source_exposure": "500ms",
+  "dtype_counts": {
+    "uint16": 100
+  },
+  "shape_counts": {
+    "2048x2048": 100
+  },
+  "raw_min_dn": 1.0,
+  "raw_max_dn": 65535.0,
+  "raw_mean_dn_range": [
+    17036.73782682419,
+    19692.99443411827
+  ],
+  "raw_p99_dn_range": [
+    39463.0,
+    44785.0
+  ],
+  "raw_zero_ratio_max": 0.0,
+  "raw_saturation_ratio_max": 0.00048422813415527344,
+  "corrected_mean_norm_range": [
+    0.0011360731441527605,
+    0.003632765030488372
+  ],
+  "corrected_p99_norm_range": [
+    0.026538172736763954,
+    0.1996011584997177
+  ],
+  "corrected_zero_ratio_range": [
+    0.9773216247558594,
+    0.9885292053222656
+  ],
+  "corrected_saturation_ratio_max": 0.0,
+  "corrected_high_frequency_std_norm_range": [
+    0.003131632460281253,
+    0.00512014189735055
+  ],
+  "exact_duplicate_pair_count": 0,
+  "near_duplicate_pair_count": 0,
+  "near_duplicate_threshold": 0.98,
+  "scene_metadata_present": false,
+  "clean_content_boundary": "single-frame sCMOS long-exposure content source with unresolved offset and sensor noise; not ICCD clean ground truth"
+}

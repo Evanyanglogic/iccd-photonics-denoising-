@@ -1,0 +1,1 @@
+scripts\run_e2_formal_input_audit.py --config configs\e2_formal_input_audit_20260717.yaml --smoke --output-root reports\e2_formal_input_audit_smoke_20260717_v2

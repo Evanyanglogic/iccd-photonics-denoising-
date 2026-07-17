@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "E:\PNGAN-main\iccd-photonics-denoising\scripts\audit_e2_synthetic_inputs.py", line 357, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "E:\PNGAN-main\iccd-photonics-denoising\scripts\audit_e2_synthetic_inputs.py", line 22, in main
+    run(config)
+    ~~~^^^^^^^^
+  File "E:\PNGAN-main\iccd-photonics-denoising\scripts\audit_e2_synthetic_inputs.py", line 49, in run
+    stat = path.stat()
+  File "E:\anaconda3\Lib\pathlib\_local.py", line 515, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'F:\\目标传感器噪声参数估计\\data\\500ms\\P251621100000.tif'

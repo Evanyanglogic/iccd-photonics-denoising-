@@ -1,0 +1,52 @@
+experiment_id: e2_formal_input_audit_20260717_smoke
+output_root: E:\PNGAN-main\iccd-photonics-denoising\reports\e2_formal_input_audit_smoke_20260717_v2
+overwrite: false
+random_seed: 20260715
+e1_formal_root: reports/e1_formal_rerun_20260717
+source_pairs_csv: reports/target_scmos_15ms_500ms_manifest/pairs.csv
+source_splits_yaml: reports/target_scmos_15ms_500ms_manifest/splits.yaml
+clean_column: clean_path
+clean_device: sCMOS
+clean_exposure: 500ms
+crop_size: 512
+crop_mode: center
+range_max: 65535
+expected_dtype: uint16
+expected_shape:
+- 2048
+- 2048
+hash_strategy: full_file_sha256
+dark_offset_path: reports/target_scmos_risk_audit/dark_offset_center_crop.npy
+bad_pixel_mask_path: reports/target_scmos_risk_audit/bad_pixel_mask_center_crop.npy
+near_duplicate:
+  thumbnail_stride: 32
+  robust_percentiles:
+  - 1.0
+  - 99.0
+  correlation_threshold: 0.98
+  report_all_pairs: false
+historical_variants:
+  legacy_unscaled_content:
+    output_root: reports/target_scmos_iccd_like_synthetic_512
+    content_p99_target: 0.0
+    config: configs/iccd_prior_20260319.yaml
+  legacy_per_image_p99_0p25:
+    output_root: reports/target_scmos_iccd_like_synthetic_512_p99_0p25
+    content_p99_target: 0.25
+    config: configs/iccd_prior_20260319.yaml
+round_trip:
+  source_pair_key: 15ms_to_500ms_000
+  source_row_index: 0
+  variants:
+  - legacy_unscaled_content
+  - legacy_per_image_p99_0p25
+  max_float_quantization_error_dn: 0.5011
+  max_residual_round_trip_error_dn: 1.0001
+  max_preclip_ratio: 0.01
+  max_absolute_brightness_bias_dn: 1.0
+formal_decision:
+  first_candidate: D
+  first_candidate_name: audit inputs and reproduce one historical sample without batch
+    generation
+  require_scene_id_for_verified_input: true
+  prohibit_batch_generation: true

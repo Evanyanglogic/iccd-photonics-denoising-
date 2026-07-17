@@ -1,0 +1,63 @@
+{
+  "status": "INVALID",
+  "checks": [
+    {
+      "name": "required_outputs",
+      "passed": true,
+      "detail": "input_audit/input_clean_manifest.csv,input_audit/clean_content_audit.csv,input_audit/clean_content_summary.json,input_audit/duplicate_or_near_duplicate_report.csv,generation_audit/e2_parameter_to_e1_mapping.csv,generation_audit/historical_e2_output_audit.csv,round_trip_audit/round_trip_metrics.csv,leakage_audit/leakage_summary.json"
+    },
+    {
+      "name": "clean_content_integrity",
+      "passed": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "full_clean_file_hashes",
+      "passed": true,
+      "detail": "count=100"
+    },
+    {
+      "name": "round_trip",
+      "passed": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "generation_numerics",
+      "passed": false,
+      "detail": "FAIL"
+    },
+    {
+      "name": "historical_exact_replay",
+      "passed": true,
+      "detail": "{\"status\": \"PASS\", \"generation_numeric_status\": \"FAIL\", \"variant_count\": 2, \"all_historical_clean_exact_match\": true, \"all_historical_noisy_exact_match\": true, \"note\": \"This is a fixed single-pair replay, not batch synthetic generation.\"}"
+    },
+    {
+      "name": "scene_isolated_split",
+      "passed": false,
+      "detail": "scene/source-group isolation cannot be verified because source_scene metadata is absent"
+    },
+    {
+      "name": "historical_provenance",
+      "passed": false,
+      "detail": "INVALID_FOR_FORMAL_USE"
+    },
+    {
+      "name": "worktree_unchanged",
+      "passed": true,
+      "detail": "before='?? configs/e2_formal_input_audit_20260717.yaml\\n?? scripts/audit_e2_round_trip.py\\n?? scripts/audit_e2_synthetic_inputs.py\\n?? scripts/check_e2_split_leakage.py\\n?? scripts/run_e2_formal_input_audit.py\\n' after='?? configs/e2_formal_input_audit_20260717.yaml\\n?? scripts/audit_e2_round_trip.py\\n?? scripts/audit_e2_synthetic_inputs.py\\n?? scripts/check_e2_split_leakage.py\\n?? scripts/run_e2_formal_input_audit.py\\n'"
+    },
+    {
+      "name": "committed_clean_code",
+      "passed": false,
+      "detail": "required for non-smoke formal status"
+    },
+    {
+      "name": "no_batch_generation",
+      "passed": true,
+      "detail": "only two fixed single-pair variant replays were written"
+    }
+  ],
+  "first_formal_candidate": "D",
+  "go_for_batch_generation": false,
+  "blocking_issue": "source_scene metadata and scene-isolated train/validation split are absent; historical physical naming and parameter mapping are not formally supported"
+}

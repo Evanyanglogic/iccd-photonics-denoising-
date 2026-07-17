@@ -1,0 +1,14 @@
+synthetic_parameter,current_code_value_or_operation,current_code_source,from_formal_e1,formal_e1_corresponding_metric,unit_consistency,interpretability
+residual_std,0.00058468276,old E1 minimum temporal std / 65535,False,formal temporal std 38.5847..228.86 DN,normalized vs raw DN,partly interpretable only as an old lower-bound scale
+gain/photon_scale,3764.2105,old single-scene mean-variance linear slope,False,no strict photon-transfer gain in formal E1,dimensionless effective count,not physically identifiable
+Fano-like,not used directly,none,False,formal operational range 1.69904..15.3911 DN,not applicable,recorded but not mapped
+signal_dependence,Poisson(clean*photon_scale),old slope proxy,False,formal conditional temporal variance only,normalized signal to effective counts,mechanism not validated
+row_energy,0.0,generator has no row term,False,6.68051..19.583 DN,missing mapping,not represented
+column_energy,0.0,generator has no column term,False,1.78236..32.5621 DN,missing mapping,not represented
+PSD,not used,none,False,formal radial and directional PSD available,missing mapping,not represented
+autocorrelation,0.0,thresholded old lag correlation; currently zero,False,0.0203836..0.0970548 correlation,sigma px vs correlation,not represented in active config
+stable_component_amplitude,not used,old value recorded but not injected,False,formal repeatable observed stable component,missing mapping,must not be called fixed-pattern
+clipping_threshold,"[0,1] then uint16 [0,65535]",generic numerical bound,False,formal saturation value 65535 DN,"consistent bound, different domains",numerically clear
+pedestal,0.0,model offset; clean dark offset is subtracted,False,formal E1 did not identify a transferable pedestal,normalized,no transferable mapping
+content_p99,0 or per-image 0.25,manual E2 option,False,not an E1 noise statistic,normalized intensity,changes absolute content scale per image
+physical_scaling,content_p99_target=0,preserve corrected sCMOS content scale,False,not a physical E1 parameter,normalized intensity,rename legacy_unscaled_content

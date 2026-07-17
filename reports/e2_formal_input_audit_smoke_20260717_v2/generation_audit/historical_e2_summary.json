@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "legacy_unscaled_content": "PARTIAL-RUN",
+    "legacy_per_image_p99_0p25": "PARTIAL-RUN"
+  },
+  "historical_chain_status": "INVALID_FOR_FORMAL_USE",
+  "reason": "generation artifacts exist, but run provenance is incomplete, source_scene metadata is absent, and the physical label is unsupported"
+}

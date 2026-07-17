@@ -1,0 +1,189 @@
+{
+  "experiment_id": "e2_formal_input_audit_20260717_smoke",
+  "status": "INVALID",
+  "smoke": true,
+  "started_at_utc": "2026-07-17T10:02:32.292695+00:00",
+  "git_commit": "524adc0578d3f83e04b95ebdc89ad829a4027496",
+  "git_worktree_clean_at_start": false,
+  "command": "scripts\\run_e2_formal_input_audit.py --config configs\\e2_formal_input_audit_20260717.yaml --smoke --output-root reports\\e2_formal_input_audit_smoke_20260717_v2",
+  "source_config": "E:\\PNGAN-main\\iccd-photonics-denoising\\configs\\e2_formal_input_audit_20260717.yaml",
+  "resolved_config": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_smoke_20260717_v2\\provenance\\resolved_config.yaml",
+  "steps": [
+    {
+      "name": "clean_content_audit",
+      "command": "E:\\anaconda3\\python.exe scripts/audit_e2_synthetic_inputs.py --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_smoke_20260717_v2\\provenance\\resolved_config.yaml",
+      "started_at_utc": "2026-07-17T10:02:32.292969+00:00",
+      "ended_at_utc": "2026-07-17T10:02:43.939923+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_smoke_20260717_v2\\logs\\clean_content_audit.log",
+      "log_sha256": "6fb6768765f5e02deb06a580b5c97f43be8887b9117b9bb28858128fb6efd277"
+    },
+    {
+      "name": "split_leakage_audit",
+      "command": "E:\\anaconda3\\python.exe scripts/check_e2_split_leakage.py --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_smoke_20260717_v2\\provenance\\resolved_config.yaml",
+      "started_at_utc": "2026-07-17T10:02:43.941484+00:00",
+      "ended_at_utc": "2026-07-17T10:02:44.052817+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_smoke_20260717_v2\\logs\\split_leakage_audit.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "single_pair_round_trip",
+      "command": "E:\\anaconda3\\python.exe scripts/audit_e2_round_trip.py --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_smoke_20260717_v2\\provenance\\resolved_config.yaml",
+      "started_at_utc": "2026-07-17T10:02:44.053287+00:00",
+      "ended_at_utc": "2026-07-17T10:02:44.414477+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_smoke_20260717_v2\\logs\\single_pair_round_trip.log",
+      "log_sha256": "a0f686b22cc6e435dc8fba57136f30cc406ba8083bee56ec1df4f558fefae86a"
+    }
+  ],
+  "batch_generation_performed": false,
+  "ended_at_utc": "2026-07-17T10:02:44.464428+00:00",
+  "outputs": [
+    {
+      "relative_path": "generation_audit\\e2_parameter_to_e1_mapping.csv",
+      "size_bytes": 2087,
+      "sha256": "0522822039dec8af9c0784c8d876455f8e91ecee4d1696f5a2519aaecdbd0a13"
+    },
+    {
+      "relative_path": "generation_audit\\historical_e2_output_audit.csv",
+      "size_bytes": 780,
+      "sha256": "41dd77e096d4e5c70b859ee41631996f3cc5c053bc2c42ebcf7df1e7974eef5d"
+    },
+    {
+      "relative_path": "generation_audit\\historical_e2_summary.json",
+      "size_bytes": 326,
+      "sha256": "38c05729d42d283771b75dc7c5d04ded0bb0c4faa77b2d27b6fffc26a34c751f"
+    },
+    {
+      "relative_path": "input_audit\\clean_content_audit.csv",
+      "size_bytes": 56291,
+      "sha256": "9a229fdb0c6446379c7f01a9dd4e3562e25427762e41b464627e48290daf32d9"
+    },
+    {
+      "relative_path": "input_audit\\clean_content_summary.json",
+      "size_bytes": 1186,
+      "sha256": "ae10367803b0eeaa5c2b7eb878d400bde6e349e47d306dd3644339d929dbac6a"
+    },
+    {
+      "relative_path": "input_audit\\duplicate_or_near_duplicate_report.csv",
+      "size_bytes": 77,
+      "sha256": "a3b7ff3ac1c1115cb7ac014b5a394e8afe21238e74cc1dc90ea23e1e495e4ea0"
+    },
+    {
+      "relative_path": "input_audit\\input_clean_manifest.csv",
+      "size_bytes": 22576,
+      "sha256": "57a77c291f3731281702e232cd2193036780b8a9de5b6e9c612501343ddfc54b"
+    },
+    {
+      "relative_path": "leakage_audit\\cross_split_near_duplicates.csv",
+      "size_bytes": 65,
+      "sha256": "0a9ef824c9473cbe6b47f8594c9595552dde11786a0028bf72ea8254ae3b95e6"
+    },
+    {
+      "relative_path": "leakage_audit\\leakage_summary.json",
+      "size_bytes": 554,
+      "sha256": "e6b6ebc479de4f93085b7073208a81b3347be3b56f289c8ffdbef5911f5c1de5"
+    },
+    {
+      "relative_path": "leakage_audit\\split_assignments.csv",
+      "size_bytes": 16552,
+      "sha256": "5b1e74fef34e79ec2f04126dd4d01dc7db8a6b2eb35a85dda3fa6e500364295b"
+    },
+    {
+      "relative_path": "logs\\clean_content_audit.log",
+      "size_bytes": 3100,
+      "sha256": "6fb6768765f5e02deb06a580b5c97f43be8887b9117b9bb28858128fb6efd277"
+    },
+    {
+      "relative_path": "logs\\single_pair_round_trip.log",
+      "size_bytes": 176,
+      "sha256": "a0f686b22cc6e435dc8fba57136f30cc406ba8083bee56ec1df4f558fefae86a"
+    },
+    {
+      "relative_path": "logs\\split_leakage_audit.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\command.txt",
+      "size_bytes": 161,
+      "sha256": "62141b8f8f258e8942dfd713b3dd39e684041028e64f653a4ac0abc6eb3d280f"
+    },
+    {
+      "relative_path": "provenance\\environment.txt",
+      "size_bytes": 279,
+      "sha256": "7fd935443f1e2b5780fef11a924932320068075f579c1acd08f475a19df575e3"
+    },
+    {
+      "relative_path": "provenance\\git_commit.txt",
+      "size_bytes": 42,
+      "sha256": "4a7925ff56acf833db79efbaa42073b22cf35b64fd2e3c7826534adf2e1ba54e"
+    },
+    {
+      "relative_path": "provenance\\git_diff.patch",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\git_status.txt",
+      "size_bytes": 203,
+      "sha256": "063bf5f81d3f9a36ebfa9667876475b142db79fc02385c107201bc05eec070ef"
+    },
+    {
+      "relative_path": "provenance\\input_file_hashes.csv",
+      "size_bytes": 2118,
+      "sha256": "5f925fffa34dbddac1eca85855e0aa6816aff2c6b845f374f552e2490fec3769"
+    },
+    {
+      "relative_path": "provenance\\resolved_config.yaml",
+      "size_bytes": 1798,
+      "sha256": "a1187a3a2b2dc67b0a657761c02ce8d0438a24d65f7611765f79c2be7392ceb0"
+    },
+    {
+      "relative_path": "provenance\\script_hashes.csv",
+      "size_bytes": 1336,
+      "sha256": "6c147752bd30791f989ee4ef9a95eb067d7891ef002ecbedeb46c775babe54d0"
+    },
+    {
+      "relative_path": "round_trip_audit\\legacy_per_image_p99_0p25\\clean_round_trip.tif",
+      "size_bytes": 524544,
+      "sha256": "ff310d7d8cad0a0dbd6e186550bc64ce567b7c2f2d8f511ed1b2afd3b3a1befc"
+    },
+    {
+      "relative_path": "round_trip_audit\\legacy_per_image_p99_0p25\\noisy_round_trip.tif",
+      "size_bytes": 524544,
+      "sha256": "4000353551ca52e2393855c9ec46f41789ecba8d85db2730d9d6fd3ce0e4ea25"
+    },
+    {
+      "relative_path": "round_trip_audit\\legacy_unscaled_content\\clean_round_trip.tif",
+      "size_bytes": 524544,
+      "sha256": "a7568980a831618d8ac8386b48a85aa51240340a797aeb9d0d763aa54cc1884b"
+    },
+    {
+      "relative_path": "round_trip_audit\\legacy_unscaled_content\\noisy_round_trip.tif",
+      "size_bytes": 524544,
+      "sha256": "274ca05ff00576cc230ba31685f616608e1e0ab82384b8af0e952325312ce8d0"
+    },
+    {
+      "relative_path": "round_trip_audit\\round_trip_metrics.csv",
+      "size_bytes": 1449,
+      "sha256": "dffa398521a923a03c027d7b97c67e9227a4d88c5c6212dc867c0815b19a5f7e"
+    },
+    {
+      "relative_path": "round_trip_audit\\round_trip_summary.json",
+      "size_bytes": 259,
+      "sha256": "b52705f78e7d76832f105a320978128892c035879d0c8e3791e0b73c2045d5af"
+    },
+    {
+      "relative_path": "verification_report.md",
+      "size_bytes": 2244,
+      "sha256": "5991f7e573258699cbe38ee7f453d6ca4140cb662a449e9da11b27d85094f3a2"
+    },
+    {
+      "relative_path": "verification_status.json",
+      "size_bytes": 2600,
+      "sha256": "5e104408d201a6a800424539e78b13169ca50960ec8245ce0a0097d4232189f8"
+    }
+  ]
+}

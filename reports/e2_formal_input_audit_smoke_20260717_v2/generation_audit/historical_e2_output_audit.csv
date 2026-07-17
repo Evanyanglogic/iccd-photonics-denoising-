@@ -1,0 +1,3 @@
+variant,historical_name,recommended_name,pair_count,missing_output_file_count,pairs_csv,metrics_csv_exists,splits_yaml_exists,raw_log_exists,commit_record_exists,environment_record_exists,resolved_config_exists,input_hashes_exist,content_p99_target,status,formal_use_gate
+legacy_unscaled_content,physical-scale,legacy_unscaled_content,100,0,reports\target_scmos_iccd_like_synthetic_512\pairs.csv,True,True,False,False,False,False,False,0.0,PARTIAL-RUN,NO-GO until scene-isolated split and formal parameter definition exist
+legacy_per_image_p99_0p25,p99,legacy_per_image_p99_0p25,100,0,reports\target_scmos_iccd_like_synthetic_512_p99_0p25\pairs.csv,True,True,False,False,False,False,False,0.25,PARTIAL-RUN,NO-GO until scene-isolated split and formal parameter definition exist

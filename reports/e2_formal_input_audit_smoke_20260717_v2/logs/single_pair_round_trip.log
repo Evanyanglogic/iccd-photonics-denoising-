@@ -1,0 +1,2 @@
+round_trip variant=legacy_unscaled_content quantization=True generation_numeric=False
+round_trip variant=legacy_per_image_p99_0p25 quantization=True generation_numeric=False

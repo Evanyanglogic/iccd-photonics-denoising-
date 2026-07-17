@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "generation_numeric_status": "FAIL",
+  "variant_count": 2,
+  "all_historical_clean_exact_match": true,
+  "all_historical_noisy_exact_match": true,
+  "note": "This is a fixed single-pair replay, not batch synthetic generation."
+}

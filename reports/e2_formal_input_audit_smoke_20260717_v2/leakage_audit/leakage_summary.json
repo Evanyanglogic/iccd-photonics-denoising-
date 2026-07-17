@@ -1,0 +1,19 @@
+{
+  "status": "FAIL",
+  "pair_count": 100,
+  "split_counts": {
+    "train": 85,
+    "val": 8,
+    "test": 7
+  },
+  "duplicate_split_membership_count": 0,
+  "missing_pair_key_count": 0,
+  "unknown_split_key_count": 0,
+  "cross_split_exact_hash_count": 0,
+  "cross_split_exact_path_count": 0,
+  "cross_split_near_duplicate_count": 0,
+  "source_scene_field_present": false,
+  "cross_split_scene_count": 0,
+  "scene_level_gate": "FAIL",
+  "reason": "scene/source-group isolation cannot be verified because source_scene metadata is absent"
+}

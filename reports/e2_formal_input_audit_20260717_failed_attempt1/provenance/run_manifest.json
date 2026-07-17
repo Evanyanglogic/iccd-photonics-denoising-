@@ -1,0 +1,76 @@
+{
+  "experiment_id": "e2_formal_input_audit_20260717",
+  "status": "INVALID",
+  "smoke": false,
+  "started_at_utc": "2026-07-17T13:56:16.626716+00:00",
+  "git_commit": "578ddf625bb8aa2aca7d84af474b689d5ecd013d",
+  "git_worktree_clean_at_start": true,
+  "command": "scripts\\run_e2_formal_input_audit.py --config configs\\e2_formal_input_audit_20260717.yaml",
+  "source_config": "E:\\PNGAN-main\\iccd-photonics-denoising\\configs\\e2_formal_input_audit_20260717.yaml",
+  "resolved_config": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_20260717\\provenance\\resolved_config.yaml",
+  "steps": [
+    {
+      "name": "clean_content_audit",
+      "command": "E:\\anaconda3\\python.exe scripts/audit_e2_synthetic_inputs.py --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_20260717\\provenance\\resolved_config.yaml",
+      "started_at_utc": "2026-07-17T13:56:16.627485+00:00",
+      "ended_at_utc": "2026-07-17T13:56:16.882579+00:00",
+      "exit_code": 1,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e2_formal_input_audit_20260717\\logs\\clean_content_audit.log",
+      "log_sha256": "a0f7afaf56e67ee7302a8fef43eae7cab02da3eb28620f831cd7b0a81b02e19f"
+    }
+  ],
+  "batch_generation_performed": false,
+  "ended_at_utc": "2026-07-17T13:56:16.889200+00:00",
+  "outputs": [
+    {
+      "relative_path": "logs\\clean_content_audit.log",
+      "size_bytes": 791,
+      "sha256": "a0f7afaf56e67ee7302a8fef43eae7cab02da3eb28620f831cd7b0a81b02e19f"
+    },
+    {
+      "relative_path": "provenance\\command.txt",
+      "size_bytes": 91,
+      "sha256": "bd0422d460ca02d902885cf875e3b52cd63b81ab049b4bdd3ddb12f46d45c924"
+    },
+    {
+      "relative_path": "provenance\\environment.txt",
+      "size_bytes": 279,
+      "sha256": "7fd935443f1e2b5780fef11a924932320068075f579c1acd08f475a19df575e3"
+    },
+    {
+      "relative_path": "provenance\\git_commit.txt",
+      "size_bytes": 42,
+      "sha256": "bd395bba3e74d37c322a1ead1f1da221bfa9c4e548634a67e1efa3c3714018c8"
+    },
+    {
+      "relative_path": "provenance\\git_diff.patch",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\git_status.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\input_file_hashes.csv",
+      "size_bytes": 2118,
+      "sha256": "5f925fffa34dbddac1eca85855e0aa6816aff2c6b845f374f552e2490fec3769"
+    },
+    {
+      "relative_path": "provenance\\resolved_config.yaml",
+      "size_bytes": 1783,
+      "sha256": "7c8802f4dcb2b44bc6872390c984615888f094f564e56e208dfb14cb6d2ab63e"
+    },
+    {
+      "relative_path": "provenance\\script_hashes.csv",
+      "size_bytes": 1336,
+      "sha256": "2d11dda2b483d2632fef957e836730c4e30d69ad9d51eab19768a6817b75fd49"
+    },
+    {
+      "relative_path": "verification_status.json",
+      "size_bytes": 105,
+      "sha256": "f61373062686340f91c746a7d35e103ed9eda1bfe5a0449aa3a635de98a476d1"
+    }
+  ]
+}
