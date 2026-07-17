@@ -1,0 +1,11 @@
+metric_a,metric_b,maximum_absolute_variant_spearman,variant_spearman,both_reliable,status
+strength,tail,0.8424242424242423,P-L:0.115152;P-H:0.842424;H-L:0.115152;H-H:0.842424,True,
+strength,spatial,0.6606060606060605,P-L:0.587879;P-H:-0.503030;H-L:0.660606;H-H:-0.381818,True,
+strength,signal_nonstationarity,0.9878787878787878,P-L:-0.284848;P-H:-0.987879;H-L:-0.284848;H-H:-0.987879,False,
+tail,spatial,0.6363636363636362,P-L:-0.575758;P-H:-0.636364;H-L:-0.381818;H-H:-0.551515,True,
+tail,signal_nonstationarity,0.8181818181818182,P-L:-0.818182;P-H:-0.818182;H-L:-0.818182;H-H:-0.818182,False,
+spatial,signal_nonstationarity,0.4424242424242424,P-L:0.369697;P-H:0.442424;H-L:0.248485;H-H:0.345455,False,
+strength,STATUS,,,True,retained
+tail,STATUS,,,True,collinear_with_strength
+spatial,STATUS,,,True,retained
+signal_nonstationarity,STATUS,,,False,failed_reliability

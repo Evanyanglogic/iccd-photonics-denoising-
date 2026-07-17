@@ -529,3 +529,38 @@ Installed/created on 2026-07-15:
 - Unique route decision: route 2, `gated ICCD characterization + conditional noise mismatch analysis + surrogate-based denoising applicability/failure-boundary validation`.
 - Full condition-aware generator, deployable gate, clean recovery, and naive repeated-frame supervision are not supported.
 - Next unique experiment is preregistered in `configs/e8_mismatch_transfer_linkage.yaml`; no new model training is allowed before its Go/No-Go result.
+
+## E8 folder-blocked mismatch-to-transfer linkage
+
+- Replaced the original seven-feature ridge/LOFO proposal because ten folders do
+  not support fitted multivariable prediction. The independent unit is the
+  folder; four variants, three seeds, and two surrogate references are repeated
+  conditions, not additional independent samples.
+- Froze scheme A: at most four single mismatch dimensions, exact permutation of
+  the ten folder profiles, folder bootstrap, leave-one-folder influence,
+  seed-reference sensitivity, and a deterministic random-rank negative control.
+- Corrected a preliminary aggregation artifact that averaged low/high mismatch
+  before analysis. Final inference computes n=10 Spearman correlations within
+  each E5 variant and uses their unweighted mean; folder labels are permuted as
+  one block across all variants.
+- Strength, tail, and spatial mismatch passed A/B construction reliability.
+  Tail was removed for `|rho| > 0.8` collinearity with strength in a high-strength
+  variant. Signal/nonstationarity mismatch was removed because only 12.5% of its
+  synthetic quantile bins were populated. Strength and spatial remained in the
+  frozen main analysis.
+- Strength mismatch gave mean variant rho `-0.6061`, exact folder-block
+  permutation `p=0.00293`, exploratory BH `q=0.00587`, 10/10 negative LOO
+  results, 6/6 negative seed-reference summaries, and partial rank rho `-0.5077`
+  after controlling gradient ratio. Variant rhos were P-L `-0.8424`, P-H
+  `-0.6000`, H-L `-0.2485`, and H-H `-0.7333`. The conservative folder
+  bootstrap interval reached zero, so the result is a narrow descriptive GO.
+- Spatial mismatch did not support the preregistered direction: mean variant rho
+  `+0.3455`, exact `p=0.1890`, with three of four variants positive. The random
+  negative control gave rho `+0.0121`, exact `p=0.9489`.
+- E8 therefore supports only this claim: residual-strength mismatch has a stable
+  folder-level association with E5 real-domain transfer under the present
+  device/data protocol. It does not establish causality, a general predictor, a
+  physical mechanism, or cross-camera validity.
+- Unique next step: freeze route 2's evidence chain and perform a manuscript
+  claim-support audit; do not train a stronger backbone or construct a mismatch
+  predictor from these ten folders.

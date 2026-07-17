@@ -1,0 +1,41 @@
+{
+  "original_e8_design_reasonable": false,
+  "independent_unit": "folder",
+  "folder_count": 10,
+  "repeated_factors": [
+    "variant",
+    "seed",
+    "surrogate_reference"
+  ],
+  "repeated_measure_count_per_folder": 24,
+  "total_rows_not_independent": 240,
+  "folder_level_variables": [
+    "mismatch metrics",
+    "primary aggregated PSNR gain"
+  ],
+  "repeated_measure_variables": [
+    "variant",
+    "seed",
+    "reference",
+    "gradient ratio",
+    "brightness bias"
+  ],
+  "allowed": [
+    "single-metric Spearman",
+    "exact folder permutation",
+    "folder bootstrap",
+    "LOO influence"
+  ],
+  "prohibited": [
+    "multivariable regression",
+    "fitted composite weights",
+    "random forest",
+    "XGBoost",
+    "neural predictor"
+  ],
+  "risks_corrected": [
+    "The superseded E7 draft proposed seven mismatch components and ridge/LOFO prediction with n=10.",
+    "It did not define seed/reference/variant as within-folder repeated measures strongly enough.",
+    "Its fitted composite score allowed unstable weights and result-sensitive apparent prediction."
+  ]
+}

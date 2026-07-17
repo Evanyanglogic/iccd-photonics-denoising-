@@ -1,31 +1,125 @@
 experiment_id: e8_mismatch_transfer_linkage
 preregistered_before_analysis: true
-primary_independent_variable: lofo_standardized_synthetic_real_mismatch_score
-unit_of_generalization: held_out_real_folder
-folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
-variants: [P-L, P-H, H-L, H-H]
-seeds: [20260716, 20260717, 20260718]
-references: [reference_a_odd, reference_b_even]
-mismatch_components:
-  - residual_strength
-  - brightness_conditional_variance
-  - tail_and_kurtosis
-  - normalized_psd_and_autocorrelation
-  - row_column_energy
-  - signal_residual_correlation
-  - clipping_ratio
-controls:
-  standardization: training_folders_only
-  model: fixed_ridge_alpha_1
-  bootstrap_unit: folder
+scientific_question: >-
+  Which preregistered dimensions of synthetic-real mismatch have a directionally
+  consistent folder-level association with real-domain negative transfer across
+  seeds and surrogate references?
+claim_boundary: >-
+  E8 is an observational association audit with ten independent folders. It
+  cannot establish causality, a performance predictor, a physical noise
+  mechanism, or cross-camera generalization.
+
+data:
+  raw_root: D:/iccd/data/20260319
+  folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
+  real_frames: 64
+  crop_size: 512
+  data_range: 65535.0
+  factorial_root: reports/e5_noise_factorial
+  factorial_folder_metrics: reports/e5_noise_factorial/factor_analysis/folder_metrics.csv
+  variants: [P-L, P-H, H-L, H-H]
+  seeds: [20260716, 20260717, 20260718]
+  references: [reference_a_odd, reference_b_even]
+  synthetic_pairs_per_construction: 20
+  radial_profile_radius: 64
+  brightness_bins: 8
+
+statistical_design:
+  independent_unit: folder
+  independent_unit_count: 10
+  repeated_factors: [variant, seed, surrogate_reference]
+  repeats_per_folder: 24
+  analysis_scheme: A_preregistered_single_metric_associations
+  primary_endpoint: folder_by_variant_mean_psnr_gain_vs_noisy
+  primary_endpoint_aggregation: >-
+    mean_over_seeds_and_references_within_each_folder_variant; the primary
+    statistic is the unweighted mean of four variant-specific folder-level
+    Spearman correlations
+  secondary_endpoints:
+    - folder_mean_gradient_ratio_to_noisy
+    - folder_mean_absolute_brightness_bias
+    - positive_repeated_measure_fraction
+  prohibit_pseudoreplication: true
+  prohibit_fitted_composite_score: true
+  prohibit_result_driven_feature_selection: true
+
+mismatch_candidates:
+  strength:
+    primary_metric: absolute_log_residual_std_ratio
+    expected_direction: negative
+    priority: 1
+    rationale: E5_strength_main_effect_and_scale_stability
+  tail:
+    primary_metric: absolute_excess_kurtosis_difference
+    expected_direction: negative
+    priority: 2
+    rationale: non_Gaussian_tail_shape_not_captured_by_std
+  spatial:
+    primary_metric: normalized_radial_psd_l1_distance
+    expected_direction: negative
+    priority: 3
+    rationale: E1_spatial_correlation_and_E5_structure_effect
+  signal_nonstationarity:
+    primary_metric: normalized_brightness_variance_curve_l1_distance
+    expected_direction: negative
+    priority: 4
+    rationale: E1_brightness_conditional_variance_and_signal_dependence
+  sensitivity_only:
+    - row_column_energy
+    - clipping_ratio
+
+reliability_gate:
+  constructions:
+    real: [odd_frames, even_frames]
+    synthetic: [even_pair_indices, odd_pair_indices]
+  minimum_construction_spearman: 0.80
+  minimum_conditional_curve_valid_bin_fraction: 1.00
+  require_positive_leave_one_folder_direction: true
+  minimum_positive_leave_one_folder_count: 10
+  maximum_main_metric_absolute_spearman: 0.80
+  collinearity_keep_order: [strength, tail, spatial, signal_nonstationarity]
   bootstrap_iterations: 10000
-  permutation_unit: folder
-  no_test_folder_threshold_or_weight_selection: true
-go_no_go:
-  maximum_spearman_rho_each_reference: -0.60
-  require_folder_bootstrap_ci_excludes_zero: true
-  minimum_lofo_rmse_reduction_over_null: 0.25
-  require_three_seed_direction_agreement: true
-  require_effect_exceeds_reference_variation: true
-  maximum_brightness_only_explained_fraction: 0.50
+  bootstrap_seed: 20260717
+
+main_analysis:
+  association: spearman
+  expected_direction: negative
+  exact_folder_permutation: true
+  permutation_alternative: two_sided
+  multiple_testing: benjamini_hochberg_exploratory
+  leave_one_folder_out: true
+  medium_effect_absolute_rho: 0.30
+  minimum_medium_effect_leave_one_out_count: 8
+  require_all_leave_one_out_nonpositive: true
+  require_all_seed_reference_directions_nonpositive: true
+  require_all_variant_directions_nonpositive: true
+  partial_rank_sensitivity_control: folder_mean_gradient_ratio_to_noisy
+  minimum_partial_absolute_rho_not_smoothing_only: 0.30
+
+negative_control:
+  type: deterministic_random_folder_score
+  seed: 20260718
+  distribution_match: rank_permutation
+  expected_result: weaker_association_than_retained_core_metric
+
+decision:
+  go:
+    minimum_retained_metrics_meeting_all_criteria: 1
+    maximum_exact_permutation_p: 0.10
+    require_expected_direction: true
+    require_loo_gate: true
+    require_seed_reference_gate: true
+    require_partial_rank_gate: true
+    require_stronger_than_negative_control: true
+  partial:
+    require_expected_direction: true
+    allow_wide_bootstrap_ci: true
+    allow_exact_permutation_p_above_go: true
+    minimum_medium_effect_leave_one_out_count: 6
+  no_go:
+    no_reliable_metric_or_no_directionally_stable_association: true
+    single_folder_driven: true
+    seed_or_reference_direction_flip: true
+    smoothing_only: true
+
 output_dir: reports/e8_mismatch_transfer_linkage

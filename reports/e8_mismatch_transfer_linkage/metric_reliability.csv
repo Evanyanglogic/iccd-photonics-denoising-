@@ -1,0 +1,5 @@
+metric,construction_spearman,minimum_variant_construction_spearman,variant_construction_spearman,bootstrap_median,bootstrap_ci95_low,bootstrap_ci95_high,bootstrap_positive_fraction,loo_positive_count,loo_total,loo_min_rho,loo_max_rho,operational_valid,operational_note,reliability_pass
+strength,0.9999999999999999,0.9999999999999999,P-L:1.000000;P-H:1.000000;H-L:1.000000;H-H:1.000000,1.0,0.9999999999999999,1.0,1.0,40,40,1.0,1.0,True,comparable_metric_definition,True
+tail,0.9999999999999999,0.9999999999999999,P-L:1.000000;P-H:1.000000;H-L:1.000000;H-H:1.000000,1.0,0.9999999999999999,1.0,1.0,40,40,1.0,1.0,True,comparable_metric_definition,True
+spatial,0.9333333333333331,0.8666666666666665,P-L:0.939394;P-H:0.866667;H-L:0.951515;H-H:0.975758,0.9294478527607363,0.715625,1.0,1.0,40,40,0.8166666666666667,0.9833333333333333,True,comparable_metric_definition,True
+signal_nonstationarity,0.9999999999999999,0.9999999999999999,P-L:1.000000;P-H:1.000000;H-L:1.000000;H-H:1.000000,1.0,0.9999999999999999,1.0,1.0,40,40,1.0,1.0,False,minimum_valid_bin_fraction=0.125;required=1.000,False

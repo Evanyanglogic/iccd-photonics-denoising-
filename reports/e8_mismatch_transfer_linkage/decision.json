@@ -1,0 +1,16 @@
+{
+  "status": "NARROW_GO_STABLE_STRENGTH_ASSOCIATION",
+  "independent_folder_count": 10,
+  "retained_main_metrics": [
+    "strength",
+    "spatial"
+  ],
+  "go_metrics": [
+    "strength"
+  ],
+  "partial_metrics": [],
+  "negative_control_rho": 0.012121212121212109,
+  "causal_claim_supported": false,
+  "predictive_claim_supported": false,
+  "unique_next_step": "freeze route 2 evidence chain and perform manuscript-level claim/support audit"
+}

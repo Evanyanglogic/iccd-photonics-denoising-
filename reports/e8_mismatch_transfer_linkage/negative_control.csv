@@ -1,0 +1,2 @@
+control,spearman_rho,exact_two_sided_permutation_p,seed,folder_order,control_values
+deterministic_random_folder_rank_permutation,0.012121212121212109,0.948941798941799,20260718,1;2;4;5;7;8;9;10;11;13,"P-L:1,4,7,0,8,5,3,6,2,9;P-H:0,8,1,9,7,2,5,6,3,4;H-L:9,6,1,7,2,4,0,3,8,5;H-H:3,2,1,5,8,9,6,0,7,4"
