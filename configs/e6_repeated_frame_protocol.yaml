@@ -1,0 +1,50 @@
+experiment_id: e6_repeated_frame_supervision_feasibility
+preregistered_before_training: true
+audit_decision: STOP_REACQUIRE
+selected_protocol: E_REACQUIRE
+training_permitted: false
+
+data:
+  raw_root: D:/iccd/data/20260319
+  folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
+  frames_per_folder: 200
+  crop_size: 512
+  range_max: 65535.0
+
+blocked_candidate_protocol:
+  name: B_SINGLE_TO_DISJOINT_8FRAME_MEAN
+  block_size: 9
+  input_offset: 0
+  target_offsets: [1, 2, 3, 4, 5, 6, 7, 8]
+  nonreused_pairs_per_folder: 22
+  reference_frames: [1, 100]
+  test_input_frames: [101, 111, 121, 131, 141, 151, 161, 171]
+  validation_folder_rule: next folder in sorted cyclic order
+
+model_if_reacquired:
+  model_type: residual_small
+  channels: 16
+  depth: 3
+  parameters: 2625
+  patch_size: 128
+  val_patch_size: 256
+  batch_size: 4
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0
+  loss: L1
+  epochs: 100
+  seeds: [20260716, 20260717, 20260718]
+  checkpoint_selection: validation-folder PSNR only
+
+go_criteria_if_reacquired:
+  both_references_better_than_p_l: true
+  mean_folder_psnr_gain_positive: true
+  minimum_positive_folders: 8
+  minimum_worst_folder_gain_db: -0.05
+  improvement_must_exceed_seed_sd: true
+  minimum_gradient_ratio_to_noisy: 0.95
+  maximum_absolute_brightness_bias: 0.0001
+  no_systematic_structure_removal_in_error_panels: true
+
+output_dir: reports/e6_repeated_frame_protocol

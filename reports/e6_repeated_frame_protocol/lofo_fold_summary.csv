@@ -1,0 +1,11 @@
+heldout_test_folder,validation_folder,train_folders,training_permitted,audit_decision,train_pair_count,val_pair_count,test_input_count,reference_frame_count
+1,2,"[4, 5, 7, 8, 9, 10, 11, 13]",False,STOP_REACQUIRE,176,22,8,100
+2,4,"[1, 5, 7, 8, 9, 10, 11, 13]",False,STOP_REACQUIRE,176,22,8,100
+4,5,"[1, 2, 7, 8, 9, 10, 11, 13]",False,STOP_REACQUIRE,176,22,8,100
+5,7,"[1, 2, 4, 8, 9, 10, 11, 13]",False,STOP_REACQUIRE,176,22,8,100
+7,8,"[1, 2, 4, 5, 9, 10, 11, 13]",False,STOP_REACQUIRE,176,22,8,100
+8,9,"[1, 2, 4, 5, 7, 10, 11, 13]",False,STOP_REACQUIRE,176,22,8,100
+9,10,"[1, 2, 4, 5, 7, 8, 11, 13]",False,STOP_REACQUIRE,176,22,8,100
+10,11,"[1, 2, 4, 5, 7, 8, 9, 13]",False,STOP_REACQUIRE,176,22,8,100
+11,13,"[1, 2, 4, 5, 7, 8, 9, 10]",False,STOP_REACQUIRE,176,22,8,100
+13,1,"[2, 4, 5, 7, 8, 9, 10, 11]",False,STOP_REACQUIRE,176,22,8,100

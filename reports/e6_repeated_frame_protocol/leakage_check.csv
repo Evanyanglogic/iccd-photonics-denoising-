@@ -1,0 +1,11 @@
+fold,heldout_test_folder,validation_folder,source_role_count,unique_source_count,error_count,status,errors
+heldout_1,1,2,1890,1890,0,PASS,
+heldout_10,10,11,1890,1890,0,PASS,
+heldout_11,11,13,1890,1890,0,PASS,
+heldout_13,13,1,1890,1890,0,PASS,
+heldout_2,2,4,1890,1890,0,PASS,
+heldout_4,4,5,1890,1890,0,PASS,
+heldout_5,5,7,1890,1890,0,PASS,
+heldout_7,7,8,1890,1890,0,PASS,
+heldout_8,8,9,1890,1890,0,PASS,
+heldout_9,9,10,1890,1890,0,PASS,

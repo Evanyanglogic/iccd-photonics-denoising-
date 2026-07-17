@@ -1,0 +1,39 @@
+experiment_id: e6_repeated_frame_supervision_audit
+preregistered_before_training: true
+
+data:
+  raw_root: D:/iccd/data/20260319
+  folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
+  expected_frames: 200
+  crop_size: 512
+  range_max: 65535.0
+
+audit:
+  registration_group_size: 8
+  registration_upsample_factor: 10
+  local_grid: 4
+  correlation_stride: 4
+  correlation_pairs_per_lag: 24
+  lags: [1, 2, 4, 8, 16, 32, 64, 100]
+  brightness_bins: 8
+  highpass_sigma: 2.0
+  target_group_sizes: [1, 8, 16]
+
+decision:
+  max_registration_shift_p95_px: 0.25
+  max_first_last_mean_shift_over_temporal_std: 0.25
+  max_local_drift_over_temporal_std: 0.35
+  max_abs_residual_correlation: 0.05
+  max_abs_highpass_correlation: 0.05
+  max_abs_row_or_column_correlation: 0.10
+  min_fixed_map_half_correlation: 0.95
+  min_target_noise_reduction_8frame: 2.0
+  min_passing_folders: 8
+
+selection:
+  representative_fold_rule: >-
+    Before model training, select the folders nearest the minimum, median, and
+    maximum E1 temporal_std_mean values. Ties are resolved by folder number.
+  protocol_priority: [B, A, C, D, E]
+
+output_dir: reports/e6_repeated_frame_audit

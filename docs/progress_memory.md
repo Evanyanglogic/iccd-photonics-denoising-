@@ -488,6 +488,20 @@ Added after reviewing `E:/Google_Download/deep-research-report.md` on
   the previous 0.036 dB condition gain, so the gate result is downgraded to an
   exploratory finding. The next unique experiment is conservative P-L
   synthetic-real gap repair with the model and strength held fixed.
+- Completed E6 repeated-frame supervision feasibility audit before any real
+  training. Only 2/10 folders passed all preregistered stability and
+  independence checks. Eight-frame targets reduced median random target noise
+  by 2.627x and high-frequency residuals were nearly independent, but several
+  folders retained strong lagged row/column correlations; folders 5 and 7 also
+  showed local brightness drift. Split-half fixed maps were stable and can be
+  learned as scene content, while the current data cannot separate true scene
+  signal from fixed-pattern bias without dark/flat or independent high-SNR
+  calibration. Decision: `STOP_REACQUIRE`, protocol E. Generated all ten
+  blocked LOFO role manifests (176 train, 22 validation, 8 test inputs per
+  fold); every fold passed source-frame leakage checks. No target
+  materialization or small-CNN training was performed. The unique next step is
+  minimum calibrated reacquisition, not synthetic-prior modification or model
+  scaling.
 
 ## Skill Setup
 

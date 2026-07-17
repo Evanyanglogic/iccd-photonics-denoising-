@@ -1,0 +1,20 @@
+{
+  "heldout_test_folder": 2,
+  "validation_folder": 4,
+  "train_folders": [
+    1,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13
+  ],
+  "training_permitted": false,
+  "audit_decision": "STOP_REACQUIRE",
+  "train_pair_count": 176,
+  "val_pair_count": 22,
+  "test_input_count": 8,
+  "reference_frame_count": 100
+}

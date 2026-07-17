@@ -1,0 +1,124 @@
+{
+  "checks": [
+    {
+      "fixed_map_stable": true,
+      "folder": 1,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": false,
+      "registration": true,
+      "residual_independence": false,
+      "row_column_independence": false
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 2,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": true,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": true
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 4,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": false,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": false
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 5,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": false,
+      "passed": false,
+      "registration": true,
+      "residual_independence": false,
+      "row_column_independence": false
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 7,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": false,
+      "passed": false,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": false
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 8,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": false,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": false
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 9,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": false,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": false
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 10,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": false,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": false
+    },
+    {
+      "fixed_map_stable": true,
+      "folder": 11,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": true,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": true
+    },
+    {
+      "fixed_map_stable": false,
+      "folder": 13,
+      "global_drift": true,
+      "highpass_independence": true,
+      "local_drift": true,
+      "passed": false,
+      "registration": true,
+      "residual_independence": true,
+      "row_column_independence": true
+    }
+  ],
+  "folder_count": 10,
+  "median_8frame_target_noise_reduction": 2.6270858432542306,
+  "passing_folder_count": 2,
+  "representative_folders_low_mid_high": [
+    13,
+    10,
+    5
+  ],
+  "selected_protocol_if_eligible": "E_REACQUIRE",
+  "status": "STOP_REACQUIRE"
+}
