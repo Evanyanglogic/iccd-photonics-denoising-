@@ -1,0 +1,122 @@
+{
+  "status": "VERIFIED-RUN",
+  "smoke": false,
+  "checks": [
+    {
+      "name": "required_csv:input_audit/input_manifest.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\input_audit\\input_manifest.csv"
+    },
+    {
+      "name": "required_csv:input_audit/data_integrity_report.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\input_audit\\data_integrity_report.csv"
+    },
+    {
+      "name": "required_csv:input_audit/frame_level_statistics.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\input_audit\\frame_level_statistics.csv"
+    },
+    {
+      "name": "required_csv:noise_summary/folder_noise_summary.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\noise_summary\\folder_noise_summary.csv"
+    },
+    {
+      "name": "required_csv:mean_variance/mean_variance_bins.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\mean_variance\\mean_variance_bins.csv"
+    },
+    {
+      "name": "required_csv:mean_variance/fano_like_summary.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\mean_variance\\fano_like_summary.csv"
+    },
+    {
+      "name": "required_csv:robustness/robustness_by_crop_and_frames.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\robustness\\robustness_by_crop_and_frames.csv"
+    },
+    {
+      "name": "required_csv:temporal_stability/temporal_drift_summary.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\temporal_stability\\temporal_drift_summary.csv"
+    },
+    {
+      "name": "required_csv:stable_component/stable_component_summary.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\stable_component\\stable_component_summary.csv"
+    },
+    {
+      "name": "required_csv:row_column/row_column_summary.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\row_column\\row_column_summary.csv"
+    },
+    {
+      "name": "required_csv:spatial/spatial_correlation_summary.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\spatial\\spatial_correlation_summary.csv"
+    },
+    {
+      "name": "required_csv:combined/folder_eligibility_summary.csv",
+      "passed": true,
+      "detail": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\combined\\folder_eligibility_summary.csv"
+    },
+    {
+      "name": "all_configured_folders_present",
+      "passed": true,
+      "detail": "expected=[1, 2, 4, 5, 7, 8, 9, 10, 11, 13] observed=[1, 2, 4, 5, 7, 8, 9, 10, 11, 13]"
+    },
+    {
+      "name": "integrity_all_pass",
+      "passed": true,
+      "detail": "statuses=['PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS']"
+    },
+    {
+      "name": "dtype_uint16",
+      "passed": true,
+      "detail": "rows=2000"
+    },
+    {
+      "name": "shape_expected",
+      "passed": true,
+      "detail": "5120x5120"
+    },
+    {
+      "name": "robustness_full_factorial",
+      "passed": true,
+      "detail": "expected=120 observed=120"
+    },
+    {
+      "name": "principal_metrics_finite",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cross_output_recompute_consistent",
+      "passed": true,
+      "detail": "{\"1\": 0.0, \"2\": 0.0, \"4\": 0.0, \"5\": 0.0, \"7\": 0.0, \"8\": 0.0, \"9\": 0.0, \"10\": 0.0, \"11\": 0.0, \"13\": 0.0}"
+    },
+    {
+      "name": "provenance_complete",
+      "passed": true,
+      "detail": "git_commit.txt,git_status.txt,git_diff.patch,environment.txt,pip_freeze.txt,gpu_info.txt,script_hashes.csv,run_manifest.json,config.resolved.yaml,command.txt"
+    },
+    {
+      "name": "worktree_unchanged_by_run",
+      "passed": true,
+      "detail": "before='' after=''"
+    },
+    {
+      "name": "committed_clean_code",
+      "passed": true,
+      "detail": "formal VERIFIED-RUN requires a clean worktree at start"
+    },
+    {
+      "name": "input_manifest_hashed",
+      "passed": true,
+      "detail": "e3c361f12aa94e9b116f632c0564aac3b7842553da04a6eb6061fa7a1e721604"
+    }
+  ],
+  "input_manifest_sha256": "e3c361f12aa94e9b116f632c0564aac3b7842553da04a6eb6061fa7a1e721604"
+}

@@ -1,0 +1,11 @@
+folder,frame_count,crop_size,crop_top,crop_left,crop_height,crop_width,metric_definition,value,valid_sample_count,warning_flags,status,tiff_count,missing_frame_count,missing_frame_indices,unexpected_frame_count,unreadable_file_count,shape_mismatch_count,dtype_mismatch_count,file_size_outlier_count,possible_duplicate_content_count,excess_zero_frame_count,excess_saturation_frame_count
+1,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+2,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+4,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+5,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+7,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+8,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+9,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+10,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+11,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0
+13,200,512,2304,2304,512,512,Folder integrity gate over indexed TIFF files.,1.0,200,,PASS,200,0,,0,0,0,0,0,0,0,0

@@ -1,0 +1,73 @@
+experiment_id: e1_formal_rerun_20260717
+data_root: D:\iccd\data\20260319
+folders:
+- 1
+- 2
+- 4
+- 5
+- 7
+- 8
+- 9
+- 10
+- 11
+- 13
+max_frames: 200
+crop_sizes:
+- 256
+- 512
+- 1024
+primary_crop_size: 512
+crop_mode: center
+frame_counts:
+- 16
+- 32
+- 64
+- 128
+dtype_expected: uint16
+image_shape_expected:
+- 5120
+- 5120
+saturation_value: 65535
+output_root: E:\PNGAN-main\iccd-photonics-denoising\reports\e1_formal_rerun_20260717
+random_seed: 20260717
+overwrite: false
+integrity:
+  expected_frame_count: 200
+  expected_first_index: 1
+  pixel_statistics_stride: 1
+  max_zero_ratio: 0.01
+  max_saturation_ratio: 0.01
+  file_size_relative_tolerance: 0.01
+  compute_file_sha256: false
+noise_summary:
+  frame_count: 128
+mean_variance:
+  frame_count: 128
+  bins: 32
+  lower_percentile: 0.5
+  upper_percentile: 99.5
+  min_pixels_per_bin: 512
+temporal_stability:
+  frame_count: 200
+  rolling_window: 16
+  local_grid: 4
+  correlation_lags:
+  - 1
+  - 10
+  - 50
+  correlation_stride: 4
+stable_component:
+  frame_count: 200
+  highpass_sigma: 8.0
+  block_size: 25
+  correlation_stride: 2
+row_column:
+  frame_count: 128
+  block_size: 16
+spatial:
+  frame_count: 128
+  max_radius: 128
+  profile_half_width: 2
+verification:
+  robustness_relative_tolerance: 1.0e-06
+  required_folder_count: 10

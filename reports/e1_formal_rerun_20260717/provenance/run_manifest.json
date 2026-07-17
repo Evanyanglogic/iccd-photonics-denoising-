@@ -1,0 +1,313 @@
+{
+  "experiment_id": "e1_formal_rerun_20260717",
+  "started_at_utc": "2026-07-17T09:13:54.273370+00:00",
+  "ended_at_utc": "2026-07-17T09:24:05.675465+00:00",
+  "repo_root": "E:\\PNGAN-main\\iccd-photonics-denoising",
+  "git_commit": "7ec37fce036df5727a5dc7cc87bbb3fca27eb169",
+  "git_worktree_clean_at_start": true,
+  "source_config": "E:\\PNGAN-main\\iccd-photonics-denoising\\configs\\e1_formal_rerun_20260717.yaml",
+  "resolved_config": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+  "command": "scripts\\run_e1_formal_rerun.py --config configs\\e1_formal_rerun_20260717.yaml",
+  "steps": [
+    {
+      "name": "input_audit",
+      "command": "E:\\anaconda3\\python.exe scripts/e1_formal_analysis.py --module input_audit --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:13:56.517963+00:00",
+      "ended_at_utc": "2026-07-17T09:21:39.618443+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\input_audit.log",
+      "log_sha256": "5d43ce88cd2567ec1c3a95184b7e930e045a41560c4115ee3738e837631c65ab"
+    },
+    {
+      "name": "noise_summary",
+      "command": "E:\\anaconda3\\python.exe scripts/e1_formal_analysis.py --module noise_summary --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:21:39.624061+00:00",
+      "ended_at_utc": "2026-07-17T09:21:58.124127+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\noise_summary.log",
+      "log_sha256": "fb42fd72594116169615b1a35c40be40717cab5053995abdbc7a25641be59fa7"
+    },
+    {
+      "name": "mean_variance",
+      "command": "E:\\anaconda3\\python.exe scripts/e1_formal_analysis.py --module mean_variance --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:21:58.129566+00:00",
+      "ended_at_utc": "2026-07-17T09:22:03.119370+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\mean_variance.log",
+      "log_sha256": "9117172cce9f91d9ea3b0a5c7574b62468671f6ae75f3caecdd59edde1f805db"
+    },
+    {
+      "name": "robustness",
+      "command": "E:\\anaconda3\\python.exe scripts/e1_formal_analysis.py --module robustness --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:22:03.125472+00:00",
+      "ended_at_utc": "2026-07-17T09:22:46.608786+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\robustness.log",
+      "log_sha256": "6b0fce011af118d681ff3d9565da1038981748a0d7660e2082168c0643e89648"
+    },
+    {
+      "name": "temporal_stability",
+      "command": "E:\\anaconda3\\python.exe scripts/audit_iccd_temporal_stability.py --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:22:46.614002+00:00",
+      "ended_at_utc": "2026-07-17T09:23:06.420553+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\temporal_stability.log",
+      "log_sha256": "9539f1e153441a99f8ef143d2b96195bee0eeb5d994aa5cb1c6b4cb63ba1b04e"
+    },
+    {
+      "name": "stable_component",
+      "command": "E:\\anaconda3\\python.exe scripts/analyze_repeatable_stable_component.py --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:23:06.425866+00:00",
+      "ended_at_utc": "2026-07-17T09:23:15.848633+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\stable_component.log",
+      "log_sha256": "1a7e83d8238055e9bf46d891bee6474cfd0767cdce7f00545c665b88269a5bc0"
+    },
+    {
+      "name": "row_column",
+      "command": "E:\\anaconda3\\python.exe scripts/analyze_row_column_structure.py --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:23:15.854494+00:00",
+      "ended_at_utc": "2026-07-17T09:23:23.298726+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\row_column.log",
+      "log_sha256": "e57c3f5c99dab9a269f2123a5aaae81b43886d022e1f3aa8fd87d073f4701b25"
+    },
+    {
+      "name": "spatial",
+      "command": "E:\\anaconda3\\python.exe scripts/e1_formal_analysis.py --module spatial --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:23:23.305321+00:00",
+      "ended_at_utc": "2026-07-17T09:24:05.354300+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\spatial.log",
+      "log_sha256": "08489983ab9c183ba72ee6cf2b11f801fda77cfa87da26bf35c9b36c13485e80"
+    },
+    {
+      "name": "combined",
+      "command": "E:\\anaconda3\\python.exe scripts/e1_formal_analysis.py --module combined --config E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\provenance\\config.resolved.yaml",
+      "started_at_utc": "2026-07-17T09:24:05.360608+00:00",
+      "ended_at_utc": "2026-07-17T09:24:05.602960+00:00",
+      "exit_code": 0,
+      "log": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e1_formal_rerun_20260717\\logs\\combined.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "status": "VERIFIED-RUN",
+  "duration_seconds": 611.402095,
+  "outputs": [
+    {
+      "relative_path": "combined\\folder_eligibility_summary.csv",
+      "size_bytes": 5094,
+      "sha256": "cdd86d7c9e25a360ecfabb6fb6ba65672a6d4dfd6ad4343c4ac5a4f9baa66351"
+    },
+    {
+      "relative_path": "input_audit\\data_integrity_report.csv",
+      "size_bytes": 1520,
+      "sha256": "e9fbeec21cb2667889bd2f93f71279b864d254a215a9a26e12c76f80a84c5daa"
+    },
+    {
+      "relative_path": "input_audit\\data_integrity_summary.json",
+      "size_bytes": 196,
+      "sha256": "40845372f10f13d52ec1724efa27f7db72f4b50115cbbc816433a86cac2aedb0"
+    },
+    {
+      "relative_path": "input_audit\\frame_level_statistics.csv",
+      "size_bytes": 511212,
+      "sha256": "49f9e0c20b0f9f0936e8070650e3a7c73dcaebf467eb8d3e65a5a82d035fa95f"
+    },
+    {
+      "relative_path": "input_audit\\input_manifest.csv",
+      "size_bytes": 211106,
+      "sha256": "e3c361f12aa94e9b116f632c0564aac3b7842553da04a6eb6061fa7a1e721604"
+    },
+    {
+      "relative_path": "logs\\combined.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "logs\\input_audit.log",
+      "size_bytes": 443,
+      "sha256": "5d43ce88cd2567ec1c3a95184b7e930e045a41560c4115ee3738e837631c65ab"
+    },
+    {
+      "relative_path": "logs\\mean_variance.log",
+      "size_bytes": 323,
+      "sha256": "9117172cce9f91d9ea3b0a5c7574b62468671f6ae75f3caecdd59edde1f805db"
+    },
+    {
+      "relative_path": "logs\\noise_summary.log",
+      "size_bytes": 243,
+      "sha256": "fb42fd72594116169615b1a35c40be40717cab5053995abdbc7a25641be59fa7"
+    },
+    {
+      "relative_path": "logs\\robustness.log",
+      "size_bytes": 213,
+      "sha256": "6b0fce011af118d681ff3d9565da1038981748a0d7660e2082168c0643e89648"
+    },
+    {
+      "relative_path": "logs\\row_column.log",
+      "size_bytes": 213,
+      "sha256": "e57c3f5c99dab9a269f2123a5aaae81b43886d022e1f3aa8fd87d073f4701b25"
+    },
+    {
+      "relative_path": "logs\\spatial.log",
+      "size_bytes": 183,
+      "sha256": "08489983ab9c183ba72ee6cf2b11f801fda77cfa87da26bf35c9b36c13485e80"
+    },
+    {
+      "relative_path": "logs\\stable_component.log",
+      "size_bytes": 273,
+      "sha256": "1a7e83d8238055e9bf46d891bee6474cfd0767cdce7f00545c665b88269a5bc0"
+    },
+    {
+      "relative_path": "logs\\temporal_stability.log",
+      "size_bytes": 293,
+      "sha256": "9539f1e153441a99f8ef143d2b96195bee0eeb5d994aa5cb1c6b4cb63ba1b04e"
+    },
+    {
+      "relative_path": "mean_variance\\fano_like_summary.csv",
+      "size_bytes": 2584,
+      "sha256": "23b3813519dd87d4a75f6d80261adc11087b3dd0debe0c1e1b5ae52b24a3e286"
+    },
+    {
+      "relative_path": "mean_variance\\mean_variance_bins.csv",
+      "size_bytes": 93568,
+      "sha256": "7ad2377d402afd1349c377cdc9693bd4f9de1562935bc7ba90a829187a8e3ace"
+    },
+    {
+      "relative_path": "noise_summary\\folder_noise_summary.csv",
+      "size_bytes": 2644,
+      "sha256": "04c2733a8857e7fab334498a614050b27464590749688bccaa29acae07f80e68"
+    },
+    {
+      "relative_path": "provenance\\command.txt",
+      "size_bytes": 79,
+      "sha256": "140cf0145722b4ba32c4af0a4104f7f15fe79e80e47a2063d07d45e88a97adde"
+    },
+    {
+      "relative_path": "provenance\\config.resolved.yaml",
+      "size_bytes": 1335,
+      "sha256": "d1154e360b5184ede9411342df6ea916b9bbd2c246266772130671272ab307d1"
+    },
+    {
+      "relative_path": "provenance\\environment.txt",
+      "size_bytes": 512,
+      "sha256": "d41713fdf8aae81b18075bc646da178dcedfb3593fc729cebabdcfcbaea7a24d"
+    },
+    {
+      "relative_path": "provenance\\git_commit.txt",
+      "size_bytes": 42,
+      "sha256": "bec029a2ea7546b720036fdbff70a62cad5b1e69b9213720a42bf5751df174fd"
+    },
+    {
+      "relative_path": "provenance\\git_diff.patch",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\git_status.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\gpu_info.txt",
+      "size_bytes": 1709,
+      "sha256": "aa6823e6c092283769c5a023b01981b2b91b4be6a463591b21dba6dd6ccd1b76"
+    },
+    {
+      "relative_path": "provenance\\pip_freeze.txt",
+      "size_bytes": 32698,
+      "sha256": "9813bad97a2947d13a85616b1602eaed41a865241b724808ed6ca46a8c916f15"
+    },
+    {
+      "relative_path": "provenance\\script_hashes.csv",
+      "size_bytes": 1234,
+      "sha256": "7e2ba1cef8d3361f0656003a4e73c714541fd0628fd0ff58f04573592616630a"
+    },
+    {
+      "relative_path": "robustness\\robustness_by_crop_and_frames.csv",
+      "size_bytes": 31227,
+      "sha256": "23dc89c98d1882d734aed7d816835a220166e91c26acda097a47554de1ee6985"
+    },
+    {
+      "relative_path": "row_column\\row_column_by_block.csv",
+      "size_bytes": 14157,
+      "sha256": "f9faf839ef56d4dbdb57e3a851f009532f54e0eaf90b9cb18d01de9eedc1370b"
+    },
+    {
+      "relative_path": "row_column\\row_column_profiles.npz",
+      "size_bytes": 4663843,
+      "sha256": "ea8b4cbc51eab58c80472c88762da769d4b9b02f3f6c27f1a5c95766d0c2e164"
+    },
+    {
+      "relative_path": "row_column\\row_column_summary.csv",
+      "size_bytes": 3450,
+      "sha256": "2765e471f2e37e62d678c8311eed9d0c0806f471f4858ee26f161a84a62326ab"
+    },
+    {
+      "relative_path": "spatial\\directional_psd.csv",
+      "size_bytes": 339653,
+      "sha256": "a8317dbea20b7bc7bd83bc94553dcefe2640f69b25533f4f9f56468601429fc0"
+    },
+    {
+      "relative_path": "spatial\\radial_autocorrelation.csv",
+      "size_bytes": 75550,
+      "sha256": "dd1d98d1e66176f8ea02c05d7ddc9160a1fa6da2240013c03e1c56cd2ece3fcc"
+    },
+    {
+      "relative_path": "spatial\\radial_psd.csv",
+      "size_bytes": 68914,
+      "sha256": "2297eea7eb73ce3ba17221d5c6533326226e2f38b07f2f948b2c999e0b7682ad"
+    },
+    {
+      "relative_path": "spatial\\spatial_arrays.npz",
+      "size_bytes": 18382588,
+      "sha256": "7b3fc80e77f0256451fc38586819b3c77d5c27ed25baf7b302b56b7a2a182f35"
+    },
+    {
+      "relative_path": "spatial\\spatial_correlation_summary.csv",
+      "size_bytes": 3769,
+      "sha256": "c7241a4e594aa020e83d537d8a64d66e7d31dc36096fb4048b3101c01754a0b3"
+    },
+    {
+      "relative_path": "stable_component\\stable_component_by_split.csv",
+      "size_bytes": 7682,
+      "sha256": "25d654b2bd1fb602b71eea32602fcf7cdae7de68ebb4c59731d6a4a1b7dc1200"
+    },
+    {
+      "relative_path": "stable_component\\stable_component_maps.npz",
+      "size_bytes": 58756659,
+      "sha256": "b4f4c45bfb7efccfb6b43f5ce4af4240a7ea0dcf3c8ae1a9333ffc79c59d09fd"
+    },
+    {
+      "relative_path": "stable_component\\stable_component_summary.csv",
+      "size_bytes": 2648,
+      "sha256": "415a45a606902ece5b443f38bf6da2f62ae380655040432182ea6c1418fa6d13"
+    },
+    {
+      "relative_path": "temporal_stability\\frame_traces.csv",
+      "size_bytes": 369154,
+      "sha256": "e59c3329a3cdd221519623741557b6a83cefedcbc7d7df11bba57ef1205a1d07"
+    },
+    {
+      "relative_path": "temporal_stability\\temporal_drift_summary.csv",
+      "size_bytes": 3934,
+      "sha256": "1a0b18f1a54c09d54a24d3d194f1427d7b2415dc70edba58ae81ac2d5fa0dde2"
+    },
+    {
+      "relative_path": "temporal_stability\\temporal_lag_correlations.csv",
+      "size_bytes": 4945,
+      "sha256": "be6ade4c8280db18de9664c3e326b07dca99ec36dbccb45efa2d20445bd8fb10"
+    },
+    {
+      "relative_path": "verification_report.md",
+      "size_bytes": 3752,
+      "sha256": "fedaa8738c73b41c4bae79317ecba91b0ea8ec5c7e782c8f0564fa59171ea7b1"
+    },
+    {
+      "relative_path": "verification_status.json",
+      "size_bytes": 4822,
+      "sha256": "fe3cdaec43e4c0c794e01ac1cbe0844dfe13dda75345642af2f941de4a31e9c8"
+    }
+  ]
+}
