@@ -47,6 +47,11 @@ def main() -> int:
     if args.output_root:
         cfg["output_root"] = args.output_root
     output = resolve(repo, cfg["output_root"])
+    no_dark_prefix = cfg.get("no_dark_recheck", {}).get("output_name_prefix", "e2_no_dark_input_recheck_")
+    if output.name.startswith(no_dark_prefix):
+        from audit_e2_no_dark_input import run as run_no_dark_input
+
+        return run_no_dark_input(repo, cfg, output, source_config)
     if output.exists():
         raise FileExistsError(f"Refusing to overwrite {output}")
     output.mkdir(parents=True)

@@ -39,3 +39,19 @@ decision:
     operational content source. They are not clean ground truth, retain an
     unresolved pedestal and sCMOS noise, and do not establish physical ICCD
     signal scale.
+
+no_dark_recheck:
+  output_name_prefix: e2_no_dark_input_recheck_
+  historical_manifest: reports/e2_formal_input_audit_smoke_20260717_v2/input_audit/input_clean_manifest.csv
+  crop_size: 512
+  thumbnail_size: 128
+  perceptual_duplicate_ssim: 0.995
+  perceptual_duplicate_correlation: 0.995
+  high_content_similarity_correlation: 0.98
+  require_exact_historical_sha256: true
+  processing_name: raw_uint16_to_float32_div_65535
+  allowed_statuses:
+    - VERIFIED-INPUT
+    - VERIFIED-INPUT-WITH-LIMITATIONS
+    - CLEAN-SOURCE-INVALID
+    - FAILED
