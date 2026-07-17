@@ -471,6 +471,23 @@ Added after reviewing `E:/Google_Download/deep-research-report.md` on
   unique experiment is a scale-matched synthetic-noise distribution audit to
   separate residual strength from distribution/structure before training a
   stronger backbone.
+- Completed E5, a controlled 2x2 synthetic noise structure-by-strength
+  experiment with four datasets (P-L, P-H, H-L, H-H), one 2,625-parameter
+  residual small CNN, three seeds, and both odd/even temporal-mean references.
+  The original p99/physical absolute residual std values were not directly
+  comparable because their clean normalizations differ, so source
+  residual-to-clean ratios were transferred to one shared clean domain. A
+  common 1024-DN pedestal was required after an initial smoke test exposed 91%
+  lower-bound clipping at exact-zero clean pixels. The final 100-pair datasets
+  passed strength matching, zero-mean, clipping, PSD/autocorrelation, and
+  distribution-structure checks. Real transfer was negative for all cells:
+  P-L -0.496 dB, P-H -4.315 dB, H-L -1.892 dB, and H-H -4.891 dB. Factor
+  effects were strength -3.409 dB, structure -0.986 dB, and interaction
+  +0.820 dB, all with folder bootstrap intervals excluding zero. The decision
+  is `C_INTERACTION`, but maximum seed variation (0.668 dB) is much larger than
+  the previous 0.036 dB condition gain, so the gate result is downgraded to an
+  exploratory finding. The next unique experiment is conservative P-L
+  synthetic-real gap repair with the model and strength held fixed.
 
 ## Skill Setup
 

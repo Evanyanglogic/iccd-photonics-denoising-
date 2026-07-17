@@ -1,0 +1,74 @@
+experiment_id: e5_noise_structure_strength_factorial
+preregistered_before_run: true
+
+source:
+  p99_pairs: reports/target_scmos_iccd_like_synthetic_512_p99_0p25/pairs.csv
+  physical_pairs: reports/target_scmos_iccd_like_synthetic_512/pairs.csv
+  source_splits: reports/target_scmos_iccd_like_synthetic_512_p99_0p25/splits.yaml
+  noise_config: configs/iccd_prior_20260319.yaml
+  common_clean_source: p99
+  range_max: 65535.0
+  seed: 20260715
+
+construction:
+  structure_definition: >-
+    A zero-mean unit-standard-deviation residual field generated with clipping
+    disabled by the frozen ICCD prior on either the p99-scaled source clean or
+    the physical-scale source clean, using the same pair index and RNG seed.
+  strength_definition: >-
+    Source residual standard deviation divided by source clean standard
+    deviation, transferred to the shared p99 clean standard deviation.
+  variants:
+    P-L: {structure: p99, strength: low}
+    P-H: {structure: p99, strength: high}
+    H-L: {structure: physical, strength: low}
+    H-H: {structure: physical, strength: high}
+  projection_iterations: 20
+  common_clean_pedestal_dn: 1024.0
+  residual_mean_tolerance: 0.0000153
+  clipping_ratio_max: 0.05
+
+validation:
+  std_relative_difference_max: 0.01
+  normalized_same_structure_psd_cosine_min: 0.99
+  normalized_same_structure_autocorr_rmse_max: 0.02
+  structure_difference_psd_l1_min: 0.001
+  structure_difference_signal_corr_min: 0.005
+  structure_difference_skew_min: 0.05
+  structure_difference_kurtosis_min: 0.5
+  structure_difference_tail_probability_min: 0.0001
+  intensity_bins: 8
+  autocorrelation_radius: 32
+  tail_sigma: 3.0
+
+training:
+  model_type: residual_small
+  channels: 16
+  depth: 3
+  patch_size: 128
+  val_patch_size: 256
+  batch_size: 4
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0
+  loss: L1
+  epochs: 100
+  checkpoint_selection: synthetic validation PSNR only
+  seeds: [20260716, 20260717, 20260718]
+  data_range: 1.0
+
+real_evaluation:
+  pair_manifest: reports/gated_iccd_20260319_surrogate_pairs/pairs.csv
+  raw_root: D:/iccd/data/20260319
+  odd_reference_frames: [1, 99]
+  even_reference_frames: [2, 100]
+  reference_stride: 2
+  crop_size: 512
+  folder_protocol: fixed 10-folder held-out evaluation; no gate threshold or hyperparameter is selected
+
+decision:
+  minimum_effect_vs_uncertainty_ratio: 1.0
+  bootstrap_iterations: 5000
+  confidence_level: 0.95
+
+output_root: reports/e5_noise_factorial

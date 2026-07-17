@@ -1,0 +1,8 @@
+{
+  "case": "C_INTERACTION",
+  "claim_downgrade_required": true,
+  "interaction_stable": true,
+  "prior_condition_gain_exceeds_uncertainty": false,
+  "strength_main_stable": true,
+  "structure_main_stable": true
+}

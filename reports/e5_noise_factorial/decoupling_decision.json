@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "clipping_controlled": true,
+    "high_strength_std_matched": true,
+    "high_structure_remains_distinct": true,
+    "low_is_lower_than_high": true,
+    "low_strength_std_matched": true,
+    "low_structure_remains_distinct": true,
+    "p99_scale_only_autocorr": true,
+    "p99_scale_only_psd": true,
+    "physical_scale_only_autocorr": true,
+    "physical_scale_only_psd": true,
+    "residual_mean_controlled": true,
+    "target_std_realized": true
+  },
+  "failed_checks": [],
+  "pair_count_per_variant": 100,
+  "status": "GO_TO_TRAIN"
+}

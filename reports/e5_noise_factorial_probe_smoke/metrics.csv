@@ -1,0 +1,2 @@
+epoch,train_l1,val_l1,val_psnr_mean,val_psnr_std,val_ssim_mean,val_ssim_std,val_residual_mean,val_residual_std,seconds_elapsed,is_best
+1,0.0005164933390915394,0.0007006191881373525,55.48497428794248,0.0,0.999446078830719,0.0,-0.00029570728656835854,0.0016555084148421884,0.7977733612060547,True

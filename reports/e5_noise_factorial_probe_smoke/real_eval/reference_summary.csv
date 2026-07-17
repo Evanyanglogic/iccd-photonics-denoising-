@@ -1,0 +1,2 @@
+folder,reference_a_frames,reference_b_frames,reference_ab_psnr,reference_ab_ssim,reference_ab_residual_mean,reference_ab_residual_std,reference_a_gradient,reference_b_gradient,reference_gradient_ratio_b_to_a
+1,50,50,73.21784145513153,0.9999459064915741,-2.4984424271679018e-06,0.00021831293997820467,0.0003835367222084234,0.00038412159529484393,1.0015249467718574

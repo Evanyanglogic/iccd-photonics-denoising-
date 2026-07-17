@@ -1,0 +1,31 @@
+{
+  "checkpoint_selection": "synthetic validation PSNR",
+  "experiment_id": "e5_factorial_probe_smoke",
+  "pair_count": 2,
+  "references": {
+    "reference_a_odd": {
+      "mean_brightness_bias": -0.00027218808827456087,
+      "mean_folder_psnr_gain": -0.21236799270723594,
+      "mean_gradient_ratio_to_noisy": 0.9985571012515353,
+      "mean_pair_psnr_gain": -0.21236799270723594,
+      "mean_residual_std": 0.0011895598145201802,
+      "mean_ssim": 0.9982983048979488,
+      "positive_folder_count": 0,
+      "positive_pair_fraction": 0.0,
+      "worst_folder_psnr_gain": -0.21236799270723594
+    },
+    "reference_b_even": {
+      "mean_brightness_bias": -0.00027468653570394963,
+      "mean_folder_psnr_gain": -0.2168860233875698,
+      "mean_gradient_ratio_to_noisy": 0.9985571012515353,
+      "mean_pair_psnr_gain": -0.2168860233875698,
+      "mean_residual_std": 0.0011865862179547548,
+      "mean_ssim": 0.9983037591261517,
+      "positive_folder_count": 0,
+      "positive_pair_fraction": 0.0,
+      "worst_folder_psnr_gain": -0.2168860233875698
+    }
+  },
+  "seed": 20260716,
+  "variant": "P-L"
+}

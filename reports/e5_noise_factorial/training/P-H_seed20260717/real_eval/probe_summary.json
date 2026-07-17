@@ -1,0 +1,31 @@
+{
+  "checkpoint_selection": "synthetic validation PSNR",
+  "experiment_id": "e5_P-H_seed20260717",
+  "pair_count": 80,
+  "references": {
+    "reference_a_odd": {
+      "mean_brightness_bias": -0.0013996906563988887,
+      "mean_folder_psnr_gain": -4.13576379080123,
+      "mean_gradient_ratio_to_noisy": 0.3514406148953599,
+      "mean_pair_psnr_gain": -4.135763790801231,
+      "mean_residual_std": 0.0019424184336457983,
+      "mean_ssim": 0.9932379160334726,
+      "positive_folder_count": 0,
+      "positive_pair_fraction": 0.0,
+      "worst_folder_psnr_gain": -6.313479519686694
+    },
+    "reference_b_even": {
+      "mean_brightness_bias": -0.0013979879338876344,
+      "mean_folder_psnr_gain": -4.133970531126065,
+      "mean_gradient_ratio_to_noisy": 0.3514406148953599,
+      "mean_pair_psnr_gain": -4.133970531126065,
+      "mean_residual_std": 0.0019390540679523837,
+      "mean_ssim": 0.9932446532109527,
+      "positive_folder_count": 0,
+      "positive_pair_fraction": 0.0,
+      "worst_folder_psnr_gain": -6.302499381344548
+    }
+  },
+  "seed": 20260717,
+  "variant": "P-H"
+}

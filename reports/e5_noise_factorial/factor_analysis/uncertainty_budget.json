@@ -1,0 +1,8 @@
+{
+  "matched_strength_construction_error_db": 3.360774783621585e-06,
+  "maximum_cell_reference_half_difference_db": 0.002028466140773788,
+  "maximum_cell_seed_std_db": 0.6679961129401641,
+  "maximum_uncertainty_db": 0.6679961129401641,
+  "prior_condition_strategy_gain_db": 0.036,
+  "prior_gain_exceeds_maximum_uncertainty": false
+}

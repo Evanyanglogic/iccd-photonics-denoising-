@@ -1,0 +1,58 @@
+{
+  "construction": {
+    "clipping_ratio_max": 0.05,
+    "common_clean_pedestal_dn": 1024.0,
+    "projection_iterations": 20,
+    "residual_mean_tolerance": 1.53e-05,
+    "strength_definition": "Source residual standard deviation divided by source clean standard deviation, transferred to the shared p99 clean standard deviation.",
+    "structure_definition": "A zero-mean unit-standard-deviation residual field generated with clipping disabled by the frozen ICCD prior on either the p99-scaled source clean or the physical-scale source clean, using the same pair index and RNG seed.",
+    "variants": {
+      "H-H": {
+        "strength": "high",
+        "structure": "physical"
+      },
+      "H-L": {
+        "strength": "low",
+        "structure": "physical"
+      },
+      "P-H": {
+        "strength": "high",
+        "structure": "p99"
+      },
+      "P-L": {
+        "strength": "low",
+        "structure": "p99"
+      }
+    }
+  },
+  "experiment_id": "e5_noise_structure_strength_factorial",
+  "note": "Original absolute p99 residual std is larger because its clean content was rescaled. Strength levels use source residual-to-clean std transferred to the shared clean domain. A common 1024-DN pedestal is applied identically to every variant because zero-valued clean pixels cannot support zero-mean signed residuals without one-sided clipping.",
+  "pair_count_per_variant": 100,
+  "source": {
+    "common_clean_source": "p99",
+    "noise_config": "configs/iccd_prior_20260319.yaml",
+    "p99_pairs": "reports/target_scmos_iccd_like_synthetic_512_p99_0p25/pairs.csv",
+    "physical_pairs": "reports/target_scmos_iccd_like_synthetic_512/pairs.csv",
+    "range_max": 65535.0,
+    "seed": 20260715,
+    "source_splits": "reports/target_scmos_iccd_like_synthetic_512_p99_0p25/splits.yaml"
+  },
+  "variants": {
+    "H-H": {
+      "strength": "high",
+      "structure": "physical"
+    },
+    "H-L": {
+      "strength": "low",
+      "structure": "physical"
+    },
+    "P-H": {
+      "strength": "high",
+      "structure": "p99"
+    },
+    "P-L": {
+      "strength": "low",
+      "structure": "p99"
+    }
+  }
+}
