@@ -1,0 +1,1 @@
+scripts\audit_e2_dark_offset_compatibility.py --config configs\e2_dark_offset_compatibility_20260717.yaml

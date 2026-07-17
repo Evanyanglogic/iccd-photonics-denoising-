@@ -1,0 +1,65 @@
+{
+  "audit_status": "PARTIAL-RUN",
+  "final_decision": "NO-DARK-OPERATIONAL",
+  "go_for_batch_synthetic_generation": false,
+  "dark_offset_classification": "UNTRACED CALIBRATION ARTIFACT",
+  "dark_offset_unit": "raw uint16-domain DN represented as float32",
+  "device_and_acquisition_match": "NOT_ESTABLISHED",
+  "spatial_crop_geometry": "MATCHED_CENTER_GEOMETRY_2048_TO_1024_TO_512",
+  "spatial_content_alignment": "NOT_COMPUTABLE_FROM_RAW_SOURCE_OFFLINE",
+  "spatial_identity_highpass_correlation": -0.02551058175751032,
+  "spatial_best_transform_by_absolute_highpass_correlation": "identity",
+  "spatial_best_transform_highpass_correlation": -0.02551058175751032,
+  "pixel_level_evidence": "SOURCE_VOLUME_UNAVAILABLE_SAVED_SUMMARY_AND_CENSORED_OUTPUT_ONLY",
+  "dark_mean_effective_512_dn": 27404.98828125,
+  "clean_full_frame_mean_range_dn": [
+    17036.73782682419,
+    19692.99443411827
+  ],
+  "dark_to_clean_mean_ratio_range": [
+    1.3916110306602554,
+    1.6085819104465584
+  ],
+  "historical_corrected_zero_ratio_range": [
+    0.9773216247558594,
+    0.9885292053222656
+  ],
+  "historical_corrected_zero_ratio_median": 0.9880847930908203,
+  "direct_cause_of_clipping": "the unvalidated dark map is larger than the 500 ms center-crop signal at almost all pixels; subtraction followed by clip(0,1) censors the nonpositive difference",
+  "clean_tiff_raw_state": "UNRESOLVED_CAMERA_EXPORTED_UINT16_NOT_PROVEN_SENSOR_RAW",
+  "clean_tiff_prior_offset_correction": "NOT_ESTABLISHED",
+  "clean_tiff_state_evidence": {
+    "sample_p50_by_folder_dn": {
+      "dark_Background": 27940.0,
+      "1ms": 29840.9375,
+      "5ms": 29878.5625,
+      "10ms": 29319.9375,
+      "15ms": 29090.125,
+      "25ms": 28298.6875,
+      "50ms": 27586.5625,
+      "125ms": 24891.8125,
+      "250ms": 20136.75,
+      "500ms": 16223.75,
+      "1s": 12277.0625
+    },
+    "sample_saturation_ratio_by_folder": {
+      "dark_Background": 0.00048422813415527344,
+      "1ms": 0.00048422813415527344,
+      "5ms": 0.00048422813415527344,
+      "10ms": 0.00048422813415527344,
+      "15ms": 0.00048422813415527344,
+      "25ms": 0.00048422813415527344,
+      "50ms": 0.00048422813415527344,
+      "125ms": 0.00048422813415527344,
+      "250ms": 0.00048422813415527344,
+      "500ms": 0.00048422813415527344,
+      "1s": 0.00048607587814331055
+    },
+    "interpretation": "folder median is non-monotonic with nominal exposure and most folders have exactly the same sample saturation ratio; this is incompatible with assuming an uncontrolled linear raw sequence"
+  },
+  "bad_pixel_mask_fraction": 0.001251220703125,
+  "selected_processing": "raw uint16 / 65535, no dark subtraction, no scalar pedestal, no per-image p99 scaling",
+  "clean_content_usable": true,
+  "clean_content_boundary": "Raw sCMOS TIFF values divided by 65535 may be retained only as an operational content source. They are not clean ground truth, retain an unresolved pedestal and sCMOS noise, and do not establish physical ICCD signal scale.",
+  "blocking_requirement_before_formal_input_audit": "remount the source volume and verify all 100 SHA256 values, TIFF tags, and no-dark center-crop quality metrics"
+}

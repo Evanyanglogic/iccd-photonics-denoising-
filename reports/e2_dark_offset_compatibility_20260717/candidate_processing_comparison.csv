@@ -1,0 +1,5 @@
+candidate,rating,operation,observed_zero_ratio,observed_saturation_ratio,negative_before_clipping_ratio,preserves_inter_image_scale,condition
+A_no_dark,ACCEPTABLE,raw uint16 / 65535; no per-image p99 scaling,0.0,0.00048422813415527344,0.0,True,operational content source only; unresolved pedestal and sCMOS noise retained
+B_matched_dark_mean,INVALID,raw DN - historical dark map,0.9880847930908203,0.0,not separately recoverable; nonpositive ratio equals corrected zero ratio,True,dark acquisition conditions are unrecorded and correction clips 97%+ pixels
+C_scalar_pedestal,INVALID,raw DN - scalar pedestal,NOT_RUN,0.00048422813415527344,NOT_RUN,True,no camera black-level metadata or matched-dark scalar is available
+D_abandon_source,CONDITIONAL,stop using the 100 images,not applicable,not applicable,not applicable,not applicable,required if source files or metadata cannot be recovered for the next formal no-dark audit

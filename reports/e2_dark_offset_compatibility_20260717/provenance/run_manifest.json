@@ -1,0 +1,94 @@
+{
+  "experiment_id": "e2_dark_offset_compatibility_20260717",
+  "status": "PARTIAL-RUN",
+  "started_at_utc": "2026-07-17T16:28:10.953143+00:00",
+  "ended_at_utc": "2026-07-17T16:28:12.235095+00:00",
+  "git_commit": "462ac84f04da6a1df118e77b3f34022fd1cb7738",
+  "git_worktree_clean_at_start": true,
+  "source_volume_available": false,
+  "raw_pixel_audit_completed": false,
+  "batch_synthetic_generation_performed": false,
+  "model_training_performed": false,
+  "outputs": [
+    {
+      "relative_path": "candidate_processing_comparison.csv",
+      "size_bytes": 930,
+      "sha256": "d0951756eef3476af4309e65f28f7f16ee4e029723c2508993aca52e5b116095"
+    },
+    {
+      "relative_path": "clean_content_gate.csv",
+      "size_bytes": 792,
+      "sha256": "480ad029184fd1ad0d5920e6ce83e1d2bb7a23ad99dd9726dd42d3b5b39df956"
+    },
+    {
+      "relative_path": "clean_dark_scale_comparison.csv",
+      "size_bytes": 50483,
+      "sha256": "59f96e4c0612b54ec4a59b619367cf7d833bdbcf6b7ce210af29e1669a35e105"
+    },
+    {
+      "relative_path": "compatibility_decision.json",
+      "size_bytes": 3218,
+      "sha256": "f220c52348439d300def6a65c4a51055ebacc314d6893764e3f3d400e9e57c21"
+    },
+    {
+      "relative_path": "dark_offset_provenance.json",
+      "size_bytes": 1774,
+      "sha256": "0358b1a75c43ed8383ff8b604debc66962d9855148dff7faf0ec9c8651985c37"
+    },
+    {
+      "relative_path": "dark_offset_statistics.csv",
+      "size_bytes": 6219,
+      "sha256": "90801cdaab3ad6c69f7e8dcafc7b443054c053e123fa2d8a3fad50903fd5dd8b"
+    },
+    {
+      "relative_path": "provenance\\command.txt",
+      "size_bytes": 107,
+      "sha256": "9233ce21d48ed851875d3be5fda74d03acede4cc2ef19311488d5e151f24f9b9"
+    },
+    {
+      "relative_path": "provenance\\environment.txt",
+      "size_bytes": 235,
+      "sha256": "71165195faf5a9b6180935128c88c5b3a9722a35b06ecd341c96d23c6f31cca4"
+    },
+    {
+      "relative_path": "provenance\\git_commit.txt",
+      "size_bytes": 42,
+      "sha256": "65992cc17109b3d28e306e06d3f6aeea85ae3d903a169a3b82ad20000aa8d59a"
+    },
+    {
+      "relative_path": "provenance\\git_diff.patch",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\git_status.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\input_hashes.csv",
+      "size_bytes": 1773,
+      "sha256": "8a5cea99e200d073c8926b438bb304e60770a64f5d7d68523b915eaae554543b"
+    },
+    {
+      "relative_path": "provenance\\resolved_config.yaml",
+      "size_bytes": 1693,
+      "sha256": "f9da74374640c3dac295d7f16b45ea61dd179f715eaf7e3c35da76c5885e2d69"
+    },
+    {
+      "relative_path": "provenance\\script_hashes.csv",
+      "size_bytes": 847,
+      "sha256": "5841629cc3228418f9d7e777b0db8d95494788e486f5ba1ac1f802d41f37f48a"
+    },
+    {
+      "relative_path": "spatial_alignment_audit.csv",
+      "size_bytes": 1974,
+      "sha256": "536044e6292724a56abcfea1b2c6388bb54d0c645d53bcc4e8f08f96c0ce6f65"
+    },
+    {
+      "relative_path": "verification_report.md",
+      "size_bytes": 2722,
+      "sha256": "e6c7f47d7e768df70b85e447b4f5d412cfccfbf792147114e480ff11bab7add4"
+    }
+  ]
+}

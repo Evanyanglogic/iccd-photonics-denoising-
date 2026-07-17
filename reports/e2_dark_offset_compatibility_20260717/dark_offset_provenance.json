@@ -1,0 +1,53 @@
+{
+  "classification": "UNTRACED CALIBRATION ARTIFACT",
+  "classification_reason": "The generating code and named source folder are known, but the run did not preserve device serial, dark exposure, gain, temperature, readout mode, black-level state, TIFF metadata, or a resolved run config.",
+  "full_path": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\target_scmos_risk_audit\\dark_offset_center_crop.npy",
+  "created_at_local": "2026-07-15T20:21:30.090688+08:00",
+  "modified_at_local": "2026-07-15T20:21:30.093733+08:00",
+  "sha256": "519a57949cfa613ae1eeb6ecd4251601edd4a2d7e116eff55018324bd196e0f2",
+  "shape": [
+    1024,
+    1024
+  ],
+  "dtype": "float32",
+  "unit": "raw uint16-domain DN represented as float32",
+  "operation": "pixelwise arithmetic mean of 64 center-cropped dark_Background TIFF frames",
+  "dark_frame_count": 64,
+  "source_folder_name": "dark_Background",
+  "source_root": "F:/目标传感器噪声参数估计/data",
+  "source_volume_available_at_audit": false,
+  "device": "UNRECORDED",
+  "exposure": "UNRECORDED",
+  "gain": "UNRECORDED",
+  "temperature": "UNRECORDED",
+  "readout_mode": "UNRECORDED",
+  "black_level_state": "UNRECORDED",
+  "source_image_shape": [
+    2048,
+    2048
+  ],
+  "source_center_crop_size": 1024,
+  "source_center_crop_coordinates": [
+    512,
+    512,
+    1024,
+    1024
+  ],
+  "effective_512_crop_within_npy": [
+    256,
+    256,
+    512,
+    512
+  ],
+  "effective_global_512_coordinates": [
+    768,
+    768,
+    512,
+    512
+  ],
+  "divided_by_65535": false,
+  "normalized": false,
+  "bad_pixel_correction_applied": false,
+  "generator_script": "scripts/audit_scmos_target_data.py",
+  "generator_script_commit": "c2b58e66327b0e9666c5f22a66012fd4e00492c4"
+}

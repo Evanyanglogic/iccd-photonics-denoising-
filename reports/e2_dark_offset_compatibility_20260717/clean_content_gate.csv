@@ -1,0 +1,11 @@
+metric,observed,threshold_or_requirement,pass,scope
+source_file_count,100,100,True,saved audit
+source_volume_currently_accessible,False,True,False,direct raw recheck unavailable when false
+raw_zero_ratio_max,0.0,0.05,True,no-dark
+raw_saturation_ratio_max,0.00048422813415527344,0.01,True,no-dark
+raw_mean_range_dn,17036.7..19693,preserve,True,no per-image normalization
+raw_p99_range_dn,39463..44785,preserve,True,no per-image normalization
+dark_subtracted_zero_ratio_median,0.9880847930908203,0.05,False,historical dark subtraction
+bad_pixel_mask_ratio,0.001251220703125,0.01,True,mask only; no correction
+per_image_p99_scaling_disabled,True,True,True,training data rule
+metadata_proves_raw_or_corrected_state,False,True,False,TIFF tags unavailable while source volume is offline
