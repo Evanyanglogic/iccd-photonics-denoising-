@@ -19,6 +19,31 @@ def gradient_energy(image: np.ndarray) -> float:
     gy,gx=np.gradient(image.astype(np.float64)); return float(np.mean(gx*gx+gy*gy))
 
 
+def radial_profile(values: np.ndarray, coordinate: np.ndarray, max_bin: int | None = None) -> pd.DataFrame:
+    bins = np.floor(coordinate).astype(int)
+    limit = int(bins.max()) if max_bin is None else min(int(bins.max()), max_bin)
+    rows=[]
+    for index in range(limit+1):
+        selected=values[bins==index]
+        rows.append({"radial_bin":index,"value":float(selected.mean()),"valid_sample_count":int(selected.size)})
+    return pd.DataFrame(rows)
+
+
+def spatial_diagnostics(residual_dn: np.ndarray, output: Path) -> tuple[float, float]:
+    centered=residual_dn-residual_dn.mean(); height,width=centered.shape
+    spectrum=np.fft.fftshift(np.fft.fft2(centered)); power=(np.abs(spectrum)**2)/(height*width)
+    yy,xx=np.indices(power.shape); radius=np.sqrt((yy-height//2)**2+(xx-width//2)**2)
+    psd=radial_profile(power,radius)
+    psd["normalized_frequency_cycles_per_pixel"] = psd.radial_bin / min(height,width)
+    psd.to_csv(output/"metrics/residual_radial_psd.csv",index=False,encoding="utf-8-sig")
+    autocorrelation=np.fft.fftshift(np.fft.ifft2(np.abs(np.fft.fft2(centered))**2).real)
+    center=float(autocorrelation[height//2,width//2]); autocorrelation/=center
+    ac=radial_profile(autocorrelation,radius,max_bin=16)
+    ac.to_csv(output/"metrics/residual_radial_autocorrelation.csv",index=False,encoding="utf-8-sig")
+    low_fraction=float(power[radius<=0.1*min(height,width)].sum()/power.sum())
+    return low_fraction,float(ac.loc[ac.radial_bin==1,"value"].iloc[0])
+
+
 def audit(cfg: dict[str, Any], output: Path, built: dict[str, Any]) -> dict[str, Any]:
     content=built["content"]; residual=built["residual"]; unclipped=built["noisy_unclipped"]; noisy=built["noisy"]
     divisor=float(cfg["content_preprocessing"]["normalization_divisor"]); target=built["sigma_norm"]
@@ -26,6 +51,7 @@ def audit(cfg: dict[str, Any], output: Path, built: dict[str, Any]) -> dict[str,
     added_zero=float(np.mean((noisy==0)&(content>0))); added_one=float(np.mean((noisy==1)&(content<1)))
     residual_dn=residual.astype(np.float64)*divisor
     highpass=residual_dn-ndimage.gaussian_filter(residual_dn,1.0)
+    psd_low_fraction, radial_acf_lag1 = spatial_diagnostics(residual_dn,output)
     pre={
       "content_mean_norm":float(content.mean()),"content_std_norm":float(content.std()),
       "content_p1_norm":float(np.percentile(content,1)),"content_p50_norm":float(np.percentile(content,50)),"content_p99_norm":float(np.percentile(content,99)),
@@ -37,7 +63,7 @@ def audit(cfg: dict[str, Any], output: Path, built: dict[str, Any]) -> dict[str,
       "gradient_energy_ratio":gradient_energy(noisy)/gradient_energy(content),
       "residual_row_energy_dn":float(residual_dn.mean(axis=1).std()),"residual_column_energy_dn":float(residual_dn.mean(axis=0).std()),
       "residual_horizontal_lag1_correlation":corr(residual_dn[:,:-1],residual_dn[:,1:]),"residual_vertical_lag1_correlation":corr(residual_dn[:-1,:],residual_dn[1:,:]),
-      "residual_high_frequency_std_dn":float(highpass.std()),
+      "residual_radial_autocorrelation_lag1":radial_acf_lag1,"residual_psd_low_frequency_fraction":psd_low_fraction,"residual_high_frequency_std_dn":float(highpass.std()),
     }
     pd.DataFrame([pre]).to_csv(output/"metrics/pre_save_metrics.csv",index=False,encoding="utf-8-sig")
     content_rt=tifffile.imread(output/"tiff/content_uint16.tiff"); noisy_rt=tifffile.imread(output/"tiff/noisy_uint16.tiff")
@@ -68,4 +94,3 @@ def audit(cfg: dict[str, Any], output: Path, built: dict[str, Any]) -> dict[str,
       "uint16_shape":rt["content_dtype"]=="uint16" and rt["noisy_dtype"]=="uint16" and rt["content_shape"]=="512x512" and rt["noisy_shape"]=="512x512",
     }
     return {"pre":pre,"round_trip":rt,"checks":checks}
-
