@@ -39,6 +39,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True)
     parser.add_argument("--output-root", default="")
+    parser.add_argument("--smoke-files", type=int, default=0)
     args = parser.parse_args()
 
     repo = Path(__file__).resolve().parents[1]
@@ -51,7 +52,7 @@ def main() -> int:
     if output.name.startswith(no_dark_prefix):
         from audit_e2_no_dark_input import run as run_no_dark_input
 
-        return run_no_dark_input(repo, cfg, output, source_config)
+        return run_no_dark_input(repo, cfg, output, source_config, smoke_files=args.smoke_files)
     if output.exists():
         raise FileExistsError(f"Refusing to overwrite {output}")
     output.mkdir(parents=True)
