@@ -1,0 +1,112 @@
+{
+  "experiment_id": "e2_content_manifest_20260717",
+  "status": "VERIFIED-CONTENT-MANIFEST-WITH-LIMITATIONS",
+  "smoke": false,
+  "started_at_utc": "2026-07-18T06:56:15.564580+00:00",
+  "ended_at_utc": "2026-07-18T06:56:18.487738+00:00",
+  "git_commit": "b8a4842d38d67b044c978bdbcf416dce246a0f1d",
+  "git_worktree_clean_at_start": true,
+  "steps": {
+    "manifest": "PASS",
+    "grouping": "PASS",
+    "alternative_search": "PASS",
+    "split_decision": "PASS"
+  },
+  "outputs": [
+    {
+      "relative_path": "alternative_content_sources.csv",
+      "size_bytes": 3228,
+      "sha256": "190b6526fbef943522da4959138ccdd49316d3f7f4afe3e498a8614cf3c628d2"
+    },
+    {
+      "relative_path": "candidate_similarity_clusters.csv",
+      "size_bytes": 16256,
+      "sha256": "7f8dd3616e4d3073d563be76b1eb5977d70d823632f9a549f6aaa30fe338fb28"
+    },
+    {
+      "relative_path": "content_grouping_report.md",
+      "size_bytes": 269,
+      "sha256": "474c25365bc2dca64c188e556d7c4e402690dc2c65049cc3ba0716f2490920ec"
+    },
+    {
+      "relative_path": "content_similarity_matrix.csv",
+      "size_bytes": 189838,
+      "sha256": "8cf21dd35deb8de4f343db7b3119fff811a316d2adae6e12607f1135d7a9c975"
+    },
+    {
+      "relative_path": "e2_content_manifest_20260717.csv",
+      "size_bytes": 67853,
+      "sha256": "b7dd12833fa5d618c8122f83ef50572a656d2913b11b76b6d56b9d757b163949"
+    },
+    {
+      "relative_path": "high_similarity_pairs.csv",
+      "size_bytes": 688764,
+      "sha256": "2b3fa968b3063908efa5a09049473c3e20d234abf9c40f8065ee03919b2207f8"
+    },
+    {
+      "relative_path": "provenance\\command.txt",
+      "size_bytes": 93,
+      "sha256": "0cd081d7bd63016a28b098f419354f78b27d2064a9fb202f3d265903bdc16fe9"
+    },
+    {
+      "relative_path": "provenance\\environment.txt",
+      "size_bytes": 181,
+      "sha256": "aab8668bd67954f4a4e573303f74a41ca9a20f7b969151026860b5f15ce47ba8"
+    },
+    {
+      "relative_path": "provenance\\git_commit.txt",
+      "size_bytes": 42,
+      "sha256": "bc8b9854c5d3eac9b997f4ba7a2b08a6505b20974dee15b5d018f16a33809212"
+    },
+    {
+      "relative_path": "provenance\\git_status_after.txt",
+      "size_bytes": 47,
+      "sha256": "ff1d596d6156ec5406c23718f39964d4cc5d71bf3683f58ca25966dfcb889c5d"
+    },
+    {
+      "relative_path": "provenance\\git_status_before.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "provenance\\resolved_config.yaml",
+      "size_bytes": 1443,
+      "sha256": "31f081307b0278198f64fecc327bad1383c3e1da2a0006ce07df1c214f661249"
+    },
+    {
+      "relative_path": "provenance\\script_hashes.csv",
+      "size_bytes": 650,
+      "sha256": "204a23722aa7402afcae4772c47b3aceabac631d2fad99af5fe6bd4bf7b29518"
+    },
+    {
+      "relative_path": "representative_content_selection.csv",
+      "size_bytes": 381,
+      "sha256": "4dd280a2a7f25b7f394b94bbd1a15e9d97ee7b27e4831a30ac47c715476c8fba"
+    },
+    {
+      "relative_path": "similarity_threshold_sensitivity.csv",
+      "size_bytes": 222,
+      "sha256": "0023b2cb1d2c7deb64c1ccee3c30e5fe572660cad68b02ff5db96936e42d0d72"
+    },
+    {
+      "relative_path": "split_decision.json",
+      "size_bytes": 475,
+      "sha256": "333a996f5a6eed139020c40be6c09a57b00eede792d29a614a30648ae9176ddb"
+    },
+    {
+      "relative_path": "split_strategy_comparison.csv",
+      "size_bytes": 348,
+      "sha256": "cf81298c401a40aeb2cbc7fc5f7bc4a58c64362e8b302855a6106a41fb1fdb91"
+    },
+    {
+      "relative_path": "verification_report.md",
+      "size_bytes": 382,
+      "sha256": "5257e27a7d55a02110b7cb4d05b6216a03f1decba2ce5a44686f5058eadfb55a"
+    },
+    {
+      "relative_path": "verification_status.json",
+      "size_bytes": 991,
+      "sha256": "5c8b7540ddea9ba2e229db5e515f28beacabfc686310dfe1dc393e782341030d"
+    }
+  ]
+}

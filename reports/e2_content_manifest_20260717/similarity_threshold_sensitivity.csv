@@ -1,0 +1,4 @@
+﻿profile,edge_count,cluster_count,largest_cluster_size,singleton_count,candidate_group_only
+lenient_full_0p98,3965,1,100,0,True
+balanced_full_0p995_roi_0p94,3682,3,87,0,True
+strict_full_0p999_roi_0p95,2,98,2,96,True

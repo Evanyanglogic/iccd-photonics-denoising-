@@ -1,0 +1,28 @@
+{
+  "status": "VERIFIED-CONTENT-MANIFEST-WITH-LIMITATIONS",
+  "checks": {
+    "manifest_rows": true,
+    "sha256_unique": true,
+    "input_hashes_recomputed_and_match": true,
+    "source_scene_frozen": true,
+    "source_group_frozen": true,
+    "one_isolation_block": true,
+    "role_debug_only": true,
+    "candidate_group_stability_rejected": true,
+    "no_validation_ready_alternative": true,
+    "no_synthetic_generation": true,
+    "no_training": true
+  },
+  "decision": {
+    "selected_strategy": "Strategy 2: Single-source-group holdout prohibited",
+    "source_scene": "unknown",
+    "source_group": "source_group_unknown",
+    "isolation_block_id": "single_unknown_source_group",
+    "internal_train_validation_split_allowed": false,
+    "independent_validation_source_found": false,
+    "allowed_role": "debug_only",
+    "candidate_clusters_are_scenes": false,
+    "synthetic_pair_generation_performed": false,
+    "model_training_performed": false
+  }
+}

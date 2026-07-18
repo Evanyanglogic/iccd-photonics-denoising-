@@ -1,0 +1,4 @@
+﻿strategy,status,reason
+A_random_image_split,INVALID,Highly similar source images would cross train/validation
+B_similarity_group_blocked,INVALID,Candidate clusters are strongly threshold-sensitive and are not true scenes
+C_single_unknown_source_group,SELECTED,Only defensible isolation boundary; internal train/validation holdout prohibited

@@ -1,0 +1,4 @@
+﻿profile,candidate_cluster,representative_source_pair_key,cluster_size,candidate_group_only,allowed_use
+balanced_full_0p995_roi_0p94,1,15ms_to_500ms_000,5,True,qualitative_preview_or_debug_only
+balanced_full_0p995_roi_0p94,2,15ms_to_500ms_010,8,True,qualitative_preview_or_debug_only
+balanced_full_0p995_roi_0p94,3,15ms_to_500ms_015,87,True,qualitative_preview_or_debug_only

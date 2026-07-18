@@ -1,0 +1,12 @@
+{
+  "selected_strategy": "Strategy 2: Single-source-group holdout prohibited",
+  "source_scene": "unknown",
+  "source_group": "source_group_unknown",
+  "isolation_block_id": "single_unknown_source_group",
+  "internal_train_validation_split_allowed": false,
+  "independent_validation_source_found": false,
+  "allowed_role": "debug_only",
+  "candidate_clusters_are_scenes": false,
+  "synthetic_pair_generation_performed": false,
+  "model_training_performed": false
+}
