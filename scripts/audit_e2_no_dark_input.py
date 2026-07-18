@@ -110,11 +110,7 @@ def run(repo: Path, cfg: dict[str, Any], output: Path, source_config: Path, smok
     group_rows, group_summary = source_group_analysis(historical, metadata_rows, similarity_rows)
     processing = assess_processing(metadata_rows, full_rows, roi_rows, group_summary)
     comparison_rows = full_vs_roi_rows(full_rows, roi_rows)
-    high_similarity_rows = [
-        row for row in similarity_rows
-        if row["center_roi_correlation"] >= float(settings["high_content_similarity_correlation"])
-        or row["center_roi_ssim"] >= float(settings["perceptual_duplicate_ssim"])
-    ]
+    high_similarity_rows = [row for row in similarity_rows if row["high_content_similarity"]]
     status = verify(cfg, commit, git_status, hash_rows, metadata_rows, full_rows, roi_rows, duplicate_rows, group_summary, processing, smoke_files)
 
     write_csv(metadata_rows, output / "tiff_metadata.csv")
@@ -295,17 +291,22 @@ def similarity_analysis(records: list[dict[str, Any]], settings: dict[str, Any])
             low_corr = correlation(first["low"], second["low"])
             high_corr = correlation(first["high"], second["high"])
             ssim = float(structural_similarity(first["image"], second["image"], data_range=1.0))
+            full_corr = correlation(first["full"], second["full"])
             row = {
                 "source_pair_key_a": first["pair_key"],
                 "source_pair_key_b": second["pair_key"],
-                "full_image_correlation": correlation(first["full"], second["full"]),
+                "full_image_correlation": full_corr,
                 "center_roi_correlation": corr,
                 "center_roi_ssim": ssim,
                 "low_frequency_correlation": low_corr,
                 "high_frequency_correlation": high_corr,
                 "gradient_map_correlation": correlation(first["gradient"], second["gradient"]),
                 "downsampled_perceptual_similarity": ssim,
-                "high_content_similarity": corr >= float(settings["high_content_similarity_correlation"]),
+                "high_content_similarity": (
+                    full_corr >= float(settings["high_content_similarity_correlation"])
+                    or corr >= float(settings["high_content_similarity_correlation"])
+                    or ssim >= float(settings["perceptual_duplicate_ssim"])
+                ),
             }
             rows.append(row)
             if corr >= float(settings["perceptual_duplicate_correlation"]) and ssim >= float(settings["perceptual_duplicate_ssim"]):
