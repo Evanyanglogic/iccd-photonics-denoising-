@@ -1,0 +1,14 @@
+﻿source_id,from_role,prohibited_to_role,reason
+scmos_500ms_current_100,debug_only,training_content_only,Highly homogeneous source; scene/group unknown
+scmos_500ms_current_100,debug_only,validation_content_only,Not independent and no defensible split
+pmrid_official_benchmark_gt_raw,validation_content_only,training_content_only,PMRID is frozen validation-only
+scmos_other_exposures,debug_only,training_content_only,Same acquisition family and scenes unverified
+scmos_other_exposures,debug_only,validation_content_only,Same acquisition family and scenes unverified
+pmrid4_validation_previews,excluded,validation_content_only,Derived uint8 previews
+pangan_local_public_samples,excluded,validation_content_only,Incomplete subset and historical PNGAN use
+formal_training_content_placeholder,none_missing_source,training_content_only,Requires a separate formal source audit
+pmrid_official_benchmark_gt_raw,scene-blocked,file-random-split,Official scene structure must be preserved
+any_source,single-role,training-and-validation,Cross-role reuse is prohibited
+real_iccd_evaluation_frames,excluded,training_content_only,Evaluation leakage
+pmrid_parent_project_models,excluded,independent-validation-model,PMRID model-history leakage
+formal_training_content_placeholder,missing,substitute-scmos,sCMOS debug source cannot fill missing training source

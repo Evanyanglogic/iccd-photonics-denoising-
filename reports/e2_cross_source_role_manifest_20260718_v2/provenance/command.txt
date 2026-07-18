@@ -1,0 +1,1 @@
+scripts\run_e2_cross_source_role_manifest.py --config configs\e2_cross_source_role_manifest_20260718.yaml --output-root reports\e2_cross_source_role_manifest_20260718_v2

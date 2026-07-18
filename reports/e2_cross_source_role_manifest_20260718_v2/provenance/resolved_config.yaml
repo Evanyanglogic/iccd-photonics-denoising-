@@ -1,0 +1,31 @@
+experiment_id: e2_cross_source_role_manifest_20260718
+inputs:
+  scmos_manifest: manifests/e2_content_manifest_20260717.csv
+  e1_status: reports/e1_formal_rerun_20260717/verification_status.json
+  candidate_a_smoke_status: reports/e2_residual_baseline_smoke_20260717/verification_status.json
+  candidate_a_stability_status: reports/e2_residual_stability_audit_20260718_v2/verification_status.json
+  validation_audit_root: reports/e2_validation_source_audit_20260718_v2
+  validation_audit_expected_commit: db93103d118606e2a4ae9b7eb49c7606931dbcec
+  pmrid_root: E:/PMRID-Pytorch-main/PMRID/PMRID
+  pmrid_benchmark: E:/PMRID-Pytorch-main/PMRID/PMRID/benchmark.json
+  pmrid_parent_models: E:/PMRID-Pytorch-main/model/pmrid
+outputs:
+  role_manifest: manifests/e2_cross_source_role_manifest_20260718.csv
+  isolation_matrix: manifests/e2_cross_source_isolation_matrix_20260718.csv
+  pmrid_scene_manifest: manifests/e2_pmrid_validation_scene_manifest_20260718.csv
+roles:
+  allowed:
+  - debug_only
+  - validation_content_only
+  - training_content_only
+  - excluded
+  - none_missing_source
+  current_scmos: debug_only
+  pmrid: validation_content_only
+  formal_training_placeholder: none_missing_source
+pmrid:
+  official_repository: https://github.com/MegEngine/PMRID
+  official_paper: https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123510001.pdf
+  license: Apache-2.0
+  preprocessing_plan_status: NOT-FROZEN
+overwrite: false

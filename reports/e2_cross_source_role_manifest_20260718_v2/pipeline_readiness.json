@@ -1,0 +1,12 @@
+{
+  "candidate_a_numeric_smoke": "GO-SMOKE",
+  "candidate_a_numeric_stability": "GO-STABILITY",
+  "debug_content_source": "AVAILABLE",
+  "e1_noise_characterization": "VERIFIED-RUN",
+  "formal_synthetic_generation": "NOT-ALLOWED",
+  "formal_train_validation_split": "NOT-ALLOWED",
+  "model_training": "NOT-ALLOWED",
+  "real_iccd_evaluation": "NOT-READY",
+  "training_content_source": "MISSING",
+  "validation_content_source": "AVAILABLE-WITH-DOMAIN-LIMITATION"
+}

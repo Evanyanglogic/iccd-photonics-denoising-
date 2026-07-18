@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "expected_isolation_pair_count": 105,
+    "isolation_pair_count": 105,
+    "no_role_conflicts": true,
+    "pmrid_entry_count": 39,
+    "pmrid_preprocessing_not_frozen": true,
+    "pmrid_scenes": [
+      "Scene1",
+      "Scene2",
+      "Scene3",
+      "Scene4"
+    ],
+    "pmrid_validation_only": true,
+    "role_count": 15,
+    "scmos_debug_only": true,
+    "training_source_missing": true
+  },
+  "experiment_id": "e2_cross_source_role_manifest_20260718",
+  "limitations": [
+    "PMRID preprocessing plan is NOT-FROZEN",
+    "PMRID is not ICCD-domain content",
+    "formal training content source is MISSING"
+  ],
+  "next_task": "Audit and determine a formal training-content-source acquisition path using existing-data review, new acquisition, or a legally usable public source; do not generate synthetic pairs.",
+  "pipeline_readiness": {
+    "candidate_a_numeric_smoke": "GO-SMOKE",
+    "candidate_a_numeric_stability": "GO-STABILITY",
+    "debug_content_source": "AVAILABLE",
+    "e1_noise_characterization": "VERIFIED-RUN",
+    "formal_synthetic_generation": "NOT-ALLOWED",
+    "formal_train_validation_split": "NOT-ALLOWED",
+    "model_training": "NOT-ALLOWED",
+    "real_iccd_evaluation": "NOT-READY",
+    "training_content_source": "MISSING",
+    "validation_content_source": "AVAILABLE-WITH-DOMAIN-LIMITATION"
+  },
+  "prohibited_role_transition_count": 13,
+  "provenance_complete": true,
+  "report_manifest_copies_match": true,
+  "role_counts": {
+    "debug_only": 2,
+    "excluded": 11,
+    "none_missing_source": 1,
+    "validation_content_only": 1
+  },
+  "source_count": 15,
+  "source_data_protected": true,
+  "source_role_conflict_count": 0,
+  "status": "ROLE-MANIFEST-VERIFIED-WITH-LIMITATIONS",
+  "synthetic_pairs_generated": false,
+  "training_or_split_performed": false
+}

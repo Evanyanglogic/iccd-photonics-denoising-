@@ -1,0 +1,21 @@
+{
+  "ended_at_utc": "2026-07-18T12:26:38.839727+00:00",
+  "experiment_id": "e2_cross_source_role_manifest_20260718",
+  "git_commit": "8e3da8fcf85ce7e265d8c0686be19caa3ba1b9ac",
+  "pmrid_file_count_after": 79,
+  "pmrid_file_count_before": 79,
+  "previous_failed_run": {
+    "path": "reports/e2_cross_source_role_manifest_20260718",
+    "reason": "OVERBROAD-HISTORICAL-TRAINING-FLAG",
+    "reused_as_formal_result": false,
+    "status": "FAILED"
+  },
+  "scmos_file_count_after": 100,
+  "scmos_file_count_before": 100,
+  "source_data_protected": true,
+  "source_write_performed": false,
+  "started_at_utc": "2026-07-18T12:26:35.333180+00:00",
+  "status": "ROLE-MANIFEST-VERIFIED-WITH-LIMITATIONS",
+  "synthetic_pairs_generated": false,
+  "training_or_split_performed": false
+}
