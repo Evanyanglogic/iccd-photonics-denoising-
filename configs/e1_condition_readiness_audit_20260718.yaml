@@ -1,0 +1,29 @@
+experiment_id: e1_condition_readiness_audit_20260718
+e1_root: reports/e1_formal_rerun_20260717
+e1_expected_status: VERIFIED-RUN
+e1_report_expected_commit: 524adc0578d3f83e04b95ebdc89ad829a4027496
+data_root: D:/iccd/data/20260319
+folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
+primary_roi:
+  top: 2304
+  left: 2304
+  height: 512
+  width: 512
+metadata_sources:
+  picture_info_name: PictureInfo.txt
+  format_ini: D:/iccd/ini/Format.ini
+  t560_ini: D:/iccd/ini/T560.ini
+  all_t560_ini: D:/iccd/ini/AllT560.ini
+real_evaluation_pairs: reports/gated_iccd_20260319_surrogate_pairs/pairs.csv
+noise_state_features:
+  - temporal_std_mean
+  - row_pattern_energy_dn
+  - column_pattern_energy_dn
+  - radial_autocorr_r1
+  - observed_stable_component_std_dn
+  - frame_mean_relative_change_half
+condition_readiness:
+  maximum_repeatability_cv: 0.05
+  maximum_redundant_absolute_spearman: 0.8
+  maximum_brightness_confound_absolute_spearman: 0.8
+overwrite: false
