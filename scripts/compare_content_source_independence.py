@@ -24,7 +24,11 @@ def thumbnail(array: np.ndarray, size: int) -> np.ndarray:
         image = image[..., :3].mean(axis=2)
     lo, hi = np.percentile(image, [1, 99])
     image = np.clip((image - lo) / max(float(hi - lo), 1e-12), 0, 1)
-    return np.asarray(Image.fromarray(image, mode="F").resize((size, size), Image.Resampling.BILINEAR), dtype=np.float32)
+    source = Image.fromarray(np.ascontiguousarray(image, dtype=np.float32))
+    result = np.asarray(source.resize((size, size), Image.Resampling.BILINEAR), dtype=np.float32)
+    if not np.isfinite(result).all():
+        raise ValueError("Thumbnail conversion produced non-finite values")
+    return result
 
 
 def corr(a: np.ndarray, b: np.ndarray) -> float:
@@ -42,7 +46,9 @@ def global_ssim(a: np.ndarray, b: np.ndarray) -> float:
 
 
 def perceptual_hash(image: np.ndarray) -> str:
-    small = np.asarray(Image.fromarray(image, mode="F").resize((32, 32), Image.Resampling.BILINEAR), dtype=np.float32)
+    if not np.isfinite(image).all():
+        raise ValueError("Perceptual hash input contains non-finite values")
+    small = np.asarray(Image.fromarray(np.ascontiguousarray(image, dtype=np.float32)).resize((32, 32), Image.Resampling.BILINEAR), dtype=np.float32)
     coefficients = dctn(small, type=2, norm="ortho")[:8, :8]
     bits = coefficients > np.median(coefficients[1:])
     return f"{int(''.join('1' if x else '0' for x in bits.ravel()), 2):016x}"
@@ -60,7 +66,7 @@ def compare(candidate_id: str, candidate_images: list[dict], reference_images: l
             low_b = gaussian_filter(b, 3.0)
             high_b = b - low_b
             grad_b = np.hypot(*np.gradient(b))
-            rows.append({
+            metrics = {
                 "candidate_id": candidate_id,
                 "candidate_file": candidate["path"],
                 "reference_content_id": reference["content_id"],
@@ -72,5 +78,9 @@ def compare(candidate_id: str, candidate_images: list[dict], reference_images: l
                 "low_frequency_correlation": corr(low_a, low_b),
                 "high_frequency_correlation": corr(high_a, high_b),
                 "gradient_similarity": corr(grad_a, grad_b),
-            })
+            }
+            numeric_values = [value for key, value in metrics.items() if key in {"correlation", "ssim", "low_frequency_correlation", "high_frequency_correlation", "gradient_similarity"}]
+            if not np.isfinite(numeric_values).all():
+                raise ValueError("Independence comparison produced non-finite metrics")
+            rows.append(metrics)
     return rows

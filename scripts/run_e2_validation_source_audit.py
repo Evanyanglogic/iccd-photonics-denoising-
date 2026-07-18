@@ -69,7 +69,9 @@ def main() -> int:
     started = utc_now()
     commit = git(repo, "rev-parse", "HEAD").strip()
     status_before = git(repo, "status", "--porcelain=v1", "--untracked-files=all")
-    if status_before.strip():
+    known_failed_prefix = "?? reports/e2_validation_source_audit_20260718/"
+    unexpected_status = [line for line in status_before.splitlines() if line and not line.startswith(known_failed_prefix)]
+    if unexpected_status:
         raise RuntimeError("Formal audit requires a clean, traceable code worktree")
 
     inventory = inventory_candidates(config)
@@ -209,7 +211,7 @@ def main() -> int:
         "validation_ready_exists": pmrid_status == "VALIDATION-READY",
         "formal_split_design_allowed_next": pmrid_status == "VALIDATION-READY",
         "split_created_in_this_run": False,
-        "next_task": "Build a formal dual-source isolation manifest for training and validation content without generating synthetic pairs.",
+        "next_task": "Build a formal dual-source isolation manifest for training and validation content without generating synthetic pairs." if pmrid_status == "VALIDATION-READY" else "Resolve the primary PMRID candidate's blocking limitation without creating a split.",
     }
     dump_json(output / "primary_candidate_decision.json", decision)
 
@@ -230,7 +232,7 @@ def main() -> int:
     input_paths = list(dict.fromkeys(input_paths))
     pd.DataFrame([{"path": str(path), "sha256": file_hash(path), "size_bytes": path.stat().st_size, "mtime_ns": path.stat().st_mtime_ns} for path in input_paths]).to_csv(output / "provenance/input_hashes.csv", index=False, encoding="utf-8-sig")
     overall_status = "VALIDATION-READY-FOUND" if pmrid_status == "VALIDATION-READY" else "VALIDATION-CANDIDATE-WITH-LIMITATIONS"
-    run_manifest = {"experiment_id": config["experiment_id"], "started_at_utc": started, "ended_at_utc": utc_now(), "git_commit": commit, "status": overall_status, "deep_candidates": list(deep.candidate_id), "source_write_performed": False, "synthetic_pairs_generated": False, "training_or_split_performed": False}
+    run_manifest = {"experiment_id": config["experiment_id"], "started_at_utc": started, "ended_at_utc": utc_now(), "git_commit": commit, "status": overall_status, "deep_candidates": list(deep.candidate_id), "previous_failed_run": {"path": "reports/e2_validation_source_audit_20260718", "status": "FAILED", "reason": "NON-FINITE-THUMBNAIL-DIAGNOSTICS", "reused_as_formal_result": False}, "source_write_performed": False, "synthetic_pairs_generated": False, "training_or_split_performed": False}
     dump_json(output / "provenance/run_manifest.json", run_manifest)
 
     report = f"""# E2 Validation Content Source Audit\n\nStatus: `{overall_status}`\n\nThe bounded inventory covered {len(inventory)} configured candidate directories: {(inventory.initial_priority == 'A').sum()} Priority A, {(inventory.initial_priority == 'B').sum()} Priority B, and {(inventory.initial_priority == 'C').sum()} Priority C. Deep review was limited to one Priority A and three Priority B candidates.\n\nThe primary candidate is the official PMRID ECCV 2020 benchmark at `E:/PMRID-Pytorch-main/PMRID/PMRID`. Its 39 GT RAW files are readable uint16 3000x4000 Bayer arrays, organized by four official scene IDs with bright/dark and ISO/exposure metadata. Its formal status is `{pmrid_status}` based on the frozen integrity, grouping, independence, numerical, and leakage gates recorded in `verification_status.json`.\n\nThis decision does not create a split, generate synthetic pairs, establish ICCD-domain equivalence, or validate model performance. The PMRID source has only four scenes and a mobile Bayer RAW domain; future preprocessing and scene blocking must be preregistered.\n"""
