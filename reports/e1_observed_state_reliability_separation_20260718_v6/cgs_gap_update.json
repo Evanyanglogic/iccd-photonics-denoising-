@@ -1,0 +1,10 @@
+{
+  "CGS_READINESS": "NOT-YET",
+  "missing": [
+    "radial ACF subset/ROI evidence must be calibration-only confirmed",
+    "row/column brightness-adjusted independence",
+    "stable-map scene leakage audit",
+    "component-energy de-duplication",
+    "calibration-only structural parameter estimation"
+  ]
+}

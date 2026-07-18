@@ -1,0 +1,30 @@
+{
+  "CG_READY": true,
+  "G_calibration_rule": "median formal-E1 temporal_std_mean over primary calibration folders only; fixed center ROI; no evaluation folders",
+  "folder_level_condition_supported": false,
+  "historical_candidate_a_used_all_folders": true,
+  "limitations": [
+    "n=10 folders",
+    "physical conditions constant/unknown",
+    "signal and folder/scene remain confounded",
+    "historical Candidate A used all folders"
+  ],
+  "optional_auxiliary_condition": null,
+  "primary_calibration_folders": [
+    1,
+    4,
+    7,
+    8,
+    10,
+    13
+  ],
+  "primary_evaluation_folders": [
+    2,
+    5,
+    9,
+    11
+  ],
+  "route": "signal-conditioned",
+  "selected_model": "S1",
+  "signal_condition_supported": true
+}

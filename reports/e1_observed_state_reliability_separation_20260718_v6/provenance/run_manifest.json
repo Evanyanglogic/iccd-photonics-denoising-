@@ -1,0 +1,13 @@
+{
+  "ended_at_utc": "2026-07-18T16:59:52.694464+00:00",
+  "experiment_id": "e1_observed_state_reliability_separation_20260718",
+  "folder_count": 10,
+  "git_commit": "c05c3e69b9b62d0fbc8b643debe88774e47dd63c",
+  "model_training_performed": false,
+  "source_data_protected": true,
+  "source_file_count_after": 2022,
+  "source_file_count_before": 2022,
+  "started_at_utc": "2026-07-18T16:54:18.599767+00:00",
+  "status": "OBSERVED-STATE-SEPARATION-VERIFIED-WITH-LIMITATIONS",
+  "synthetic_pairs_generated": false
+}

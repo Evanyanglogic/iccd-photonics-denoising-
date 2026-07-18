@@ -1,0 +1,95 @@
+experiment_id: e1_observed_state_reliability_separation_20260718
+data_root: D:/iccd/data/20260319
+folders:
+- 1
+- 2
+- 4
+- 5
+- 7
+- 8
+- 9
+- 10
+- 11
+- 13
+frame_count: 200
+dtype_expected: uint16
+shape_expected:
+- 5120
+- 5120
+frozen_roi:
+  top: 2304
+  left: 2304
+  height: 512
+  width: 512
+roi_sensitivity:
+  center:
+    top: 2304
+    left: 2304
+    height: 512
+    width: 512
+  top_left:
+    top: 0
+    left: 0
+    height: 512
+    width: 512
+  top_right:
+    top: 0
+    left: 4608
+    height: 512
+    width: 512
+  bottom_left:
+    top: 4608
+    left: 0
+    height: 512
+    width: 512
+  bottom_right:
+    top: 4608
+    left: 4608
+    height: 512
+    width: 512
+subsets:
+- first_32
+- middle_32
+- last_32
+- odd
+- even
+- first_half
+- second_half
+highpass_sigma_px: 8.0
+formal_e1_root: reports/e1_formal_rerun_20260717
+formal_e1_expected_status: VERIFIED-RUN
+formal_e1_report_commit: 524adc0578d3f83e04b95ebdc89ad829a4027496
+historical_candidate_a_used_all_folders: true
+models:
+- L1
+- L2
+- P1
+- S1
+split_a:
+  calibration:
+  - 5
+  - 8
+  - 9
+  - 10
+  - 11
+  - 13
+  evaluation:
+  - 1
+  - 2
+  - 4
+  - 7
+split_b:
+  calibration:
+  - 1
+  - 4
+  - 7
+  - 8
+  - 10
+  - 13
+  evaluation:
+  - 2
+  - 5
+  - 9
+  - 11
+primary_split: B
+overwrite: false

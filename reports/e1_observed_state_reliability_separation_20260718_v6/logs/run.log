@@ -1,0 +1,12 @@
+{
+  "experiment_id": "e1_observed_state_reliability_separation_20260718",
+  "status": "OBSERVED-STATE-SEPARATION-VERIFIED-WITH-LIMITATIONS",
+  "CG_READY": true,
+  "CGS_READINESS": "NOT-YET",
+  "selected_model": "S1",
+  "primary_split": "B",
+  "provenance_complete": true,
+  "source_data_protected": true,
+  "model_training_performed": false,
+  "synthetic_pairs_generated": false
+}

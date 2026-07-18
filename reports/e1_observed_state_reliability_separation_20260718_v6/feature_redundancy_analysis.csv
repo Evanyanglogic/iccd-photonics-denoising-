@@ -1,0 +1,41 @@
+﻿analysis,feature,component,value,note
+VIF,mean_signal_DN,,1000000000000.0,descriptive only; n=10
+VIF,temporal_std_DN,,1000000000000.0,descriptive only; n=10
+VIF,brightness_adjusted_temporal_residual_DN,,1000000000000.0,descriptive only; n=10
+VIF,row_energy_DN,,1933.8486605147539,descriptive only; n=10
+VIF,column_energy_DN,,414.9553540025195,descriptive only; n=10
+VIF,radial_acf_lag1,,200.018304384034,descriptive only; n=10
+VIF,observed_stable_strength_DN,,949.0409244712596,descriptive only; n=10
+VIF,drift_percent,,4.223718747416212,descriptive only; n=10
+PCA_VARIANCE,,PC1,0.7179570382668001,"auxiliary, not a physical condition"
+PCA_VARIANCE,,PC2,0.14274441315417916,"auxiliary, not a physical condition"
+PCA_VARIANCE,,PC3,0.0910345076669083,"auxiliary, not a physical condition"
+PCA_VARIANCE,,PC4,0.04720012927957962,"auxiliary, not a physical condition"
+PCA_VARIANCE,,PC5,0.0009142557053439424,"auxiliary, not a physical condition"
+PCA_VARIANCE,,PC6,0.00011095473487171099,"auxiliary, not a physical condition"
+PCA_VARIANCE,,PC7,3.870119231712957e-05,"auxiliary, not a physical condition"
+PCA_VARIANCE,,PC8,2.931179372571349e-34,"auxiliary, not a physical condition"
+PCA_LOADING,mean_signal_DN,PC1,0.4094269035759588,"auxiliary, sign arbitrary"
+PCA_LOADING,temporal_std_DN,PC1,0.39897324361376935,"auxiliary, sign arbitrary"
+PCA_LOADING,brightness_adjusted_temporal_residual_DN,PC1,-0.013024528762073568,"auxiliary, sign arbitrary"
+PCA_LOADING,row_energy_DN,PC1,0.41077005874098454,"auxiliary, sign arbitrary"
+PCA_LOADING,column_energy_DN,PC1,0.4113411656314623,"auxiliary, sign arbitrary"
+PCA_LOADING,radial_acf_lag1,PC1,0.2762275476169683,"auxiliary, sign arbitrary"
+PCA_LOADING,observed_stable_strength_DN,PC1,0.41489822415193534,"auxiliary, sign arbitrary"
+PCA_LOADING,drift_percent,PC1,-0.2943544342981789,"auxiliary, sign arbitrary"
+PCA_LOADING,mean_signal_DN,PC2,0.06213506906185362,"auxiliary, sign arbitrary"
+PCA_LOADING,temporal_std_DN,PC2,0.23901552369958615,"auxiliary, sign arbitrary"
+PCA_LOADING,brightness_adjusted_temporal_residual_DN,PC2,0.9105553630700195,"auxiliary, sign arbitrary"
+PCA_LOADING,row_energy_DN,PC2,-0.01728407185113403,"auxiliary, sign arbitrary"
+PCA_LOADING,column_energy_DN,PC2,0.05727308417906086,"auxiliary, sign arbitrary"
+PCA_LOADING,radial_acf_lag1,PC2,-0.15197252008085918,"auxiliary, sign arbitrary"
+PCA_LOADING,observed_stable_strength_DN,PC2,0.003591333579981013,"auxiliary, sign arbitrary"
+PCA_LOADING,drift_percent,PC2,0.28846534204297275,"auxiliary, sign arbitrary"
+PCA_LOADING,mean_signal_DN,PC3,0.13418564924554713,"auxiliary, sign arbitrary"
+PCA_LOADING,temporal_std_DN,PC3,0.12723731940698998,"auxiliary, sign arbitrary"
+PCA_LOADING,brightness_adjusted_temporal_residual_DN,PC3,-0.02227850706954902,"auxiliary, sign arbitrary"
+PCA_LOADING,row_energy_DN,PC3,-0.19315689064220326,"auxiliary, sign arbitrary"
+PCA_LOADING,column_energy_DN,PC3,0.08699477431617746,"auxiliary, sign arbitrary"
+PCA_LOADING,radial_acf_lag1,PC3,-0.8071107668524378,"auxiliary, sign arbitrary"
+PCA_LOADING,observed_stable_strength_DN,PC3,0.01915364961499751,"auxiliary, sign arbitrary"
+PCA_LOADING,drift_percent,PC3,-0.5183012799384505,"auxiliary, sign arbitrary"

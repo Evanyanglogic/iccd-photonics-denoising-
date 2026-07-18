@@ -1,0 +1,5 @@
+﻿rank,candidate,role,reliable,brightness_relation,subset_rank_rho_median,roi_rank_rho_median,decision
+1,predicted_sigma_from_signal_model,primary,True,explicitly modeled,0.9999999999999999,0.9757575757575757,SELECT
+2,brightness_adjusted_temporal_residual,folder-state alternative,False,residualized but remaining Spearman rho=0.612121,0.9272727272727272,0.8909090909090909,REJECT
+3,radial_acf_lag1,optional auxiliary,False,rho=0.454545,0.6121212121212121,0.6606060606060605,NOT-YET
+4,row_column_stable,excluded from CG main condition,False,highly confounded/redundant,,,REJECT
