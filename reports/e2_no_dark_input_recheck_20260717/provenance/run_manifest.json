@@ -1,0 +1,150 @@
+{
+  "experiment_id": "e2_dark_offset_compatibility_20260717_no_dark_recheck",
+  "status": "VERIFIED-INPUT-WITH-LIMITATIONS",
+  "git_commit": "853add5db8c05ad6caa320275d72f119e51db4a8",
+  "git_worktree_clean_at_start": true,
+  "started_at_utc": "2026-07-18T04:53:05.931369+00:00",
+  "ended_at_utc": "2026-07-18T04:55:02.324724+00:00",
+  "exit_code": 0,
+  "smoke": false,
+  "processed_file_count": 100,
+  "formal_expected_file_count": 100,
+  "preprocessing": "raw_uint16.astype(np.float32) / 65535.0",
+  "dark_subtraction": false,
+  "scalar_pedestal_subtraction": false,
+  "per_image_p99_scaling": false,
+  "synthetic_generation_performed": false,
+  "model_training_performed": false,
+  "output_hashes": [
+    {
+      "path": "center_roi_statistics.csv",
+      "sha256": "cb4a2809d6fd96a2ef0590ec308735015b5d2232480ea7ee03d89f32737a7d51",
+      "size_bytes": 81755
+    },
+    {
+      "path": "content_similarity.csv",
+      "sha256": "b2f885522c10009a7abad140a784d44a662b540ca2572a678546dc399b5c6fc2",
+      "size_bytes": 863127
+    },
+    {
+      "path": "duplicate_analysis.csv",
+      "sha256": "5cc048c426c0d48e82908f88e2b0395e049c3a12b64680d9fa4ee0a121b2c2c6",
+      "size_bytes": 250
+    },
+    {
+      "path": "full_image_statistics.csv",
+      "sha256": "00af82d3dccfc40785f2b122a2f6c18eb2f2d78668aa9b6a71a12b0201be2189",
+      "size_bytes": 78622
+    },
+    {
+      "path": "full_vs_roi_statistics.csv",
+      "sha256": "a02e59202804e3c5ff1637343bf09864f41d708b82a051dafdfceb1a14812306",
+      "size_bytes": 16555
+    },
+    {
+      "path": "high_similarity_pairs.csv",
+      "sha256": "02ba195b1a14491ffdf149e6d191fff209386c8f3c9d54489526e1d6f201f654",
+      "size_bytes": 690633
+    },
+    {
+      "path": "input_manifest.csv",
+      "sha256": "232a21afaf014b8acdb22f3fa1cc9423f49255e29311406230f3b0eac1f18093",
+      "size_bytes": 38616
+    },
+    {
+      "path": "logs\\stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "logs\\stdout.log",
+      "sha256": "a890938a8e5758f45ef642db189720b951b6e8f72c3bde2bc264acf41d8850c6",
+      "size_bytes": 61
+    },
+    {
+      "path": "processing_status_assessment.json",
+      "sha256": "64691b08274ffbf2ddb8276e9d5ac64f28a5fae98ec00b239811ba4bfc97f1bb",
+      "size_bytes": 882
+    },
+    {
+      "path": "provenance\\command.txt",
+      "sha256": "fb90b0040da9764debe0231b755590e38f64912fd781ba0168b90fe1c6808633",
+      "size_bytes": 163
+    },
+    {
+      "path": "provenance\\environment.txt",
+      "sha256": "180eca7ded65a2bea777d4c13ed150d73782ebef82d3f16b178c803d0010e8bf",
+      "size_bytes": 153
+    },
+    {
+      "path": "provenance\\git_commit.txt",
+      "sha256": "c7d225b6d6e28fb26eee8fcad27e2f86f3e81e56f20e4d7a1969d4c2bf5fa2a5",
+      "size_bytes": 42
+    },
+    {
+      "path": "provenance\\git_diff.patch",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "provenance\\git_status_after.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "provenance\\git_status_before.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "provenance\\gpu_info.txt",
+      "sha256": "b45c65e4514473bd6adbcf55bbbe96c78fd7f56711782716ead45b626c09c57a",
+      "size_bytes": 1709
+    },
+    {
+      "path": "provenance\\pip_freeze.txt",
+      "sha256": "9813bad97a2947d13a85616b1602eaed41a865241b724808ed6ca46a8c916f15",
+      "size_bytes": 32698
+    },
+    {
+      "path": "provenance\\resolved_config.yaml",
+      "sha256": "7151692ceceedb275823f05fe95532a92b5b51bd9d28791fd4647be3e3da4967",
+      "size_bytes": 2239
+    },
+    {
+      "path": "provenance\\script_hashes.csv",
+      "sha256": "1fb023c9f81bc1d919ca7008d349edb0e132f9afbbffcda01a6614908bb0dfdc",
+      "size_bytes": 487
+    },
+    {
+      "path": "sha256_comparison.csv",
+      "sha256": "232a21afaf014b8acdb22f3fa1cc9423f49255e29311406230f3b0eac1f18093",
+      "size_bytes": 38616
+    },
+    {
+      "path": "source_group_analysis.csv",
+      "sha256": "afe3d053090c233d6e572f5131afeb9e1f3f79d14bd9d96ba678400616d78bd7",
+      "size_bytes": 21099
+    },
+    {
+      "path": "source_group_decision.json",
+      "sha256": "7f14cf1e32957f02ea0863f46bb8fc3262590bebeeffef78a220e950abfef2db",
+      "size_bytes": 339
+    },
+    {
+      "path": "tiff_metadata.csv",
+      "sha256": "54bae75f780d0aecce18d0b99f0c7df288f79c236245f8287e11efce7e72dea0",
+      "size_bytes": 130101
+    },
+    {
+      "path": "verification_report.md",
+      "sha256": "8c4e6a7e89f126871a2fce377444a1b3d591084207fb0105de35aca4db9eb0e7",
+      "size_bytes": 1398
+    },
+    {
+      "path": "verification_status.json",
+      "sha256": "2537cd094dcc61e46661f0a984278013a20d46ca24d86743975b85aaf5d08ab7",
+      "size_bytes": 2484
+    }
+  ]
+}

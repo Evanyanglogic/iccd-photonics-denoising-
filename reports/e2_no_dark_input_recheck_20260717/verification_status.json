@@ -1,0 +1,119 @@
+{
+  "status": "VERIFIED-INPUT-WITH-LIMITATIONS",
+  "checks": [
+    {
+      "name": "file_count",
+      "passed": true,
+      "observed": 100
+    },
+    {
+      "name": "sha256_match",
+      "passed": true,
+      "observed": 0
+    },
+    {
+      "name": "dtype_uint16",
+      "passed": true,
+      "observed": [
+        "uint16"
+      ]
+    },
+    {
+      "name": "shape_2048x2048",
+      "passed": true,
+      "observed": [
+        "2048x2048"
+      ]
+    },
+    {
+      "name": "center_roi_coordinates",
+      "passed": true,
+      "observed": "768,768,512,512"
+    },
+    {
+      "name": "zero_ratio_lt_5pct",
+      "passed": true,
+      "observed": 0.0
+    },
+    {
+      "name": "saturation_ratio_lt_1pct",
+      "passed": true,
+      "observed": 0.00048422813415527344
+    },
+    {
+      "name": "negative_ratio_zero",
+      "passed": true,
+      "observed": 0
+    },
+    {
+      "name": "no_nan_inf",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "no_per_image_scaling",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "normalization_is_float32_divide_65535",
+      "passed": true,
+      "observed": 2.9801867640344426e-08
+    },
+    {
+      "name": "no_uint8_conversion",
+      "passed": true,
+      "observed": [
+        "uint16"
+      ]
+    },
+    {
+      "name": "no_silent_clipping",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "inter_image_mean_not_forced",
+      "passed": true,
+      "observed": [
+        17036.73782682419,
+        19692.99443411827
+      ]
+    },
+    {
+      "name": "inter_image_p99_not_forced",
+      "passed": true,
+      "observed": [
+        39463.0,
+        44785.0
+      ]
+    },
+    {
+      "name": "inter_image_dynamic_range_not_forced",
+      "passed": true,
+      "observed": [
+        32082.0,
+        36856.0
+      ]
+    },
+    {
+      "name": "perceptual_or_exact_duplicate_fraction_lt_20pct",
+      "passed": true,
+      "observed": 0.0
+    },
+    {
+      "name": "metadata_recorded",
+      "passed": true,
+      "observed": 100
+    },
+    {
+      "name": "clean_commit",
+      "passed": true,
+      "observed": "853add5db8c05ad6caa320275d72f119e51db4a8"
+    }
+  ],
+  "processing_status": "processing status unknown",
+  "source_group": "source_group_unknown",
+  "synthetic_generation_performed": false,
+  "model_training_performed": false
+}

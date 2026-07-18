@@ -1,0 +1,51 @@
+experiment_id: e2_dark_offset_compatibility_20260717
+output_root: reports\e2_no_dark_input_recheck_20260717
+overwrite: false
+source_root: F:/目标传感器噪声参数估计/data
+clean_folder: 500ms
+dark_folder: dark_Background
+expected_clean_count: 100
+expected_clean_shape:
+- 2048
+- 2048
+expected_clean_dtype: uint16
+crop_size: 512
+range_max_dn: 65535
+dark_offset_path: reports/target_scmos_risk_audit/dark_offset_center_crop.npy
+dark_std_path: reports/target_scmos_risk_audit/dark_std_center_crop.npy
+bad_pixel_mask_path: reports/target_scmos_risk_audit/bad_pixel_mask_center_crop.npy
+dark_generation_script: scripts/audit_scmos_target_data.py
+dark_generation_commit: c2b58e66327b0e9666c5f22a66012fd4e00492c4
+dark_frame_count: 64
+dark_source_crop_size: 1024
+saved_clean_audit_csv: reports/e2_formal_input_audit_smoke_20260717_v2/input_audit/clean_content_audit.csv
+saved_clean_manifest_csv: reports/e2_formal_input_audit_smoke_20260717_v2/input_audit/input_clean_manifest.csv
+historical_corrected_pairs_csv: reports/target_scmos_iccd_like_synthetic_512/pairs.csv
+historical_folder_summary_csv: reports/target_scmos_risk_audit/folder_summary.csv
+quality_gates:
+  maximum_zero_ratio: 0.05
+  maximum_negative_before_clipping_ratio: 0.05
+  maximum_saturation_ratio: 0.01
+  maximum_bad_pixel_ratio: 0.01
+decision:
+  selected: NO-DARK-OPERATIONAL
+  prohibit_per_image_p99: true
+  prohibit_batch_generation: true
+  boundary: Raw sCMOS TIFF values divided by 65535 may be retained only as an operational
+    content source. They are not clean ground truth, retain an unresolved pedestal
+    and sCMOS noise, and do not establish physical ICCD signal scale.
+no_dark_recheck:
+  output_name_prefix: e2_no_dark_input_recheck_
+  historical_manifest: reports/e2_formal_input_audit_smoke_20260717_v2/input_audit/input_clean_manifest.csv
+  crop_size: 512
+  thumbnail_size: 128
+  perceptual_duplicate_ssim: 0.995
+  perceptual_duplicate_correlation: 0.995
+  high_content_similarity_correlation: 0.98
+  require_exact_historical_sha256: true
+  processing_name: raw_uint16_to_float32_div_65535
+  allowed_statuses:
+  - VERIFIED-INPUT
+  - VERIFIED-INPUT-WITH-LIMITATIONS
+  - CLEAN-SOURCE-INVALID
+  - FAILED

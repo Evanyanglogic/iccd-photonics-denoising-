@@ -1,0 +1,8 @@
+{
+  "source_scene_reliably_established": false,
+  "source_group_reliably_established": false,
+  "assigned_group": "source_group_unknown",
+  "high_similarity_pair_count": 3965,
+  "pair_count": 4950,
+  "decision_basis": "parent directory, filename sequence, TIFF datetime/tags, acquisition order, and image similarity were reviewed"
+}

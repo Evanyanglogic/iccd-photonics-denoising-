@@ -1,0 +1,25 @@
+{
+  "classification": "processing status unknown",
+  "metadata_explicit_processing_file_count": 0,
+  "software_values": [],
+  "black_level_correction": "NOT_ESTABLISHED",
+  "uniform_pedestal": "NOT_ESTABLISHED",
+  "software_clipping": "NOT_ESTABLISHED",
+  "gamma_or_nonlinear_mapping": "NOT_ESTABLISHED",
+  "bad_pixel_correction": "NOT_ESTABLISHED",
+  "cross_exposure_nonmonotonic_median_evidence": "previous audit observed decreasing median with nominal exposure; acquisition settings/pipeline unresolved",
+  "within_500ms_mean_range_dn": [
+    17036.73782682419,
+    19692.99443411827
+  ],
+  "within_500ms_p99_range_dn": [
+    39463.0,
+    44785.0
+  ],
+  "within_500ms_roi_dynamic_range_dn": [
+    46608.0,
+    56412.0
+  ],
+  "source_group": "source_group_unknown",
+  "content_boundary": "sCMOS-derived operational content source; not clean ground truth"
+}
