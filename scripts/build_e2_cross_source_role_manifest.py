@@ -51,8 +51,7 @@ def make_role_rows(config: dict, source_summary: pd.DataFrame, inventory: pd.Dat
             "source_group_available": False, "official_split_available": False,
             "isolation_level": "source-level only", "independence_from_scmos": summary["independence"],
             "used_in_e1": False, "used_in_generator_design": False,
-            "used_in_training": bool(summary["historical_training_or_tuning"]),
-            "used_in_checkpoint_selection": bool(summary["historical_training_or_tuning"]),
+            "used_in_training": False, "used_in_checkpoint_selection": False,
             "allowed_role": role, "prohibited_roles": "training_content_only;validation_content_only" if role in {"debug_only", "excluded"} else "",
             "allowed_operations": "metadata audit;numerical audit" if role != "excluded" else "provenance audit only",
             "prohibited_operations": "formal training;checkpoint selection;cross-role reuse",
@@ -72,10 +71,14 @@ def make_role_rows(config: dict, source_summary: pd.DataFrame, inventory: pd.Dat
     rows.append(pmrid)
 
     other = base("scmos_other_exposures", "f_scmos_other_exposures", "Other local sCMOS exposures", "operational content", "local sCMOS exposure family", "debug_only", "DEBUG-ONLY")
-    other.update({"used_in_generator_design": True, "allowed_operations": "debug;numerical audit", "preprocessing_status": "NOT-FROZEN", "domain_limitation": "Same device/acquisition family; independent scenes unverified"})
+    other.update({"used_in_generator_design": True, "used_in_training": True, "used_in_checkpoint_selection": True, "allowed_operations": "debug;numerical audit", "preprocessing_status": "NOT-FROZEN", "domain_limitation": "Same device/acquisition family; independent scenes unverified"})
     rows.append(other)
-    rows.append(base("pmrid4_validation_previews", "d_val_cmos_derived", "PMRID4 validation previews", "derived preview", "local PMRID4", "excluded", "EXCLUDED"))
-    rows.append(base("pangan_local_public_samples", "pngan_public_samples", "PNGAN local public samples", "incomplete benchmark samples", "PNGAN bundled samples", "excluded", "EXCLUDED"))
+    previews = base("pmrid4_validation_previews", "d_val_cmos_derived", "PMRID4 validation previews", "derived preview", "local PMRID4", "excluded", "EXCLUDED")
+    previews.update({"used_in_checkpoint_selection": True, "notes": "Historical derived validation previews; no evidence they were training content."})
+    rows.append(previews)
+    pngan = base("pangan_local_public_samples", "pngan_public_samples", "PNGAN local public samples", "incomplete benchmark samples", "PNGAN bundled samples", "excluded", "EXCLUDED")
+    pngan.update({"used_in_generator_design": True, "used_in_training": True, "used_in_checkpoint_selection": True, "notes": "Parent PNGAN project used these named datasets for modeling/evaluation; local subsets are incomplete."})
+    rows.append(pngan)
 
     mappings = [
         ("pmrid4_500ms_exact_copy", "d_pmrid4_500ms_copy"), ("pmrid7_historical_exposures", "e_pmrid7_exposures"),
@@ -83,10 +86,22 @@ def make_role_rows(config: dict, source_summary: pd.DataFrame, inventory: pd.Dat
         ("iccd_pir_calibration_outputs", "f_iccd_pir"), ("scmos_dark_frames", "f_scmos_dark"),
         ("pmrid_local_historical_training_data", "pmrid_local_training_data"), ("pmrid_noise_calibration_data", "pmrid_noise_calibration"),
     ]
+    explicit_history = {
+        "pmrid4_500ms_exact_copy": (False, True, True),
+        "pmrid7_historical_exposures": (False, True, True),
+        "pmrid4_training_cache": (False, True, True),
+        "real_iccd_evaluation_frames": (True, False, False),
+        "iccd_pir_calibration_outputs": (True, False, False),
+        "scmos_dark_frames": (True, False, False),
+        "pmrid_local_historical_training_data": (False, True, True),
+        "pmrid_noise_calibration_data": (True, False, False),
+    }
     for source_id, candidate_id in mappings:
         row = base(source_id, candidate_id, source_id.replace("_", " "), "excluded audited source", candidate_id, "excluded", "EXCLUDED")
+        generator_design, training, checkpoint = explicit_history[source_id]
+        row.update({"used_in_generator_design": generator_design, "used_in_training": training, "used_in_checkpoint_selection": checkpoint})
         if source_id == "real_iccd_evaluation_frames":
-            row.update({"used_in_e1": True, "used_in_generator_design": True, "notes": "Real ICCD repeated frames used for E1 characterization/evaluation; excluded from content roles."})
+            row.update({"used_in_e1": True, "notes": "Real ICCD repeated frames used for E1 characterization/evaluation; excluded from content roles."})
         rows.append(row)
 
     parent_models_path = Path(config["inputs"]["pmrid_parent_models"])
