@@ -1,0 +1,97 @@
+experiment_id: e2_validation_source_audit_20260718
+current_content_manifest: manifests/e2_content_manifest_20260717.csv
+current_representatives: reports/e2_residual_stability_audit_20260718_v2/metrics/selected_debug_contents.csv
+official_sources:
+  pmrid_repository: https://github.com/MegEngine/PMRID
+  pmrid_paper: https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123510001.pdf
+  pmrid_license: https://github.com/MegEngine/PMRID/blob/main/LICENSE
+limits:
+  max_priority_b_deep_audits: 3
+  max_candidate_representatives: 16
+  thumbnail_size: 128
+  max_generic_files_for_pixel_audit: 64
+candidate_directories:
+- candidate_id: pmrid_official_benchmark
+  path: E:/PMRID-Pytorch-main/PMRID/PMRID
+  priority: A
+  suspected_dataset_name: PMRID ECCV 2020 benchmark
+  suspected_role: official benchmark GT RAW content
+  deep_audit: true
+- candidate_id: f_scmos_other_exposures
+  path: F:/目标传感器噪声参数估计/data
+  priority: B
+  suspected_dataset_name: local sCMOS exposure series
+  suspected_role: possible alternate content
+  deep_audit: true
+- candidate_id: d_val_cmos_derived
+  path: D:/PMRID4/data/val_cmos_images
+  priority: B
+  suspected_dataset_name: PMRID4 validation previews
+  suspected_role: possible validation content
+  deep_audit: true
+- candidate_id: pngan_public_samples
+  path: E:/PNGAN-main/datasets
+  priority: B
+  suspected_dataset_name: PNGAN bundled public samples
+  suspected_role: public sample content
+  deep_audit: true
+- candidate_id: current_scmos_500ms
+  path: F:/目标传感器噪声参数估计/data/500ms
+  priority: C
+  suspected_dataset_name: current audited sCMOS source
+  suspected_role: current debug source
+  deep_audit: false
+- candidate_id: d_pmrid4_500ms_copy
+  path: D:/PMRID4/data/500ms
+  priority: C
+  suspected_dataset_name: PMRID4 sCMOS copy
+  suspected_role: duplicate content
+  deep_audit: false
+- candidate_id: e_pmrid7_exposures
+  path: E:/PMRID/PMRID7/data
+  priority: C
+  suspected_dataset_name: PMRID7 exposure data
+  suspected_role: historical training content
+  deep_audit: false
+- candidate_id: d_pmrid4_cache
+  path: D:/PMRID4/data/cache_train
+  priority: C
+  suspected_dataset_name: PMRID4 cache
+  suspected_role: derived training cache
+  deep_audit: false
+- candidate_id: d_real_iccd_evaluation
+  path: D:/iccd/data/20260319
+  priority: C
+  suspected_dataset_name: real ICCD repeated frames
+  suspected_role: evaluation data
+  deep_audit: false
+- candidate_id: f_iccd_pir
+  path: F:/ICCD_pir
+  priority: C
+  suspected_dataset_name: ICCD calibration and derived results
+  suspected_role: calibration or evaluation data
+  deep_audit: false
+- candidate_id: f_scmos_dark
+  path: F:/目标传感器噪声参数估计/data/dark_Background
+  priority: C
+  suspected_dataset_name: sCMOS dark frames
+  suspected_role: calibration data
+  deep_audit: false
+- candidate_id: pmrid_local_training_data
+  path: E:/PMRID-Pytorch-main/Code/data
+  priority: C
+  suspected_dataset_name: local PMRID training data
+  suspected_role: historical training content
+  deep_audit: false
+- candidate_id: pmrid_noise_calibration
+  path: E:/PMRID-Pytorch-main/reno10x_noise
+  priority: C
+  suspected_dataset_name: PMRID Reno10x noise calibration
+  suspected_role: calibration data
+  deep_audit: false
+classification:
+  cross_source_correlation_duplicate_threshold: 0.98
+  cross_source_ssim_duplicate_threshold: 0.98
+  zero_ratio_max: 0.05
+  saturation_ratio_max: 0.01
+overwrite: false

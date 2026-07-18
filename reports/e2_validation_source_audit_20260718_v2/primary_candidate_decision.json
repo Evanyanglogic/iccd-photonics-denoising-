@@ -1,0 +1,39 @@
+{
+  "backup_candidates": [
+    {
+      "candidate_id": "f_scmos_other_exposures",
+      "reason": "Same acquisition family and no independent scene grouping",
+      "status": "DEBUG-ONLY"
+    },
+    {
+      "candidate_id": "pngan_public_samples",
+      "reason": "Sparse samples and historical PNGAN use",
+      "status": "EXCLUDED"
+    }
+  ],
+  "formal_split_design_allowed_next": true,
+  "next_task": "Build a formal dual-source isolation manifest for training and validation content without generating synthetic pairs.",
+  "primary_candidate": {
+    "allowed_role": "validation_content_only",
+    "candidate_id": "pmrid_official_benchmark",
+    "content_files": 39,
+    "group_structure": [
+      "Scene1",
+      "Scene2",
+      "Scene3",
+      "Scene4"
+    ],
+    "independence_evidence": "Different OPPO Reno 10x public RAW benchmark, zero exact/perceptual matches in bounded comparison, official scene metadata",
+    "limitations": [
+      "Only four scenes",
+      "Mobile Bayer RAW domain differs from grayscale sCMOS/ICCD content",
+      "Must not be used for retrospective claims involving PMRID-tuned models"
+    ],
+    "path": "E:/PMRID-Pytorch-main/PMRID/PMRID",
+    "preprocessing": "Read uint16 GT RAW at 3000x4000 and divide by 65535; preserve Bayer or preregister deterministic Bayer-to-grayscale conversion later",
+    "source": "https://github.com/MegEngine/PMRID",
+    "status": "VALIDATION-READY"
+  },
+  "split_created_in_this_run": false,
+  "validation_ready_exists": true
+}

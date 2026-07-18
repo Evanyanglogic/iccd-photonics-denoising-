@@ -1,0 +1,35 @@
+{
+  "all_outputs_inside_repo": true,
+  "deep_candidates": [
+    "pmrid_official_benchmark",
+    "f_scmos_other_exposures",
+    "d_val_cmos_derived",
+    "pngan_public_samples"
+  ],
+  "experiment_id": "e2_validation_source_audit_20260718",
+  "inventory_count": 13,
+  "next_task": "Build a formal dual-source isolation manifest for training and validation content without generating synthetic pairs.",
+  "primary_candidate": "pmrid_official_benchmark",
+  "primary_candidate_gates": {
+    "all_gt_files_read": true,
+    "dtype_uint16": true,
+    "no_exact_hash_match": true,
+    "no_near_duplicate_correlation": true,
+    "no_near_duplicate_ssim": true,
+    "no_perceptual_hash_match": true,
+    "no_training_list_reference": true,
+    "official_scene_groups_present": true,
+    "saturation_ratio_acceptable": true,
+    "shape_3000x4000": true,
+    "zero_ratio_acceptable": true
+  },
+  "priority_counts": {
+    "A": 1,
+    "B": 3,
+    "C": 9
+  },
+  "provenance_complete": true,
+  "source_data_protected": true,
+  "status": "VALIDATION-READY-FOUND",
+  "validation_ready_exists": true
+}

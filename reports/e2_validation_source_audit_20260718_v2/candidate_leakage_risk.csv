@@ -1,0 +1,14 @@
+﻿candidate_id,historical_training_or_tuning,leakage_risk,allowed_role,status
+pmrid_official_benchmark,False,No evidence of use by Candidate A or current ICCD generator; restrict to future validation_content_only,validation_content_only,VALIDATION-READY
+f_scmos_other_exposures,True,High source/content overlap risk,debug_only,DEBUG-ONLY
+d_val_cmos_derived,True,Explicit historical validation derivative,excluded,EXCLUDED
+pngan_public_samples,True,Parent PNGAN explicitly used these datasets for modeling/evaluation,excluded,EXCLUDED
+d_pmrid4_500ms_copy,True,Exact duplicate,excluded,EXCLUDED
+current_scmos_500ms,False,Current single unknown source group,debug_only,DEBUG-ONLY
+e_pmrid7_exposures,True,Historical training content and same acquisition family,excluded,EXCLUDED
+d_pmrid4_cache,True,Derived training cache,excluded,EXCLUDED
+d_real_iccd_evaluation,True,Real ICCD evaluation data; validation-role leakage,excluded,EXCLUDED
+f_iccd_pir,True,ICCD calibration/evaluation and derived outputs,excluded,EXCLUDED
+f_scmos_dark,True,"Dark calibration frames, not content",excluded,EXCLUDED
+pmrid_local_training_data,True,Historical training data,excluded,EXCLUDED
+pmrid_noise_calibration,True,"Noise calibration data, not validation content",excluded,EXCLUDED

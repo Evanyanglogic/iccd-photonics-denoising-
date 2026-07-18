@@ -1,0 +1,8 @@
+﻿candidate_id,source_scene,evidence,is_real_group,allowed_for_blocking
+pmrid_official_benchmark,Scene1,benchmark.json meta.scene_id,True,True
+pmrid_official_benchmark,Scene2,benchmark.json meta.scene_id,True,True
+pmrid_official_benchmark,Scene3,benchmark.json meta.scene_id,True,True
+pmrid_official_benchmark,Scene4,benchmark.json meta.scene_id,True,True
+f_scmos_other_exposures,unknown,Exposure folders are not scene identifiers,False,False
+d_val_cmos_derived,unknown,Sample numbers are generated outputs,False,False
+pngan_public_samples,unknown,Sparse local samples do not preserve complete official splits,False,False

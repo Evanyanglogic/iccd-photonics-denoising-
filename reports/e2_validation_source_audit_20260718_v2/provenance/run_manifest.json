@@ -1,0 +1,23 @@
+{
+  "deep_candidates": [
+    "pmrid_official_benchmark",
+    "f_scmos_other_exposures",
+    "d_val_cmos_derived",
+    "pngan_public_samples"
+  ],
+  "ended_at_utc": "2026-07-18T12:09:11.734935+00:00",
+  "experiment_id": "e2_validation_source_audit_20260718",
+  "git_commit": "080b60c422cbdc0bcaf73dc33f055ca143a7be1e",
+  "previous_failed_run": {
+    "path": "reports/e2_validation_source_audit_20260718",
+    "reason": "NON-FINITE-THUMBNAIL-DIAGNOSTICS",
+    "reused_as_formal_result": false,
+    "status": "FAILED"
+  },
+  "source_data_protected": true,
+  "source_write_performed": false,
+  "started_at_utc": "2026-07-18T12:08:44.401921+00:00",
+  "status": "VALIDATION-READY-FOUND",
+  "synthetic_pairs_generated": false,
+  "training_or_split_performed": false
+}

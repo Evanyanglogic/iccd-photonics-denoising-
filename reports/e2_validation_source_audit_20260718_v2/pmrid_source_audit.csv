@@ -1,0 +1,8 @@
+﻿question,answer
+source,Official MegEngine/PMRID repository; ECCV 2020 Practical Deep Raw Image Denoising on Mobile Devices
+local_structure,"39 input/gt RAW pairs, 4 official scenes, bright/dark, ISO/exposure metadata"
+format,"uint16 BGGR Bayer RAW, 3000x4000, official loader normalizes by 65535"
+license,Official repository is Apache-2.0; attribution/source URL must accompany use
+current_project_use,No training-list reference to benchmark GT RAW found; current audit/config references: 3
+parent_project_use,Local PMRID code and pretrained model coexist; benchmark paths found in training lists: 0
+role,Future validation_content_only; not retrospective evidence for any model previously tuned on PMRID

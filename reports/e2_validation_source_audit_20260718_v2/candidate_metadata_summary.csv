@@ -1,0 +1,27 @@
+﻿candidate_id,field,value
+pmrid_official_benchmark,total_records,39
+pmrid_official_benchmark,gt_files_expected,39
+pmrid_official_benchmark,gt_files_read,39
+pmrid_official_benchmark,failures,[]
+pmrid_official_benchmark,scene_ids,"[""Scene1"", ""Scene2"", ""Scene3"", ""Scene4""]"
+pmrid_official_benchmark,light_conditions,"[""bright"", ""dark""]"
+pmrid_official_benchmark,iso_values,"[800, 1600, 3200, 4655, 6400]"
+pmrid_official_benchmark,exposure_values,"[20.0, 32.0, 40.0, 80.0, 160.0]"
+pmrid_official_benchmark,shape_values,"[[3000, 4000]]"
+pmrid_official_benchmark,bayer_patterns,"[""BGGR""]"
+pmrid_official_benchmark,representative_count,16
+f_scmos_other_exposures,total_image_files,2700
+f_scmos_other_exposures,sampled_files,16
+f_scmos_other_exposures,successfully_read,16
+f_scmos_other_exposures,failures,[]
+f_scmos_other_exposures,representative_count,16
+d_val_cmos_derived,total_image_files,30
+d_val_cmos_derived,sampled_files,16
+d_val_cmos_derived,successfully_read,16
+d_val_cmos_derived,failures,[]
+d_val_cmos_derived,representative_count,16
+pngan_public_samples,total_image_files,39
+pngan_public_samples,sampled_files,16
+pngan_public_samples,successfully_read,16
+pngan_public_samples,failures,[]
+pngan_public_samples,representative_count,16

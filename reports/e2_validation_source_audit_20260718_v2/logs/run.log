@@ -1,0 +1,17 @@
+{
+  "pmrid_gates": {
+    "all_gt_files_read": true,
+    "dtype_uint16": true,
+    "no_exact_hash_match": true,
+    "no_near_duplicate_correlation": true,
+    "no_near_duplicate_ssim": true,
+    "no_perceptual_hash_match": true,
+    "no_training_list_reference": true,
+    "official_scene_groups_present": true,
+    "saturation_ratio_acceptable": true,
+    "shape_3000x4000": true,
+    "zero_ratio_acceptable": true
+  },
+  "source_data_protected": true,
+  "status": "VALIDATION-READY-FOUND"
+}

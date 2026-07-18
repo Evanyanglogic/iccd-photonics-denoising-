@@ -1,0 +1,14 @@
+﻿candidate_id,file_count_before,file_count_after,image_count_before,image_count_after,bytes_before,bytes_after,unchanged
+pmrid_official_benchmark,79,79,78,78,1872044222,1872044222,True
+f_scmos_other_exposures,2900,2900,2900,2900,24345134600,24345134600,True
+d_val_cmos_derived,30,30,30,30,90729606,90729606,True
+pngan_public_samples,39,39,39,39,10364879,10364879,True
+current_scmos_500ms,100,100,100,100,839487400,839487400,True
+d_pmrid4_500ms_copy,100,100,100,100,839487400,839487400,True
+e_pmrid7_exposures,1121,1121,1100,1100,9237480243,9237480243,True
+d_pmrid4_cache,400,400,0,0,8882040151,8882040151,True
+d_real_iccd_evaluation,2022,2022,2009,2009,105412375559,105412375559,True
+f_iccd_pir,672,672,671,671,3665364854,3665364854,True
+f_scmos_dark,100,100,100,100,839487400,839487400,True
+pmrid_local_training_data,10669,10669,10666,10666,1334828960,1334828960,True
+pmrid_noise_calibration,740,740,0,0,17778825600,17778825600,True
