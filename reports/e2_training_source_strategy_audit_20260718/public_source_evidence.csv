@@ -1,0 +1,11 @@
+﻿candidate_id,evidence_type,url,accessed_on,evidence_summary
+raise_raw_images,official_dataset_page,https://loki.disi.unitn.it/RAISE/index.php,2026-07-18,"Dataset structure, scale and use terms recorded for RAISE."
+raise_raw_images,official_paper_or_publisher,https://iris.unitn.it/handle/11572/122245,2026-07-18,Primary publication supporting dataset description for RAISE.
+mit_adobe_fivek,official_dataset_page,https://data.csail.mit.edu/graphics/fivek/,2026-07-18,"Dataset structure, scale and use terms recorded for MIT-Adobe FiveK."
+mit_adobe_fivek,official_paper_or_publisher,https://doi.org/10.1145/2010324.1964969,2026-07-18,Primary publication supporting dataset description for MIT-Adobe FiveK.
+sid_see_in_the_dark,official_dataset_page,https://github.com/cchen156/Learning-to-See-in-the-Dark,2026-07-18,"Dataset structure, scale and use terms recorded for See-in-the-Dark (SID)."
+sid_see_in_the_dark,official_paper_or_publisher,https://arxiv.org/abs/1805.01934,2026-07-18,Primary publication supporting dataset description for See-in-the-Dark (SID).
+sidd_full,official_dataset_page,https://abdokamel.github.io/sidd/,2026-07-18,"Dataset structure, scale and use terms recorded for SIDD."
+sidd_full,official_paper_or_publisher,https://www.eecs.yorku.ca/~kamel/sidd/files/SIDD_CVPR_2018.pdf,2026-07-18,Primary publication supporting dataset description for SIDD.
+renoir,official_dataset_page,https://ani.stat.fsu.edu/~abarbu/Renoir.html,2026-07-18,"Dataset structure, scale and use terms recorded for RENOIR."
+renoir,official_paper_or_publisher,https://arxiv.org/abs/1409.8230,2026-07-18,Primary publication supporting dataset description for RENOIR.

@@ -1,0 +1,15 @@
+﻿dimension,route_a_local,route_b_new_acquisition,route_c_public
+source_traceability,low-medium: histories are mixed,high: captured under a frozen protocol,high for official sources
+pmrid_isolation,mixed; each source requires recovery,high by design,high at dataset level; verify after download
+scene_independence,not defensible for available candidates,high if 20-40 independent scenes are recorded,"dataset dependent; RAISE/FiveK broad, SIDD only 10 base scenes"
+data_scale,large only for contaminated derived PMRID tree,60 minimum / 200 recommended files,"5,000-8,156 for leading candidates"
+bit_depth,mostly 8-bit derived PNG or role-ineligible sources,controllable uint16 or camera-native high bit depth,RAW/DNG or normalized Raw-RGB depending on dataset
+processing_status,unknown or derived,recordable from acquisition start,documented but camera/dataset specific
+acquisition_time,"short audit, but no source passes",moderate; operator and scene setup required,"short planning, long download/input audit"
+implementation_cost,low but unusable,moderate,low-medium monetary; high storage/preprocessing
+license_risk,source records incomplete,owned/project-governed capture; consent/privacy still required,low for confirmed research licenses; dataset-specific restrictions
+domain_match,mixed and not defensible,best controllable match to grayscale/high-bit pipeline; still not ICCD clean,"camera RAW content, not ICCD domain"
+preprocessing_complexity,high due unknown derivation,medium and auditable,high for Bayer/proprietary RAW
+leakage_risk,high,low if compositions and groups are frozen,low vs PMRID but historical-project overlap varies
+reproducibility,low,"high with protocol, hashes and metadata",high for official dataset; preprocessing must be frozen
+recommendation,NO,PRIMARY,BACKUP

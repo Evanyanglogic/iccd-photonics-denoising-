@@ -1,0 +1,33 @@
+experiment_id: e2_training_source_strategy_audit_20260718
+inputs:
+  role_manifest: manifests/e2_cross_source_role_manifest_20260718.csv
+  role_audit_root: reports/e2_cross_source_role_manifest_20260718_v2
+  role_audit_expected_commit: 338c56e6600918807f76ac3143a4261e13480a9e
+  validation_scene_manifest: manifests/e2_pmrid_validation_scene_manifest_20260718.csv
+  validation_audit_root: reports/e2_validation_source_audit_20260718_v2
+  local_inventory: reports/e2_validation_source_audit_20260718_v2/candidate_directory_inventory.csv
+  scmos_manifest: manifests/e2_content_manifest_20260717.csv
+  historical_training_root: E:/PMRID-Pytorch-main/Code/data
+  pngan_samples_root: E:/PNGAN-main/datasets
+public_audit:
+  accessed_on: 2026-07-18
+  maximum_candidates: 5
+acquisition:
+  formal_name: newly acquired operational training content
+  source_role: training_content_only
+  minimum_scenes: 20
+  minimum_frames_per_scene: 3
+  recommended_scenes: 40
+  recommended_frames_per_scene: 5
+  nominal_shape:
+  - 2048
+  - 2048
+  nominal_dtype: uint16
+  bytes_per_pixel: 2
+protection_roots:
+- D:/PMRID4
+- D:/iccd/data
+- F:/目标传感器噪声参数估计/data
+- F:/ICCD_pir
+- E:/PMRID-Pytorch-main/PMRID/PMRID
+overwrite: false

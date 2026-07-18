@@ -1,0 +1,8 @@
+﻿route,risk,evidence,mitigation
+Route A,HIGH,"No local candidate combines original-source provenance, defensible groups, unpolluted history and PMRID isolation.",Do not upgrade any frozen local role.
+Route B,LOW-CONDITIONAL,A new dataset can exclude PMRID and ICCD evaluation compositions and bind repeats to scene/acquisition blocks.,"Freeze role before capture and perform post-capture hash, duplicate, metadata and overlap audit."
+Route C/RAISE,LOW-CONDITIONAL,Independent official dataset and cameras; no current local-project occurrence detected.,"Use training-only subset, preserve official metadata, audit hashes/content after approved download."
+Route C/FiveK,LOW-CONDITIONAL,Independent photography corpus; no current local-project occurrence detected.,Resolve file-scoped license mapping and freeze DNG/TIFF choice before download.
+Route C/SID,HIGH,"Local PMRID parent contains SID Sony lists and 10,666 historical derived training PNG files.",Do not select without a dedicated history and license-scope audit.
+Route C/SIDD,MEDIUM-HIGH,SIDD samples exist in the PNGAN parent and the released Raw-RGB is already normalized/black-level corrected.,Not a preferred backup; require separate history and preprocessing audit.
+Route C/RENOIR,UNACCEPTABLE,Official page does not state an explicit dataset license.,Exclude until written license terms are confirmed.

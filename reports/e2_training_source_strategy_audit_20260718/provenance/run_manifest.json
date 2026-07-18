@@ -1,0 +1,14 @@
+{
+  "data_acquired": false,
+  "data_downloaded": false,
+  "ended_at_utc": "2026-07-18T15:29:26.912948+00:00",
+  "experiment_id": "e2_training_source_strategy_audit_20260718",
+  "git_commit": "9b4c8b30d8c540241acb262e1034750559f50af3",
+  "network_use": "official-source metadata verification only; no dataset download",
+  "source_data_protected": true,
+  "source_write_performed": false,
+  "split_or_training_performed": false,
+  "started_at_utc": "2026-07-18T15:29:25.592219+00:00",
+  "status": "TRAINING-STRATEGY-VERIFIED-WITH-LIMITATIONS",
+  "synthetic_pairs_generated": false
+}

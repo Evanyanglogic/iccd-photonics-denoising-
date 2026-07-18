@@ -1,0 +1,16 @@
+﻿field,value
+strategy_name,minimum
+formal_source_name,newly acquired operational training content
+allowed_role,training_content_only
+independent_scene_count,20
+frames_per_scene,3
+expected_file_count,60
+nominal_dtype,uint16
+nominal_shape,2048x2048
+estimated_uncompressed_gib,0.469
+scene_categories,low/mid/high brightness;flat;texture;fine lines;edges;natural objects;industrial targets;multiple spatial frequencies;multiple dynamic ranges
+grouping_rule,one scene_id per independently composed scene; all repeats remain in one acquisition_group and one isolation_block
+pmrid_isolation,dataset-level isolation; no PMRID content and no ICCD evaluation composition reuse
+capture_rule,high-bit-depth grayscale-capable camera; low gain where practical; stable exposure; no clipping; preserve camera-native files and metadata
+processing_rule,no dark/pedestal/p99/min-max/gamma correction before a separate input audit freezes preprocessing
+status,TRAINING-SOURCE-CANDIDATE-WITH-LIMITATIONS

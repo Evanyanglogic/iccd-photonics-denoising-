@@ -1,0 +1,33 @@
+{
+  "backup_strategies": [
+    {
+      "candidate": "RAISE-1k training-only subset",
+      "status": "TRAINING-SOURCE-CANDIDATE-WITH-LIMITATIONS",
+      "strategy": "LEGAL-PUBLIC-DATASET"
+    },
+    {
+      "candidate": "MIT-Adobe FiveK DNG",
+      "status": "TRAINING-SOURCE-CANDIDATE-WITH-LIMITATIONS",
+      "strategy": "LEGAL-PUBLIC-DATASET"
+    }
+  ],
+  "current_materialization_status": "NO",
+  "current_training_source_status": "MISSING",
+  "formal_source_name": "newly acquired operational training content",
+  "future_role_after_successful_input_audit": "training_content_only",
+  "next_task": "Output and obtain human confirmation of the formal acquisition protocol, directory structure and metadata table; do not acquire data automatically.",
+  "primary_limitations": [
+    "capture has not occurred",
+    "device metadata capability requires operator confirmation",
+    "captured sCMOS content will retain sensor noise/pedestal until separately audited",
+    "time and storage require manual confirmation"
+  ],
+  "primary_strategy": "NEW-CONTENT-ACQUISITION",
+  "selection_basis": [
+    "lowest controllable leakage risk",
+    "source and role can be frozen before capture",
+    "true scene/acquisition grouping can be recorded",
+    "high-bit-depth grayscale compatibility can be controlled",
+    "dataset-level isolation from PMRID validation"
+  ]
+}

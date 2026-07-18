@@ -1,0 +1,39 @@
+{
+  "backup_strategy_count": 2,
+  "data_acquired": false,
+  "data_downloaded": false,
+  "experiment_id": "e2_training_source_strategy_audit_20260718",
+  "limitations": [
+    "training source is not materialized",
+    "capture device metadata capability and storage/time require human confirmation",
+    "public backups require post-download input and license-scope audit"
+  ],
+  "local_candidate_count": 13,
+  "local_training_ready_count": 0,
+  "model_training_performed": false,
+  "next_task": "Output and obtain human confirmation of the formal acquisition protocol, directory structure and metadata table; do not acquire data automatically.",
+  "pipeline_readiness": {
+    "formal_synthetic_generation": "NOT-ALLOWED",
+    "formal_train_validation_split": "NOT-ALLOWED",
+    "formal_training_content_manifest": "NOT-AVAILABLE",
+    "model_training": "NOT-ALLOWED",
+    "training_content_source": "MISSING",
+    "training_source_audited": "NO",
+    "training_source_materialized": "NO",
+    "training_source_strategy": "VERIFIED",
+    "validation_content_source": "AVAILABLE-WITH-DOMAIN-LIMITATION"
+  },
+  "primary_strategy": "NEW-CONTENT-ACQUISITION",
+  "provenance_complete": true,
+  "public_candidate_count": 5,
+  "routes_audited": [
+    "LOCAL-EXISTING-SOURCE-AUDIT",
+    "NEW-CONTENT-ACQUISITION",
+    "LEGAL-PUBLIC-DATASET"
+  ],
+  "source_data_protected": true,
+  "split_created": false,
+  "status": "TRAINING-STRATEGY-VERIFIED-WITH-LIMITATIONS",
+  "synthetic_pairs_generated": false,
+  "training_manifest_created": false
+}

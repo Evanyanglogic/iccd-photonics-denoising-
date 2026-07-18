@@ -1,0 +1,28 @@
+﻿field,type,required,definition
+content_id,string,True,stable unique identifier
+scene_id,string,True,independently composed scene identifier
+acquisition_group,string,True,all repeat frames from one capture group
+isolation_block_id,string,True,must equal or contain scene/acquisition grouping
+allowed_role,enum,True,training_content_only
+device_make,string,True,camera manufacturer
+device_model,string,True,camera model
+device_serial,string,False,record when available
+capture_date_time,ISO-8601,True,capture timestamp and timezone
+exposure_time,string,True,camera-reported exposure
+analog_gain,string,True,camera-reported gain or ISO
+temperature,string,False,sensor/body temperature when available
+readout_mode,string,True,"mode, bit depth, binning and ROI"
+black_level_setting,string,False,camera setting or unknown; never infer
+lens,string,True,lens and aperture where applicable
+software,string,True,capture/export software and version
+internal_correction_status,enum,True,enabled/disabled/unknown for each camera correction
+original_filename,string,True,camera-native filename
+relative_path,string,True,path under acquisition root
+file_size,integer,True,bytes
+sha256,hex,True,hash of immutable source file
+dtype,string,True,audited after acquisition
+shape,string,True,audited after acquisition
+processing_status,enum,True,likely raw-like/likely camera-processed/unknown after audit
+scene_description,string,True,content category without personal identifiers
+overlap_with_iccd_test,boolean,True,must be false
+notes,string,False,"capture anomalies retained, not deleted"
