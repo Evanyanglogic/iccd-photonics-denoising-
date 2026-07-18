@@ -1,0 +1,25 @@
+{
+  "ended_at_utc": "2026-07-18T11:32:52.396989+00:00",
+  "exit_code": 0,
+  "experiment_id": "e2_residual_stability_audit_20260718",
+  "git_commit": "235bdff07cd97d02faecf31a862cdfde9fd48901",
+  "git_worktree_clean_at_start": true,
+  "previous_failed_run": {
+    "path": "reports/e2_residual_stability_audit_20260718",
+    "reason": "NUMPY-BOOL-JSON-SERIALIZATION",
+    "reused_as_formal_result": false,
+    "status": "FAILED"
+  },
+  "run_id": "e2_residual_stability_audit_20260718_v2",
+  "self_check": false,
+  "started_at_utc": "2026-07-18T11:32:46.569309+00:00",
+  "status": "GO-STABILITY",
+  "steps": {
+    "aggregation": 0,
+    "generation": 0,
+    "json_serialization": 0,
+    "numeric_comparison": 0,
+    "selection": 0,
+    "source_protection": 0
+  }
+}

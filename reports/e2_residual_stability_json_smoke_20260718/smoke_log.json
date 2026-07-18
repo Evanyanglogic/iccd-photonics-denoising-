@@ -1,0 +1,9 @@
+{
+  "checks": {
+    "manifest_parse": true,
+    "nonfinite_to_null": true,
+    "number_types": true,
+    "verification_parse": true
+  },
+  "status": "PASS"
+}

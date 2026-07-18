@@ -1,0 +1,83 @@
+{
+  "source_protection": {
+    "all_outputs_inside_repo": true,
+    "count_after": 100,
+    "count_before": 100,
+    "file_names_unchanged": true,
+    "selected_hashes_and_mtimes_unchanged": true,
+    "source_directory": "F:\\目标传感器噪声参数估计\\data\\500ms",
+    "source_write_performed": false
+  },
+  "verification": {
+    "all_pairs_completed": true,
+    "candidate_name": "e1_temporal_strength_gaussian",
+    "current_claim": "Numerical stability within eight debug-only contents from one unknown source group and three preregistered seeds.",
+    "experiment_id": "e2_residual_stability_audit_20260718",
+    "failed_gates": [],
+    "final_status": "GO-STABILITY",
+    "gate_results": {
+      "candidate_a_only": true,
+      "clean_code_commit": true,
+      "clipping": true,
+      "content_count_8": true,
+      "content_std_cv": true,
+      "debug_only": true,
+      "gradient": true,
+      "median_std_error": true,
+      "no_content_anomaly": true,
+      "no_real_iccd_tuning": true,
+      "no_seed_anomaly": true,
+      "no_split_or_training": true,
+      "no_warning_pairs": true,
+      "numeric_drift_free": true,
+      "overall_brightness": true,
+      "pair_brightness": true,
+      "pair_count_24": true,
+      "pair_std_error": true,
+      "provenance_complete": true,
+      "round_trip": true,
+      "run_manifest_json_standard": true,
+      "seeds_exact": true,
+      "selection_matches_failed_run": true,
+      "sigma_frozen": true,
+      "source_protected": true,
+      "verification_json_standard": true
+    },
+    "next_task": "Audit local D/E/F drives for an independent traceable validation-ready content source only if GO-STABILITY.",
+    "number_of_contents": 8,
+    "number_of_pairs": 24,
+    "previous_failed_run": {
+      "path": "reports/e2_residual_stability_audit_20260718",
+      "reason": "NUMPY-BOOL-JSON-SERIALIZATION",
+      "reused_as_formal_result": false,
+      "status": "FAILED"
+    },
+    "prohibited_claims": [
+      "ICCD physical noise realism",
+      "synthetic-real transfer",
+      "cross-scene generalization",
+      "training readiness",
+      "Gaussian is the true ICCD distribution"
+    ],
+    "provenance_complete": true,
+    "run_id": "e2_residual_stability_audit_20260718_v2",
+    "seeds": [
+      20260717,
+      20260718,
+      20260719
+    ],
+    "sigma_DN": 79.4792404175,
+    "sigma_norm": 0.0012127754698634317,
+    "source_data_protection": {
+      "all_outputs_inside_repo": true,
+      "count_after": 100,
+      "count_before": 100,
+      "file_names_unchanged": true,
+      "selected_hashes_and_mtimes_unchanged": true,
+      "source_directory": "F:\\目标传感器噪声参数估计\\data\\500ms",
+      "source_write_performed": false
+    },
+    "warnings": []
+  },
+  "warnings": []
+}
