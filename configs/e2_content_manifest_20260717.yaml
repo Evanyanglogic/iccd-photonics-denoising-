@@ -1,0 +1,27 @@
+experiment_id: e2_content_manifest_20260717
+input_report: reports/e2_no_dark_input_recheck_20260717
+output_root: reports/e2_content_manifest_20260717
+canonical_manifest: manifests/e2_content_manifest_20260717.csv
+expected_count: 100
+required_input_status: VERIFIED-INPUT-WITH-LIMITATIONS
+preprocessing: raw_uint16.astype(np.float32)/65535.0
+roi: {top: 768, left: 768, height: 512, width: 512}
+source_scene: unknown
+source_group: source_group_unknown
+isolation_block_id: single_unknown_source_group
+processing_status: unknown
+allowed_role_without_independent_validation: debug_only
+candidate_group_only: true
+grouping_profiles:
+  - {name: lenient_full_0p98, full_min: 0.98}
+  - {name: balanced_full_0p995_roi_0p94, full_min: 0.995, roi_min: 0.94}
+  - {name: strict_full_0p999_roi_0p95, full_min: 0.999, roi_min: 0.95}
+high_similarity: {full_min: 0.98, roi_min: 0.95, ssim_min: 0.90}
+alternative_sources:
+  - {path: "F:/\u76ee\u6807\u4f20\u611f\u5668\u566a\u58f0\u53c2\u6570\u4f30\u8ba1/data", relation: same_acquisition_family}
+  - {path: "D:/iccd/data/20260319", relation: real_iccd_evaluation_data}
+  - {path: "F:/ICCD_pir/2025.07.09/CDM-A4000-UM90_DH09131AAK00007", relation: iccd_calibration_or_background}
+  - {path: "E:/PMRID/PMRID7/data", relation: historical_copy_or_same_acquisition_family}
+  - {path: "D:/PMRID4/data", relation: candidate_scene_named_scmos_content}
+  - {path: "E:/PMRID-Pytorch-main/PMRID/PMRID", relation: candidate_public_pmrid_content}
+
