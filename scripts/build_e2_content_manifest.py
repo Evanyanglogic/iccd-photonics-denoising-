@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from e2_content_manifest_lib import read_config, resolve
+from e2_content_manifest_lib import read_config, resolve, sha256_file
 
 
 def build(repo: Path, cfg: dict, output: Path) -> pd.DataFrame:
@@ -26,10 +26,15 @@ def build(repo: Path, cfg: dict, output: Path) -> pd.DataFrame:
     rows = []
     for index, row in joined.sort_values("source_pair_key").reset_index(drop=True).iterrows():
         raw_path = Path(str(row["absolute_path"]))
+        if not raw_path.is_file():
+            raise FileNotFoundError(raw_path)
+        current_sha256 = sha256_file(raw_path)
+        if current_sha256 != row["actual_sha256"]:
+            raise RuntimeError(f"INPUT-DRIFT: {raw_path}")
         rows.append({
             "content_id": f"content_{index:03d}", "source_pair_key": row["source_pair_key"],
             "absolute_path": str(raw_path), "relative_path": raw_path.name, "filename": raw_path.name,
-            "sha256": row["actual_sha256"], "file_size": int(row["file_size_bytes"]),
+            "sha256": current_sha256, "file_size": int(row["file_size_bytes"]),
             "modified_time": pd.to_datetime(int(row["mtime_ns"]), unit="ns").isoformat(),
             "dtype": row["dtype_meta"], "shape": row["shape_meta"],
             "roi_top": cfg["roi"]["top"], "roi_left": cfg["roi"]["left"],
@@ -64,4 +69,3 @@ def main() -> int:
 
 
 if __name__ == "__main__": raise SystemExit(main())
-
