@@ -198,6 +198,7 @@ def statistics_row(pair_key: str, path: Path, image: np.ndarray, scope: str, coo
     raw = np.asarray(image)
     values = raw.astype(np.float64)
     normalized = raw.astype(np.float32) / np.float32(65535.0)
+    exact_normalized = values / 65535.0
     q = np.percentile(values, [0.1, 1, 5, 25, 50, 75, 95, 99, 99.9])
     gx = np.diff(normalized, axis=1)
     gy = np.diff(normalized, axis=0)
@@ -248,6 +249,9 @@ def statistics_row(pair_key: str, path: Path, image: np.ndarray, scope: str, coo
         "norm_p95": float(q[6] / 65535.0),
         "norm_p99": float(q[7] / 65535.0),
         "norm_p99_9": float(q[8] / 65535.0),
+        "normalization_max_abs_error_vs_float64_div65535": float(
+            np.max(np.abs(normalized.astype(np.float64) - exact_normalized))
+        ),
         "zero_ratio": float(np.mean(raw == 0)),
         "saturation_ratio": float(np.mean(raw == 65535)),
         "negative_before_clipping_ratio": 0.0,
@@ -449,8 +453,9 @@ def verify(
     add("negative_ratio_zero", max(row["negative_before_clipping_ratio"] for row in full + roi) == 0, 0)
     add("no_nan_inf", all(row["nan_count"] == 0 and row["inf_count"] == 0 for row in full + roi), True)
     add("no_per_image_scaling", all(row["preprocessing"] == "raw_uint16.astype(np.float32)/65535.0" for row in full + roi), True)
-    normalization_error = max(abs(row["norm_mean"] - row["raw_mean_dn"] / 65535.0) for row in full + roi)
-    add("normalization_is_exact_divide_65535", normalization_error < 2e-7, normalization_error)
+    normalization_error = max(row["normalization_max_abs_error_vs_float64_div65535"] for row in full + roi)
+    float32_half_ulp_at_one = float(np.finfo(np.float32).eps / 2.0)
+    add("normalization_is_float32_divide_65535", normalization_error <= float32_half_ulp_at_one, normalization_error)
     add("no_uint8_conversion", all(row["dtype"] == "uint16" for row in full + roi), sorted({row["dtype"] for row in full + roi}))
     add("no_silent_clipping", all(row["norm_min"] >= 0.0 and row["norm_max"] <= 1.0 for row in full + roi), True)
     add("inter_image_mean_not_forced", max(row["raw_mean_dn"] for row in full) > min(row["raw_mean_dn"] for row in full), range_of(full, "raw_mean_dn"))
