@@ -1,0 +1,5 @@
+﻿priority,gap_id,module,gap,can_use_existing_data,single_next_task
+1,OBSERVED-STATE-RELIABILITY-SEPARATION,CG,"No frozen calibration/evaluation boundary and no brightness-adjusted, frame-subset reliability/redundancy gate for observed noise-state features.",True,True
+2,SPATIAL-SUBSET-REPEATABILITY,CGS,Radial ACF/PSD are folder-level only; frame-subset repeatability is not reported.,True,False
+3,STRUCTURE-ENERGY-ACCOUNTING,CGS,"Temporal, row/column, spatial and stable energies are not shown to be non-overlapping generator components.",True,False
+4,PHYSICAL-CONDITION-VARIATION,CG,Recorded exposure/sync/gain settings are constant; gate attribution and varying physical conditions cannot be recovered from these folders.,False,False

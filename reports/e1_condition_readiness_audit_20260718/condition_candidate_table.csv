@@ -1,0 +1,12 @@
+﻿candidate,candidate_type,observed_range,evidence_status,ready_for_frozen_condition,limitation
+recorded_exposure_channel_width_ms,physical-recorded,900 for all folders,VERIFIED,False,constant; cannot define states
+recorded_gain_setting,physical-recorded,60 for all folders,VERIFIED,False,constant; cannot define states
+sync_a_or_b_width_us,physical-recorded,4 for all folders,VERIFIED,False,constant and gate attribution unknown
+mean_signal,content/statistical covariate,935.120-4699.217 DN,VERIFIED-OPERATIONAL,False,"brightness/scene covariate, not a device condition"
+temporal_std_mean,observed noise-state,38.585-228.860 DN,REPEATABLE-WITH-CONFOUND,False,"best CG strength candidate, but rho=1.0 with mean signal and evaluation overlap unresolved"
+temporal_fano_approx,observed derived statistic,1.699-15.391,OPERATIONAL-ONLY,False,derived from variance and mean; not photon gain
+row_pattern_energy_dn,observed noise-state,6.681-19.583 DN,PARTIAL,False,block CV available; brightness and other strength features are highly collinear
+column_pattern_energy_dn,observed noise-state,1.782-32.562 DN,PARTIAL,False,block CV available; brightness and temporal strength are highly collinear
+radial_autocorr_r1,observed noise-state,0.0204-0.0971,PARTIAL,False,low brightness correlation but frame-subset repeatability not established
+observed_stable_component_std_dn,observed stable state,12.896-544.528 DN,PARTIAL,False,"split maps repeat, but scene content and stable detector structure are not separable"
+frame_mean_relative_change_half,observed drift state,-0.005374-0.002081,PARTIAL,False,single sequence per folder; sign and magnitude require repeatability audit

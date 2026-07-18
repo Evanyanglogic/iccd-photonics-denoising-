@@ -1,0 +1,6 @@
+{
+  "highest_priority_gap": "OBSERVED-STATE-RELIABILITY-SEPARATION",
+  "next_task": "Using existing data only, pre-register a folder-blocked calibration/evaluation boundary and audit brightness-adjusted frame-subset reliability and redundancy of the observed noise-state vector; do not train or implement CG.",
+  "reacquisition_required": false,
+  "status": "E1-PARTIAL-FOR-CONDITION-MODELING"
+}

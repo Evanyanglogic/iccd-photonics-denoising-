@@ -1,0 +1,15 @@
+{
+  "CGS_READY": false,
+  "CG_READY": false,
+  "calibration_evaluation_overlap_folder_count": 10,
+  "experiment_id": "e1_condition_readiness_audit_20260718",
+  "folder_count": 10,
+  "model_training_performed": false,
+  "next_task": "Using existing data only, pre-register a folder-blocked calibration/evaluation boundary and audit brightness-adjusted frame-subset reliability and redundancy of the observed noise-state vector; do not train or implement CG.",
+  "observed_noise_state_candidates_found": true,
+  "physical_condition_variation_found": false,
+  "provenance_complete": true,
+  "source_data_protected": true,
+  "status": "E1-PARTIAL-FOR-CONDITION-MODELING",
+  "synthetic_pairs_generated": false
+}

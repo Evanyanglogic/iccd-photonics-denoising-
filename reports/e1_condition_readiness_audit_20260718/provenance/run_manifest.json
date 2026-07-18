@@ -1,0 +1,14 @@
+{
+  "e1_source_commit": "524adc0578d3f83e04b95ebdc89ad829a4027496",
+  "ended_at_utc": "2026-07-18T16:09:03.244922+00:00",
+  "experiment_id": "e1_condition_readiness_audit_20260718",
+  "git_commit": "bad1f04b97ed7ab6aa6ba6acba3a8e57324c0e2e",
+  "model_training_performed": false,
+  "source_data_protected": true,
+  "source_file_count_after": 2022,
+  "source_file_count_before": 2022,
+  "source_write_performed": false,
+  "started_at_utc": "2026-07-18T16:09:01.566128+00:00",
+  "status": "E1-PARTIAL-FOR-CONDITION-MODELING",
+  "synthetic_pairs_generated": false
+}

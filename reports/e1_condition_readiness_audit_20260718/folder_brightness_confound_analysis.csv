@@ -1,0 +1,8 @@
+﻿feature,spearman_with_mean_signal,absolute_spearman,folder_min,folder_max,brightness_confound_risk,interpretation
+temporal_std_mean,0.9999999999999999,0.9999999999999999,38.584720611572266,228.86013793945312,HIGH,descriptive n=10; scene and brightness are not independently controlled
+row_pattern_energy_dn,0.9272727272727272,0.9272727272727272,6.68051400876739,19.58295917566259,HIGH,descriptive n=10; scene and brightness are not independently controlled
+column_pattern_energy_dn,0.9878787878787878,0.9878787878787878,1.7823555598275769,32.56209547919251,HIGH,descriptive n=10; scene and brightness are not independently controlled
+radial_autocorr_r1,0.06666666666666665,0.06666666666666665,0.0203835697227431,0.0970547677968631,LOW-TO-MODERATE,descriptive n=10; scene and brightness are not independently controlled
+observed_stable_component_std_dn,0.9636363636363635,0.9636363636363635,12.896051352755336,544.527852969119,HIGH,descriptive n=10; scene and brightness are not independently controlled
+frame_mean_relative_change_half,-0.3696969696969697,0.3696969696969697,-0.0053742392787815,0.00208132402257,LOW-TO-MODERATE,descriptive n=10; scene and brightness are not independently controlled
+temporal_std_roi_sensitivity,,,0.002866301305437733,0.3142569276396766,HIGH,crop-size relative range across 256/512/1024; fixed ROI is mandatory

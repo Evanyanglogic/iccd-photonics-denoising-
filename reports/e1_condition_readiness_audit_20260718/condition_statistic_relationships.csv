@@ -1,0 +1,22 @@
+﻿condition,noise_statistic,relationship,reason
+recorded_exposure_channel_width_ms,temporal_std_mean,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_exposure_channel_width_ms,row_pattern_energy_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_exposure_channel_width_ms,column_pattern_energy_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_exposure_channel_width_ms,radial_autocorr_r1,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_exposure_channel_width_ms,observed_stable_component_std_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_gain_setting,temporal_std_mean,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_gain_setting,row_pattern_energy_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_gain_setting,column_pattern_energy_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_gain_setting,radial_autocorr_r1,NOT-ESTIMABLE,condition is constant across all 10 folders
+recorded_gain_setting,observed_stable_component_std_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+sync_a_or_b_width_us,temporal_std_mean,NOT-ESTIMABLE,condition is constant across all 10 folders
+sync_a_or_b_width_us,row_pattern_energy_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+sync_a_or_b_width_us,column_pattern_energy_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+sync_a_or_b_width_us,radial_autocorr_r1,NOT-ESTIMABLE,condition is constant across all 10 folders
+sync_a_or_b_width_us,observed_stable_component_std_dn,NOT-ESTIMABLE,condition is constant across all 10 folders
+mean_signal_covariate,temporal_std_mean,0.9999999999999999,descriptive Spearman; brightness and scene uncontrolled
+mean_signal_covariate,row_pattern_energy_dn,0.9272727272727272,descriptive Spearman; brightness and scene uncontrolled
+mean_signal_covariate,column_pattern_energy_dn,0.9878787878787878,descriptive Spearman; brightness and scene uncontrolled
+mean_signal_covariate,radial_autocorr_r1,0.06666666666666665,descriptive Spearman; brightness and scene uncontrolled
+mean_signal_covariate,observed_stable_component_std_dn,0.9636363636363635,descriptive Spearman; brightness and scene uncontrolled
+mean_signal_covariate,frame_mean_relative_change_half,-0.3696969696969697,descriptive Spearman; brightness and scene uncontrolled

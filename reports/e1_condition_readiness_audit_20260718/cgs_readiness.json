@@ -1,0 +1,14 @@
+{
+  "CGS_READY": false,
+  "decision": "CGS is not ready; no structured component may be added until CG is frozen and one structure component passes an independent reliability and energy-accounting gate.",
+  "gate_results": {
+    "calibration_only_parameter_estimation_available": false,
+    "component_energy_double_counting_ruled_out": false,
+    "row_column_block_repeatability_available": true,
+    "row_column_folder_statistics_available": true,
+    "spatial_acf_psd_folder_statistics_available": true,
+    "spatial_acf_psd_frame_subset_repeatability_available": false,
+    "stable_component_scene_separation_available": false,
+    "stable_map_split_repeatability_available": true
+  }
+}

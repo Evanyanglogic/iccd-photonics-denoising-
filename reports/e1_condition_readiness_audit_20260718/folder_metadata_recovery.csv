@@ -1,0 +1,161 @@
+﻿folder,condition_field,recovered_value,verification_level,evidence
+1,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+1,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+1,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+1,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+1,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+1,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+1,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+1,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+1,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+1,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+1,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+1,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+1,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+1,acquisition_order,1,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+1,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+1,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+2,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+2,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+2,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+2,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+2,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+2,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+2,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+2,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+2,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+2,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+2,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+2,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+2,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+2,acquisition_order,2,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+2,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+2,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+4,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+4,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+4,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+4,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+4,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+4,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+4,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+4,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+4,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+4,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+4,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+4,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+4,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+4,acquisition_order,3,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+4,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+4,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+5,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+5,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+5,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+5,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+5,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+5,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+5,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+5,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+5,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+5,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+5,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+5,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+5,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+5,acquisition_order,4,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+5,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+5,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+7,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+7,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+7,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+7,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+7,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+7,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+7,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+7,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+7,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+7,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+7,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+7,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+7,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+7,acquisition_order,5,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+7,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+7,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+8,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+8,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+8,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+8,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+8,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+8,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+8,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+8,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+8,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+8,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+8,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+8,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+8,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+8,acquisition_order,6,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+8,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+8,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+9,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+9,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+9,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+9,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+9,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+9,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+9,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+9,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+9,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+9,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+9,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+9,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+9,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+9,acquisition_order,7,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+9,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+9,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+10,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+10,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+10,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+10,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+10,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+10,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+10,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+10,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+10,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+10,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+10,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+10,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+10,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+10,acquisition_order,8,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+10,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+10,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+11,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+11,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+11,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+11,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+11,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+11,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+11,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+11,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+11,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+11,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+11,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+11,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+11,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+11,acquisition_order,9,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+11,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+11,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.
+13,camera_serial,20600555,VERIFIED,Filename and Format.ini serialNumber agree.
+13,recorded_exposure_channel_width_ms,900.0,VERIFIED,All 200 PictureInfo lines record Exposure width 900 ms.
+13,recorded_exposure_channel_delay_ms,0.0,VERIFIED,All 200 PictureInfo lines record Exposure delay 0 ms.
+13,sync_a_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.A width 4 us; physical gate attribution is not established.
+13,sync_b_width_us,4.0,VERIFIED,All 200 PictureInfo lines record Sync.B width 4 us; physical gate attribution is not established.
+13,recorded_gain_setting,60.0,VERIFIED,All 200 PictureInfo lines and T560.ini record gain 60.
+13,mcp_gain,60?,PARTIALLY-VERIFIED,"The control is labeled gain, but no source explicitly identifies it as calibrated MCP gain."
+13,physical_gate_width,unknown,UNKNOWN,"Sync channels are recorded, but their mapping to the intensifier gate is undocumented."
+13,sensor_integration_exposure,900 ms vs Format.ini 300,CONFLICTING,Per-frame Exposure channel is 900 ms; non-snapshotted Format.ini contains s_exposure=300.
+13,trigger_mode,unknown,UNKNOWN,No per-folder trigger-mode record.
+13,readout_mode,5120x5120 uint16; other settings uncertain,PARTIALLY-VERIFIED,TIFF encoding is verified; Format.ini settings are not a per-folder immutable snapshot.
+13,temperature,unknown,UNKNOWN,No TIFF/PictureInfo temperature field.
+13,capture_date,20260319,PARTIALLY-VERIFIED,"Directory and INI path encode date, but TIFF has no DateTime tag and manifest mtimes reflect later file handling."
+13,acquisition_order,10,PARTIALLY-VERIFIED,"Folder and mtime order are monotonic, but no immutable acquisition log confirms causality."
+13,within_folder_same_scene,likely repeated sequence,PARTIALLY-VERIFIED,Sequential 200-frame capture with constant settings; scene identifier absent.
+13,cross_folder_same_scene,unknown,UNKNOWN,No scene identifier or acquisition note links folders.

@@ -1,0 +1,25 @@
+{
+  "CG_READY": false,
+  "decision": "Candidate observed strength states exist, but CG must wait for a frozen folder-blocked calibration/evaluation boundary and a brightness-adjusted reliability/redundancy audit.",
+  "evidence": {
+    "temporal_std_frame_count_cv_range": [
+      0.006728822605702266,
+      0.021120043605676306
+    ],
+    "temporal_std_range_dn": [
+      38.584720611572266,
+      228.86013793945312
+    ],
+    "temporal_std_ratio_max_min": 5.931366984443416,
+    "temporal_std_vs_mean_signal_spearman": 0.9999999999999999
+  },
+  "minimum_gate_results": {
+    "at_least_two_distinguishable_strength_states": true,
+    "brightness_scene_confound_resolved": false,
+    "calibration_evaluation_separation_frozen": false,
+    "conditions_preregisterable_now": false,
+    "physical_condition_varies_across_folders": false,
+    "sigma_repeatable_across_frame_counts": true,
+    "state_definition_traceable": "PARTIAL-observed-noise-state-only"
+  }
+}
