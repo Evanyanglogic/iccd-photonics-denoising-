@@ -85,7 +85,9 @@ def fit_all(df,models):
             errors.append(err); slopes.append(fit['b']); loo.append({'model':name,'excluded_folder':int(row.folder),'train_a':fit['a'],'train_b':fit['b'],'predicted_std_DN':pred,'observed_std_DN':float(s[i]),'prediction_error_DN':err,'residual_sign':int(np.sign(err)),'slope_relative_change':abs(fit['b']-full['b'])/max(abs(full['b']),1e-12)})
         summaries.append({'model':name,'equation':full['equation'],'a':full['a'],'b':full['b'],'pearson_r_signal_vs_native_target':pr(x,v if name=='L2' else s),'r_squared_native':full['r_squared_native'],'full_rmse_std_DN':full['rmse_std'],'loocv_rmse_std_DN':float(np.sqrt(np.mean(np.square(errors)))),'loocv_mae_std_DN':float(np.mean(np.abs(errors))),'loo_slope_sign_consistency':float(np.mean(np.sign(slopes)==np.sign(full['b']))),'maximum_slope_relative_change':float(max(abs(np.asarray(slopes)-full['b'])/max(abs(full['b']),1e-12))),'nonphysical_warning':full['nonphysical_warning']})
     out=pd.DataFrame(summaries).sort_values('loocv_rmse_std_DN').reset_index(drop=True); out['loocv_rank']=np.arange(1,len(out)+1)
-    lo=pd.DataFrame(loo); lo['high_influence']=lo.slope_relative_change>0.25
+    lo=pd.DataFrame(loo)
+    median_abs_error=lo.groupby('model').prediction_error_DN.transform(lambda values: np.median(np.abs(values)))
+    lo['high_influence']=(lo.slope_relative_change>0.25) | (np.abs(lo.prediction_error_DN)>2*median_abs_error)
     return out,lo
 def fit_model_prediction(name,fit,x):
     if name=='L2': return float(math.sqrt(max(fit['a']+fit['b']*x,0)))
@@ -161,13 +163,15 @@ def main():
     subset_rank_rho=float(np.median([rho(adjusted.set_index('folder').loc[g.folder].temporal_std_DN,g.temporal_std_DN) for _,g in subsets_df.groupby('subset')]))
     roi_rank_rho=float(np.median([rho(adjusted.set_index('folder').loc[g.folder].temporal_std_DN,g.temporal_std_DN) for _,g in rois.groupby('roi_name')]))
     signal_ok=bool(fits.iloc[0].loocv_rmse_std_DN/center.temporal_std_DN.mean()<0.25 and fits.iloc[0].loo_slope_sign_consistency==1 and subset_rank_rho>=0.9 and roi_rank_rho>=0.7)
-    state_ok=bool((repeat.adjusted_residual_sign_consistency_vs_full>=6/7).sum()>=4 and (roi_summary.adjusted_residual_roi_sign_consistency>=.8).sum()>=4)
+    adjusted_subset_rhos=[rho(adjusted.set_index('folder').loc[g.folder].brightness_adjusted_temporal_residual_DN,g.brightness_adjusted_temporal_residual_DN) for _,g in subsets_df.groupby('subset')]
+    adjusted_roi_rhos=[rho(adjusted.set_index('folder').loc[g.folder].brightness_adjusted_temporal_residual_DN,g.brightness_adjusted_temporal_residual_DN) for _,g in rois.groupby('roi_name')]
+    state_ok=bool(abs(rho(adjusted.mean_signal_DN,adjusted.brightness_adjusted_temporal_residual_DN))<=.5 and np.median(adjusted_subset_rhos)>=.7 and np.median(adjusted_roi_rhos)>=.7 and (repeat.adjusted_residual_sign_consistency_vs_full>=6/7).sum()>=4 and (roi_summary.adjusted_residual_roi_sign_consistency>=.8).sum()>=4)
     acf_subset_rhos=[rho(adjusted.set_index('folder').loc[g.folder].radial_acf_lag1,g.radial_acf_lag1) for _,g in subsets_df.groupby('subset')]
     acf_roi_rhos=[rho(adjusted.set_index('folder').loc[g.folder].radial_acf_lag1,g.radial_acf_lag1) for _,g in rois.groupby('roi_name')]
     acf_aux=bool(abs(rho(center.mean_signal_DN,center.radial_acf_lag1))<.5 and np.median(acf_subset_rhos)>=.7 and np.median(acf_roi_rhos)>=.7)
     candidates=pd.DataFrame([
       {'rank':1,'candidate':'predicted_sigma_from_signal_model','role':'primary','reliable':signal_ok,'brightness_relation':'explicitly modeled','subset_rank_rho_median':subset_rank_rho,'roi_rank_rho_median':roi_rank_rho,'decision':'SELECT' if signal_ok else 'REJECT'},
-      {'rank':2,'candidate':'brightness_adjusted_temporal_residual','role':'folder-state alternative','reliable':state_ok,'brightness_relation':'residualized','subset_rank_rho_median':float(np.median([rho(adjusted.set_index('folder').loc[g.folder].brightness_adjusted_temporal_residual_DN,g.brightness_adjusted_temporal_residual_DN) for _,g in subsets_df.groupby('subset')])),'roi_rank_rho_median':float(np.median([rho(adjusted.set_index('folder').loc[g.folder].brightness_adjusted_temporal_residual_DN,g.brightness_adjusted_temporal_residual_DN) for _,g in rois.groupby('roi_name')])),'decision':'AUXILIARY' if state_ok else 'REJECT'},
+      {'rank':2,'candidate':'brightness_adjusted_temporal_residual','role':'folder-state alternative','reliable':state_ok,'brightness_relation':f'residualized but remaining Spearman rho={rho(adjusted.mean_signal_DN,adjusted.brightness_adjusted_temporal_residual_DN):.6g}','subset_rank_rho_median':float(np.median(adjusted_subset_rhos)),'roi_rank_rho_median':float(np.median(adjusted_roi_rhos)),'decision':'AUXILIARY' if state_ok else 'REJECT'},
       {'rank':3,'candidate':'radial_acf_lag1','role':'optional auxiliary','reliable':acf_aux,'brightness_relation':f'rho={rho(center.mean_signal_DN,center.radial_acf_lag1):.6g}','subset_rank_rho_median':float(np.median(acf_subset_rhos)),'roi_rank_rho_median':float(np.median(acf_roi_rhos)),'decision':'AUXILIARY' if acf_aux else 'NOT-YET'},
       {'rank':4,'candidate':'row_column_stable','role':'excluded from CG main condition','reliable':False,'brightness_relation':'highly confounded/redundant','subset_rank_rho_median':float('nan'),'roi_rank_rho_median':float('nan'),'decision':'REJECT'}])
     split_rows=[]
