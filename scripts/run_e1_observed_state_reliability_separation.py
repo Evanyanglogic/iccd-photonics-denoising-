@@ -183,8 +183,12 @@ def main():
     outputs={'folder_signal_noise_table.csv':adjusted,'signal_noise_model_fits.csv':fits,'leave_one_folder_out_results.csv':loo,'brightness_adjusted_residuals.csv':adjusted[['folder','mean_signal_DN','temporal_std_DN','predicted_temporal_std_DN','brightness_adjusted_temporal_residual_DN','standardized_adjusted_residual','residual_rank','residual_sign']], 'folder_subset_repeatability.csv':subsets_df,'roi_sensitivity_analysis.csv':rois,'feature_correlation_spearman.csv':sp.reset_index(),'feature_correlation_pearson.csv':pe.reset_index(),'feature_redundancy_analysis.csv':red,'condition_candidate_ranking.csv':candidates,'split_candidate_comparison.csv':split_compare,'primary_folder_blocked_split.csv':split_manifest}
     for n,d in outputs.items(): d.to_csv(output/n,index=False,encoding='utf-8-sig')
     manifest=repo/'manifests/e1_primary_calibration_evaluation_split_20260718.csv'
-    if manifest.exists(): raise FileExistsError(f'Manifest exists: {manifest}')
-    split_manifest.to_csv(manifest,index=False,encoding='utf-8-sig')
+    if manifest.exists():
+        existing=pd.read_csv(manifest)
+        if list(existing.columns)!=list(split_manifest.columns) or not existing.astype(str).equals(split_manifest.astype(str)):
+            raise RuntimeError(f'Existing split manifest drift: {manifest}')
+    else:
+        split_manifest.to_csv(manifest,index=False,encoding='utf-8-sig')
     dump_json(output/'cg_readiness.json',{'CG_READY':cg_ready,'route':'signal-conditioned' if signal_ok else ('observed-state-conditioned' if state_ok else 'none'),'selected_model':selected,'signal_condition_supported':signal_ok,'folder_level_condition_supported':state_ok,'optional_auxiliary_condition':'radial_acf_lag1' if acf_aux else None,'primary_calibration_folders':cfg[pkey]['calibration'],'primary_evaluation_folders':cfg[pkey]['evaluation'],'historical_candidate_a_used_all_folders':True,'G_calibration_rule':'median formal-E1 temporal_std_mean over primary calibration folders only; fixed center ROI; no evaluation folders','limitations':['n=10 folders','physical conditions constant/unknown','signal and folder/scene remain confounded','historical Candidate A used all folders']})
     dump_json(output/'cgs_gap_update.json',{'CGS_READINESS':'NOT-YET','missing':['radial ACF subset/ROI evidence must be calibration-only confirmed','row/column brightness-adjusted independence','stable-map scene leakage audit','component-energy de-duplication','calibration-only structural parameter estimation']})
     commit_files=[Path(__file__),cfg_path,repo/'scripts/json_serialization.py']; input_files=[formal/'verification_status.json',formal/'noise_summary/folder_noise_summary.csv',formal/'spatial/spatial_correlation_summary.csv',formal/'stable_component/stable_component_summary.csv']
@@ -200,7 +204,8 @@ def main():
     (output/'verification_report.md').write_text(report,encoding='utf-8')
     run={'experiment_id':cfg['experiment_id'],'started_at_utc':started,'ended_at_utc':now(),'git_commit':commit,'status':final,'folder_count':10,'source_file_count_before':count_before,'source_file_count_after':count_after,'source_data_protected':source_ok,'synthetic_pairs_generated':False,'model_training_performed':False}
     required=list(outputs)+['cg_readiness.json','cgs_gap_update.json','verification_report.md','provenance/git_commit.txt','provenance/git_status_before.txt','provenance/git_diff.patch','provenance/command.txt','provenance/environment.txt','provenance/resolved_config.yaml','provenance/script_hashes.csv','provenance/input_hashes.csv','provenance/source_protection.csv']
-    provenance_complete=all((output/p).is_file() and (output/p).stat().st_size>0 for p in required)
+    allowed_empty={'provenance/git_status_before.txt','provenance/git_diff.patch'}
+    provenance_complete=all((output/p).is_file() and ((output/p).stat().st_size>0 or p in allowed_empty) for p in required)
     verification={'experiment_id':cfg['experiment_id'],'status':final,'CG_READY':cg_ready,'CGS_READINESS':'NOT-YET','selected_model':selected,'primary_split':primary,'provenance_complete':provenance_complete,'source_data_protected':source_ok,'model_training_performed':False,'synthetic_pairs_generated':False}
     if not provenance_complete or not source_ok:
         verification['status']='OBSERVED-STATE-SEPARATION-NO-GO'; run['status']=verification['status']
