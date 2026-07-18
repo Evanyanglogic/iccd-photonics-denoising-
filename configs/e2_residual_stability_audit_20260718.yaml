@@ -1,0 +1,41 @@
+experiment_id: e2_residual_stability_audit_20260718
+content_manifest: manifests/e2_content_manifest_20260717.csv
+e1_status: reports/e1_formal_rerun_20260717/verification_status.json
+e1_strength_csv: reports/e1_formal_rerun_20260717/noise_summary/folder_noise_summary.csv
+baseline_report: reports/e2_residual_baseline_smoke_20260717/verification_status.json
+content_selection:
+  method: roi_mean_quantiles
+  quantiles: [0.0, 0.15, 0.30, 0.45, 0.60, 0.75, 0.90, 1.0]
+  tie_breaker: sha256_lexicographic_smallest
+required_content_role: debug_only
+isolation_block_id: single_unknown_source_group
+seeds: [20260717, 20260718, 20260719]
+sigma_dn: 79.4792404175
+sigma_source: e1_folder_temporal_std_median
+normalization_divisor: 65535.0
+roi: {top: 768, left: 768, height: 512, width: 512}
+preprocessing:
+  dark_subtraction: false
+  scalar_pedestal_subtraction: false
+  per_image_p99_scaling: false
+  min_max_normalization: false
+representative_save:
+  seed: 20260717
+  roles: [lowest_mean, closest_selected_median, highest_mean]
+gates:
+  pair_residual_std_relative_error_max: 0.01
+  median_residual_std_relative_error_max: 0.005
+  content_level_residual_std_mean_cv_max: 0.005
+  negative_before_clipping_max: 0.05
+  above_one_before_clipping_max: 0.01
+  added_zero_clipping_max: 0.05
+  added_one_clipping_max: 0.01
+  pair_abs_brightness_difference_dn_max: 1.0
+  overall_abs_mean_brightness_difference_dn_max: 0.25
+  overall_mean_abs_brightness_difference_dn_max: 0.5
+  gradient_energy_ratio_min: 0.98
+  gradient_energy_ratio_max: 1.05
+  noisy_round_trip_max_error_dn: 0.501
+  residual_reconstruction_max_error_dn: 1.0
+overwrite: false
+
