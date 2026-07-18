@@ -1,0 +1,1 @@
+scripts\run_e2_residual_baseline_smoke.py --config configs\e2_residual_baseline_smoke_20260717.yaml --output-root reports\e2_residual_baseline_smoke_20260717

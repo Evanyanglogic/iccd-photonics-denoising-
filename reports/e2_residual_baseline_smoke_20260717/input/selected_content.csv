@@ -1,0 +1,2 @@
+﻿content_id,source_pair_key,source_path,source_sha256,selection_rule,allowed_role,roi_top,roi_left,roi_height,roi_width,raw_roi_min_dn,raw_roi_max_dn,raw_roi_mean_dn,raw_roi_std_dn
+content_096,15ms_to_500ms_096,F:\目标传感器噪声参数估计\data\500ms\P251622040096.tif,02aaffa2527faef5539d1b9d9100aceb38fc6870379cd83789651d273a23b212,sha256_lexicographic_first,debug_only,768,768,512,512,3873,57942,12839.923118591309,3769.092198391961

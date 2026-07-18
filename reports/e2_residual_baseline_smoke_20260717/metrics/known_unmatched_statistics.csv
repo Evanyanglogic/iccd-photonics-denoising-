@@ -1,0 +1,8 @@
+﻿metric,status,reason
+row_energy,intentionally_unmatched,Candidate A is the preregistered strength-only baseline
+column_energy,intentionally_unmatched,Candidate A is the preregistered strength-only baseline
+radial_psd,intentionally_unmatched,Candidate A is the preregistered strength-only baseline
+spatial_autocorrelation,intentionally_unmatched,Candidate A is the preregistered strength-only baseline
+repeatable_observed_stable_component,intentionally_unmatched,Candidate A is the preregistered strength-only baseline
+fano_like,intentionally_unmatched,Candidate A is the preregistered strength-only baseline
+signal_dependence,intentionally_unmatched,Candidate A is the preregistered strength-only baseline

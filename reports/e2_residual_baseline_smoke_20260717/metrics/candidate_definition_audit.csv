@@ -1,0 +1,4 @@
+﻿candidate,status,reason
+A strength-only Gaussian,GO,Minimal zero-mean Gaussian with strength from formal E1 median temporal std; only candidate executed
+B empirical residual,NO-GO,No frozen ICCD calibration/test isolation; residual scene/stable-component leakage is unresolved
+C structured operational,NO-GO,E1 summary energies and correlations do not uniquely identify independent generator parameters

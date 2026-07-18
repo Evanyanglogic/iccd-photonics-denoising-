@@ -1,0 +1,31 @@
+{
+  "status": "GO-SMOKE",
+  "definition_checks": {
+    "candidate_a_only": true,
+    "single_pair_only": true,
+    "e1_verified": true,
+    "strength_from_e1_median": true,
+    "no_dark": true,
+    "no_pedestal": true,
+    "no_p99": true,
+    "content_debug_only": true,
+    "no_training_or_split": true,
+    "clean_worktree_at_start": true
+  },
+  "numeric_checks": {
+    "residual_std": true,
+    "negative_clipping": true,
+    "above_one_clipping": true,
+    "added_zero_clipping": true,
+    "added_one_clipping": true,
+    "content_round_trip": true,
+    "noisy_round_trip": true,
+    "residual_round_trip": true,
+    "std_round_trip": true,
+    "uint16_shape": true
+  },
+  "candidate_executed": "A strength-only Gaussian",
+  "pair_count": 1,
+  "synthetic_dataset_generated": false,
+  "model_training_performed": false
+}

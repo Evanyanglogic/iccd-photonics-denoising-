@@ -1,0 +1,38 @@
+experiment_id: e2_residual_baseline_smoke_20260717
+content_manifest: manifests/e2_content_manifest_20260717.csv
+e1_status: reports/e1_formal_rerun_20260717/verification_status.json
+e1_strength_csv: reports/e1_formal_rerun_20260717/noise_summary/folder_noise_summary.csv
+content_selection: sha256_lexicographic_first
+required_content_role: debug_only
+roi:
+  top: 768
+  left: 768
+  height: 512
+  width: 512
+content_preprocessing:
+  dark_subtraction: false
+  scalar_pedestal_subtraction: false
+  per_image_p99_scaling: false
+  normalization_divisor: 65535.0
+residual_baseline:
+  name: e1_temporal_strength_gaussian
+  scientific_name: operational synthetic residual baseline
+  distribution: gaussian
+  mean: 0.0
+  strength_source: e1_folder_temporal_std_median
+  e1_field: temporal_std_mean
+  seed: 20260717
+  per_image_mean_correction: false
+  per_image_std_correction: false
+output_dtype: uint16
+tiff_compression: none
+overwrite: false
+gates:
+  residual_std_relative_error_max: 0.05
+  negative_before_clipping_ratio_max: 0.05
+  above_one_before_clipping_ratio_max: 0.01
+  added_zero_clipping_ratio_max: 0.05
+  added_one_clipping_ratio_max: 0.01
+  uint16_max_error_dn: 0.501
+  residual_reconstruction_max_error_dn: 1.0
+  round_trip_std_relative_error_max: 0.01

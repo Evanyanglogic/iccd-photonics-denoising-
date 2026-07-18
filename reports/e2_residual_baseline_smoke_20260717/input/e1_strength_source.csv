@@ -1,0 +1,11 @@
+﻿folder,temporal_std_dn,selected_median_sigma_dn,selected_sigma_norm,metric_definition
+1,68.3813705444336,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+2,43.59041976928711,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+4,111.48194122314452,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+5,228.86013793945312,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+7,148.05999755859375,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+8,134.9202117919922,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+9,87.5539321899414,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+10,71.40454864501953,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+11,58.20510482788086,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI
+13,38.584720611572266,79.47924041748047,0.0012127754698631338,Median across folder-level mean per-pixel temporal std in raw DN at fixed E1 ROI

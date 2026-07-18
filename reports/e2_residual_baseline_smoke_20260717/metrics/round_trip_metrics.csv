@@ -1,0 +1,2 @@
+﻿content_dtype,noisy_dtype,content_shape,noisy_shape,content_max_abs_error_dn,noisy_max_abs_error_dn,residual_reconstruction_max_abs_error_dn,residual_reconstruction_mean_error_dn,residual_reconstruction_std_relative_error,zero_ratio_change,one_ratio_change,tiff_compression,readable
+uint16,uint16,512x512,512x512,0.0,0.5009689331054688,0.5009689331054688,-0.0002372275193920359,1.3050894072610184e-05,0.0,0.0,NONE,True

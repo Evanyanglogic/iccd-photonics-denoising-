@@ -1,0 +1,12 @@
+{
+  "experiment_id": "e2_residual_baseline_smoke_20260717",
+  "status": "GO-SMOKE",
+  "self_check": false,
+  "started_at_utc": "2026-07-18T10:34:56.760901+00:00",
+  "ended_at_utc": "2026-07-18T10:34:58.252503+00:00",
+  "exit_code": 0,
+  "git_commit": "56b97d2f441efcd946d25f484c2a1dba5c6d8638",
+  "git_worktree_clean_at_start": true,
+  "seed": 20260717,
+  "pair_count": 1
+}

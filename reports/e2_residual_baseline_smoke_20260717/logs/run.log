@@ -1,0 +1,50 @@
+{
+  "verification": {
+    "status": "GO-SMOKE",
+    "definition_checks": {
+      "candidate_a_only": true,
+      "single_pair_only": true,
+      "e1_verified": true,
+      "strength_from_e1_median": true,
+      "no_dark": true,
+      "no_pedestal": true,
+      "no_p99": true,
+      "content_debug_only": true,
+      "no_training_or_split": true,
+      "clean_worktree_at_start": true
+    },
+    "numeric_checks": {
+      "residual_std": true,
+      "negative_clipping": true,
+      "above_one_clipping": true,
+      "added_zero_clipping": true,
+      "added_one_clipping": true,
+      "content_round_trip": true,
+      "noisy_round_trip": true,
+      "residual_round_trip": true,
+      "std_round_trip": true,
+      "uint16_shape": true
+    },
+    "candidate_executed": "A strength-only Gaussian",
+    "pair_count": 1,
+    "synthetic_dataset_generated": false,
+    "model_training_performed": false
+  },
+  "sigma_dn": 79.47924041748047,
+  "selection": {
+    "content_id": "content_096",
+    "source_pair_key": "15ms_to_500ms_096",
+    "source_path": "F:\\目标传感器噪声参数估计\\data\\500ms\\P251622040096.tif",
+    "source_sha256": "02aaffa2527faef5539d1b9d9100aceb38fc6870379cd83789651d273a23b212",
+    "selection_rule": "sha256_lexicographic_first",
+    "allowed_role": "debug_only",
+    "roi_top": 768,
+    "roi_left": 768,
+    "roi_height": 512,
+    "roi_width": 512,
+    "raw_roi_min_dn": 3873,
+    "raw_roi_max_dn": 57942,
+    "raw_roi_mean_dn": 12839.923118591309,
+    "raw_roi_std_dn": 3769.092198391961
+  }
+}
