@@ -1,0 +1,41 @@
+experiment_id: e5_g_cg_bias_structure_attribution_20260719
+data_root: D:/iccd/data/20260319
+evaluation_folders: [2, 5, 9, 11]
+calibration_folders: [1, 4, 7, 8, 10, 13]
+frames_per_folder: 200
+roi: {top: 2304, left: 2304, height: 512, width: 512}
+normalization_divisor: 65535.0
+condition_slope: 0.059136757483193435
+calibration_signal_range_DN: [935.1195068359375, 2510.12255859375]
+model: {base_channels: 16, output_mode: residual_prediction}
+inference: {batch_size: 4, precision: cuda_amp_float16, memory_format: channels_last}
+checkpoints:
+  - {run_seed: 20260719, model: G, best_epoch: 2, path: reports/e4_g_cg_multiseed_stability_20260719_v3/training/seed_20260719/checkpoints/G/best.pt, sha256: 66cff90551fdbd934cefbdefcbeeafcd2874f8ee084adae053b5c001d1ff8835}
+  - {run_seed: 20260719, model: CG_NC, best_epoch: 2, path: reports/e4_g_cg_multiseed_stability_20260719_v3/training/seed_20260719/checkpoints/CG_NC/best.pt, sha256: 8e4461e52edc87bb8caae1553b5f7d708676db76204ed82af394e2004f881822}
+  - {run_seed: 20260720, model: G, best_epoch: 17, path: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260720/checkpoints/G/best.pt, sha256: 9fe1d864876cb41fd7d53a0eeb26ee98bfbcb260984847350c6f019c64a45acf}
+  - {run_seed: 20260720, model: CG_NC, best_epoch: 22, path: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260720/checkpoints/CG_NC/best.pt, sha256: a2676279d33a545455cea404f6abebd5af984eae6ff311086db71897b84618c4}
+  - {run_seed: 20260721, model: G, best_epoch: 6, path: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260721/checkpoints/G/best.pt, sha256: 2885aaeeb1dc2e3887d8899537ffa233e2571eb7c54453dcb41c32314ad267ec}
+  - {run_seed: 20260721, model: CG_NC, best_epoch: 15, path: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260721/checkpoints/CG_NC/best.pt, sha256: 1930286634ff3202f8af3c75042c205757e454acf35d7edc93aa7855c13b3f61}
+training_metric_sources:
+  20260719: reports/e4_g_cg_multiseed_stability_20260719_v3/training/seed_20260719/metrics/epoch_metrics.csv
+  20260720: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260720/metrics/epoch_metrics.csv
+  20260721: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260721/metrics/epoch_metrics.csv
+gradient_regions:
+  flat_upper_percentile: 25.0
+  low_upper_percentile: 50.0
+  medium_upper_percentile: 90.0
+frequency_bands_cycles_per_pixel:
+  very_low_upper: 0.015625
+  low_upper: 0.0625
+  mid_upper: 0.25
+dc_correction_decision:
+  brightness_reduction_fraction_min: 0.95
+  temporal_reduction_retention_min: 0.90
+  gradient_ratio_tolerance: 0.000001
+  row_column_relative_tolerance: 0.000001
+  structure_correlation_tolerance: 0.01
+overfit:
+  validation_psnr_drop_warning_dB: 0.5
+source_protection:
+  full_sha256_before_after: true
+overwrite: false
