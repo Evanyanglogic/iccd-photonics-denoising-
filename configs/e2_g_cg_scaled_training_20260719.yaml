@@ -45,6 +45,8 @@ training:
   model_seed: 20260719
   dataloader_seed: 20260719
   augmentations: [horizontal_flip, vertical_flip, rotation_90]
+  precision: cuda_amp_float16
+  memory_format: channels_last
 checkpoint:
   primary: highest_overall_validation_psnr
   tie_break: lowest_validation_l1

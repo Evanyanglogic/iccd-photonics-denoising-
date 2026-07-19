@@ -275,12 +275,14 @@ class PairDataset(Dataset):
 
 
 @torch.no_grad()
-def validation_loss_psnr(model: nn.Module, loader: DataLoader, device: torch.device) -> tuple[float, float]:
+def validation_loss_psnr(model: nn.Module, loader: DataLoader, device: torch.device, use_amp: bool) -> tuple[float, float]:
     model.eval()
     l1_values, psnr_values = [], []
     for inputs, target, _ in loader:
-        inputs, target = inputs.to(device), target.to(device)
-        clean_hat = inputs[:, :1] - model(inputs)
+        inputs = inputs.to(device, memory_format=torch.channels_last)
+        target = target.to(device, memory_format=torch.channels_last)
+        with torch.amp.autocast("cuda", enabled=use_amp):
+            clean_hat = inputs[:, :1] - model(inputs)
         l1_values.extend(torch.mean(torch.abs(clean_hat - target), dim=(1, 2, 3)).cpu().tolist())
         mse = torch.mean((torch.clamp(clean_hat, 0, 1) - target) ** 2, dim=(1, 2, 3))
         psnr_values.extend((-10 * torch.log10(torch.clamp(mse, min=1e-12))).cpu().tolist())
@@ -293,7 +295,7 @@ def train_experiment(
 ) -> tuple[pd.DataFrame, Path, Path, dict[str, Any]]:
     train_cfg = cfg["training"]
     set_seed(int(train_cfg["model_seed"]))
-    model = LightUNet(2 if conditional_channel else 1, int(cfg["network"]["base_channels"])).to(device)
+    model = LightUNet(2 if conditional_channel else 1, int(cfg["network"]["base_channels"])).to(device, memory_format=torch.channels_last)
     optimizer = torch.optim.Adam(model.parameters(), lr=float(train_cfg["learning_rate"]), weight_decay=float(train_cfg["weight_decay"]))
     train_dataset = PairDataset(train_records, conditional_channel, augment=True)
     validation_dataset = PairDataset(validation_records, conditional_channel, augment=False)
@@ -302,6 +304,8 @@ def train_experiment(
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, generator=generator, num_workers=0)
     validation_loader = DataLoader(validation_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
     epochs = 1 if smoke else int(train_cfg["epochs"])
+    use_amp = device.type == "cuda" and train_cfg.get("precision") == "cuda_amp_float16"
+    scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
     metrics = []
     best_psnr, best_l1, best_epoch = -math.inf, math.inf, -1
     checkpoint_dir = output_root / "checkpoints" / name
@@ -314,16 +318,19 @@ def train_experiment(
         model.train()
         losses = []
         for inputs, target, _ in train_loader:
-            inputs, target = inputs.to(device), target.to(device)
+            inputs = inputs.to(device, memory_format=torch.channels_last)
+            target = target.to(device, memory_format=torch.channels_last)
             optimizer.zero_grad(set_to_none=True)
-            predicted_residual = model(inputs)
-            clean_hat = inputs[:, :1] - predicted_residual
-            loss = F.l1_loss(clean_hat, target)
+            with torch.amp.autocast("cuda", enabled=use_amp):
+                predicted_residual = model(inputs)
+                clean_hat = inputs[:, :1] - predicted_residual
+                loss = F.l1_loss(clean_hat, target)
             if not torch.isfinite(loss): raise RuntimeError(f"Nonfinite training loss in {name} epoch {epoch}")
-            loss.backward()
-            optimizer.step()
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
             losses.append(float(loss.item()))
-        val_l1, val_psnr = validation_loss_psnr(model, validation_loader, device)
+        val_l1, val_psnr = validation_loss_psnr(model, validation_loader, device, use_amp)
         train_l1 = float(np.mean(losses))
         improved = val_psnr > best_psnr + 1e-12 or (abs(val_psnr - best_psnr) <= 1e-12 and val_l1 < best_l1)
         if improved:
@@ -360,7 +367,7 @@ def image_metrics(reference: np.ndarray, noisy: np.ndarray, output: np.ndarray, 
 
 @torch.no_grad()
 def evaluate_best(name: str, checkpoint: Path, records: list[PairRecord], conditional_channel: bool, cfg: dict[str, Any], device: torch.device) -> pd.DataFrame:
-    model = LightUNet(2 if conditional_channel else 1, int(cfg["network"]["base_channels"])).to(device)
+    model = LightUNet(2 if conditional_channel else 1, int(cfg["network"]["base_channels"])).to(device, memory_format=torch.channels_last)
     payload = torch.load(checkpoint, map_location=device, weights_only=False)
     model.load_state_dict(payload["model"]); model.eval()
     rows = []
@@ -370,8 +377,10 @@ def evaluate_best(name: str, checkpoint: Path, records: list[PairRecord], condit
         noisy = np.clip(reference + true_residual, 0, 1)
         channels = [noisy]
         if conditional_channel: channels.append(np.full_like(noisy, record.sigma_dn / 65535.0))
-        inputs = torch.from_numpy(np.stack(channels)[None]).to(device)
-        predicted = model(inputs).cpu().numpy()[0, 0]
+        inputs = torch.from_numpy(np.stack(channels)[None]).to(device, memory_format=torch.channels_last)
+        use_amp = device.type == "cuda" and cfg["training"].get("precision") == "cuda_amp_float16"
+        with torch.amp.autocast("cuda", enabled=use_amp):
+            predicted = model(inputs).float().cpu().numpy()[0, 0]
         output = noisy - predicted
         metrics = image_metrics(reference, noisy, output, true_residual, predicted)
         rows.append({"experiment": name, "pair_id": record.pair_id, "content_id": record.content_id, "scene_id": record.scene_id, "condition_id": record.condition_id, "sigma_DN": record.sigma_dn, "seed": record.seed, **metrics})
