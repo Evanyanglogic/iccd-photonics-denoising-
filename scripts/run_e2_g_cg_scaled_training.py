@@ -410,13 +410,17 @@ def main() -> int:
     parser.add_argument("--config", required=True)
     parser.add_argument("--output-root", required=True)
     parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--experiments", default="G,CG_NC,CG_C")
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     cfg_path = (repo / args.config).resolve()
     cfg = yaml.safe_load(cfg_path.read_text(encoding="utf-8"))
     out = (repo / args.output_root).resolve()
     if out.exists(): raise FileExistsError(f"Output exists: {out}")
-    for directory in ["provenance", "configs", "manifests", "scale_preflight", "condition_model", "generated_data/limited_previews", "training/G", "training/CG_NC", "training/CG_C", "metrics", "checkpoints", "logs"]:
+    experiment_names = [name.strip() for name in args.experiments.split(",") if name.strip()]
+    if not experiment_names or any(name not in {"G", "CG_NC", "CG_C"} for name in experiment_names):
+        raise ValueError(f"Unsupported experiments: {experiment_names}")
+    for directory in ["provenance", "configs", "manifests", "scale_preflight", "condition_model", "generated_data/limited_previews", "metrics", "checkpoints", "logs"] + [f"training/{name}" for name in experiment_names]:
         (out / directory).mkdir(parents=True, exist_ok=False)
     started = now()
     commit = write_provenance_before(repo, out, cfg_path, cfg, subprocess.list2cmdline(sys.argv))
@@ -516,7 +520,9 @@ def main() -> int:
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     epoch_frames, training_info, checkpoints = [], {}, {}
-    experiments = [("G", train_g, False), ("CG_NC", train_cg, False), ("CG_C", train_cg, True)]
+    record_sets = {"G": train_g, "CG_NC": train_cg, "CG_C": train_cg}
+    conditional_channels = {"G": False, "CG_NC": False, "CG_C": True}
+    experiments = [(name, record_sets[name], conditional_channels[name]) for name in experiment_names]
     for name, records, conditional_channel in experiments:
         frame, best, final, info = train_experiment(name, records, validation_cg, conditional_channel, cfg, out, device, args.smoke)
         epoch_frames.append(frame); training_info[name] = info; checkpoints[name] = best
@@ -542,7 +548,7 @@ def main() -> int:
 
     finite = bool(np.isfinite(epochs.select_dtypes("number")).all().all() and np.isfinite(validation_metrics.select_dtypes("number")).all().all())
     completed_epochs = 1 if args.smoke else int(cfg["training"]["epochs"])
-    training_completed = all(int((epochs.experiment == name).sum()) == completed_epochs for name in ["G", "CG_NC", "CG_C"])
+    training_completed = all(int((epochs.experiment == name).sum()) == completed_epochs for name in experiment_names)
     output_not_degenerate = bool((comparison.max_output_zero_ratio < 0.99).all() and (comparison.max_output_one_ratio < 0.99).all())
     psnr_improved = bool((comparison.output_psnr > comparison.noisy_psnr).all())
     ssim_not_lower = bool((comparison.output_ssim >= comparison.noisy_ssim).all())
@@ -559,7 +565,14 @@ def main() -> int:
         final_status = "TRAINING-RUN-VALID"
     else:
         final_status = "TRAINING-RUN-VALID-WITH-LIMITATIONS"
-    conditional_benefit = bool(comparison.set_index("experiment").loc["CG_C", "output_psnr"] > comparison.set_index("experiment").loc["G", "output_psnr"] and comparison.set_index("experiment").loc["CG_C", "output_ssim"] > comparison.set_index("experiment").loc["G", "output_ssim"])
+    indexed_comparison = comparison.set_index("experiment")
+    conditional_name = "CG_C" if "CG_C" in indexed_comparison.index else "CG_NC"
+    conditional_benefit = bool(
+        "G" in indexed_comparison.index
+        and conditional_name in indexed_comparison.index
+        and indexed_comparison.loc[conditional_name, "output_psnr"] > indexed_comparison.loc["G", "output_psnr"]
+        and indexed_comparison.loc[conditional_name, "output_ssim"] > indexed_comparison.loc["G", "output_ssim"]
+    )
 
     source_rows = []
     for path_string, before in source_before.items():
@@ -571,7 +584,7 @@ def main() -> int:
     script_paths = [Path(__file__), cfg_path, repo / cfg["condition_model"], repo / "scripts/json_serialization.py"]
     pd.DataFrame([{"path": str(path.relative_to(repo)), "sha256": sha256_file(path)} for path in script_paths]).to_csv(out / "provenance/script_hashes.csv", index=False, encoding="utf-8-sig")
     (out / "provenance/git_status_after.txt").write_text(git(repo, "status", "--porcelain=v1", "--untracked-files=all").stdout, encoding="utf-8")
-    run_manifest = {"experiment_id": cfg["experiment_id"], "smoke": args.smoke, "started_at_utc": started, "ended_at_utc": now(), "git_commit": commit, "device": str(device), "final_status": final_status, "source_data_protected": protected, "evaluation_iccd_raw_read": False, "training_info": training_info}
+    run_manifest = {"experiment_id": cfg["experiment_id"], "experiments": experiment_names, "smoke": args.smoke, "started_at_utc": started, "ended_at_utc": now(), "git_commit": commit, "device": str(device), "final_status": final_status, "source_data_protected": protected, "evaluation_iccd_raw_read": False, "training_info": training_info}
     dump_json(out / "provenance/run_manifest.json", run_manifest)
     verification = {"experiment_id": cfg["experiment_id"], "final_status": final_status, "scale_preflight_passed": True, "scale_pairs": len(scaling), "pair_preflight_passed": True, "noise_pairs": len(pair_frame), "training_completed": training_completed, "completed_epochs": completed_epochs, "finite_metrics": finite, "output_not_degenerate": output_not_degenerate, "train_loss_decreased_all_arms": train_loss_decreased, "psnr_improved_all_arms": psnr_improved, "ssim_not_lower_all_arms": ssim_not_lower, "mean_shift_gate_passed": mean_shift_ok, "conditional_benefit_observed": conditional_benefit, "warnings": warnings, "source_data_protected": protected, "evaluation_iccd_holdout_preserved": True, "provenance_complete": True}
     dump_json(out / "verification_status.json", verification)
