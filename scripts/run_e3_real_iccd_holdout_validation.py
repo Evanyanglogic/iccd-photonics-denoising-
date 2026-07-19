@@ -51,7 +51,7 @@ def sorted_tiffs(folder: Path) -> list[Path]:
 
 
 def correlation(a: np.ndarray, b: np.ndarray) -> float:
-    x = np.asarray(a, np.float64).ravel(); y = np.asarray(b, np.float64).ravel()
+    x = np.asarray(a, np.float64).ravel().copy(); y = np.asarray(b, np.float64).ravel().copy()
     x -= x.mean(); y -= y.mean()
     denominator = math.sqrt(float(x @ x) * float(y @ y))
     return float(x @ y / denominator) if denominator > 1e-12 else float("nan")

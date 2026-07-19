@@ -28,3 +28,12 @@ def test_split_map_and_correlation() -> None:
     summary = split_stable_summary(2, "raw", stack)
     assert summary["split_map_correlation"] > 0.999
     assert correlation(base, base) == 1.0
+
+
+def test_correlation_does_not_mutate_float64_inputs() -> None:
+    first = np.arange(16, dtype=np.float64).reshape(4, 4)
+    second = first.copy()
+    before_first = first.copy(); before_second = second.copy()
+    correlation(first, second)
+    assert np.array_equal(first, before_first)
+    assert np.array_equal(second, before_second)
