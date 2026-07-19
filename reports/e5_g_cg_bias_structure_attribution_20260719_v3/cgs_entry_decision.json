@@ -1,0 +1,7 @@
+{
+  "CGS_ENTRY_ALLOWED": false,
+  "full_CGS_prohibited": true,
+  "reason": "Entry remains blocked by unresolved network bias/overfitting or edge-retention tradeoff",
+  "row_column_component_prohibited": true,
+  "stable_component_prohibited": true
+}

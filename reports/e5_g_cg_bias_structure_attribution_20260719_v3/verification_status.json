@@ -1,0 +1,29 @@
+{
+  "CGS_ENTRY_ALLOWED": false,
+  "DC_correction_status": "DC-CORRECTION-BENEFICIAL",
+  "checkpoint_modified": false,
+  "conditional_benefit_mainly_DC": false,
+  "conditional_benefit_persists_after_mean_centering": true,
+  "data_leakage_detected": false,
+  "final_status": "BIAS-STRUCTURE-ATTRIBUTION-VERIFIED-WITH-LIMITATIONS",
+  "finite_metrics": true,
+  "folders_completed": [
+    2,
+    5,
+    9,
+    11
+  ],
+  "frames_per_folder": 200,
+  "frozen_checkpoint_count": 6,
+  "inference_frame_outputs": 4800,
+  "input_preprocessing_frozen": true,
+  "provenance_complete": true,
+  "smoke": false,
+  "source_data_protected": true,
+  "training_performed": false,
+  "warnings": [
+    "HIGH_GRADIENT_RETENTION_TRADEOFF",
+    "RAPID_OVERFITTING_ACROSS_SEEDS",
+    "SEED_DEPENDENT_DC_BIAS"
+  ]
+}

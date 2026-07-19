@@ -1,0 +1,8 @@
+{
+  "checkpoints_modified": false,
+  "finalized_at_utc": "2026-07-19T16:10:07.250329+00:00",
+  "git_commit": "9ae0c37e5611d3f9011f1693a41c1dfcf50127c0",
+  "metrics_modified": false,
+  "reason": "Correct derived frequency attribution and complete numerical report",
+  "training_performed": false
+}

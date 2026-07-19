@@ -1,0 +1,17 @@
+{
+  "checkpoint_modified": false,
+  "checks": {
+    "all_folders_brightness_improved": true,
+    "all_seeds_brightness_improved": true,
+    "brightness_reduction_pass": true,
+    "column_not_worse": true,
+    "gradient_not_worse": true,
+    "mean_centered_temporal_identical": true,
+    "raw_temporal_retained_majority": true,
+    "removed_structure_not_increased_majority": true,
+    "row_not_worse": true
+  },
+  "correction": "frame-wise DC mean restoration",
+  "historical_results_modified": false,
+  "status": "DC-CORRECTION-BENEFICIAL"
+}

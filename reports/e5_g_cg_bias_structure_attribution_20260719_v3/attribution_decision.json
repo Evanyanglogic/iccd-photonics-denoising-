@@ -1,0 +1,42 @@
+{
+  "DC_corrected_CG_minus_G_temporal_reduction_mean": 0.009671649237499962,
+  "brightness_shift_categories": [
+    "A. seed-dependent network DC bias",
+    "B. input-signal-dependent bias",
+    "F. unresolved checkpoint-specific contribution"
+  ],
+  "condition_strength_identifiability": "NOT-SEPARABLE-FROM-INPUT-SIGNAL: CG sigma is exactly proportional to input mean",
+  "conditional_benefit_mainly_DC": false,
+  "conditional_benefit_persists_after_mean_centering": true,
+  "flat_region_CG_minus_G_reduction_mean": 0.010396576399020223,
+  "frequency_band_CG_minus_G_energy_ratio": {
+    "dc": 0.003562035261645511,
+    "high": -0.012456385800756503,
+    "low": 0.003105464686701013,
+    "mid": -0.002611781633332163,
+    "very_low": 0.0035382799406786236
+  },
+  "high_gradient_CG_minus_G_retention_mean": -0.0027389007534898424,
+  "mean_centered_CG_minus_G_temporal_reduction_mean": 0.009700030155044208,
+  "overfitting_across_all_runs": true,
+  "overfitting_bias_causality": "NOT-ESTABLISHED: epochwise real-holdout bias was not measured; descriptive drop-vs-best-bias correlation is insufficient",
+  "raw_CG_minus_G_temporal_reduction_mean": 0.00966024814902155,
+  "scientific_scope": "operational attribution; regressions are descriptive and not physical causal models",
+  "signal_correlations": [
+    {
+      "model": "CG_NC",
+      "pearson_with_signal": -0.5054987540840192,
+      "spearman_with_signal": -0.2682224481199584
+    },
+    {
+      "model": "G",
+      "pearson_with_signal": -0.684446696029281,
+      "spearman_with_signal": -0.5701541299004946
+    }
+  ],
+  "structure_reduction_categories": [
+    "A. flat-region noise suppression",
+    "B. edge attenuation",
+    "D. broad smoothing"
+  ]
+}

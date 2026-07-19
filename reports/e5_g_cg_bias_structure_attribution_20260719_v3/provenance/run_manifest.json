@@ -1,0 +1,9 @@
+{
+  "ended_at_utc": "2026-07-19T16:05:59.686773+00:00",
+  "experiment_id": "e5_g_cg_bias_structure_attribution_20260719",
+  "final_status": "BIAS-STRUCTURE-ATTRIBUTION-VERIFIED-WITH-LIMITATIONS",
+  "git_commit": "5d2a1449ca690c210264070667f3c9c2665997bf",
+  "output_root": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\e5_g_cg_bias_structure_attribution_20260719_v3",
+  "started_at_utc": "2026-07-19T15:39:59.226978+00:00",
+  "training_performed": false
+}
