@@ -1,0 +1,11 @@
+{
+  "failure_conditions": [
+    "NaN",
+    "Inf",
+    "negative variance",
+    "sigma<=0",
+    "sigma>300 DN"
+  ],
+  "policy": "allow_and_flag_no_clamp",
+  "safe_sigma_max_DN": 300.0
+}

@@ -1,0 +1,26 @@
+{
+  "blockers": {
+    "pmrid_cg_patches_invalid": 16,
+    "pmrid_patches_total": 39,
+    "reason": "All 300 sCMOS CG pairs exceed the pre-registered 300 DN sigma safety limit.",
+    "scmos_cg_pairs_invalid": 300,
+    "scmos_cg_pairs_total": 300,
+    "training_started": false
+  },
+  "blocking_gate": "CG_SIGMA_DOMAIN_MISMATCH",
+  "condition_model_fit_completed": true,
+  "condition_model_selected": "std_nonnegative",
+  "evaluation_iccd_holdout_preserved": true,
+  "experiment_id": "e2_g_cg_initial_training_20260719",
+  "experiments_completed": {
+    "CG_C": false,
+    "CG_NC": false,
+    "G": false
+  },
+  "next_task": "Resolve the single condition-scale/domain mismatch without changing network, loss, split, or using validation outcomes.",
+  "provenance_complete": true,
+  "source_data_protected": true,
+  "status": "TRAINING-PREFLIGHT-NO-GO",
+  "synthetic_pairs_generated": false,
+  "training_started": false
+}

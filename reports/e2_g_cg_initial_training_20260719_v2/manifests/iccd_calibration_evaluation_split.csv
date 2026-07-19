@@ -1,0 +1,11 @@
+﻿folder,acquisition_order,role,split_id,selection_basis,allowed_parameter_use,historical_candidate_a_used_all_folders
+1,1,calibration,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,estimate G/CG parameters,True
+2,2,evaluation,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,holdout controlled real evaluation only,True
+4,3,calibration,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,estimate G/CG parameters,True
+5,4,evaluation,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,holdout controlled real evaluation only,True
+7,5,calibration,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,estimate G/CG parameters,True
+8,6,calibration,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,estimate G/CG parameters,True
+9,7,evaluation,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,holdout controlled real evaluation only,True
+10,8,calibration,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,estimate G/CG parameters,True
+11,9,evaluation,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,holdout controlled real evaluation only,True
+13,10,calibration,primary_split_B,pre-registered signal/noise and acquisition order; no denoising outcomes,estimate G/CG parameters,True

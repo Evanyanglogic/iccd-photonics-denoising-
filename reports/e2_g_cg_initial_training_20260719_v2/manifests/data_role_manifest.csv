@@ -1,0 +1,5 @@
+﻿source,role,count,used,reason
+sCMOS_100,exploratory_training_only,100,False,CG preflight failed before generation
+PMRID_GT_RAW,validation_content_only,39,False,CG preflight failed before generation
+ICCD_calibration_folders,condition_parameter_calibration_only,6,True,read existing E1 CSV only
+ICCD_evaluation_folders,holdout,4,False,not read

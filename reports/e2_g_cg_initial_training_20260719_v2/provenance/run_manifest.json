@@ -1,0 +1,11 @@
+{
+  "ended_at_utc": "2026-07-19T06:12:33.185957+00:00",
+  "evaluation_iccd_folders_read": false,
+  "experiment_id": "e2_g_cg_initial_training_20260719",
+  "git_commit": "2c2cfba2a46795a42025d54d045a56cce616d7a0",
+  "source_data_protected": true,
+  "started_at_utc": "2026-07-19T06:12:10.092951+00:00",
+  "status": "TRAINING-PREFLIGHT-NO-GO",
+  "synthetic_pairs_generated": false,
+  "training_started": false
+}

@@ -1,0 +1,2 @@
+﻿scmos_cg_pairs_total,scmos_cg_pairs_invalid,pmrid_patches_total,pmrid_cg_patches_invalid,training_started,reason
+300,300,39,16,False,All 300 sCMOS CG pairs exceed the pre-registered 300 DN sigma safety limit.
