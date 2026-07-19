@@ -168,6 +168,12 @@ def pair_metrics(reference_uint16: np.ndarray, sigma_dn: float, seed: int) -> tu
         "noisy_round_trip_max_error_DN": float(np.max(np.abs(noisy_uint16.astype(np.float32) - noisy_dn_for_rounding))),
         "residual_reconstruction_max_error_DN": float(np.max(np.abs(reconstructed_residual_dn - clipped_float_residual_dn))),
     }
+    metrics["patch_height"] = int(reference.shape[0])
+    metrics["patch_width"] = int(reference.shape[1])
+    metrics["number_of_pixels"] = int(reference.size)
+    metrics["standard_error_mean_DN"] = float(sigma_dn / math.sqrt(reference.size))
+    metrics["z_mean"] = float(metrics["residual_mean_DN"] / metrics["standard_error_mean_DN"])
+    metrics["clipping_mean_contribution_DN"] = float(metrics["brightness_shift_DN"] - metrics["residual_mean_DN"])
     return z, metrics
 
 
@@ -175,7 +181,11 @@ def pair_pass(metrics: dict[str, Any], gates: dict[str, float]) -> tuple[bool, s
     failures = []
     if not all(math.isfinite(float(value)) for value in metrics.values()): failures.append("NONFINITE")
     if metrics["residual_std_relative_error"] >= gates["residual_std_relative_error_max"]: failures.append("SIGMA_ERROR")
-    if abs(metrics["brightness_shift_DN"]) >= gates["absolute_brightness_shift_DN_max"]: failures.append("BRIGHTNESS")
+    if "residual_mean_z_max" in gates:
+        if abs(metrics["z_mean"]) > gates["residual_mean_z_max"]: failures.append("RESIDUAL_MEAN_Z")
+        if abs(metrics["residual_mean_DN"]) >= gates["absolute_residual_mean_DN_max"]: failures.append("RESIDUAL_MEAN_SAFETY")
+    elif abs(metrics["brightness_shift_DN"]) >= gates["absolute_brightness_shift_DN_max"]:
+        failures.append("BRIGHTNESS")
     if metrics["added_zero_ratio"] >= gates["added_zero_ratio_max"]: failures.append("ZERO_CLIPPING")
     if metrics["added_one_ratio"] >= gates["added_one_ratio_max"]: failures.append("ONE_CLIPPING")
     if metrics["noisy_round_trip_max_error_DN"] > gates["noisy_round_trip_max_error_DN"]: failures.append("NOISY_ROUND_TRIP")
@@ -510,6 +520,24 @@ def main() -> int:
     if not pair_frame.pair_gate_pass.all():
         dump_json(out / "verification_status.json", {"final_status": "PAIR-PREFLIGHT-NO-GO", "failed_count": int((~pair_frame.pair_gate_pass).sum())})
         return 4
+    if "experiment_seed_mean_brightness_DN_max" in cfg["pair_gates"]:
+        group_rows = []
+        threshold = float(cfg["pair_gates"]["experiment_seed_mean_brightness_DN_max"])
+        for experiment, group in pair_frame.groupby("pair_type"):
+            value = float(group.brightness_shift_DN.mean())
+            group_rows.append({"group_type": "experiment_seed", "experiment": experiment, "condition_id": "all", "mean_brightness_shift_DN": value, "threshold_DN": threshold, "pass": abs(value) < threshold})
+        threshold = float(cfg["pair_gates"]["experiment_condition_seed_mean_brightness_DN_max"])
+        for (experiment, condition), group in pair_frame.groupby(["pair_type", "condition_id"]):
+            value = float(group.brightness_shift_DN.mean())
+            group_rows.append({"group_type": "experiment_condition_seed", "experiment": experiment, "condition_id": condition, "mean_brightness_shift_DN": value, "threshold_DN": threshold, "pass": abs(value) < threshold})
+        threshold = float(cfg["pair_gates"]["seed_overall_mean_brightness_DN_max"])
+        value = float(pair_frame.brightness_shift_DN.mean())
+        group_rows.append({"group_type": "seed_overall", "experiment": "all", "condition_id": "all", "mean_brightness_shift_DN": value, "threshold_DN": threshold, "pass": abs(value) < threshold})
+        group_frame = pd.DataFrame(group_rows)
+        group_frame.to_csv(out / "metrics/pair_group_brightness_gates.csv", index=False, encoding="utf-8-sig")
+        if not group_frame["pass"].all():
+            dump_json(out / "verification_status.json", {"final_status": "PAIR-GROUP-BIAS-NO-GO", "failed_count": int((~group_frame["pass"]).sum())})
+            return 4
 
     pd.DataFrame([
         {"source": "sCMOS_500ms_100", "role": "exploratory_training_only", "source_count": len(selected_scmos), "scene_status": "single_unknown_source_group"},
