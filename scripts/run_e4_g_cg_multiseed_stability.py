@@ -35,7 +35,7 @@ def git(repo: Path, *args: str) -> str:
     return subprocess.run(["git", *args], cwd=repo, text=True, capture_output=True, check=True).stdout
 
 
-def run_logged(command: list[str], repo: Path, log_path: Path) -> None:
+def run_logged(command: list[str], repo: Path, log_path: Path) -> int:
     with log_path.open("w", encoding="utf-8") as log:
         process = subprocess.Popen(command, cwd=repo, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=1)
         assert process.stdout is not None
@@ -43,8 +43,68 @@ def run_logged(command: list[str], repo: Path, log_path: Path) -> None:
             print(line, end="", flush=True)
             log.write(line)
         return_code = process.wait()
-    if return_code != 0:
-        raise RuntimeError(f"Command failed ({return_code}): {subprocess.list2cmdline(command)}")
+    return return_code
+
+
+def finalize_failed_run(
+    out: Path,
+    repo: Path,
+    cfg: dict[str, Any],
+    started: str,
+    commit: str,
+    seed: int,
+    stage: str,
+    return_code: int,
+    child_status: dict[str, Any] | None,
+) -> int:
+    child_final_status = (child_status or {}).get("final_status", "UNKNOWN-CHILD-FAILURE")
+    final_status = f"MULTISEED-{child_final_status}"
+    verification = {
+        "final_status": final_status,
+        "failed_seed": seed,
+        "failed_stage": stage,
+        "child_return_code": return_code,
+        "child_status": child_status,
+        "all_seed_runs_completed": False,
+        "conditional_benefit": "NOT-DETERMINED",
+        "CGS_ENTRY_ALLOWED": False,
+        "data_leakage_detected": False,
+        "provenance_complete": True,
+    }
+    dump_json(out / "verification_status.json", verification)
+    dump_json(
+        out / "provenance/run_manifest.json",
+        {
+            "experiment_id": cfg["experiment_id"],
+            "started_at_utc": started,
+            "ended_at_utc": now(),
+            "git_commit": commit,
+            "failed_seed": seed,
+            "failed_stage": stage,
+            "child_return_code": return_code,
+            "final_status": final_status,
+        },
+    )
+    (out / "provenance/git_status_after.txt").write_text(git(repo, "status", "--porcelain=v1", "--untracked-files=all"), encoding="utf-8")
+    report = [
+        "# E4 G/CG-NC Multiseed Stability",
+        "",
+        f"Status: `{final_status}`",
+        "",
+        f"The run stopped at `{stage}` for seed `{seed}` with child return code `{return_code}`.",
+        "",
+        "No failed pair, seed, threshold, noise strength, model, or checkpoint was replaced.",
+        "",
+        "A multiseed conditional-benefit decision was not issued because the preregistered run did not complete.",
+    ]
+    (out / "verification_report.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+    hashes = []
+    for path in sorted(out.rglob("*")):
+        if path.is_file() and path.name != "output_hashes.csv":
+            hashes.append({"relative_path": str(path.relative_to(out)), "size_bytes": path.stat().st_size, "sha256": sha256_file(path)})
+    pd.DataFrame(hashes).to_csv(out / "output_hashes.csv", index=False, encoding="utf-8-sig")
+    print(json.dumps(verification, indent=2))
+    return return_code
 
 
 def descriptive(values: pd.Series, prefix: str) -> dict[str, float]:
@@ -199,7 +259,11 @@ def main() -> int:
         command = [sys.executable, str(repo / "scripts/run_e2_g_cg_scaled_training.py"), "--config", str(training_cfg_path), "--output-root", str(training_out), "--experiments", "G,CG_NC"]
         if args.smoke:
             command.append("--smoke")
-        run_logged(command, repo, out / "logs" / f"training_seed_{seed}.log")
+        return_code = run_logged(command, repo, out / "logs" / f"training_seed_{seed}.log")
+        if return_code != 0:
+            status_path = training_out / "verification_status.json"
+            child_status = json.loads(status_path.read_text(encoding="utf-8")) if status_path.exists() else None
+            return finalize_failed_run(out, repo, cfg, started, commit, seed, "training_preflight_or_training", return_code, child_status)
         comparison = pd.read_csv(training_out / "metrics/experiment_comparison.csv")
         validation = pd.read_csv(training_out / "metrics/validation_pair_metrics.csv")
         for row in comparison.to_dict("records"):
@@ -228,7 +292,11 @@ def main() -> int:
         command = [sys.executable, str(repo / "scripts/run_e3_real_iccd_holdout_validation.py"), "--config", str(holdout_cfg_path), "--output-root", str(holdout_out)]
         if args.smoke:
             command.append("--smoke")
-        run_logged(command, repo, out / "logs" / f"holdout_seed_{seed}.log")
+        return_code = run_logged(command, repo, out / "logs" / f"holdout_seed_{seed}.log")
+        if return_code != 0:
+            status_path = holdout_out / "verification_status.json"
+            child_status = json.loads(status_path.read_text(encoding="utf-8")) if status_path.exists() else None
+            return finalize_failed_run(out, repo, cfg, started, commit, seed, "real_holdout", return_code, child_status)
         real = pd.read_csv(holdout_out / "metrics/model_comparison.csv")
         real.insert(0, "run_seed", seed)
         real_rows.extend(real.to_dict("records"))
