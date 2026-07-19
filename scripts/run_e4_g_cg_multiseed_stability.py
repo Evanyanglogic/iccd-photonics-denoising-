@@ -59,16 +59,29 @@ def finalize_failed_run(
 ) -> int:
     child_final_status = (child_status or {}).get("final_status", "UNKNOWN-CHILD-FAILURE")
     final_status = f"MULTISEED-{child_final_status}"
+    failed_output = out / "training" / f"seed_{seed}" / "metrics" / "warnings.csv"
+    failed_pairs = pd.read_csv(failed_output).to_dict("records") if failed_output.exists() else []
+    script_paths = [
+        Path(__file__),
+        repo / "scripts/run_e2_g_cg_scaled_training.py",
+        repo / "scripts/run_e3_real_iccd_holdout_validation.py",
+        repo / "scripts/json_serialization.py",
+    ]
+    pd.DataFrame([{"path": str(path.relative_to(repo)), "sha256": sha256_file(path)} for path in script_paths]).to_csv(
+        out / "provenance/script_hashes.csv", index=False, encoding="utf-8-sig"
+    )
     verification = {
         "final_status": final_status,
         "failed_seed": seed,
         "failed_stage": stage,
         "child_return_code": return_code,
         "child_status": child_status,
+        "failed_pairs": failed_pairs,
         "all_seed_runs_completed": False,
         "conditional_benefit": "NOT-DETERMINED",
         "CGS_ENTRY_ALLOWED": False,
         "data_leakage_detected": False,
+        "source_data_protection": "PRE-RUN-HASHES-PASSED; POST-RUN-HASHES-INCOMPLETE-FOR-FAILED-SEED",
         "provenance_complete": True,
     }
     dump_json(out / "verification_status.json", verification)
