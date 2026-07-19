@@ -1,0 +1,20 @@
+{
+  "calibration_folders_read": false,
+  "device": "cuda",
+  "ended_at_utc": "2026-07-19T12:40:15.017888+00:00",
+  "evaluation_folders": [
+    2,
+    5,
+    9,
+    11
+  ],
+  "experiment_id": "e3_real_iccd_holdout_validation_20260719",
+  "final_status": "REAL-HOLDOUT-VALID-WITH-WARNINGS",
+  "frames": 800,
+  "git_commit": "f446b9bdba069caa12389e67965cd5d02c9d996c",
+  "model_outputs": 2400,
+  "smoke": false,
+  "source_data_protected": true,
+  "started_at_utc": "2026-07-19T12:34:04.100728+00:00",
+  "training_performed": false
+}

@@ -1,0 +1,11 @@
+﻿folder,role,formal_evaluation
+2,evaluation_holdout,True
+5,evaluation_holdout,True
+9,evaluation_holdout,True
+11,evaluation_holdout,True
+1,calibration_not_read,False
+4,calibration_not_read,False
+7,calibration_not_read,False
+8,calibration_not_read,False
+10,calibration_not_read,False
+13,calibration_not_read,False

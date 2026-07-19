@@ -1,0 +1,67 @@
+experiment_id: e3_real_iccd_holdout_validation_20260719
+data_root: D:/iccd/data/20260319
+evaluation_folders:
+- 2
+- 5
+- 9
+- 11
+calibration_folders:
+- 1
+- 4
+- 7
+- 8
+- 10
+- 13
+frames_per_folder: 200
+roi:
+  top: 2304
+  left: 2304
+  height: 512
+  width: 512
+normalization_divisor: 65535.0
+condition_slope: 0.059136757483193435
+calibration_signal_range_DN:
+- 935.1195068359375
+- 2510.12255859375
+sigma_safety_max_DN: 300.0
+training_report: reports/e2_g_cg_initial_training_20260719_v5
+e1_input_manifest: reports/e1_formal_rerun_20260717/input_audit/input_manifest.csv
+checkpoints:
+  G:
+    path: reports/e2_g_cg_initial_training_20260719_v5/checkpoints/G/best.pt
+    epoch: 2
+    input_channels: 1
+    sha256: 66c5a14178714acaa5e3c624dd801eb583f149045a6041c33fa0bc920fceba12
+  CG_NC:
+    path: reports/e2_g_cg_initial_training_20260719_v5/checkpoints/CG_NC/best.pt
+    epoch: 2
+    input_channels: 1
+    sha256: a78109f96c9a75f490a8bef9e8f92eebaee7d91cacfcc2eedf9489cd8e0d63b2
+  CG_C:
+    path: reports/e2_g_cg_initial_training_20260719_v5/checkpoints/CG_C/best.pt
+    epoch: 30
+    input_channels: 2
+    sha256: 186ab9f2f834fc055cadd642fedfbd66138f9550dcd5344d0f11fbe877703c8b
+model:
+  base_channels: 16
+  output_mode: residual_prediction
+inference:
+  batch_size: 4
+  precision: cuda_amp_float16
+  memory_format: channels_last
+spatial:
+  max_radius: 128
+gradient:
+  high_percentile: 90.0
+  low_percentile: 50.0
+  edge_retention_warning_min: 0.95
+brightness:
+  warning_DN: 5.0
+  severe_warning_DN: 15.0
+removed_residual:
+  structure_correlation_warning_abs: 0.1
+preview_frames_1_based:
+- 1
+- 100
+- 200
+overwrite: false

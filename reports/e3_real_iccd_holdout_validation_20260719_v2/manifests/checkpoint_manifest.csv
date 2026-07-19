@@ -1,0 +1,4 @@
+﻿model,path,best_epoch,input_channels,sha256,training_report,frozen
+G,E:\PNGAN-main\iccd-photonics-denoising\reports\e2_g_cg_initial_training_20260719_v5\checkpoints\G\best.pt,2,1,66c5a14178714acaa5e3c624dd801eb583f149045a6041c33fa0bc920fceba12,reports/e2_g_cg_initial_training_20260719_v5,True
+CG_NC,E:\PNGAN-main\iccd-photonics-denoising\reports\e2_g_cg_initial_training_20260719_v5\checkpoints\CG_NC\best.pt,2,1,a78109f96c9a75f490a8bef9e8f92eebaee7d91cacfcc2eedf9489cd8e0d63b2,reports/e2_g_cg_initial_training_20260719_v5,True
+CG_C,E:\PNGAN-main\iccd-photonics-denoising\reports\e2_g_cg_initial_training_20260719_v5\checkpoints\CG_C\best.pt,30,2,186ab9f2f834fc055cadd642fedfbd66138f9550dcd5344d0f11fbe877703c8b,reports/e2_g_cg_initial_training_20260719_v5,True
