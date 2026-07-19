@@ -1,0 +1,32 @@
+experiment_id: e2_g_cg_initial_training_20260719
+condition_model: configs/e2_signal_condition_model_20260719.yaml
+e1_statistics: reports/e1_formal_rerun_20260717/noise_summary/folder_noise_summary.csv
+folder_split: manifests/e1_primary_calibration_evaluation_split_20260718.csv
+scmos_manifest: manifests/e2_content_manifest_20260717.csv
+pmrid_scene_manifest: manifests/e2_pmrid_validation_scene_manifest_20260718.csv
+pmrid_benchmark: E:/PMRID-Pytorch-main/PMRID/PMRID/benchmark.json
+pmrid_root: E:/PMRID-Pytorch-main/PMRID/PMRID
+training_content_role: exploratory_training_only
+validation_content_role: validation_content_only
+scmos_roi: {top: 768, left: 768, height: 512, width: 512}
+pmrid_patch:
+  height: 512
+  width: 512
+  count_per_entry: 1
+  selection: sha256_even_coordinate
+  preserve_bayer_phase: true
+pmrid_preprocessing:
+  dtype: uint16
+  shape: [3000, 4000]
+  bayer_pattern: BGGR
+  normalization_divisor: 65535.0
+  black_level_subtraction: false
+  rationale: official PMRID benchmark.py reads uint16, reshapes from metadata, and divides by 65535 without black-level subtraction
+training_noise_seeds: [20260717, 20260718, 20260719]
+validation_noise_seed_base: 20260719
+g_sigma_DN: 91.4432
+safe_sigma_max_DN: 300.0
+network: {type: light_unet_residual_prediction, base_channels: 16, encoder_levels: 3, normalization: none, activation: ReLU}
+training: {epochs: 30, optimizer: Adam, learning_rate: 0.001, loss: L1, weight_decay: 0.0, scheduler: none, batch_size: 2, model_seed: 20260719, dataloader_seed: 20260719, augmentations: [horizontal_flip, vertical_flip, rotation_90]}
+formal_training_requires_all_three_experiments: true
+overwrite: false
