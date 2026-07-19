@@ -574,14 +574,19 @@ def main() -> int:
     brightness_categories = ["A. seed-dependent network DC bias"]
     if any(abs(item["spearman_with_signal"]) >= 0.3 for item in signal_correlations):
         brightness_categories.append("B. input-signal-dependent bias")
-    brightness_categories.append("D. overfitting-associated bias (descriptive; epochwise bias unavailable)")
     if float(np.mean(corrected_frame_df.correction_DN.abs())) > 0:
         brightness_categories.append("F. unresolved checkpoint-specific contribution")
-    structure_categories = ["A. flat-region noise suppression"]
+    frequency_wide = frequency_df.pivot(index=["run_seed", "folder", "band"], columns="model", values="output_energy_ratio")
+    frequency_delta = (frequency_wide.CG_NC - frequency_wide.G).groupby(level="band").mean()
+    structure_categories = []
+    if float((flat.CG_NC - flat.G).mean()) > 0:
+        structure_categories.append("A. flat-region noise suppression")
     if float((high.CG_NC - high.G).mean()) < 0:
         structure_categories.append("B. edge attenuation")
-    if float(frequency_df[frequency_df.band.isin(["dc", "very_low"])].output_energy_ratio.mean()) < 1:
+    if float(frequency_delta.get("dc", 0.0)) < 0 or float(frequency_delta.get("very_low", 0.0)) < 0:
         structure_categories.append("C. low-frequency/DC suppression")
+    if float(frequency_delta.get("mid", 0.0)) < 0 and float(frequency_delta.get("high", 0.0)) < 0:
+        structure_categories.append("D. broad smoothing")
     conditional_persists = bool((centered_delta.groupby(level="run_seed").mean() > 0).all() and (centered_delta.groupby(level="folder").mean() > 0).all())
     benefit_mainly_dc = bool(float(centered_delta.mean()) < 0.5 * float(raw_delta.mean()))
     overfit_all = bool(not drop_df.empty and (drop_df.best_to_final_PSNR_drop > cfg["overfit"]["validation_psnr_drop_warning_dB"]).all())
@@ -597,6 +602,7 @@ def main() -> int:
         "conditional_benefit_mainly_DC": benefit_mainly_dc,
         "flat_region_CG_minus_G_reduction_mean": float((flat.CG_NC - flat.G).mean()),
         "high_gradient_CG_minus_G_retention_mean": float((high.CG_NC - high.G).mean()),
+        "frequency_band_CG_minus_G_energy_ratio": {str(key): float(value) for key, value in frequency_delta.items()},
         "overfitting_across_all_runs": overfit_all,
         "overfitting_bias_causality": "UNRESOLVED: epochwise real-holdout bias was not measured and checkpoints remain frozen",
         "scientific_scope": "operational attribution; regressions are descriptive and not physical causal models",
