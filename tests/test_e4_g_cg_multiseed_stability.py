@@ -37,3 +37,25 @@ def test_decision_reports_repeatable_tradeoffs() -> None:
     decision, cgs = MODULE.decide(synthetic, pd.DataFrame(rows), cfg)
     assert decision["status"] == "CONDITIONAL-BENEFIT-WITH-TRADEOFFS"
     assert cgs["CGS_ENTRY_ALLOWED"] is False
+
+
+def test_removed_structure_compares_absolute_correlations() -> None:
+    synthetic = pd.DataFrame([
+        {"run_seed": seed, "model": model, "output_psnr": 57.0, "output_ssim": 0.99}
+        for seed in [1, 2, 3] for model in ["G", "CG_NC"]
+    ])
+    rows = []
+    for seed in [1, 2, 3]:
+        for folder in [2, 5, 9, 11]:
+            for model in ["G", "CG_NC"]:
+                rows.append({
+                    "run_seed": seed, "folder": folder, "model": model,
+                    "temporal_variance_reduction": 0.04, "row_energy_reduction": 0.01,
+                    "column_energy_reduction": 0.01, "max_absolute_shift_DN": 1.0,
+                    "high_gradient_retention": 0.99,
+                    "removed_structure_correlation": -0.1 if model == "CG_NC" else 0.2,
+                })
+    cfg = {"decision": {"required_synthetic_noninferior_seeds": 2, "required_real_better_seeds": 2, "required_folders_mean_better": 3, "severe_brightness_shift_DN": 15.0, "obvious_gradient_retention_drop": 0.01, "structure_correlation_margin": 0.02}}
+    decision, _ = MODULE.decide(synthetic, pd.DataFrame(rows), cfg)
+    assert decision["removed_structure_systematically_higher"] is False
+    assert decision["removed_structure_margin_exceeded"] is False

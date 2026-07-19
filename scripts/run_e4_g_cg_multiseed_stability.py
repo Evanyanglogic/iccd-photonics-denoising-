@@ -154,7 +154,10 @@ def decide(synthetic: pd.DataFrame, real: pd.DataFrame, cfg: dict[str, Any]) -> 
     gradient_systematic = bool(
         (gradient_delta.groupby(level="run_seed").mean() < -float(limits["obvious_gradient_retention_drop"])).sum() >= 2
     )
-    structure_delta = delta.removed_structure_correlation.abs()
+    structure_delta = (
+        real_wide["removed_structure_correlation"]["CG_NC"].abs()
+        - real_wide["removed_structure_correlation"]["G"].abs()
+    )
     structure_systematic = bool(
         (structure_delta.groupby(level="run_seed").mean() > float(limits["structure_correlation_margin"])).sum() >= 2
     )
