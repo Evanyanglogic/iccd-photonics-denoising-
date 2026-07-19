@@ -1,0 +1,15 @@
+{
+  "CGS_ENTRY_ALLOWED": false,
+  "conditional_benefit": "CONDITIONAL-BENEFIT-WITH-TRADEOFFS",
+  "data_leakage_detected": false,
+  "final_status": "PAIR-GATE-REVISION-VERIFIED",
+  "finite_metrics": true,
+  "gate_revision_verified": true,
+  "provenance_complete": true,
+  "source_data_protected": true,
+  "training_completed_seeds": [
+    20260719,
+    20260720,
+    20260721
+  ]
+}

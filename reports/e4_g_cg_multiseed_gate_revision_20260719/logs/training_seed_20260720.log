@@ -1,0 +1,83 @@
+G epoch=01/30 train_l1=0.01267881 val_l1=0.00161505 val_psnr=51.5997
+G epoch=02/30 train_l1=0.00162739 val_l1=0.00147346 val_psnr=52.6062
+G epoch=03/30 train_l1=0.00139736 val_l1=0.00164025 val_psnr=54.2454
+G epoch=04/30 train_l1=0.00124931 val_l1=0.00119328 val_psnr=57.1572
+G epoch=05/30 train_l1=0.00126933 val_l1=0.00163838 val_psnr=54.2797
+G epoch=06/30 train_l1=0.00125464 val_l1=0.00120531 val_psnr=57.0452
+G epoch=07/30 train_l1=0.00122293 val_l1=0.00123773 val_psnr=56.7562
+G epoch=08/30 train_l1=0.00122906 val_l1=0.00127658 val_psnr=56.4291
+G epoch=09/30 train_l1=0.00128775 val_l1=0.00118642 val_psnr=57.2300
+G epoch=10/30 train_l1=0.00120320 val_l1=0.00122305 val_psnr=56.9117
+G epoch=11/30 train_l1=0.00119239 val_l1=0.00128534 val_psnr=56.3868
+G epoch=12/30 train_l1=0.00125508 val_l1=0.00154705 val_psnr=54.7376
+G epoch=13/30 train_l1=0.00112596 val_l1=0.00118149 val_psnr=57.2764
+G epoch=14/30 train_l1=0.00124966 val_l1=0.00127052 val_psnr=56.4950
+G epoch=15/30 train_l1=0.00121503 val_l1=0.00133036 val_psnr=56.0232
+G epoch=16/30 train_l1=0.00115431 val_l1=0.00119498 val_psnr=57.1518
+G epoch=17/30 train_l1=0.00118055 val_l1=0.00118087 val_psnr=57.2796
+G epoch=18/30 train_l1=0.00115149 val_l1=0.00128668 val_psnr=56.3697
+G epoch=19/30 train_l1=0.00115425 val_l1=0.00118617 val_psnr=57.2292
+G epoch=20/30 train_l1=0.00118958 val_l1=0.00128480 val_psnr=56.3525
+G epoch=21/30 train_l1=0.00115465 val_l1=0.00120500 val_psnr=57.0577
+G epoch=22/30 train_l1=0.00110151 val_l1=0.00146808 val_psnr=55.1109
+G epoch=23/30 train_l1=0.00115477 val_l1=0.00125704 val_psnr=56.6497
+G epoch=24/30 train_l1=0.00111875 val_l1=0.00132632 val_psnr=56.0266
+G epoch=25/30 train_l1=0.00111946 val_l1=0.00134599 val_psnr=55.9164
+G epoch=26/30 train_l1=0.00108375 val_l1=0.00141491 val_psnr=55.4465
+G epoch=27/30 train_l1=0.00106061 val_l1=0.00185538 val_psnr=53.1357
+G epoch=28/30 train_l1=0.00108001 val_l1=0.00168626 val_psnr=53.8506
+G epoch=29/30 train_l1=0.00103787 val_l1=0.00190554 val_psnr=52.4819
+G epoch=30/30 train_l1=0.00103330 val_l1=0.00256429 val_psnr=50.1397
+CG_NC epoch=01/30 train_l1=0.01262079 val_l1=0.00168310 val_psnr=51.1415
+CG_NC epoch=02/30 train_l1=0.00202723 val_l1=0.00198461 val_psnr=50.9828
+CG_NC epoch=03/30 train_l1=0.00216371 val_l1=0.00299121 val_psnr=49.1424
+CG_NC epoch=04/30 train_l1=0.00186039 val_l1=0.00148110 val_psnr=53.3751
+CG_NC epoch=05/30 train_l1=0.00144849 val_l1=0.00175789 val_psnr=52.5264
+CG_NC epoch=06/30 train_l1=0.00178787 val_l1=0.00133756 val_psnr=54.3237
+CG_NC epoch=07/30 train_l1=0.00183170 val_l1=0.00153361 val_psnr=53.7394
+CG_NC epoch=08/30 train_l1=0.00164158 val_l1=0.00164939 val_psnr=53.4828
+CG_NC epoch=09/30 train_l1=0.00162422 val_l1=0.00120329 val_psnr=56.9926
+CG_NC epoch=10/30 train_l1=0.00145575 val_l1=0.00135602 val_psnr=55.8388
+CG_NC epoch=11/30 train_l1=0.00136872 val_l1=0.00119069 val_psnr=57.2018
+CG_NC epoch=12/30 train_l1=0.00128702 val_l1=0.00126579 val_psnr=56.5522
+CG_NC epoch=13/30 train_l1=0.00141695 val_l1=0.00121751 val_psnr=56.9236
+CG_NC epoch=14/30 train_l1=0.00123381 val_l1=0.00118075 val_psnr=57.2856
+CG_NC epoch=15/30 train_l1=0.00124284 val_l1=0.00119701 val_psnr=57.1330
+CG_NC epoch=16/30 train_l1=0.00116817 val_l1=0.00118496 val_psnr=57.2455
+CG_NC epoch=17/30 train_l1=0.00139473 val_l1=0.00122696 val_psnr=56.8348
+CG_NC epoch=18/30 train_l1=0.00118393 val_l1=0.00118149 val_psnr=57.2795
+CG_NC epoch=19/30 train_l1=0.00121774 val_l1=0.00129775 val_psnr=56.3129
+CG_NC epoch=20/30 train_l1=0.00141551 val_l1=0.00129591 val_psnr=56.3111
+CG_NC epoch=21/30 train_l1=0.00143545 val_l1=0.00120613 val_psnr=57.0146
+CG_NC epoch=22/30 train_l1=0.00124917 val_l1=0.00116593 val_psnr=57.3931
+CG_NC epoch=23/30 train_l1=0.00119797 val_l1=0.00135587 val_psnr=55.8512
+CG_NC epoch=24/30 train_l1=0.00140084 val_l1=0.00120340 val_psnr=57.0420
+CG_NC epoch=25/30 train_l1=0.00129603 val_l1=0.00117046 val_psnr=57.3388
+CG_NC epoch=26/30 train_l1=0.00126424 val_l1=0.00122319 val_psnr=56.8784
+CG_NC epoch=27/30 train_l1=0.00116971 val_l1=0.00120606 val_psnr=57.0355
+CG_NC epoch=28/30 train_l1=0.00123631 val_l1=0.00124287 val_psnr=56.7350
+CG_NC epoch=29/30 train_l1=0.00105783 val_l1=0.00131335 val_psnr=56.2052
+CG_NC epoch=30/30 train_l1=0.00109975 val_l1=0.00156889 val_psnr=54.4467
+{
+  "experiment_id": "e4_g_cg_multiseed_gate_revision_20260719_seed_20260720",
+  "final_status": "TRAINING-RUN-VALID-WITH-LIMITATIONS",
+  "scale_preflight_passed": true,
+  "scale_pairs": 417,
+  "pair_preflight_passed": true,
+  "noise_pairs": 717,
+  "training_completed": true,
+  "completed_epochs": 30,
+  "finite_metrics": true,
+  "output_not_degenerate": true,
+  "train_loss_decreased_all_arms": true,
+  "psnr_improved_all_arms": true,
+  "ssim_not_lower_all_arms": true,
+  "mean_shift_gate_passed": false,
+  "conditional_benefit_observed": true,
+  "warnings": [
+    "OUTPUT_MEAN_SHIFT_WARNING"
+  ],
+  "source_data_protected": true,
+  "evaluation_iccd_holdout_preserved": true,
+  "provenance_complete": true
+}

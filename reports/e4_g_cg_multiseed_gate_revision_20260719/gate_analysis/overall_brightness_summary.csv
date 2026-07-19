@@ -1,0 +1,2 @@
+﻿pair_count,mean_residual_DN,mean_brightness_shift_DN,median_brightness_shift_DN,std_brightness_shift_DN,max_absolute_brightness_shift_DN,positive_ratio,mean_ci95_low_DN,mean_ci95_high_DN,mean_clipping_contribution_DN,z_mean_mean,z_mean_std,max_absolute_z_mean
+2151,0.004278429859539533,0.01759597649140185,0.018824552254592675,0.19910218407123537,1.0609505124125285,0.5448628544862855,0.00918179471195077,0.02601015827085293,0.013317546631862315,0.017025042345542696,0.9871148037119838,2.9731164108966492

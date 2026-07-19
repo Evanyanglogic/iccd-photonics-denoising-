@@ -1,0 +1,21 @@
+model_id: e2_signal_condition_model_20260719
+scientific_name: observed-signal-conditioned operational noise-strength model
+model_type: nonnegative_std_linear
+equation: sigma_DN = a + b * reference_patch_mean_DN
+a: 0.0
+b: 0.059136757483193435
+epsilon: 1.0e-12
+calibration_folders: [1, 4, 7, 8, 10, 13]
+evaluation_folders: [2, 5, 9, 11]
+calibration_signal_range_DN: [935.1195068359375, 2510.12255859375]
+calibration_sigma_range_DN: [38.584720611572266, 148.05999755859375]
+fitting_method: scipy.optimize.nnls on temporal_std_mean versus mean_signal
+selection_rule: lowest calibration-folder LOOCV RMSE among finite, sign-stable candidates
+loocv_rmse_DN: 8.063817345675991
+extrapolation_policy: allow and flag; never clamp; fail pair if nonfinite, nonpositive, or above 300 DN
+safe_sigma_max_DN: 300.0
+parameter_status: FIT-VERIFIED-BUT-DOMAIN-PREFLIGHT-FAILED
+source_csv: reports/e1_formal_rerun_20260717/noise_summary/folder_noise_summary.csv
+source_split: manifests/e1_primary_calibration_evaluation_split_20260718.csv
+source_report: reports/e1_observed_state_reliability_separation_20260718_v6
+prohibited_interpretations: [conversion_gain, read_noise_calibration, photon_transfer_curve, physical_gate_condition]

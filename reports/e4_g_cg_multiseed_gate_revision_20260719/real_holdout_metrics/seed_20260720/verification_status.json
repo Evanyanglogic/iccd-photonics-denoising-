@@ -1,0 +1,30 @@
+{
+  "all_folders_completed": true,
+  "calibration_folders_not_evaluated": true,
+  "checkpoint_hashes_verified": true,
+  "conditional_benefit_checks": {
+    "better_temporal_reduction_folders": 4,
+    "brightness_not_worse": true,
+    "folder_5_temporal_better": true,
+    "gradient_not_worse": false,
+    "proxy_not_systematically_lower": true,
+    "residual_structure_not_higher": true,
+    "row_column_not_systematically_worse": false
+  },
+  "conditional_benefit_observed": true,
+  "final_status": "REAL-HOLDOUT-VALID-WITH-WARNINGS",
+  "finite_metrics": true,
+  "output_degenerate": false,
+  "outputs_completed_per_model": 800,
+  "preprocessing_frozen": true,
+  "provenance_complete": true,
+  "raw_frames_completed": 800,
+  "smoke": false,
+  "source_data_protected": true,
+  "training_performed": false,
+  "warnings": [
+    "BRIGHTNESS_SHIFT_WARNING",
+    "SEVERE_BRIGHTNESS_SHIFT_WARNING",
+    "REMOVED_RESIDUAL_STRUCTURE_WARNING"
+  ]
+}

@@ -1,0 +1,43 @@
+folder=2 load
+folder=2 model=G inference
+folder=2 model=CG_NC inference
+folder=5 load
+folder=5 model=G inference
+folder=5 model=CG_NC inference
+folder=9 load
+folder=9 model=G inference
+folder=9 model=CG_NC inference
+folder=11 load
+folder=11 model=G inference
+folder=11 model=CG_NC inference
+{
+  "final_status": "REAL-HOLDOUT-VALID-WITH-WARNINGS",
+  "smoke": false,
+  "all_folders_completed": true,
+  "raw_frames_completed": 800,
+  "outputs_completed_per_model": 800,
+  "checkpoint_hashes_verified": true,
+  "preprocessing_frozen": true,
+  "finite_metrics": true,
+  "output_degenerate": false,
+  "calibration_folders_not_evaluated": true,
+  "training_performed": false,
+  "source_data_protected": true,
+  "conditional_benefit_observed": false,
+  "conditional_benefit_checks": {
+    "better_temporal_reduction_folders": 3,
+    "row_column_not_systematically_worse": false,
+    "brightness_not_worse": false,
+    "gradient_not_worse": false,
+    "proxy_not_systematically_lower": true,
+    "residual_structure_not_higher": false,
+    "folder_5_temporal_better": true
+  },
+  "warnings": [
+    "BRIGHTNESS_SHIFT_WARNING",
+    "SEVERE_BRIGHTNESS_SHIFT_WARNING",
+    "REMOVED_RESIDUAL_STRUCTURE_WARNING",
+    "NO_CLEAR_REAL_DOMAIN_CONDITIONAL_BENEFIT"
+  ],
+  "provenance_complete": true
+}

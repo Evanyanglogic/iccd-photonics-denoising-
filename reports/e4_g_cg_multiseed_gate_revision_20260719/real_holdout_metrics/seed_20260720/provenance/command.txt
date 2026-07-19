@@ -1,0 +1,1 @@
+E:\PNGAN-main\iccd-photonics-denoising\scripts\run_e3_real_iccd_holdout_validation.py --config E:\PNGAN-main\iccd-photonics-denoising\reports\e4_g_cg_multiseed_gate_revision_20260719\configs\holdout_seed_20260720.yaml --output-root E:\PNGAN-main\iccd-photonics-denoising\reports\e4_g_cg_multiseed_gate_revision_20260719\real_holdout_metrics\seed_20260720

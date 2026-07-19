@@ -1,0 +1,62 @@
+experiment_id: e4_g_cg_multiseed_gate_revision_20260719_real_seed_20260720
+data_root: D:/iccd/data/20260319
+evaluation_folders:
+- 2
+- 5
+- 9
+- 11
+calibration_folders:
+- 1
+- 4
+- 7
+- 8
+- 10
+- 13
+frames_per_folder: 200
+roi:
+  top: 2304
+  left: 2304
+  height: 512
+  width: 512
+normalization_divisor: 65535.0
+condition_slope: 0.059136757483193435
+calibration_signal_range_DN:
+- 935.1195068359375
+- 2510.12255859375
+sigma_safety_max_DN: 300.0
+training_report: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260720
+e1_input_manifest: reports/e1_formal_rerun_20260717/input_audit/input_manifest.csv
+checkpoints:
+  G:
+    path: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260720/checkpoints/G/best.pt
+    epoch: 17
+    input_channels: 1
+    sha256: 9fe1d864876cb41fd7d53a0eeb26ee98bfbcb260984847350c6f019c64a45acf
+  CG_NC:
+    path: reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260720/checkpoints/CG_NC/best.pt
+    epoch: 22
+    input_channels: 1
+    sha256: a2676279d33a545455cea404f6abebd5af984eae6ff311086db71897b84618c4
+model:
+  base_channels: 16
+  output_mode: residual_prediction
+inference:
+  batch_size: 4
+  precision: cuda_amp_float16
+  memory_format: channels_last
+spatial:
+  max_radius: 128
+gradient:
+  high_percentile: 90.0
+  low_percentile: 50.0
+  edge_retention_warning_min: 0.95
+brightness:
+  warning_DN: 5.0
+  severe_warning_DN: 15.0
+removed_residual:
+  structure_correlation_warning_abs: 0.1
+preview_frames_1_based:
+- 1
+- 100
+- 200
+overwrite: false

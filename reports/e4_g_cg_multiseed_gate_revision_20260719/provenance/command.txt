@@ -1,0 +1,1 @@
+scripts\run_e4_g_cg_gate_revision.py --config configs\e4_g_cg_multiseed_gate_revision_20260719.yaml --output-root reports\e4_g_cg_multiseed_gate_revision_20260719

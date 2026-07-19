@@ -1,0 +1,3 @@
+﻿model,path,best_epoch,input_channels,sha256,training_report,frozen
+G,E:\PNGAN-main\iccd-photonics-denoising\reports\e4_g_cg_multiseed_gate_revision_20260719\training\seed_20260721\checkpoints\G\best.pt,6,1,2885aaeeb1dc2e3887d8899537ffa233e2571eb7c54453dcb41c32314ad267ec,reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260721,True
+CG_NC,E:\PNGAN-main\iccd-photonics-denoising\reports\e4_g_cg_multiseed_gate_revision_20260719\training\seed_20260721\checkpoints\CG_NC\best.pt,15,1,1930286634ff3202f8af3c75042c205757e454acf35d7edc93aa7855c13b3f61,reports/e4_g_cg_multiseed_gate_revision_20260719/training/seed_20260721,True

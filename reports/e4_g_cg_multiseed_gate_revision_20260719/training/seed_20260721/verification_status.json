@@ -1,0 +1,25 @@
+{
+  "completed_epochs": 30,
+  "conditional_benefit_observed": false,
+  "evaluation_iccd_holdout_preserved": true,
+  "experiment_id": "e4_g_cg_multiseed_gate_revision_20260719_seed_20260721",
+  "final_status": "TRAINING-RUN-VALID-WITH-LIMITATIONS",
+  "finite_metrics": true,
+  "mean_shift_gate_passed": false,
+  "noise_pairs": 717,
+  "output_not_degenerate": true,
+  "pair_preflight_passed": true,
+  "provenance_complete": true,
+  "psnr_improved_all_arms": false,
+  "scale_pairs": 417,
+  "scale_preflight_passed": true,
+  "source_data_protected": true,
+  "ssim_not_lower_all_arms": false,
+  "train_loss_decreased_all_arms": true,
+  "training_completed": true,
+  "warnings": [
+    "OUTPUT_MEAN_SHIFT_WARNING",
+    "SSIM_NOT_IMPROVED_FOR_ALL_ARMS",
+    "PSNR_NOT_IMPROVED_FOR_ALL_ARMS"
+  ]
+}

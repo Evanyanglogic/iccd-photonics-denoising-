@@ -1,0 +1,2 @@
+﻿dtype,shape,roi_top,roi_left,roi_height,roi_width,normalization,dark_subtraction,p99_scaling,exposure_scaling
+uint16,5120x5120,2304,2304,512,512,float32 / 65535.0,False,False,False

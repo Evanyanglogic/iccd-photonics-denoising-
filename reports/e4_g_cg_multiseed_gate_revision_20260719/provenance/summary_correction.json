@@ -1,0 +1,8 @@
+{
+  "checkpoint_changed": false,
+  "metric_values_changed": false,
+  "reason": "Compare abs(CG structure correlation) minus abs(G structure correlation), not abs(CG-G)",
+  "summary_commit": "6bce9f95becfb17ab79a6a9d2bc1c0738525cff4",
+  "timestamp_utc": "2026-07-19T14:25:18.332342+00:00",
+  "training_rerun": false
+}

@@ -1,0 +1,19 @@
+{
+  "CGS_ENTRY_ALLOWED": false,
+  "conditional_benefit": "CONDITIONAL-BENEFIT-WITH-TRADEOFFS",
+  "data_leakage_detected": false,
+  "ended_at_utc": "2026-07-19T14:21:56.156742+00:00",
+  "experiment_id": "e4_g_cg_multiseed_gate_revision_20260719",
+  "final_status": "PAIR-GATE-REVISION-VERIFIED",
+  "finite_metrics": true,
+  "gate_revision_verified": true,
+  "git_commit": "586cfdb8fffbb9b2a74fb3bf2b0142d426ebdbd1",
+  "provenance_complete": true,
+  "source_data_protected": true,
+  "started_at_utc": "2026-07-19T14:01:42.782139+00:00",
+  "training_completed_seeds": [
+    20260719,
+    20260720,
+    20260721
+  ]
+}

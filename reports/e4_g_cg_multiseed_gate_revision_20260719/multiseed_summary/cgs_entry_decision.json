@@ -1,0 +1,10 @@
+{
+  "CGS_ENTRY_ALLOWED": false,
+  "allowed_next_component_if_true": "calibration-only spatial-correlation residual feasibility",
+  "prohibited": [
+    "full CGS",
+    "row/column component",
+    "stable component"
+  ],
+  "reason": "Conditional benefit has unresolved brightness/gradient/removed-structure tradeoffs or is not repeatable"
+}

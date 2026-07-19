@@ -1,0 +1,10 @@
+﻿group_type,experiment,condition_id,mean_brightness_shift_DN,threshold_DN,pass
+experiment_seed,CG_SHARED,all,0.045771514986491846,0.25,True
+experiment_seed,G,all,0.009917964651660793,0.25,True
+experiment_condition_seed,CG_SHARED,high,0.07557304230628528,0.35,True
+experiment_condition_seed,CG_SHARED,low,0.006794312071380731,0.35,True
+experiment_condition_seed,CG_SHARED,mid,0.054947190581809545,0.35,True
+experiment_condition_seed,G,high,0.023064339843662296,0.35,True
+experiment_condition_seed,G,low,-0.025531202368517403,0.35,True
+experiment_condition_seed,G,mid,0.032220756479837485,0.35,True
+seed_overall,all,all,0.03077002949074664,0.1,True

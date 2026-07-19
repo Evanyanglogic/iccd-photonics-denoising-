@@ -1,0 +1,30 @@
+{
+  "brightness_systematically_worse": false,
+  "direction_consistent_across_seeds": true,
+  "folders_with_positive_mean_real_delta": 4,
+  "gradient_obviously_worse": false,
+  "gradient_systematically_worse": true,
+  "real_better_seed_count": 3,
+  "real_mean_deltas": {
+    "20260719": 0.0094407156102335,
+    "20260720": 0.0143155459615871,
+    "20260721": 0.00522448287524405
+  },
+  "removed_structure_margin_exceeded": false,
+  "removed_structure_systematically_higher": false,
+  "severe_brightness_shift_detected": true,
+  "single_seed_dominates": false,
+  "status": "CONDITIONAL-BENEFIT-WITH-TRADEOFFS",
+  "synthetic_advantage_near_zero": false,
+  "synthetic_noninferior_seed_count": 3,
+  "synthetic_psnr_deltas": {
+    "20260719": 0.002740737914756153,
+    "20260720": 0.11346535580447181,
+    "20260721": 0.058981592262107085
+  },
+  "synthetic_ssim_deltas": {
+    "20260719": 9.464616829490957e-06,
+    "20260720": 4.106569522543957e-05,
+    "20260721": -1.700348276501007e-05
+  }
+}

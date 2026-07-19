@@ -1,0 +1,24 @@
+{
+  "calibration_folders_read": false,
+  "device": "cuda",
+  "ended_at_utc": "2026-07-19T14:12:18.032127+00:00",
+  "evaluation_folders": [
+    2,
+    5,
+    9,
+    11
+  ],
+  "experiment_id": "e4_g_cg_multiseed_gate_revision_20260719_real_seed_20260720",
+  "final_status": "REAL-HOLDOUT-VALID-WITH-WARNINGS",
+  "frames": 800,
+  "git_commit": "586cfdb8fffbb9b2a74fb3bf2b0142d426ebdbd1",
+  "model_outputs": 1600,
+  "models": [
+    "G",
+    "CG_NC"
+  ],
+  "smoke": false,
+  "source_data_protected": true,
+  "started_at_utc": "2026-07-19T14:07:38.701157+00:00",
+  "training_performed": false
+}

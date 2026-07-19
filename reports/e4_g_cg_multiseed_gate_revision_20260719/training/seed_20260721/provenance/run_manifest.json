@@ -1,0 +1,33 @@
+{
+  "device": "cuda",
+  "ended_at_utc": "2026-07-19T14:17:03.429175+00:00",
+  "evaluation_iccd_raw_read": false,
+  "experiment_id": "e4_g_cg_multiseed_gate_revision_20260719_seed_20260721",
+  "experiments": [
+    "G",
+    "CG_NC"
+  ],
+  "final_status": "TRAINING-RUN-VALID-WITH-LIMITATIONS",
+  "git_commit": "586cfdb8fffbb9b2a74fb3bf2b0142d426ebdbd1",
+  "smoke": false,
+  "source_data_protected": true,
+  "started_at_utc": "2026-07-19T14:12:22.848304+00:00",
+  "training_info": {
+    "CG_NC": {
+      "best_epoch": 15,
+      "best_validation_l1": 0.0011940475346313582,
+      "best_validation_psnr": 57.17607928545047,
+      "elapsed_seconds": 118.71638530000928,
+      "parameter_count": 481745,
+      "peak_gpu_bytes": 271566848
+    },
+    "G": {
+      "best_epoch": 6,
+      "best_validation_l1": 0.0011982923327809852,
+      "best_validation_psnr": 57.11708672026284,
+      "elapsed_seconds": 117.78471499998705,
+      "parameter_count": 481745,
+      "peak_gpu_bytes": 265765376
+    }
+  }
+}
