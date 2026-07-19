@@ -145,10 +145,11 @@ def pair_metrics(reference_uint16: np.ndarray, sigma_dn: float, seed: int) -> tu
     residual = z * np.float32(sigma_dn / 65535.0)
     noisy_unclipped = reference + residual
     noisy = np.clip(noisy_unclipped, 0.0, 1.0)
-    noisy_uint16 = np.rint(noisy * 65535.0).astype(np.uint16)
+    noisy_dn_for_rounding = noisy * np.float32(65535.0)
+    noisy_uint16 = np.rint(noisy_dn_for_rounding).astype(np.uint16)
     noisy_round_trip = noisy_uint16.astype(np.float32) / 65535.0
-    reconstructed_residual_dn = (noisy_round_trip - reference) * 65535.0
-    clipped_float_residual_dn = (noisy - reference) * 65535.0
+    reconstructed_residual_dn = noisy_uint16.astype(np.float32) - reference_uint16.astype(np.float32)
+    clipped_float_residual_dn = noisy_dn_for_rounding - reference_uint16.astype(np.float32)
     residual_dn = residual * 65535.0
     source_zero = float(np.mean(reference_uint16 == 0))
     source_one = float(np.mean(reference_uint16 == 65535))
@@ -164,7 +165,7 @@ def pair_metrics(reference_uint16: np.ndarray, sigma_dn: float, seed: int) -> tu
         "added_one_ratio": max(0.0, float(np.mean(noisy == 1)) - source_one),
         "brightness_shift_DN": float((np.mean(noisy, dtype=np.float64) - np.mean(reference, dtype=np.float64)) * 65535.0),
         "gradient_ratio": gradient_energy(noisy) / max(gradient_energy(reference), 1e-20),
-        "noisy_round_trip_max_error_DN": float(np.max(np.abs(noisy_round_trip - noisy)) * 65535.0),
+        "noisy_round_trip_max_error_DN": float(np.max(np.abs(noisy_uint16.astype(np.float32) - noisy_dn_for_rounding))),
         "residual_reconstruction_max_error_DN": float(np.max(np.abs(reconstructed_residual_dn - clipped_float_residual_dn))),
     }
     return z, metrics

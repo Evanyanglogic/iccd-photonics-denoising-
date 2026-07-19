@@ -37,6 +37,8 @@ def test_pair_generation_and_network_shapes() -> None:
 
 def test_residual_round_trip_uses_post_clipping_residual() -> None:
     raw = np.full((512, 512), 4, dtype=np.uint16)
-    _, metrics = pair_metrics(raw, 148.440509, 20260719)
-    assert metrics["negative_before_clipping_ratio"] > 0
-    assert metrics["residual_reconstruction_max_error_DN"] <= 1.0
+    for seed in [20260717, 20260718, 20260719, 2527312500]:
+        _, metrics = pair_metrics(raw, 148.440509, seed)
+        assert metrics["negative_before_clipping_ratio"] > 0
+        assert metrics["noisy_round_trip_max_error_DN"] <= 0.5
+        assert metrics["residual_reconstruction_max_error_DN"] <= 0.5
