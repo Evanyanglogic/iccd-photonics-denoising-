@@ -1,0 +1,37 @@
+{
+  "device": "cuda",
+  "ended_at_utc": "2026-07-19T11:10:31.213088+00:00",
+  "evaluation_iccd_raw_read": false,
+  "experiment_id": "e2_g_cg_scaled_training_20260719",
+  "final_status": "TRAINING-RUN-VALID-WITH-LIMITATIONS",
+  "git_commit": "3c3459b8adf343fe3af40675e604851e4033c5f9",
+  "smoke": false,
+  "source_data_protected": true,
+  "started_at_utc": "2026-07-19T11:02:26.189084+00:00",
+  "training_info": {
+    "CG_C": {
+      "best_epoch": 30,
+      "best_validation_l1": 0.0011862648728614051,
+      "best_validation_psnr": 57.232763078477646,
+      "elapsed_seconds": 126.69616099999985,
+      "parameter_count": 481889,
+      "peak_gpu_bytes": 280516096
+    },
+    "CG_NC": {
+      "best_epoch": 2,
+      "best_validation_l1": 0.0011728493930596826,
+      "best_validation_psnr": 57.342814355833916,
+      "elapsed_seconds": 118.2566247000068,
+      "parameter_count": 481745,
+      "peak_gpu_bytes": 271566848
+    },
+    "G": {
+      "best_epoch": 2,
+      "best_validation_l1": 0.0011739001274069087,
+      "best_validation_psnr": 57.340072403606186,
+      "elapsed_seconds": 186.5567886000208,
+      "parameter_count": 481745,
+      "peak_gpu_bytes": 265765376
+    }
+  }
+}

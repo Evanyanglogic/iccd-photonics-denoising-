@@ -1,0 +1,1 @@
+scripts\run_e2_g_cg_scaled_training.py --config configs\e2_g_cg_scaled_training_20260719.yaml --output-root reports\e2_g_cg_initial_training_20260719_v5

@@ -1,0 +1,1 @@
+﻿source,content_id,content_sha256,condition_id,seed,source_mean_DN,target_iccd_signal_DN,gain,scaled_mean_DN,relative_mean_error,source_zero_ratio,scaled_zero_ratio,added_zero_ratio,clipping_high_ratio,unique_values,scaled_std_DN,effective_dynamic_range_DN,round_trip_max_error_DN,scale_gate_pass,failure_reason,scene_id,patch_top,patch_left
