@@ -275,6 +275,9 @@ def load_epoch_metrics(repo: Path, cfg: dict[str, Any], bias_summary: pd.DataFra
     rows = []
     for seed, relative in cfg["training_metric_sources"].items():
         frame = pd.read_csv(repo / relative)
+        if "experiment" not in frame.columns:
+            raise RuntimeError(f"Training metric schema missing experiment column: {relative}")
+        frame = frame.rename(columns={"experiment": "model"})
         frame.insert(0, "run_seed", int(seed))
         rows.append(frame)
     epochs = pd.concat(rows, ignore_index=True)
@@ -287,7 +290,7 @@ def load_epoch_metrics(repo: Path, cfg: dict[str, Any], bias_summary: pd.DataFra
     epochs["real_bias_available_for_epoch"] = epochs.is_best
     epochs.loc[~epochs.is_best, ["mean_real_shift_DN", "mean_absolute_real_shift_DN", "mean_predicted_residual_DC_DN"]] = np.nan
     drop_rows = []
-    for (seed, model), group in epochs.groupby(["run_seed", "experiment"]):
+    for (seed, model), group in epochs.groupby(["run_seed", "model"]):
         best = group.loc[group.validation_psnr.idxmax()]
         final = group.sort_values("epoch").iloc[-1]
         real_bias = bias[(bias.run_seed == seed) & (bias.model == model)].iloc[0]

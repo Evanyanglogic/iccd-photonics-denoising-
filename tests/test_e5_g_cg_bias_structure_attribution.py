@@ -12,6 +12,7 @@ from run_e5_g_cg_bias_structure_attribution import (
     bias_model_fits,
     frequency_band_energy,
     gradient_masks,
+    load_epoch_metrics,
     region_metrics,
     residual_dc_metrics,
     temporal_metrics,
@@ -78,3 +79,21 @@ def test_bias_models_recover_signal_slope() -> None:
     assert abs(coefficients["intercept"] - 2.0) < 1e-10
     assert abs(coefficients["input_mean_signal"] - 0.01) < 1e-12
     assert b2.R2 > 0.999999
+
+
+def test_epoch_metrics_schema_maps_experiment_to_model(tmp_path: Path) -> None:
+    metrics = pd.DataFrame([
+        {"experiment": model, "epoch": epoch, "train_l1": 0.1 / epoch, "validation_l1": 0.2, "validation_psnr": 50 + epoch, "is_best": epoch == 2}
+        for model in ["G", "CG_NC"] for epoch in [1, 2]
+    ])
+    path = tmp_path / "epoch_metrics.csv"
+    metrics.to_csv(path, index=False)
+    bias = pd.DataFrame([
+        {"run_seed": 1, "model": model, "folder": folder, "mean_shift_DN": shift, "predicted_residual_mean_DN": -shift}
+        for model, shift in [("G", 1.0), ("CG_NC", 2.0)] for folder in [2, 5]
+    ])
+    cfg = {"training_metric_sources": {1: str(path)}}
+    epochs, drops = load_epoch_metrics(Path("/"), cfg, bias)
+    assert set(epochs.model) == {"G", "CG_NC"}
+    assert len(drops) == 2
+    assert set(drops.model) == {"G", "CG_NC"}
