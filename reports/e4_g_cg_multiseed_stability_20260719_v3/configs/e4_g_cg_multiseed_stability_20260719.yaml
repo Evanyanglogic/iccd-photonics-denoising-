@@ -1,0 +1,23 @@
+experiment_id: e4_g_cg_multiseed_stability_20260719
+run_seeds: [20260719, 20260720, 20260721]
+experiments: [G, CG_NC]
+training_config: configs/e2_g_cg_scaled_training_20260719.yaml
+holdout_config: configs/e3_real_iccd_holdout_validation_20260719.yaml
+evaluation_folders: [2, 5, 9, 11]
+calibration_folders: [1, 4, 7, 8, 10, 13]
+frozen:
+  g_sigma_DN: 91.4432
+  condition_slope: 0.059136757483193435
+  anchors_DN: {low: 935.119507, mid: 1491.982910, high: 2510.122559}
+  cg_sigma_DN: {low: 55.299935, mid: 88.231032, high: 148.440509}
+  epochs: 30
+  batch_size: 2
+  learning_rate: 0.001
+decision:
+  required_synthetic_noninferior_seeds: 2
+  required_real_better_seeds: 2
+  required_folders_mean_better: 3
+  severe_brightness_shift_DN: 15.0
+  obvious_gradient_retention_drop: 0.01
+  structure_correlation_margin: 0.02
+overwrite: false

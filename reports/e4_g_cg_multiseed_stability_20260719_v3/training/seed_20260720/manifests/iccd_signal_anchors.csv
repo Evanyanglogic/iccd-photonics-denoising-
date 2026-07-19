@@ -1,0 +1,4 @@
+﻿condition_id,target_signal_DN,source_calibration_folders,anchor_rule,predicted_sigma_DN
+low,935.1195068359376,1;4;7;8;10;13,minimum calibration-folder mean signal,55.29993549356029
+mid,1491.98291015625,1;4;7;8;10;13,arithmetic median of six calibration-folder means,88.23103152697934
+high,2510.12255859375,1;4;7;8;10;13,maximum calibration-folder mean signal,148.4405090006516

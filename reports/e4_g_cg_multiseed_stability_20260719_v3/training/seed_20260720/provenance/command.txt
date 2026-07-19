@@ -1,0 +1,1 @@
+E:\PNGAN-main\iccd-photonics-denoising\scripts\run_e2_g_cg_scaled_training.py --config E:\PNGAN-main\iccd-photonics-denoising\reports\e4_g_cg_multiseed_stability_20260719_v3\configs\training_seed_20260720.yaml --output-root E:\PNGAN-main\iccd-photonics-denoising\reports\e4_g_cg_multiseed_stability_20260719_v3\training\seed_20260720 --experiments G,CG_NC

@@ -1,0 +1,10 @@
+{
+  "child_return_code": 4,
+  "ended_at_utc": "2026-07-19T13:38:32.474009+00:00",
+  "experiment_id": "e4_g_cg_multiseed_stability_20260719",
+  "failed_seed": 20260720,
+  "failed_stage": "training_preflight_or_training",
+  "final_status": "MULTISEED-PAIR-PREFLIGHT-NO-GO",
+  "git_commit": "068d8ece1120ba22a12467b6ef7e2c4448cdc68a",
+  "started_at_utc": "2026-07-19T13:28:37.024563+00:00"
+}

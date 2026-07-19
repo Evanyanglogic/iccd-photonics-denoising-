@@ -1,0 +1,43 @@
+{
+  "CGS_ENTRY_ALLOWED": false,
+  "all_seed_runs_completed": false,
+  "child_return_code": 4,
+  "child_status": {
+    "failed_count": 1,
+    "final_status": "PAIR-PREFLIGHT-NO-GO"
+  },
+  "conditional_benefit": "NOT-DETERMINED",
+  "data_leakage_detected": false,
+  "failed_pairs": [
+    {
+      "above_one_before_clipping_ratio": 0.0,
+      "added_one_ratio": 0.0,
+      "added_zero_ratio": 0.00909423828125,
+      "brightness_shift_DN": 1.0609505124125285,
+      "condition_id": "high",
+      "content_id": "pmrid_gt_034",
+      "failure_reason": "BRIGHTNESS",
+      "gradient_ratio": 1.0113035657138918,
+      "negative_before_clipping_ratio": 0.00909423828125,
+      "noisy_round_trip_max_error_DN": 0.5,
+      "pair_gate_pass": false,
+      "pair_id": "validation_pmrid_gt_034_high_CG_SHARED",
+      "pair_type": "CG_SHARED",
+      "residual_excess_kurtosis": 0.0044903755187988,
+      "residual_mean_DN": 0.4525933888456031,
+      "residual_reconstruction_max_error_DN": 0.5,
+      "residual_skewness": 0.0038004093803465,
+      "residual_std_DN": 148.57716341594886,
+      "residual_std_relative_error": 0.0009206005572014,
+      "scene_id": "Scene4",
+      "seed": 3413302546,
+      "sigma_DN": 148.4405090006516,
+      "split": "validation"
+    }
+  ],
+  "failed_seed": 20260720,
+  "failed_stage": "training_preflight_or_training",
+  "final_status": "MULTISEED-PAIR-PREFLIGHT-NO-GO",
+  "provenance_complete": true,
+  "source_data_protection": "PRE-RUN-HASHES-PASSED; POST-RUN-HASHES-INCOMPLETE-FOR-FAILED-SEED"
+}

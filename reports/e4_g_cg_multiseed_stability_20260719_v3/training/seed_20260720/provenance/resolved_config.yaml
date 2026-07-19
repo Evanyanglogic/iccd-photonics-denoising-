@@ -1,0 +1,76 @@
+experiment_id: e4_g_cg_multiseed_stability_20260719_seed_20260720
+e1_statistics: reports/e1_formal_rerun_20260717/noise_summary/folder_noise_summary.csv
+folder_split: manifests/e1_primary_calibration_evaluation_split_20260718.csv
+condition_model: configs/e2_signal_condition_model_20260719.yaml
+scmos_manifest: manifests/e2_content_manifest_20260717.csv
+pmrid_scene_manifest: manifests/e2_pmrid_validation_scene_manifest_20260718.csv
+pmrid_benchmark: E:/PMRID-Pytorch-main/PMRID/PMRID/benchmark.json
+pmrid_root: E:/PMRID-Pytorch-main/PMRID/PMRID
+calibration_folders:
+- 1
+- 4
+- 7
+- 8
+- 10
+- 13
+evaluation_folders:
+- 2
+- 5
+- 9
+- 11
+g_sigma_DN: 91.4432
+condition_slope: 0.059136757483193435
+normalization_divisor: 65535.0
+base_seed: 20260720
+scmos_roi:
+  top: 768
+  left: 768
+  height: 512
+  width: 512
+pmrid_patch:
+  height: 512
+  width: 512
+  selection: sha256_even_coordinate
+scaling_gates:
+  relative_mean_error_max: 0.005
+  high_clipping_ratio_max: 0.001
+  added_zero_ratio_max: 0.01
+  unique_values_min: 256
+  scaled_std_DN_min: 2.0
+  round_trip_max_error_DN: 0.501
+pair_gates:
+  residual_std_relative_error_max: 0.01
+  absolute_brightness_shift_DN_max: 1.0
+  added_zero_ratio_max: 0.05
+  added_one_ratio_max: 0.01
+  noisy_round_trip_max_error_DN: 0.501
+  residual_reconstruction_max_error_DN: 1.0
+network:
+  base_channels: 16
+  levels: 3
+  normalization: none
+  activation: ReLU
+  prediction: residual
+training:
+  epochs: 30
+  batch_size: 2
+  optimizer: Adam
+  learning_rate: 0.001
+  loss: L1
+  weight_decay: 0.0
+  scheduler: none
+  model_seed: 20260720
+  dataloader_seed: 20260720
+  augmentations:
+  - horizontal_flip
+  - vertical_flip
+  - rotation_90
+  precision: cuda_amp_float16
+  memory_format: channels_last
+checkpoint:
+  primary: highest_overall_validation_psnr
+  tie_break: lowest_validation_l1
+  validation_pairs: common_CG_signal_conditioned_pairs_for_all_three_models
+evaluation:
+  output_mean_shift_warning_DN: 5.0
+overwrite: false
