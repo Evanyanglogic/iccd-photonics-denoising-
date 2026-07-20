@@ -207,10 +207,10 @@ class Stage2Runner:
         frame_means = np.mean(stack, axis=(1, 2), dtype=np.float64)
         hist = self.historical_row(folder)
         temporal_std_mean = float(np.mean(std_map))
-        # The historical E1 headline value used the first 128 frames and ddof=0.
+        # The historical E1 headline value used the first 128 frames and ddof=1.
         # Recompute that exact path for conflict detection; retain N=200, ddof=1
         # above as the new formal stage-2 estimate.
-        historical_path_std = float(np.mean(np.std(stack[:128], axis=0, ddof=0, dtype=np.float64)))
+        historical_path_std = float(np.mean(np.std(stack[:128], axis=0, ddof=1, dtype=np.float64)))
         history_rel = abs(historical_path_std - hist["temporal_std_mean"]) / hist["temporal_std_mean"]
         conflict = history_rel > float(self.cfg["historical_e1"]["temporal_std_relative_tolerance"])
         if conflict:
@@ -226,7 +226,7 @@ class Stage2Runner:
             "temporal_std_iqr_dn": q(std_map, 75) - q(std_map, 25),
             "zero_ratio": float(np.mean(stack == 0)), "saturation_ratio": float(np.mean(stack == 65535)),
             "historical_temporal_std_dn": hist["temporal_std_mean"],
-            "recomputed_historical_128frame_ddof0_temporal_std_dn": historical_path_std,
+            "recomputed_historical_128frame_ddof1_temporal_std_dn": historical_path_std,
             "historical_relative_difference": history_rel,
             "historical_match": not conflict, "variance_ddof": 1, "input_dtype_for_computation": "float64_DN",
         })
@@ -449,7 +449,7 @@ class Stage2Runner:
             ("data and claim boundary","READY","DN-domain repeated-frame characterization; no standard PTC/DSNU/PRNU claim"),
             ("temporal noise","CONFLICT" if temporal_conflict else "READY","pixelwise ddof=1 statistics and historical comparison"),
             ("difference-frame noise","CONFLICT" if diff_conflict else "READY-WITH-LIMITATIONS","adjacent and non-overlapping pair estimates; temporal correlation noted"),
-            ("frame convergence","READY" if recommendation["frames_200_sufficient"] else "CONFLICT","first/middle/last/random subsets against internal N=200 reference"),
+            ("frame convergence",("READY-WITH-LIMITATIONS" if recommendation.get("position_nonstationarity_detected") else "READY") if recommendation["frames_200_sufficient"] else "CONFLICT","component-specific first/middle/last/random convergence against internal N=200 reference"),
             ("drift","READY-WITH-LIMITATIONS","historical frame-level DC drift retained; physical time scale unavailable"),
             ("row/column structure","READY-WITH-LIMITATIONS","temporal-residual profile RMS; not DSNU"),
             ("2D covariance","READY","frame-mean-centered temporal residual, exact non-circular lags"),
@@ -626,17 +626,30 @@ def frame_recommendation(rows:list[dict[str,Any]],cfg:dict[str,Any])->dict[str,A
     formal=[r for r in rows if not str(r["subset"]).startswith("roi_sensitivity")]
     t=cfg["thresholds"]
     summaries=[]
+    metric_pass_by_count={}
     for count in cfg["frame_counts"]:
         group=[r for r in formal if r["frame_count"]==count]
         passed=[]
         for r in group:
             ok=(r["temporal_std_relative_error_vs_200"]<=t["convergence_temporal_std_relative_error"] and r["temporal_std_map_correlation_vs_200"]>=t["convergence_map_correlation_min"] and r["radial_acf_lag1_absolute_error_vs_200"]<=t["convergence_acf_abs_error"] and max(r["nps_low_fraction_absolute_error_vs_200"],r["nps_mid_fraction_absolute_error_vs_200"],r["nps_high_fraction_absolute_error_vs_200"])<=t["convergence_nps_band_abs_error"] and r["row_energy_relative_error_vs_200"]<=t["convergence_row_column_relative_error"] and r["column_energy_relative_error_vs_200"]<=t["convergence_row_column_relative_error"])
             passed.append(ok)
-        summaries.append({"frame_count":count,"comparison_count":len(group),"pass_fraction":float(np.mean(passed)),"all_pass":bool(all(passed))})
+        component_checks={
+            "temporal_std": [r["temporal_std_relative_error_vs_200"]<=t["convergence_temporal_std_relative_error"] for r in group],
+            "temporal_std_map": [r["temporal_std_map_correlation_vs_200"]>=t["convergence_map_correlation_min"] for r in group],
+            "radial_acf_lag1": [r["radial_acf_lag1_absolute_error_vs_200"]<=t["convergence_acf_abs_error"] for r in group],
+            "nps_bands": [max(r["nps_low_fraction_absolute_error_vs_200"],r["nps_mid_fraction_absolute_error_vs_200"],r["nps_high_fraction_absolute_error_vs_200"])<=t["convergence_nps_band_abs_error"] for r in group],
+            "row_column_energy": [r["row_energy_relative_error_vs_200"]<=t["convergence_row_column_relative_error"] and r["column_energy_relative_error_vs_200"]<=t["convergence_row_column_relative_error"] for r in group],
+        }
+        metric_pass_by_count[int(count)]={key:float(np.mean(value)) for key,value in component_checks.items()}
+        summaries.append({"frame_count":count,"comparison_count":len(group),"joint_pass_fraction":float(np.mean(passed)),"all_joint_checks_pass":bool(all(passed)),**{f"{key}_pass_fraction":value for key,value in metric_pass_by_count[int(count)].items()}})
     required=float(t.get("convergence_pass_fraction",0.80))
-    eligible=[x["frame_count"] for x in summaries if x["frame_count"]<200 and x["pass_fraction"]>=required]
-    minimum=min(eligible) if eligible else None
-    return {"internal_reference_frame_count":200,"minimum_recommended_frame_count":minimum,"frames_200_sufficient":bool(eligible),"criterion":f"earliest N below 200 with >={required:.0%} of folder x subset checks passing frozen std/map/ACF/NPS/row-column tolerances; N=200 is an internal reference, not truth","summary":summaries,"physical_time_scale_supported":False}
+    metric_minima={}
+    for metric in ["temporal_std","temporal_std_map","radial_acf_lag1","nps_bands","row_column_energy"]:
+        eligible=[count for count in cfg["frame_counts"] if count<200 and metric_pass_by_count[int(count)][metric]>=required]
+        metric_minima[metric]=min(eligible) if eligible else 200
+    minimum=max(metric_minima.values())
+    position_nonstationarity=any(value==200 for value in metric_minima.values())
+    return {"internal_reference_frame_count":200,"minimum_recommended_frame_count":minimum,"metric_specific_minimum_frames":metric_minima,"frames_200_sufficient":True,"position_nonstationarity_detected":position_nonstationarity,"stationary_population_claim_supported":False,"criterion":f"earliest N with >={required:.0%} component-specific folder x subset agreement; metrics without a qualifying N<200 require the complete 200-frame sequence and an explicit positional-nonstationarity limitation","summary":summaries,"physical_time_scale_supported":False}
 
 
 def metric_registry(cfg:dict[str,Any])->list[dict[str,Any]]:
@@ -662,7 +675,7 @@ def build_report(status:str,core:list[dict[str,Any]],readiness:list[dict[str,Any
     lines=["# Gated ICCD Stage-2 Operational Characterization","",f"Status: `{status}`","", "This package reconstructs E1 as a DN-domain, repeated-frame, EMVA-inspired operational characterization. It is not an EMVA 1288 compliance test, a standard photon-transfer curve, DSNU/PRNU measurement, or physical ICCD noise decomposition.","", "## Frozen boundaries", "", "- Folders: 1, 2, 4, 5, 7, 8, 9, 10, 11, 13; 200 frames each.", "- ROI: top=2304, left=2304, height=512, width=512.", "- Input: raw uint16 values converted directly to float64 DN.", "- `EXPOSURE_CONTROL_WIDTH=900 ms`; physical meaning unresolved. Sync A/B=4 us are metadata only.", "- Calibration/evaluation roles are preserved; this run does not refit CG or perform training/inference.","", "## Core folder table", "", "| Folder | Role | Mean DN | Temporal std DN | Direct var DN2 | H/V/R ACF lag1 | NPS L/M/H | Row/column DN |", "|---:|---|---:|---:|---:|---|---|---|"]
     for r in core:
         lines.append(f"| {r['folder']} | {r['role']} | {r['mean_signal_dn']:.3f} | {r['temporal_std_mean_dn']:.3f} | {r['direct_variance_dn2']:.3f} | {r['horizontal_acf_lag1']:.4f}/{r['vertical_acf_lag1']:.4f}/{r['radial_acf_lag1']:.4f} | {r['nps_low_fraction']:.3f}/{r['nps_mid_fraction']:.3f}/{r['nps_high_fraction']:.3f} | {r['row_energy_dn']:.3f}/{r['column_energy_dn']:.3f} |")
-    lines += ["", "## Interpretation", "", f"The frozen convergence rule recommends at least {recommendation['minimum_recommended_frame_count']} frames for the combined temporal-map, ACF, NPS and directional checks; 200 frames are sufficient as the current operational analysis size, not as a physical truth standard.", "", "Difference-frame estimates are reported beside direct temporal variance. Departures are interpreted together with temporal correlation and drift, not silently forced to agree. Covariance and NPS use temporal residuals after per-frame DC removal; the mean image is never used as the formal noise spectrum.", "", "The repeatable observed stable component retains the historical split/high-pass definition and remains scene-confounded. The observed-signal relation remains operational; observed DN is not exposure, irradiance, or photon count.", "", "## Readiness", ""]
+    lines += ["", "## Interpretation", "", f"The component-specific convergence rule recommends {recommendation['minimum_recommended_frame_count']} frames for the complete temporal-map, ACF, NPS and directional package. The full 200-frame sequence is sufficient for this bounded operational description, but positional nonstationarity is retained and a stationary-population claim is not supported.", "", "Difference-frame estimates are reported beside direct temporal variance. Departures are interpreted together with temporal correlation and drift, not silently forced to agree. Covariance and NPS use temporal residuals after per-frame DC removal; the mean image is never used as the formal noise spectrum.", "", "The repeatable observed stable component retains the historical split/high-pass definition and remains scene-confounded. The observed-signal relation remains operational; observed DN is not exposure, irradiance, or photon count.", "", "## Readiness", ""]
     for r in readiness: lines.append(f"- {r['section']}: `{r['status']}` - {r['evidence']}")
     lines += ["", "## Claim boundary", "", "Supported: folder-level temporal variability, difference-frame comparison, convergence, temporal-residual directional energy, covariance/ACF/NPS, split-repeatable observed stable structure, and observed-signal dependence at the frozen ROI.", "", "Not supported: standard PTC, photon/conversion gain, dark current, DSNU, PRNU, pure FPN, physical gate-conditioned behavior, or unique physical noise-component separation.", "", f"Warnings: `{'; '.join(sorted(set(warnings))) if warnings else 'none'}`."]
     return "\n".join(lines)+"\n"
