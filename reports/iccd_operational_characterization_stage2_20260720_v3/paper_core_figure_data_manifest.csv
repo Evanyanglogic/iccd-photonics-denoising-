@@ -1,0 +1,7 @@
+figure_id,subject,data
+F1,folder temporal std maps and distributions,temporal_noise/temporal_std_maps; temporal_noise/folder_temporal_statistics.csv
+F2,direct versus difference-frame variance,temporal_noise/direct_vs_difference_summary.csv
+F3,frame-count convergence,temporal_noise/frame_count_convergence.csv
+F4,2D covariance and directional/radial ACF,spatial_correlation/covariance_2d; spatial_correlation/acf_horizontal_vertical_radial.csv
+F5,"2D, radial and directional temporal-residual NPS",nps/nps_2d; nps/radial_nps.csv; nps/directional_nps.csv
+F6,observed signal versus temporal noise,signal_noise_relation/observed_signal_noise_plot_data.csv

@@ -1,0 +1,15 @@
+{
+  "formal_name": "repeatable observed stable component",
+  "formula": "For each split, highpass(mean(group A), sigma=8 px) and highpass(mean(group B), sigma=8 px); stable map=(A+B)/2; strength=sample std; repeatability=Pearson(A,B). Folder summary uses median strength and minimum/median correlation across odd-even, first-second half, and alternating 25-frame blocks.",
+  "global_mean": "removed implicitly by high-pass filter",
+  "input_frames": 200,
+  "paper_eligibility": "READY-WITH-LIMITATIONS",
+  "prohibited_name": "fixed-pattern noise or pure FPN",
+  "roi_sensitivity": "available from historical bounded ROI audit; component is not relabeled as FPN",
+  "scene_leakage_risk": "HIGH-UNRESOLVED because ordinary-scene structure can repeat in both split means",
+  "splits": [
+    "odd_even",
+    "first_second_half",
+    "alternating_25_frame_blocks"
+  ]
+}

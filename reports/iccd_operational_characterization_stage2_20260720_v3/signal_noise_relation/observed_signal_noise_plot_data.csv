@@ -1,0 +1,11 @@
+folder,role,observed_signal_dn,temporal_std_dn,temporal_variance_dn2,fixed_cg_predicted_sigma_dn,fixed_cg_residual_dn,signal_terminology
+1,calibration,1157.3995986938476,70.77975260023057,5984.686191136344,68.44485937910346,2.3348932211271034,"observed signal level; not exposure, irradiance, or photon number"
+2,evaluation,964.9581463623047,43.753510974364936,2028.6426129181064,57.06449588285948,-13.310984908494547,"observed signal level; not exposure, irradiance, or photon number"
+4,calibration,1782.1325646972657,112.62205013840575,16937.465805050644,105.38954128140374,7.232508857002017,"observed signal level; not exposure, irradiance, or photon number"
+5,evaluation,4690.909596557617,236.51817661506308,78390.62112525519,277.4051831872126,-40.88700657214949,"observed signal level; not exposure, irradiance, or photon number"
+7,calibration,2509.448143310547,150.1137543492857,30508.240042792087,148.40062626760587,1.7131280816798267,"observed signal level; not exposure, irradiance, or photon number"
+8,calibration,2240.6550509643553,136.0263428827664,24850.510805565922,132.5050743523715,3.5212685303948774,"observed signal level; not exposure, irradiance, or photon number"
+9,evaluation,1399.1596292114257,87.79751595856969,9785.796742967772,82.74176367295092,5.055752285618766,"observed signal level; not exposure, irradiance, or photon number"
+10,calibration,1201.2420809936523,71.5212428906046,6199.766211256478,71.03756162232823,0.4836812682763707,"observed signal level; not exposure, irradiance, or photon number"
+11,evaluation,1080.4407278442384,58.279476802133914,3825.0834238330326,63.893761297489725,-5.614284495355811,"observed signal level; not exposure, irradiance, or photon number"
+13,calibration,936.2326419067383,38.642498781947545,1590.9737883018608,55.365762692288264,-16.72326391034072,"observed signal level; not exposure, irradiance, or photon number"

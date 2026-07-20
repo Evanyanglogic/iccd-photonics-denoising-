@@ -1,0 +1,11 @@
+folder,role,path,frame_count,dtype,shape,filename_pattern,roi_top,roi_left,roi_height,roi_width
+1,calibration,D:\iccd\data\20260319\1,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+2,evaluation,D:\iccd\data\20260319\2,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+4,calibration,D:\iccd\data\20260319\4,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+5,evaluation,D:\iccd\data\20260319\5,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+7,calibration,D:\iccd\data\20260319\7,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+8,calibration,D:\iccd\data\20260319\8,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+9,evaluation,D:\iccd\data\20260319\9,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+10,calibration,D:\iccd\data\20260319\10,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+11,evaluation,D:\iccd\data\20260319\11,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512
+13,calibration,D:\iccd\data\20260319\13,200,uint16,5120x5120,<1..200>-Camera1[20600555].tif,2304,2304,512,512

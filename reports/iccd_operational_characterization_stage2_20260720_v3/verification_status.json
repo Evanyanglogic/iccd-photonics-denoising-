@@ -1,0 +1,29 @@
+{
+  "cg_parameter_refit": false,
+  "claim": "EMVA-inspired layered gated ICCD operational noise characterization",
+  "direct_difference_conflict": false,
+  "experiment_id": "iccd_operational_characterization_stage2_20260720",
+  "folder_count": 10,
+  "formal_roi": {
+    "height": 512,
+    "left": 2304,
+    "top": 2304,
+    "width": 512
+  },
+  "frame_count_per_folder": 200,
+  "frames_200_sufficient": true,
+  "historical_e1_conflict": false,
+  "input_domain": "raw DN float64",
+  "metric_definitions_frozen": true,
+  "prohibited_claims": [
+    "standard PTC",
+    "conversion gain",
+    "DSNU",
+    "PRNU",
+    "pure FPN",
+    "physical ICCD noise decomposition"
+  ],
+  "status": "OPERATIONAL-CHARACTERIZATION-PAPER-READY-WITH-LIMITATIONS",
+  "training_or_inference_performed": false,
+  "warnings": []
+}

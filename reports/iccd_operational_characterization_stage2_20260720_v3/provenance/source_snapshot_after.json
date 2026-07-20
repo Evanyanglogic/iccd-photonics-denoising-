@@ -1,0 +1,125 @@
+{
+  "folders": [
+    {
+      "file_count": 200,
+      "folder": 1,
+      "max_mtime_ns": 1784105659233601900,
+      "min_mtime_ns": 1784105302470929200,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "72d1dd8858525a4975ed7ccec1ee315a40739ac1ec6456a3142599d8b01957f1",
+        "101-Camera1[20600555].tif": "58b65a72bbbc0cc47ec642d8529ed9981d305427c1ab760de53d884cbb7c19cb",
+        "200-Camera1[20600555].tif": "d1eaad0f84efb40dc070ae6dcc0be0974f5ee5f2020a2b81905cef61f1f10fc2"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 2,
+      "max_mtime_ns": 1784106016861601100,
+      "min_mtime_ns": 1784105661200868800,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "a5287d09f4f2b1fb77a16ddb46eab7038ad217e0f38638d1ab01e64128d36158",
+        "101-Camera1[20600555].tif": "884c4272983348e79752a8c89e9ea59c3c80da4f396f2cccfc83012fce127ce1",
+        "200-Camera1[20600555].tif": "847c61b20d1598d44abe6fb934be94497b71d5baa04ca8b77b17ca47cf9a98f5"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 4,
+      "max_mtime_ns": 1784106410389538600,
+      "min_mtime_ns": 1784106029267238400,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "4ed358d8bdd2de9447fc27d2ccd1e69fd4981198cf135f4008441480412a76b4",
+        "101-Camera1[20600555].tif": "d7b365e8e9f05d62afbbc8381e16552c1efda6592a19828d1982097315869f80",
+        "200-Camera1[20600555].tif": "a3b36aa9b28884a7b4ec1c1e6b2baddd06abf3a63162657445a7af098ec6f459"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 5,
+      "max_mtime_ns": 1784106852351730900,
+      "min_mtime_ns": 1784106394429610600,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "057045d9bd6d5f91b562817f4d6d3a2669b6a62351a8669809645b564f75857d",
+        "101-Camera1[20600555].tif": "aaee6ab81e2acc49a3c03eebd9d125599470c0141e1816df971cd8658499fa5e",
+        "200-Camera1[20600555].tif": "98384f85aa5e254edc86962e5a60feee093822ba89a496f2d2b863207b33ea4c"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 7,
+      "max_mtime_ns": 1784107322750496700,
+      "min_mtime_ns": 1784106864701633100,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "638333c5dad4ed87c0042e6e31a9b5071dd4d57d023ec947d2a6ab4b4a0f4ff8",
+        "101-Camera1[20600555].tif": "a72cbbc07ca8a1970a2dbfb7028ed8ea3175ea30c6ac4cc1c54a704db6b39f6a",
+        "200-Camera1[20600555].tif": "a3567a26262832768e92ba47925c70a342fab9ea43d1a0db601789fcb92cc5be"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 8,
+      "max_mtime_ns": 1784107683343683200,
+      "min_mtime_ns": 1784107327015575000,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "7377e2de4f9755699e0bed2436133f201cbf7c42b3648a3a49c4bb0932cc5d96",
+        "101-Camera1[20600555].tif": "71b35a4008fcb711e7145b5a734c681c040c690a6061467bc0f859cb93ff7624",
+        "200-Camera1[20600555].tif": "fe566285965201a21dcdeecfe707b3f697a550612078bb5aab21e0acf18c0bce"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 9,
+      "max_mtime_ns": 1784107954539964900,
+      "min_mtime_ns": 1784107678053899800,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "a5495b0d96a524b01d22ec64065e657c720ee96073a6985ae19836ab92cac96c",
+        "101-Camera1[20600555].tif": "267def03240354ba173f2a797f322113258ee4b3a6c6a69f65356d4714af0bef",
+        "200-Camera1[20600555].tif": "bf7c03933272a4378c81740cd30bd85abb828d6192f8c05ae9a52de09ae2ad19"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 10,
+      "max_mtime_ns": 1784108214423129200,
+      "min_mtime_ns": 1784107954209962400,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "315c94e4553b6e597bbf7fd87c1d17eeb3dce1f0106f4d04b90ed885026e442f",
+        "101-Camera1[20600555].tif": "341e23bff70102f775c5736b7c7379f61ae5f7f59c5738e6df42ebf7c237b12a",
+        "200-Camera1[20600555].tif": "4de3a8022eefa5a0a3d49c3dcd3fe0139d2ba67ec14f8f8cdf39ae4c5d75e8a2"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 11,
+      "max_mtime_ns": 1784108457064835200,
+      "min_mtime_ns": 1784108212500993500,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "03a2f38baf9491bd3ee3723d895ae8d9594d3872ecf2421e6ed229763f24d54d",
+        "101-Camera1[20600555].tif": "a9a1256671b5539a549bde6a3a22cbec913f38a3c28ebfe0aa27a62aa4a530e6",
+        "200-Camera1[20600555].tif": "8a509300f2f51596d0d9839a75da17054b14f1c05b9387fdcc84c313bbe37f97"
+      },
+      "total_size": 10493978800
+    },
+    {
+      "file_count": 200,
+      "folder": 13,
+      "max_mtime_ns": 1784108675586126300,
+      "min_mtime_ns": 1784108457516048800,
+      "sample_hashes": {
+        "1-Camera1[20600555].tif": "d16502d55d2bc290897adb78b14b7cb0eb7413c32b4929518bc11f19ae5fab38",
+        "101-Camera1[20600555].tif": "6acb54f8909f79fda18b8edacab30f082bba37a0ffa0bc19c5ab81920c3bd8cd",
+        "200-Camera1[20600555].tif": "dd1fdc1f9a4a9c9a0bf76b67bccc30357689fcb0ded81122c8dcae8bce8ca429"
+      },
+      "total_size": 10493978800
+    }
+  ],
+  "root": "D:\\iccd\\data\\20260319"
+}

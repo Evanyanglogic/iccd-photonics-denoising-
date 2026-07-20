@@ -1,0 +1,4 @@
+field,value,unit,verification,physical_meaning,allowed_interpretation,prohibited_interpretation
+EXPOSURE_CONTROL_WIDTH,900.0,ms,VERIFIED-RECORDED,PHYSICAL_MEANING_UNRESOLVED,recorded control-channel width,gate width; sensor integration time; physical exposure
+SYNC_A_WIDTH,4.0,us,VERIFIED-RECORDED,UNRESOLVED,recorded synchronization metadata,effective gate width
+SYNC_B_WIDTH,4.0,us,VERIFIED-RECORDED,UNRESOLVED,recorded synchronization metadata,effective gate width

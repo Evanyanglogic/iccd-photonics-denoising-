@@ -1,0 +1,3 @@
+asset,eligibility,reason,allowed_use
+sCMOS dark_Background,NOT-ELIGIBLE,different sensor and unverified acquisition match,separate debug audit only
+ICCD_pir 8-bit background,NOT-ELIGIBLE,8-bit derived/processing status and acquisition match unresolved,separate exploratory audit only

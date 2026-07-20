@@ -1,0 +1,84 @@
+{
+  "criterion": "earliest N with >=80% component-specific folder x subset agreement; metrics without a qualifying N<200 require the complete 200-frame sequence and an explicit positional-nonstationarity limitation",
+  "frames_200_sufficient": true,
+  "internal_reference_frame_count": 200,
+  "metric_specific_minimum_frames": {
+    "nps_bands": 150,
+    "radial_acf_lag1": 200,
+    "row_column_energy": 200,
+    "temporal_std": 100,
+    "temporal_std_map": 100
+  },
+  "minimum_recommended_frame_count": 200,
+  "physical_time_scale_supported": false,
+  "position_nonstationarity_detected": true,
+  "stationary_population_claim_supported": false,
+  "summary": [
+    {
+      "all_joint_checks_pass": false,
+      "comparison_count": 40,
+      "frame_count": 10,
+      "joint_pass_fraction": 0.0,
+      "nps_bands_pass_fraction": 0.675,
+      "radial_acf_lag1_pass_fraction": 0.575,
+      "row_column_energy_pass_fraction": 0.375,
+      "temporal_std_map_pass_fraction": 0.0,
+      "temporal_std_pass_fraction": 0.0
+    },
+    {
+      "all_joint_checks_pass": false,
+      "comparison_count": 40,
+      "frame_count": 20,
+      "joint_pass_fraction": 0.075,
+      "nps_bands_pass_fraction": 0.7,
+      "radial_acf_lag1_pass_fraction": 0.575,
+      "row_column_energy_pass_fraction": 0.4,
+      "temporal_std_map_pass_fraction": 0.275,
+      "temporal_std_pass_fraction": 0.6
+    },
+    {
+      "all_joint_checks_pass": false,
+      "comparison_count": 40,
+      "frame_count": 50,
+      "joint_pass_fraction": 0.2,
+      "nps_bands_pass_fraction": 0.7,
+      "radial_acf_lag1_pass_fraction": 0.6,
+      "row_column_energy_pass_fraction": 0.4,
+      "temporal_std_map_pass_fraction": 0.675,
+      "temporal_std_pass_fraction": 0.725
+    },
+    {
+      "all_joint_checks_pass": false,
+      "comparison_count": 40,
+      "frame_count": 100,
+      "joint_pass_fraction": 0.475,
+      "nps_bands_pass_fraction": 0.775,
+      "radial_acf_lag1_pass_fraction": 0.625,
+      "row_column_energy_pass_fraction": 0.475,
+      "temporal_std_map_pass_fraction": 1.0,
+      "temporal_std_pass_fraction": 0.8
+    },
+    {
+      "all_joint_checks_pass": false,
+      "comparison_count": 40,
+      "frame_count": 150,
+      "joint_pass_fraction": 0.575,
+      "nps_bands_pass_fraction": 0.85,
+      "radial_acf_lag1_pass_fraction": 0.625,
+      "row_column_energy_pass_fraction": 0.575,
+      "temporal_std_map_pass_fraction": 1.0,
+      "temporal_std_pass_fraction": 0.85
+    },
+    {
+      "all_joint_checks_pass": true,
+      "comparison_count": 40,
+      "frame_count": 200,
+      "joint_pass_fraction": 1.0,
+      "nps_bands_pass_fraction": 1.0,
+      "radial_acf_lag1_pass_fraction": 1.0,
+      "row_column_energy_pass_fraction": 1.0,
+      "temporal_std_map_pass_fraction": 1.0,
+      "temporal_std_pass_fraction": 1.0
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "frozen_slope": 0.059136757483193435,
+  "interpretation": "operational observed-signal-conditioned noise-strength model",
+  "parameter_consistent_with_frozen_config": true,
+  "recomputed_or_refit": false,
+  "source": "configs/e2_signal_condition_model_20260719.yaml"
+}

@@ -1,0 +1,34 @@
+{
+  "all_folders_completed": true,
+  "command": "scripts\\run_iccd_operational_characterization_stage2.py --config configs\\iccd_operational_characterization_stage2_20260720.yaml --output-root reports\\iccd_operational_characterization_stage2_20260720_v3",
+  "data_root": "D:/iccd/data/20260319",
+  "ended_utc": "2026-07-20T04:28:07.065892+00:00",
+  "experiment_id": "iccd_operational_characterization_stage2_20260720",
+  "folders": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13
+  ],
+  "git_commit": "aad527f3f0010af85849a8b65cf06e1f7ccf7b33\n",
+  "input_domain": "raw uint16 DN converted to float64",
+  "model_inference": false,
+  "model_training": false,
+  "output_root": "E:\\PNGAN-main\\iccd-photonics-denoising\\reports\\iccd_operational_characterization_stage2_20260720_v3",
+  "roi": {
+    "height": 512,
+    "left": 2304,
+    "top": 2304,
+    "width": 512
+  },
+  "source_data_protected": true,
+  "started_utc": "2026-07-20T04:16:19.592199+00:00",
+  "status": "OPERATIONAL-CHARACTERIZATION-PAPER-READY-WITH-LIMITATIONS",
+  "writes_outside_project": false
+}

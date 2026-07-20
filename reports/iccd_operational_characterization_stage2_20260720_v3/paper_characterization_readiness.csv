@@ -1,0 +1,13 @@
+section,status,evidence
+data and claim boundary,READY,DN-domain repeated-frame characterization; no standard PTC/DSNU/PRNU claim
+temporal noise,READY,pixelwise ddof=1 statistics and historical comparison
+difference-frame noise,READY-WITH-LIMITATIONS,adjacent and non-overlapping pair estimates; temporal correlation noted
+frame convergence,READY-WITH-LIMITATIONS,component-specific first/middle/last/random convergence against internal N=200 reference
+drift,READY-WITH-LIMITATIONS,historical frame-level DC drift retained; physical time scale unavailable
+row/column structure,READY-WITH-LIMITATIONS,temporal-residual profile RMS; not DSNU
+2D covariance,READY,"frame-mean-centered temporal residual, exact non-circular lags"
+ACF,READY,normalized temporal-residual covariance in pixel lags
+NPS,READY-WITH-LIMITATIONS,"cycles/pixel, 2D Hann, no pixel-pitch conversion"
+stable component,READY-WITH-LIMITATIONS,repeatable observed stable component with scene-leakage caveat
+observed-signal dependence,READY-WITH-LIMITATIONS,observed signal level is not exposure or irradiance
+noise-model parameter support,READY-WITH-LIMITATIONS,"frozen calibration-only CG slope retained, not refit"
