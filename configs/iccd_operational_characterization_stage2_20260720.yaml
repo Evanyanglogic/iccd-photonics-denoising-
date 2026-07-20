@@ -1,0 +1,58 @@
+experiment_id: iccd_operational_characterization_stage2_20260720
+data_root: D:/iccd/data/20260319
+folders: [1, 2, 4, 5, 7, 8, 9, 10, 11, 13]
+calibration_folders: [1, 4, 7, 8, 10, 13]
+evaluation_folders: [2, 5, 9, 11]
+frame_count: 200
+expected_dtype: uint16
+expected_shape: [5120, 5120]
+roi: {top: 2304, left: 2304, height: 512, width: 512}
+roi_sensitivity:
+  center: {top: 2304, left: 2304, height: 512, width: 512}
+  top_left: {top: 0, left: 0, height: 512, width: 512}
+  top_right: {top: 0, left: 4608, height: 512, width: 512}
+  bottom_left: {top: 4608, left: 0, height: 512, width: 512}
+  bottom_right: {top: 4608, left: 4608, height: 512, width: 512}
+frame_counts: [10, 20, 50, 100, 150, 200]
+random_subset_seed: 20260720
+acf_max_lag: 16
+nps:
+  window: hann_2d_separable
+  frequency_unit: cycles_per_pixel
+  exclude_dc: true
+  bands:
+    low: [0.0, 0.0625]
+    mid: [0.0625, 0.1875]
+    high: [0.1875, 0.7071067811865476]
+  band_interval: left_closed_right_open_except_high
+stable_component:
+  highpass_sigma_px: 8.0
+  splits: [odd_even, first_second_half, alternating_25_frame_blocks]
+  correlation_stride: 2
+historical_e1:
+  statistics_csv: reports/e1_condition_readiness_audit_20260718/folder_level_noise_statistics.csv
+  stable_split_csv: reports/e1_formal_rerun_20260717/stable_component/stable_component_by_split.csv
+  observed_state_root: reports/e1_observed_state_reliability_separation_20260718_v6
+  temporal_std_relative_tolerance: 0.01
+signal_model:
+  model_type: observed_signal_conditioned_strength
+  slope: 0.059136757483193435
+  intercept: 0.0
+  source: configs/e2_signal_condition_model_20260719.yaml
+metadata:
+  camera_serial: '20600555'
+  exposure_control_width_ms: 900.0
+  exposure_control_status: PHYSICAL_MEANING_UNRESOLVED
+  sync_a_width_us: 4.0
+  sync_b_width_us: 4.0
+thresholds:
+  difference_relative_consistency: 0.05
+  difference_map_correlation_min: 0.50
+  convergence_temporal_std_relative_error: 0.02
+  convergence_map_correlation_min: 0.95
+  convergence_acf_abs_error: 0.01
+  convergence_nps_band_abs_error: 0.03
+  convergence_row_column_relative_error: 0.10
+  convergence_pass_fraction: 0.80
+output_root: reports/iccd_operational_characterization_stage2_20260720
+overwrite: false
