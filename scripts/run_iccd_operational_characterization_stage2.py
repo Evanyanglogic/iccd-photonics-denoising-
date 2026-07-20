@@ -699,7 +699,7 @@ def max_noncenter(a:np.ndarray,c:int)->float:
     b=a.copy();b[c,c]=-np.inf;return float(np.max(b))
 def q(a:np.ndarray,p:float)->float:return float(np.percentile(a,p))
 def pearson(a:np.ndarray,b:np.ndarray)->float:
-    a=np.asarray(a,dtype=np.float64).ravel();b=np.asarray(b,dtype=np.float64).ravel();a-=a.mean();b-=b.mean();d=math.sqrt(float(a@a)*float(b@b));return float(a@b/d) if d>0 else float("nan")
+    a=np.array(a,dtype=np.float64,copy=True).ravel();b=np.array(b,dtype=np.float64,copy=True).ravel();a-=a.mean();b-=b.mean();d=math.sqrt(float(a@a)*float(b@b));return float(a@b/d) if d>0 else float("nan")
 def rel_abs(a:float,b:float)->float:return abs(a-b)/(abs(b)+1e-30)
 def rel_signed(a:float,b:float)->float:return (a-b)/(abs(b)+1e-30)
 def sha256_file(path:Path)->str:
