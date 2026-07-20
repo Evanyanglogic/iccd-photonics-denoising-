@@ -1,0 +1,79 @@
+{
+  "acta_photonica_sinica_draft_supported": "SUPPORTED-WITH-METADATA-GAPS",
+  "command": "scripts\\run_literature_grounded_iccd_characterization_stage1.py --config configs\\literature_grounded_iccd_characterization_stage1_20260720.yaml --output-root reports\\literature_grounded_iccd_characterization_stage1_20260720_v2",
+  "eligibility_counts": {
+    "EXPLORATORY-ONLY": 5,
+    "FORMALLY-ELIGIBLE": 9,
+    "NOT-ELIGIBLE": 1,
+    "PARTIALLY-ELIGIBLE": 6,
+    "REQUIRES-NEW-ACQUISITION": 11
+  },
+  "ended_at_utc": "2026-07-20T03:25:20.534374+00:00",
+  "experiment_id": "literature_grounded_iccd_characterization_stage1_20260720",
+  "f_volume_accessible": false,
+  "final_status": "LITERATURE-GROUNDED-FRAMEWORK-READY-WITH-METADATA-GAPS",
+  "general_paper_draft_supported": true,
+  "git_commit": "386a12d994e1ff098d58c004c464d4939e22c1a4",
+  "inputs": [
+    {
+      "path": "reports\\gated_iccd_20260319_full_inventory\\gated_iccd_batch_inventory.csv",
+      "sha256": "e712f409f36879e1f7f73ee490589eed9c80ba6e82a688efa12ef78ba4307b90",
+      "size_bytes": 1857
+    },
+    {
+      "path": "reports\\e1_condition_readiness_audit_20260718\\folder_input_inventory.csv",
+      "sha256": "e3e11a7481fd1099100940e925663b1c555bf7994f0e8f92e00e0af77dcc41bc",
+      "size_bytes": 3119
+    },
+    {
+      "path": "reports\\e1_condition_readiness_audit_20260718\\folder_metadata_recovery.csv",
+      "sha256": "383de2e145a92b91b48e33902090ae85e6c17f1be05d71ff8d94d16e5083a884",
+      "size_bytes": 19200
+    },
+    {
+      "path": "reports\\e1_condition_readiness_audit_20260718\\folder_level_noise_statistics.csv",
+      "sha256": "1aa12c495d2c46ecd3521eca13484cdbfd0b1816f3c747473ddbac84be04592a",
+      "size_bytes": 8316
+    },
+    {
+      "path": "reports\\e2_validation_source_audit_20260718_v2\\candidate_directory_inventory.csv",
+      "sha256": "84abfc3739627d9f55cc20d8baad2651202bb9daf05dd512a846947039b827a6",
+      "size_bytes": 5177
+    },
+    {
+      "path": "reports\\e2_validation_source_audit_20260718_v2\\candidate_file_statistics.csv",
+      "sha256": "9d91d453cc85ee323ab85a861adbfbd03a6f17479b81f2955c15fb48ff3a44fd",
+      "size_bytes": 29528
+    },
+    {
+      "path": "reports\\e2_cross_source_role_manifest_20260718_v2\\e2_cross_source_role_manifest_20260718.csv",
+      "sha256": "54d8d5eac53a8258e890bfe18cab3f1e024284f247cd0bb1d21ac8ec0b37ce9e",
+      "size_bytes": 13156
+    },
+    {
+      "path": "reports\\e2_dark_offset_compatibility_20260717\\verification_report.md",
+      "sha256": "e6c7f47d7e768df70b85e447b4f5d412cfccfbf792147114e480ff11bab7add4",
+      "size_bytes": 2722
+    },
+    {
+      "path": "reports\\iccd_pir_20250709_background_57_187\\background_audit_report.md",
+      "sha256": "08725fce1b05010952465a6eca4912d6e7c54922dc4c2f6cd2a895892edd275d",
+      "size_bytes": 1402
+    }
+  ],
+  "method_count": 32,
+  "new_pixel_statistics_computed": false,
+  "next_task": "Submit the complete stage-1 literature/method/data-fit results to the project director for selection of stage-2 characterization procedures; do not execute stage 2 automatically.",
+  "provenance_complete": true,
+  "recommended_framework": "D_LAYERED_EMVA_INSPIRED_OPERATIONAL",
+  "reference_class_counts": {
+    "DETECTOR_PAPER": 14,
+    "DETECTOR_REFERENCE": 1,
+    "RESTORATION_PAPER": 5,
+    "STANDARD": 3
+  },
+  "reference_count": 23,
+  "source_data_modified": false,
+  "stage2_executed": false,
+  "started_at_utc": "2026-07-20T03:25:20.254088+00:00"
+}

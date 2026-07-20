@@ -1,0 +1,33 @@
+﻿method_id,method,status,supporting_asset,missing_condition,overclaiming_risk,recommended_terminology,paper_section,priority
+M01,standard photon transfer curve,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,"scene leakage, nonlinearity, covariance",high,photon-transfer method only after compliant acquisition,PTC,P3/auxiliary
+M02,difference-frame PTC,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,motion/flicker/unequal flats,high,difference-frame PTC only after controlled flat acquisition,PTC,P3/auxiliary
+M03,scene-stack temporal mean-variance,PARTIALLY-ELIGIBLE,formal ICCD repeated folders,scene/flicker/ROI confounding,controlled by terminology,observed signal-level/temporal-variance relation; not PTC,PTC,P2
+M04,dark-current exposure sequence,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,"untraced darks, compensation, hot-pixel nonlinearity",high,dark-current sequence only after matched acquisition,Dark,P3/auxiliary
+M05,temporal dark noise/read-noise proxy,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,unknown compensation/mismatch,high,temporal dark-noise proxy after matched acquisition,Dark,P3/auxiliary
+M06,DSNU,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,scene or unmatched dark contamination,high,DSNU only after matched dark acquisition,Spatial,P3/auxiliary
+M07,PRNU,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,vignetting/scene texture,high,PRNU only after controlled flat acquisition,Spatial,P3/auxiliary
+M08,row/column/pixel spatial variance decomposition,PARTIALLY-ELIGIBLE,formal ICCD repeated folders,scene edges and repeated structure,controlled by terminology,row-profile energy and column-profile energy of temporal residual,Spatial,P2
+M09,hot/defect pixel statistics,EXPLORATORY-ONLY,formal ICCD repeated folders,threshold and scene leakage,controlled by terminology,hot-pixel candidate rate,Dark,P3/auxiliary
+M10,exposure-response and linearity,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,"folder labels, auto processing",high,observed signal range only until controlled acquisition,Response,P3/auxiliary
+M11,saturation and dynamic range,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,sample maxima are not saturation capacity,high,zero/saturation ratios and dynamic-range proxy only,Response,P3/auxiliary
+M12,pixelwise temporal mean/std/variance,FORMALLY-ELIGIBLE,formal ICCD repeated folders,motion/flicker/drift,controlled by terminology,pixelwise temporal variability at frozen ROI,Temporal,P1
+M13,frame-difference temporal noise,FORMALLY-ELIGIBLE,formal ICCD repeated folders,motion/flicker,controlled by terminology,frame-difference operational temporal noise,Temporal,P1
+M14,frame-count convergence,FORMALLY-ELIGIBLE,formal ICCD repeated folders,drift and scene changes,controlled by terminology,frame-count sensitivity/convergence,Temporal,P1
+M15,split-half and odd-even repeatability,FORMALLY-ELIGIBLE,formal ICCD repeated folders,drift,controlled by terminology,split-map repeatability of observed stable component,Temporal,P1
+M16,frame-level DC drift,FORMALLY-ELIGIBLE,formal ICCD repeated folders,"flicker, scene motion",controlled by terminology,frame-mean drift over acquisition order,Temporal,P1
+M17,time-series autocorrelation,PARTIALLY-ELIGIBLE,formal ICCD repeated folders,unknown interval limits seconds/Hz,controlled by terminology,frame-lag autocorrelation; no physical frequency,Temporal,P2
+M18,Allan/multiscale stability,EXPLORATORY-ONLY,formal ICCD repeated folders,only 200 frames; cadence unknown,controlled by terminology,sample-count multiscale stability; not physical Allan time,Temporal,P3/auxiliary
+M19,horizontal/vertical/radial ACF of temporal residual,FORMALLY-ELIGIBLE,formal ICCD repeated folders,mean-image or scene leakage,controlled by terminology,temporal-residual spatial autocorrelation,Correlation,P1
+M20,2D spatial covariance,FORMALLY-ELIGIBLE,formal ICCD repeated folders,scene/FPN leakage and limited ROI,controlled by terminology,2D covariance of temporal residual; operational,Correlation,P1
+M21,temporal-residual NPS/radial NPS,FORMALLY-ELIGIBLE,formal ICCD repeated folders,"fixed gain pattern, window/normalization errors",controlled by terminology,temporal-residual power spectrum in cycles/pixel,Frequency,P1
+M22,mean-image/fixed-pattern spectrum,EXPLORATORY-ONLY,formal ICCD repeated folders,ordinary scene dominates,controlled by terminology,spectrum of repeatable observed stable component,Frequency,P3/auxiliary
+M23,anisotropic row/column spectral peaks,FORMALLY-ELIGIBLE,formal ICCD repeated folders,scene edges and windowing,controlled by terminology,directional temporal-residual spectral energy,Frequency,P1
+M24,3D/spatiotemporal PTC,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,too few controlled levels; double counting,high,not applicable without controlled flat series,PTC,P3/auxiliary
+M25,Fano/variance-to-mean overdispersion,PARTIALLY-ELIGIBLE,formal ICCD repeated folders,"pedestal, gain and scene confounding",controlled by terminology,Fano-like operational statistic in DN; not photon gain,Photon statistics,P2
+M26,photon-count histogram/zero-event probability,NOT-ELIGIBLE,none satisfying formal prerequisites,analog integration or unknown mode,high,possible future photon-counting method only,Photon statistics,P3/auxiliary
+M27,multiplication/excess-noise factor,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,unknown gain and compound coupling,high,possible physical origin only,Gain detector,P3/auxiliary
+M28,noise-level function/heteroscedastic Gaussian,PARTIALLY-ELIGIBLE,formal ICCD repeated folders,scene/ROI/pedestal confounding,controlled by terminology,observed-signal-conditioned operational noise-strength model,Restoration,P2
+M29,Poisson-Gaussian noise model,EXPLORATORY-ONLY,formal ICCD repeated folders,ICCD multiplication and unknown processing,controlled by terminology,heteroscedastic operational fit; no physical component labels,Restoration,P3/auxiliary
+M30,correlated Gaussian residual model,PARTIALLY-ELIGIBLE,formal ICCD repeated folders,non-Gaussian tails and stable leakage,controlled by terminology,calibration-only correlated operational residual,Restoration,P2
+M31,real-noise patch extraction/covariance,EXPLORATORY-ONLY,formal ICCD repeated folders,scene and holdout leakage,controlled by terminology,calibration-only residual patches after leakage audit,Restoration,P3/auxiliary
+M32,afterglow/lag and phosphor-spread characterization,REQUIRES-NEW-ACQUISITION,none satisfying formal prerequisites,unknown cadence and ordinary scenes,high,possible physical origins only,Gain detector,P3/auxiliary

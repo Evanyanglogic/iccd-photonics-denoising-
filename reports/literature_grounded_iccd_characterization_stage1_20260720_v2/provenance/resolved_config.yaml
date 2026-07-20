@@ -1,0 +1,29 @@
+experiment_id: literature_grounded_iccd_characterization_stage1_20260720
+stage: literature_and_data_eligibility_only
+output_root: reports/literature_grounded_iccd_characterization_stage1_20260720
+project_line:
+- gated_iccd_operational_noise_characterization
+- condition_aware_noise_modeling
+- controlled_denoising_validation
+source_roots:
+- D:/iccd/data
+- D:/PMRID4
+- F:/目标传感器噪声参数估计/data
+- F:/ICCD_pir
+existing_evidence:
+  e1_inventory: reports/gated_iccd_20260319_full_inventory/gated_iccd_batch_inventory.csv
+  e1_folder_inventory: reports/e1_condition_readiness_audit_20260718/folder_input_inventory.csv
+  e1_metadata: reports/e1_condition_readiness_audit_20260718/folder_metadata_recovery.csv
+  e1_statistics: reports/e1_condition_readiness_audit_20260718/folder_level_noise_statistics.csv
+  validation_inventory: reports/e2_validation_source_audit_20260718_v2/candidate_directory_inventory.csv
+  validation_file_statistics: reports/e2_validation_source_audit_20260718_v2/candidate_file_statistics.csv
+  role_manifest: reports/e2_cross_source_role_manifest_20260718_v2/e2_cross_source_role_manifest_20260718.csv
+  dark_compatibility: reports/e2_dark_offset_compatibility_20260717/verification_report.md
+  iccd_pir_background: reports/iccd_pir_20250709_background_57_187/background_audit_report.md
+constraints:
+  compute_new_pixel_statistics: false
+  modify_source_data: false
+  execute_stage2: false
+  train_or_infer: false
+  download_data: false
+  overwrite: false

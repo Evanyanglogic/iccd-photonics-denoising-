@@ -1,0 +1,8 @@
+﻿criterion,general_paper,acta_photonica_sinica,evidence,blocking
+experimental system information,PARTIAL,PARTIAL,camera serial and several controls recovered; physical gate/mode/temp incomplete,P0 metadata
+real repeated ICCD data,SUPPORTED,SUPPORTED,10x200 uint16 repeated frames and folder-blocked split,scene relation
+temporal noise,SUPPORTED,SUPPORTED,"std/variance, convergence, repeatability, drift",difference-frame formalization
+spatial noise/correlation,SUPPORTED-WITH-LIMITATIONS,SUPPORTED-WITH-LIMITATIONS,"row/column, ACF, PSD, observed stable component",covariance/NPS method registry and scene leakage
+PTC/linearity/dynamic range,NOT-REQUIRED for operational paper,NOT-SUPPORTED as formal calibration,no compliant flats/darks/radiometry,new acquisition only
+signal-conditioned modeling,SUPPORTED-WITH-LIMITATIONS,SUPPORTED-WITH-LIMITATIONS,calibration-only observed signal/noise relation and controlled validation,cannot call physical condition
+overall draft,SUPPORTED,SUPPORTED-WITH-METADATA-GAPS,layered operational characterization plus controlled restoration validation,P0 terminology/metadata and selected P1 computations before final submission

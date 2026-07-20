@@ -1,0 +1,30 @@
+{
+  "acta_photonica_sinica_draft_supported": "SUPPORTED-WITH-METADATA-GAPS",
+  "eligibility_counts": {
+    "EXPLORATORY-ONLY": 5,
+    "FORMALLY-ELIGIBLE": 9,
+    "NOT-ELIGIBLE": 1,
+    "PARTIALLY-ELIGIBLE": 6,
+    "REQUIRES-NEW-ACQUISITION": 11
+  },
+  "ended_at_utc": "2026-07-20T03:25:20.534374+00:00",
+  "experiment_id": "literature_grounded_iccd_characterization_stage1_20260720",
+  "f_volume_accessible": false,
+  "final_status": "LITERATURE-GROUNDED-FRAMEWORK-READY-WITH-METADATA-GAPS",
+  "general_paper_draft_supported": true,
+  "method_count": 32,
+  "new_pixel_statistics_computed": false,
+  "next_task": "Submit the complete stage-1 literature/method/data-fit results to the project director for selection of stage-2 characterization procedures; do not execute stage 2 automatically.",
+  "provenance_complete": true,
+  "recommended_framework": "D_LAYERED_EMVA_INSPIRED_OPERATIONAL",
+  "reference_class_counts": {
+    "DETECTOR_PAPER": 14,
+    "DETECTOR_REFERENCE": 1,
+    "RESTORATION_PAPER": 5,
+    "STANDARD": 3
+  },
+  "reference_count": 23,
+  "source_data_modified": false,
+  "stage2_executed": false,
+  "started_at_utc": "2026-07-20T03:25:20.254088+00:00"
+}

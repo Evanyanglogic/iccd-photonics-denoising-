@@ -1,0 +1,8 @@
+﻿claim,support,allowed_wording,prohibited_wording
+gated ICCD operational temporal variability differs across observed folder states,SUPPORTED,observed folder/state differences at frozen ROI,physical gain/gate causality
+current analysis is EMVA 1288 compliant,NOT-SUPPORTED,EMVA-inspired partial characterization,EMVA compliant
+Fano statistic measures photon gain,NOT-SUPPORTED,Fano-like variance-to-mean statistic in DN,conversion gain or photon gain
+stable residual is fixed-pattern noise,PARTIAL,repeatable observed stable component,pure FPN/DSNU
+row/column metrics are formal DSNU components,NOT-SUPPORTED,row/column profile energy of temporal residual,DSNU.row/DSNU.col
+signal-conditioned CG has an operational basis,SUPPORTED-WITH-LIMITATIONS,observed-signal-conditioned noise-strength model,PTC-calibrated physical ICCD model
+photon-counting statistics apply,NOT-SUPPORTED,possible future method if acquisition mode is verified,event rate/zero-photon probability from analog images

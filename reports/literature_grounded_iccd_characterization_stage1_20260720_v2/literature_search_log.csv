@@ -1,0 +1,14 @@
+﻿query_id,query,scope,accessed_at,result
+Q01,EMVA 1288 Release 4.0 Linear General,standards,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q02,ISO 15739:2023 noise measurements,standards,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q03,photon transfer curve flat field covariance,PTC,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q04,difference frame photon transfer Janesick,PTC,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q05,CCD dark current exposure temperature hot pixels,dark,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q06,image sensor NPS gain nonuniformity,NPS,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q07,3D noise photon transfer curve,spatiotemporal,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q08,EMCCD excess noise factor photon counting,gain detectors,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q09,ICCD MCP phosphor spatial gain afterglow,ICCD/MCP,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q10,stack raw images flicker vibration sensor noise,repeatability,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q11,Allan variance optical instrument stability,temporal,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q12,Poisson Gaussian raw noise model,restoration,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims
+Q13,physics based low-light raw noise modeling,restoration,2026-07-20,primary/official evidence retained; secondary search snippets excluded from claims

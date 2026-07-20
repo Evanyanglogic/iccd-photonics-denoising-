@@ -1,0 +1,37 @@
+{
+  "RECOMMENDED_CHARACTERIZATION_FRAMEWORK": "D_LAYERED_EMVA_INSPIRED_OPERATIONAL",
+  "current_e1_restructure": "YES-NAMING-AND-LAYERING; retain verified values, reorganize methods and add only approved P0/P1 analyses later.",
+  "emva_compliance": false,
+  "formal_name": "EMVA-inspired layered gated ICCD operational noise characterization",
+  "layers": [
+    {
+      "content": "metadata, DN integrity, zero/saturation, scene relation, candidate response range",
+      "layer": 1,
+      "name": "data and response validity"
+    },
+    {
+      "content": "temporal maps, difference-frame noise, convergence, split repeatability, drift, sample-lag correlation",
+      "layer": 2,
+      "name": "temporal noise and stability"
+    },
+    {
+      "content": "repeatable observed stable component, row/column residual energy, covariance, temporal-residual ACF/NPS, ROI sensitivity",
+      "layer": 3,
+      "name": "spatial nonuniformity and correlation"
+    },
+    {
+      "content": "verified exposure-response only when metadata permits; otherwise observed signal-level versus operational temporal strength",
+      "layer": 4,
+      "name": "signal/exposure dependence"
+    },
+    {
+      "content": "calibration-only repeatable NLF/covariance parameters with holdout separation",
+      "layer": 5,
+      "name": "restoration-model constraints"
+    }
+  ],
+  "signal_conditioned_conclusion": "RETAINS-OPERATIONAL-BASIS; it remains an observed-signal-conditioned strength model, not a physical gain/PTC result.",
+  "status": "LITERATURE-GROUNDED-FRAMEWORK-READY-WITH-METADATA-GAPS",
+  "why_not_current_e1_only": "E1 lacks a formal difference-frame/covariance/NPS definition registry and does not resolve exposure, scene or matching dark provenance.",
+  "why_not_standard_ptc_only": "Current data lack prescribed homogeneous calibrated illumination, matched darks and a verified ICCD exposure/irradiance series."
+}
